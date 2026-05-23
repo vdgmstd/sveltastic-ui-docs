@@ -1,0 +1,1346 @@
+{
+	"common": {
+		"theme": "Тема",
+		"locale": "Язык",
+		"direction": "Направление",
+		"light": "Светлая",
+		"dark": "Тёмная",
+		"ltr": "LTR",
+		"rtl": "RTL"
+	},
+	"playground": {
+		"title": "Песочница Sveltastic UI",
+		"code": {
+			"label": "Код"
+		},
+		"sections": {
+			"button": "Кнопка",
+			"avatar": "Аватар",
+			"card": "Карточка",
+			"alert": "Alert",
+			"checkbox": "Чекбокс",
+			"radio": "Радио",
+			"segmented": "Сегментированный",
+			"switch": "Переключатель",
+			"input": "Поле ввода",
+			"tooltip": "Подсказка",
+			"pagination": "Пагинация",
+			"divider": "Разделитель",
+			"select": "Селект",
+			"menu": "Menu",
+			"dialog": "Диалог"
+		},
+		"button": {
+			"title": "Кнопка",
+			"description": "Все варианты, цвета, размеры, формы, animate-слот, загрузка, upload, block, активное состояние.",
+			"variants": {
+				"label": "Варианты",
+				"default": "По умолчанию",
+				"flat": "Плоская",
+				"border": "С рамкой",
+				"gradient": "Градиент",
+				"relief": "Рельеф",
+				"transparent": "Прозрачная",
+				"shadow": "С тенью",
+				"floating": "Плавающая"
+			},
+			"colors": {
+				"label": "Цвета",
+				"primary": "Основной",
+				"success": "Успех",
+				"danger": "Опасность",
+				"warning": "Предупреждение",
+				"dark": "Тёмный",
+				"hex": "HEX",
+				"rgb": "RGB"
+			},
+			"sizes": {
+				"label": "Размеры",
+				"xl": "XL",
+				"large": "Большой",
+				"medium": "Средний",
+				"small": "Маленький",
+				"mini": "Мини"
+			},
+			"shapes": {
+				"label": "Форма",
+				"default": "По умолчанию",
+				"circle": "Круг",
+				"square": "Квадрат",
+				"rounded": "Скруглённый"
+			},
+			"states": {
+				"label": "Состояния",
+				"loading": "Загрузка",
+				"disabled": "Отключена",
+				"active": "Активна",
+				"pressedDisabled": "Активна и заблокирована",
+				"block": "Кнопка-блок"
+			},
+			"icon": {
+				"label": "Иконка",
+				"only": "Только иконка",
+				"before": "Лайк",
+				"after": "Отправить"
+			},
+			"animate": {
+				"label": "Animate-снипет",
+				"home": "Главная",
+				"send": "Отправить",
+				"store": "Магазин",
+				"dynamicLabel": "Динамическая ширина — меняется при наведении",
+				"fixedLabel": "Фиксированная ширина — зафиксирована по большему сниппету",
+				"reply": "Ответить",
+				"replyNow": "Ответить сейчас",
+				"add": "Добавить",
+				"addToCart": "Добавить в корзину",
+				"save": "Сохранить",
+				"savedToFavorites": "Сохранено в избранное",
+				"download": "Скачать",
+				"downloadReportPdf": "Скачать отчёт PDF"
+			},
+			"upload": {
+				"label": "Прогресс загрузки",
+				"uploading": "Загрузка"
+			},
+			"ripple": {
+				"label": "Ripple",
+				"on": "Ripple включён",
+				"off": "Ripple выключен"
+			},
+			"href": {
+				"label": "Кнопка-ссылка",
+				"docs": "Открыть документацию"
+			},
+			"group": {
+				"label": "Группа кнопок"
+			},
+			"classOverride": {
+				"label": "Переопределение class и style"
+			},
+			"events": {
+				"label": "События",
+				"clicked": "Клик в {time}",
+				"empty": "Событий пока нет"
+			}
+		},
+		"avatar": {
+			"title": "Аватар",
+			"description": "Миниатюры пользователя с текстовым запасом, изображением, иконками, значком, загрузкой, кольцом истории, индикатором набора и группировкой со счётчиком переполнения.",
+			"shapes": {
+				"label": "Формы",
+				"defaultInitials": "ДФ",
+				"circleInitials": "КР",
+				"squareInitials": "КВ"
+			},
+			"colors": {
+				"label": "Цвета",
+				"primaryInitials": "ОС",
+				"successInitials": "УС",
+				"dangerInitials": "ОП",
+				"warningInitials": "ВН",
+				"darkInitials": "ТМ",
+				"hexInitials": "ХК",
+				"rgbInitials": "РГ"
+			},
+			"text": {
+				"label": "Текстовый запас",
+				"short": "Ли",
+				"long": "Алиса Боб Крис",
+				"hint": "Строки до 5 символов выводятся как есть; более длинные разбиваются по пробелам и берутся первые буквы."
+			},
+			"images": {
+				"label": "Изображения и иконки"
+			},
+			"sizes": {
+				"label": "Произвольный размер"
+			},
+			"badge": {
+				"label": "Значок",
+				"top-rightInitials": "ВП",
+				"top-leftInitials": "ВЛ",
+				"bottom-rightInitials": "НП",
+				"bottom-leftInitials": "НЛ"
+			},
+			"writing": {
+				"label": "Индикатор набора",
+				"toggle": "Набор"
+			},
+			"history": {
+				"label": "Кольцо истории"
+			},
+			"loading": {
+				"label": "Загрузка"
+			},
+			"icons": {
+				"label": "Полоса иконок"
+			},
+			"group": {
+				"label": "Группа с max и float"
+			},
+			"remount": {
+				"label": "Тест перемонтирования",
+				"toggle": "Пересоздать"
+			}
+		},
+		"card": {
+			"title": "Карточка",
+			"description": "Все шесть вариантов и именованные снипеты (img, title, body, buttons, interactions).",
+			"variants": {
+				"label": "Варианты",
+				"default": "По умолчанию",
+				"caption": "Подпись",
+				"horizontal": "Горизонтальная",
+				"frosted": "Матовая",
+				"peek": "Выступ",
+				"compact": "Компактная"
+			},
+			"imgSize": {
+				"label": "Произвольный imgSize",
+				"description": "Проп `imgSize` управляет основным размером картинки в зависимости от варианта — ребро квадрата для compact, ширина левой колонки для horizontal, max-height для вертикальных. Принимает число (px) или любую CSS-длину."
+			},
+			"withButtons": {
+				"label": "Форма комментария",
+				"description": "Карточка в виде чат-формы для отправки комментария — заголовок, картинка и одна нижняя строка с инпутом и иконкой-кнопкой отправки."
+			},
+			"composition": {
+				"label": "Мини-плеер"
+			}
+		},
+		"alert": {
+			"title": "Alert",
+			"description": "Двухвариантная полоса для обратной связи. Relief — по умолчанию; gradient добавляет диагональную подсветку. Поддерживает иконку, заголовок, футер, закрытие, сворачивание и страничное содержимое.",
+			"basic": { "label": "Базовый" },
+			"variants": { "label": "Варианты" },
+			"icon": { "label": "С иконкой и футером" },
+			"closable": { "label": "Закрываемый" },
+			"collapsible": { "label": "Сворачиваемый" },
+			"pages": { "label": "Страничный walkthrough" }
+		},
+		"checkbox": {
+			"title": "Чекбокс",
+			"description": "Все состояния, цвета, позиция метки, кастомная иконка, групповой выбор через bind:group.",
+			"states": {
+				"label": "Состояния",
+				"basic": "Базовый",
+				"indeterminate": "Частично",
+				"lineThrough": "Зачёркнуто",
+				"disabled": "Отключён",
+				"loading": "Загрузка"
+			},
+			"colors": {
+				"label": "Цвета",
+				"primary": "Основной",
+				"success": "Успех",
+				"danger": "Опасность",
+				"warning": "Предупреждение",
+				"dark": "Тёмный",
+				"hex": "HEX",
+				"rgb": "RGB"
+			},
+			"label": {
+				"label": "Позиция метки",
+				"before": "Метка слева",
+				"after": "Метка справа"
+			},
+			"icon": {
+				"label": "Кастомная иконка",
+				"custom": "Сердце"
+			},
+			"group": {
+				"label": "Групповой массив (bind:group)",
+				"description": "Множественный выбор через общий массив — каждый чекбокс вносит свой `value`.",
+				"apple": "Яблоко",
+				"banana": "Банан",
+				"cherry": "Вишня",
+				"selected": "Выбрано"
+			}
+		},
+		"radio": {
+			"title": "Радио",
+			"description": "Все цвета, состояния, позиции метки, кастомная иконка, нативный групповой выбор.",
+			"basic": {
+				"label": "Группа",
+				"apple": "Яблоко",
+				"banana": "Банан",
+				"cherry": "Вишня",
+				"selected": "Выбрано"
+			},
+			"colors": {
+				"label": "Цвета",
+				"primary": "Основной",
+				"success": "Успех",
+				"danger": "Опасность",
+				"warning": "Предупреждение",
+				"dark": "Тёмный"
+			},
+			"states": {
+				"label": "Состояния",
+				"disabled": "Отключён",
+				"loading": "Загрузка"
+			},
+			"icon": {
+				"label": "Кастомная иконка",
+				"star": "Звезда",
+				"heart": "Сердце",
+				"fire": "Огонь",
+				"lightning": "Молния",
+				"crown": "Корона"
+			},
+			"label": {
+				"label": "Позиция метки",
+				"before": "Метка слева",
+				"after": "Метка справа"
+			}
+		},
+		"segmented": {
+			"title": "Сегментированный контрол",
+			"description": "Радио-группа с одним выбором в виде сегментированного контрола со скользящим индикатором. Иконки, размеры, цвета, block-режим, полная поддержка клавиатуры.",
+			"basic": {
+				"label": "Базовый",
+				"hint": "Привяжите значение, передайте items с метками — индикатор плавно скользит между сегментами.",
+				"fiveMin": "5 мин",
+				"fifteenMin": "15 мин",
+				"thirtyMin": "30 мин"
+			},
+			"variants": {
+				"label": "Варианты",
+				"hint": "`default` — gray-2 трек, акцентный thumb. `tonal` — трек подкрашен акцентом. `border` — без заливки, только обводка. `relief` — утопленный трек с приподнятым thumb."
+			},
+			"icons": {
+				"label": "С иконками",
+				"hint": "Каждый item принимает сниппет `icon`, рендерится перед меткой.",
+				"list": "Список",
+				"grid": "Сетка",
+				"rows": "Строки"
+			},
+			"iconOnly": {
+				"label": "Только иконки",
+				"hint": "Без метки — компактные иконочные сегменты. Не забудьте `ariaLabel` для скринридеров."
+			},
+			"theme": {
+				"label": "Переключатель темы",
+				"hint": "Готовая замена для глобального переключателя темы приложения.",
+				"light": "Светлая",
+				"dark": "Тёмная",
+				"system": "Система"
+			},
+			"sizes": {
+				"label": "Размеры",
+				"hint": "Три преднастроенных шкалы — small, medium (по умолчанию), large."
+			},
+			"colors": {
+				"label": "Цвета",
+				"hint": "`color` группы красит всю группу; `color` у item переопределяет только свой сегмент — активный лейбл и bloom ripple зависят от цвета нажатого элемента."
+			},
+			"perItem": {
+				"approve": "Принять",
+				"review": "На проверку",
+				"reject": "Отклонить"
+			},
+			"block": {
+				"label": "Block",
+				"hint": "`block` растягивает группу на всю ширину контейнера равными сегментами."
+			},
+			"disabled": {
+				"label": "Disabled",
+				"hint": "Отключение per-item или всей группы целиком."
+			},
+			"options": {
+				"label": "API",
+				"hint": "Публичные пропы.",
+				"value": "Текущий выбор; биндите через `bind:value`.",
+				"items": "Массив `{ value, label?, icon?, disabled? }`.",
+				"color": "Имя из палитры или CSS-цвет — активный лейбл, заливка тумблера, свечение и focus-ring.",
+				"size": "Шкала размеров.",
+				"block": "Растянуть на всю ширину равными сегментами.",
+				"disabled": "Отключить всю группу.",
+				"onchange": "Срабатывает при смене выбора."
+			}
+		},
+		"switch": {
+			"title": "Переключатель",
+			"description": "Pill или square трек, три размера, все цвета, иконки и подписи on/off, ghost-knob режим, indeterminate, загрузка, disabled.",
+			"basic": {
+				"label": "Базовый"
+			},
+			"sizes": {
+				"label": "Размеры"
+			},
+			"shapes": {
+				"label": "Формы"
+			},
+			"colors": {
+				"label": "Цвета"
+			},
+			"thumbColor": {
+				"label": "Кастомный цвет thumb",
+				"description": "Передайте `thumbColor`, чтобы окрасить knob независимо от трека. Комбинируйте с `color` для двухцветных переключателей."
+			},
+			"thumbColorStates": {
+				"label": "Цвет thumb по состояниям",
+				"description": "Используйте `thumbColorOff` и `thumbColorOn`, чтобы knob плавно переходил между двумя цветами при переключении."
+			},
+			"timing": {
+				"label": "Кастомные тайминги анимации",
+				"description": "Передайте `transitionDuration` (мс) и `transitionEasing` (функция `(t: number) => number` из `svelte/easing` или своя), чтобы перенастроить анимацию переключения. Дефолт — 240мс cubicOut."
+			},
+			"icons": {
+				"label": "Inline и knob иконки"
+			},
+			"text": {
+				"label": "On / off текст",
+				"on": "Вкл",
+				"off": "Выкл"
+			},
+			"ghost": {
+				"label": "Ghost knob (стиль theme-toggle)"
+			},
+			"states": {
+				"label": "Состояния"
+			}
+		},
+		"input": {
+			"title": "Поле ввода",
+			"description": "Все стили метки, состояния, варианты, иконки до/после, показ пароля, прогресс-бар, загрузка, message-снипет.",
+			"basic": {
+				"label": "Базовый",
+				"placeholder": "Введите имя",
+				"readonly": "значение только для чтения"
+			},
+			"label": {
+				"label": "Стили метки",
+				"float": "Плавающая метка",
+				"inline": "Inline-метка",
+				"placeholder": "Видимый плейсхолдер"
+			},
+			"icons": {
+				"label": "Иконка (до / после)",
+				"search": "Поиск…",
+				"email": "Email"
+			},
+			"iconColor": {
+				"label": "Цвет фона иконки в фокусе",
+				"primary": "Иконка primary",
+				"warning": "Иконка warning"
+			},
+			"variants": {
+				"label": "Варианты",
+				"default": "По умолчанию",
+				"border": "С рамкой",
+				"shadow": "С тенью"
+			},
+			"states": {
+				"label": "Состояния",
+				"primary": "Основной",
+				"success": "Успех",
+				"danger": "Опасность",
+				"warning": "Предупреждение"
+			},
+			"password": {
+				"label": "Показ пароля",
+				"placeholder": "Пароль"
+			},
+			"progress": {
+				"label": "Прогресс-бар (надёжность пароля)",
+				"password": "Пароль"
+			},
+			"loading": {
+				"label": "Загрузка",
+				"placeholder": "Загрузка…"
+			},
+			"message": {
+				"label": "Message-снипет",
+				"label2": "Email",
+				"error": "Введите корректный email."
+			},
+			"block": {
+				"label": "Block",
+				"placeholder": "Поле во всю ширину"
+			},
+			"mask": {
+				"label": "Маски ввода",
+				"phone": "Телефон",
+				"phonePlaceholder": "+7 (___) ___-__-__",
+				"card": "Номер карты",
+				"cardPlaceholder": "0000 0000 0000 0000",
+				"date": "Дата",
+				"datePlaceholder": "ДД.ММ.ГГГГ",
+				"ip": "IPv4",
+				"ipPlaceholder": "0.0.0.0",
+				"license": "Номер авто",
+				"licensePlaceholder": "А 123 АА"
+			}
+		},
+		"tooltip": {
+			"title": "Подсказка",
+			"description": "Позиции, варианты, триггеры hover/click, интерактивность, задержка, загрузка.",
+			"placement": {
+				"label": "Позиция",
+				"top": "Сверху",
+				"right": "Справа",
+				"bottom": "Снизу",
+				"left": "Слева"
+			},
+			"variants": {
+				"label": "Варианты",
+				"default": "По умолчанию",
+				"shadow": "С тенью",
+				"border": "С границей"
+			},
+			"trigger": {
+				"label": "Триггеры",
+				"hover": "Наведение",
+				"click": "Клик",
+				"interactive": "Интерактивный",
+				"delay": "Задержка 500мс",
+				"loading": "Загрузка"
+			},
+			"color": {
+				"label": "Цвет",
+				"primary": "Primary",
+				"success": "Success",
+				"danger": "Danger",
+				"warning": "Warning",
+				"dark": "Dark",
+				"hex": "Hex",
+				"rgb": "RGB"
+			}
+		},
+		"divider": {
+			"title": "Разделитель",
+			"description": "Тонкая разделительная линия. Горизонтальная или вертикальная, dashed / dotted, опциональная подпись, цвет и толщина.",
+			"basic": { "label": "Базовый" },
+			"variants": { "label": "Варианты (solid, dashed, dotted)" },
+			"label": { "label": "С подписью" },
+			"colors": { "label": "Цвета" },
+			"thickness": { "label": "Толщина" },
+			"inset": { "label": "Отступ" },
+			"vertical": { "label": "Вертикальный" }
+		},
+		"pagination": {
+			"title": "Пагинация",
+			"description": "Числовой режим и точки, infinite, прогресс, многоточия и отключённые / загружаемые страницы.",
+			"basic": {
+				"label": "Базовый",
+				"current": "Текущая страница"
+			},
+			"dots": {
+				"label": "Точки-индикаторы"
+			},
+			"options": {
+				"label": "Опции (progress, infinite, форма, only-arrows, disabled)"
+			},
+			"disabledItems": {
+				"label": "Отключённые и загружаемые страницы"
+			}
+		},
+		"select": {
+			"title": "Селект",
+			"description": "Single / multiple, фильтр, группы опций, чипы со сворачиванием, состояния.",
+			"basic": {
+				"label": "Один",
+				"placeholder": "Выберите фрукт",
+				"value": "Значение",
+				"apple": "Яблоко",
+				"banana": "Банан",
+				"cherry": "Вишня",
+				"date": "Финик"
+			},
+			"multi": {
+				"label": "Несколько со сворачиваемыми чипами",
+				"placeholder": "Выберите фрукты",
+				"value": "Значение"
+			},
+			"filter": {
+				"label": "Фильтр + группы",
+				"placeholder": "Поиск…",
+				"fruits": "Фрукты",
+				"veggies": "Овощи"
+			},
+			"variants": {
+				"label": "Варианты",
+				"default": "По умолчанию",
+				"border": "С подчёркиванием",
+				"shadow": "С тенью"
+			},
+			"openAnim": {
+				"label": "Анимация раскрытия",
+				"description": "Выбор анимации появления списка. `pop` (по умолчанию) — резкий back-out scale; `slide` — выезд сверху; `fade` — простой fade; `spring` — упругий elastic-out; `stagger` — панель поп-апом, а строки прилетают по очереди."
+			},
+			"caret": {
+				"label": "Кастомная иконка-индикатор",
+				"description": "Передайте `caret` снипет вместо стандартного шеврона. Снипет получает `isOpen` — можно вращать или менять глиф.",
+				"search": "Поиск фрукта",
+				"toggle": "Переключатель"
+			},
+			"states": {
+				"label": "Состояния",
+				"disabled": "Отключён",
+				"primary": "Primary",
+				"success": "Success",
+				"danger": "Danger",
+				"warning": "Warning",
+				"dark": "Dark"
+			},
+			"custom": {
+				"label": "Кастомный слот опции",
+				"description": "Снипеты `option`, `selected` и `groupTitle` дают полный контроль над разметкой — цветные иконки, две строки текста, значки. Поведение Select не меняется.",
+				"placeholder": "Выберите вкус",
+				"value": "Выбрано",
+				"fruits": "Фрукты",
+				"veggies": "Овощи",
+				"mango": "Сладкий, сочный, тропический",
+				"cherry": "Кисло-сладкий, яркий",
+				"apple": "Хрустящая классика",
+				"carrot": "Землистый, сладкий, хрустящий",
+				"spinach": "Мягкий, листовой, богат железом"
+			},
+			"customMulti": {
+				"label": "Кастомные слоты — мульти",
+				"description": "Те же `option` и `groupTitle`, плюс снипет `chip` для пилюль в поле выбора.",
+				"placeholder": "Выберите несколько"
+			}
+		},
+		"menu": {
+			"title": "Menu",
+			"description": "Привязанный к якорю попап с гибким слотом-триггером. Открытие по click / hover / вручную, шесть placement'ов, закрытие по click-outside / Esc.",
+			"basic": {
+				"label": "Базовый — Button как триггер",
+				"open": "Действия"
+			},
+			"placements": {
+				"label": "Placement'ы"
+			},
+			"hover": {
+				"label": "Hover-триггер",
+				"hint": "Открывается при наведении, закрывается с небольшой задержкой когда курсор уходит и с якоря, и с попапа.",
+				"trigger": "Аккаунт"
+			},
+			"custom": {
+				"label": "closeOnSelect = false (закрытие вручную)",
+				"hint": "Клики по элементам не закрывают меню автоматически. Удобно для theme picker'ов или многошаговых действий.",
+				"theme": "Тема",
+				"themeLabel": "Выберите тему",
+				"light": "Светлая",
+				"dark": "Тёмная",
+				"system": "Системная"
+			},
+			"manual": {
+				"label": "Ручное управление",
+				"hint": "`triggerOn=\"manual\"` — вы сами управляете `open` снаружи. Снипет-триггер всё равно служит визуальным якорем для позиционирования.",
+				"open": "Открыть снаружи",
+				"close": "Закрыть снаружи",
+				"anchor": "Якорь здесь"
+			},
+			"block": {
+				"label": "Block якорь",
+				"hint": "`block` растягивает враппер триггера на ширину родителя — полезно внутри flex / grid ячейки.",
+				"trigger": "Триггер на всю ширину"
+			},
+			"openAnim": {
+				"label": "Анимация раскрытия",
+				"description": "Выбирается через `openAnim`. `pop` (по умолчанию) — back-out scale; `slide` — выезд от якоря; `fade` — только opacity; `spring` — упругий elastic-out."
+			},
+			"timing": {
+				"label": "Кастомные тайминги",
+				"description": "Переопределите `openDuration` (мс) и `openEasing` (любая CSS-easing строка: `cubic-bezier(...)`, `ease`, `linear` и т.д.), чтобы перенастроить любой вариант. Дефолты подобраны под каждый `openAnim`."
+			},
+			"actions": {
+				"section": "Аккаунт",
+				"edit": "Редактировать",
+				"duplicate": "Дублировать",
+				"share": "Поделиться",
+				"delete": "Удалить",
+				"option": "Опция",
+				"profile": "Профиль",
+				"settings": "Настройки",
+				"logout": "Выйти"
+			},
+			"lastAction": "Последнее действие"
+		},
+		"dialog": {
+			"title": "Диалог",
+			"description": "Модальное окно на основе native <dialog>. Снипеты header / children / footer, пресет size, режим persistent. Focus-trap и блокировка скролла — встроены.",
+			"basic": { "label": "Базовый" },
+			"persistent": { "label": "Persistent (без Esc и клика по подложке)" },
+			"sizes": { "label": "Размеры" },
+			"form": { "label": "Диалог с формой" },
+			"scroll": { "label": "Скроллируемый контент" }
+		},
+		"notifications": {
+			"title": "Уведомления",
+			"description": "Императивный API `notify(...)` рендерится через NotificationsHost. Шесть позиций-якорей, sticky, closable, loading, кастомная иконка, клик-обработчик.",
+			"colors": {
+				"label": "Цвета",
+				"primary": "Основной",
+				"success": "Успех",
+				"danger": "Опасность",
+				"warning": "Предупреждение",
+				"dark": "Тёмный"
+			},
+			"variants": {
+				"label": "Варианты",
+				"tint": "С тинтом (по умолчанию)",
+				"border": "С рамкой",
+				"square": "Квадратные"
+			},
+			"states": {
+				"label": "Состояния",
+				"sticky": "Sticky",
+				"closable": "Sticky + закрываемая",
+				"loading": "Со спиннером",
+				"clickable": "Кликабельная (click-close)"
+			},
+			"positions": {
+				"label": "Позиции",
+				"topRight": "Сверху-справа",
+				"topLeft": "Сверху-слева",
+				"topCenter": "Сверху по центру",
+				"bottomRight": "Снизу-справа",
+				"bottomLeft": "Снизу-слева",
+				"bottomCenter": "Снизу по центру"
+			},
+			"icon": {
+				"label": "Кастомная иконка (snippet)"
+			},
+			"sample": {
+				"title": "Уведомление",
+				"body": "Это тело уведомления."
+			}
+		},
+		"chip": {
+			"title": "Chip",
+			"description": "Компактный элемент-тег для фильтров, меток и выбора. Делит словарь вариантов, шкалу, фокус-кольцо и рябь с Button — чипы и кнопки читаются как одна семья.",
+			"default": {
+				"label": "По умолчанию"
+			},
+			"variants": {
+				"label": "Варианты",
+				"default": "Default",
+				"flat": "Flat",
+				"border": "Border",
+				"transparent": "Transparent",
+				"gradient": "Gradient",
+				"shadow": "Shadow"
+			},
+			"colors": {
+				"label": "Цвета"
+			},
+			"sizes": {
+				"label": "Размеры",
+				"xl": "Extra-large",
+				"large": "Large",
+				"medium": "Medium",
+				"small": "Small",
+				"mini": "Mini"
+			},
+			"shapes": {
+				"label": "Формы",
+				"default": "Пилюля",
+				"square": "Скруглённый прямоугольник",
+				"circle": "Круг"
+			},
+			"icon": {
+				"label": "С иконкой",
+				"tag": "тег",
+				"user": "пользователь",
+				"verified": "проверено",
+				"featured": "избранное"
+			},
+			"active": {
+				"label": "Активное состояние",
+				"hint": "Нажмите, чтобы переключить. Фильтр-чипы используют `active` и озвучиваются как `aria-pressed`.",
+				"frontend": "frontend",
+				"backend": "backend",
+				"design": "design",
+				"qa": "qa"
+			},
+			"closable": {
+				"label": "С закрытием",
+				"frontend": "frontend",
+				"backend": "backend",
+				"design": "design",
+				"clickable": "клик + закрытие"
+			},
+			"clickable": {
+				"label": "Кликабельный",
+				"click": "Нажми меня"
+			},
+			"disabled": {
+				"label": "Отключённый"
+			},
+			"samples": {
+				"primary": "Primary",
+				"success": "Success",
+				"danger": "Danger",
+				"warning": "Warning",
+				"dark": "Dark"
+			},
+			"harmony": {
+				"label": "Рядом с Input и Button",
+				"hint": "Одна палитра поверхностей, один акцент фокуса, один ритм радиусов — форма, действие и слой тегов складываются в одну строку ввода.",
+				"placeholder": "Добавить тег",
+				"add": "Добавить",
+				"empty": "Тегов пока нет."
+			}
+		},
+		"scrollbar": {
+			"title": "Scrollbar",
+			"description": "Тематические скроллбары с авто-скрытием, применяются ко всему киту через базовые стили. Подключение состоит из двух частей: tokens.css задаёт scrollbar-color у каждого элемента через три CSS-переменные, а <ScrollbarHost> — смонтированный один раз в корне приложения — переключает [data-scrolling] на том элементе, который сейчас скроллят, чтобы CSS мог переключиться между «покой» и «активен».",
+			"default": {
+				"label": "По умолчанию — подключение",
+				"hint": "Импортируйте ScrollbarHost из кита и смонтируйте его один раз в корне приложения. Он ставит один capture-listener на scroll и переключает [data-scrolling] на элементе, который этот event вызвал; tokens.css ловит атрибут и меняет цвет тумба. Глобальный host уже стоит в +layout.svelte — второй mount в этом примере просто no-op (защита через module-level guard), он нужен только чтобы контракт читался в исходнике."
+			},
+			"liveState": {
+				"label": "Live [data-scrolling]",
+				"hint": "Тот же контейнер плюс MutationObserver, который зеркалит атрибут, выставленный ScrollbarHost. Прокрутите бокс — пилюля загорается, а через ~1с после последнего события гаснет. Наглядно показывает связку JS↔CSS."
+			},
+			"alwaysVisible": {
+				"label": "Всегда виден",
+				"hint": "Переопределите --scrollbar-thumb видимым цветом, когда заметность важнее минимализма. Свап на --scrollbar-thumb-hover во время скролла продолжает работать."
+			},
+			"brand": {
+				"label": "Брендированный активный тумб",
+				"hint": "Переопределите --scrollbar-thumb-hover, чтобы активный тумб перекрасился в токен кита. В покое тумб остаётся прозрачным — поверхность выглядит чисто."
+			},
+			"track": {
+				"label": "Окрашенный трек",
+				"hint": "Переопределите --scrollbar-track, чтобы у желоба появился ненавязчивый фон — пригодится, когда поверхности нужно явно показать, что её можно скроллить, даже в покое."
+			},
+			"horizontal": {
+				"label": "Горизонтальная ось",
+				"hint": "scrollbar-color не зависит от оси — те же три переменные перекрашивают и горизонтальный скроллбар. ScrollbarHost слушает все scroll-события, поэтому свап в активное состояние работает одинаково."
+			},
+			"variables": {
+				"label": "Все переменные",
+				"hint": "Переопределение на :root меняет глобально, на любом контейнере — точечно.",
+				"thumb": "Цвет тумба в покое. Прозрачный включает авто-скрытие.",
+				"thumbHover": "Цвет тумба во время скролла (и 1с после).",
+				"track": "Цвет трека."
+			}
+		},
+		"ripple": {
+			"title": "Ripple",
+			"description": "GPU-композитный «бутон» при клике, упакован в Svelte-action. Подключается через use:ripple на любом host-элементе — устанавливает свой scoped-стиль на первом использовании, чистится в destroy.",
+			"basic": {
+				"label": "Базовый",
+				"hint": "use:ripple без опций использует primary-цвет кита.",
+				"click": "Кликните в любое место"
+			},
+			"colors": {
+				"label": "Цвета",
+				"hint": "Передайте color как имя из палитры кита или любую CSS-строку — ripple наследует акцент."
+			},
+			"solidBg": {
+				"label": "Сплошная заливка",
+				"hint": "Установите solidBg: true, когда фон host'а уже окрашен в акцент (filled-кнопки). Поднимает тело волны, чтобы она читалась на одноцветной поверхности.",
+				"filled": "Заливка (solidBg)",
+				"flat": "Плоский (по умолчанию)"
+			},
+			"disabled": {
+				"label": "Отключён",
+				"hint": "disabled: true полностью отключает эмиссию ripple, не снимая listener."
+			},
+			"textColor": {
+				"label": "Шифт цвета текста",
+				"hint": "Цвет текста host'а анимируется к textColor во время bloom (по умолчанию rgb(var(--on-accent)) — токен 'текст на акценте', как у Button.default) и обратно.",
+				"defaultLabel": "default (on-accent)",
+				"offLabel": "currentColor (выкл)"
+			},
+			"surfaces": {
+				"label": "Произвольные поверхности",
+				"hint": "Ripple уважает border-radius host'а — работает на карточках, кружках, чём угодно.",
+				"cardTitle": "Карточка-host",
+				"cardBody": "Кликните, чтобы запустить ripple"
+			},
+			"options": {
+				"label": "Опции",
+				"hint": "RippleOptions, принимаемые use:ripple={ ... }.",
+				"color": "Цвет акцента для этого ripple. Имя палитры или CSS-строка.",
+				"solidBg": "Поднять тело волны, чтобы она не сливалась с host'ом, окрашенным в тот же акцент.",
+				"disabled": "Полностью отключить эмиссию ripple.",
+				"textColor": "Цвет, к которому анимируется текст host'а во время bloom. По умолчанию rgb(var(--on-accent)) — токен 'текст на акценте'. 'currentColor' — отключить шифт."
+			}
+		},
+		"list": {
+			"title": "List",
+			"description": "Поверхность для вертикальных коллекций — учитывает палитру, размеры, разделители, секции, listbox-выбор.",
+			"basic": {
+				"label": "Базовый"
+			},
+			"variants": {
+				"label": "Варианты",
+				"hint": "default · flat · border · transparent · shadow"
+			},
+			"sizes": {
+				"label": "Размеры"
+			},
+			"colors": {
+				"label": "Цвет"
+			},
+			"divided": {
+				"label": "С разделителями"
+			},
+			"withHeader": {
+				"label": "Header и footer",
+				"header": "Входящие",
+				"footer": "4 пункта"
+			},
+			"withIcons": {
+				"label": "Lead, trail, описание",
+				"user": "Иоанна Доу",
+				"userDesc": "Была 2 часа назад",
+				"userRole": "админ",
+				"settings": "Настройки",
+				"settingsDesc": "Параметры рабочего пространства",
+				"notifs": "Уведомления",
+				"notifsDesc": "Email и push"
+			},
+			"states": {
+				"label": "Состояния",
+				"active": "Активный (current)",
+				"selected": "Выбран",
+				"disabled": "Отключён",
+				"loading": "Загрузка",
+				"link": "Внешняя ссылка"
+			},
+			"groups": {
+				"label": "Группы и разделители",
+				"workspace": "Рабочая область",
+				"account": "Аккаунт",
+				"projects": "Проекты",
+				"members": "Участники",
+				"profile": "Профиль",
+				"signOut": "Выйти"
+			},
+			"listbox": {
+				"label": "Listbox (одиночный)",
+				"hint": "Стрелки / Home / End — навигация с клавиатуры.",
+				"red": "Багровый",
+				"blue": "Лазурный",
+				"green": "Изумрудный",
+				"yellow": "Янтарный",
+				"selected": "Выбран:"
+			},
+			"multiselect": {
+				"label": "Listbox (множественный)",
+				"hint": "Клик переключает пункт независимо.",
+				"selected": "Выбраны:"
+			},
+			"empty": {
+				"label": "Пустое состояние",
+				"text": "Пока ничего нет."
+			},
+			"items": {
+				"a": "Черновики",
+				"b": "Отправленные",
+				"c": "Архив",
+				"d": "Корзина"
+			}
+		},
+		"progress": {
+			"title": "Progress",
+			"description": "Линейный или круговой прогресс с indeterminate, полосами, толщиной и палитровыми цветами.",
+			"linear": {
+				"label": "Линейный"
+			},
+			"colors": {
+				"label": "Цвета"
+			},
+			"stripes": {
+				"label": "Полосы"
+			},
+			"indeterminate": {
+				"label": "Indeterminate"
+			},
+			"circular": {
+				"label": "Круговой"
+			},
+			"interactive": {
+				"label": "Интерактивный"
+			},
+			"value": "значение"
+		},
+		"inputNumber": {
+			"title": "Input Number",
+			"description": "Числовой степпер: min/max/step, авто-повтор при удержании, focus-волна и общий контракт размер / форма / палитра.",
+			"basic": {
+				"label": "Базовый"
+			},
+			"stepBounds": {
+				"label": "Шаг / границы",
+				"hint": "step={100} — посмотрите как «накручиваются» цифры"
+			},
+			"colors": {
+				"label": "Цвета"
+			},
+			"splitColors": {
+				"label": "Раздельные цвета (− / +)",
+				"hint": "decrementColor + incrementColor"
+			},
+			"sizes": {
+				"label": "Размеры"
+			},
+			"shapes": {
+				"label": "Формы",
+				"default": "Обычная",
+				"square": "Квадрат",
+				"circle": "Круг"
+			},
+			"states": {
+				"label": "Состояния",
+				"square": "Квадрат",
+				"disabled": "Отключённый",
+				"readonly": "Только чтение",
+				"block": "Block (на всю ширину)"
+			},
+			"animation": {
+				"label": "Длительность анимации"
+			}
+		},
+		"textarea": {
+			"title": "Textarea",
+			"description": "Многострочный ввод с теми же вариантами/состояниями/метками, что и Input. Доступен auto-grow.",
+			"basic": {
+				"label": "Базовый",
+				"placeholder": "Введите более длинный текст…"
+			},
+			"variants": {
+				"label": "Варианты"
+			},
+			"states": {
+				"label": "Состояния поля"
+			},
+			"label": {
+				"label": "Стили метки",
+				"default": "Default",
+				"inline": "Inline",
+				"labelText": "Комментарий",
+				"placeholder": "Placeholder"
+			},
+			"autoGrow": {
+				"label": "Auto-grow",
+				"placeholder": "Я расту с вводом…"
+			},
+			"block": {
+				"label": "Block",
+				"placeholder": "Растягивается на всю ширину контейнера."
+			}
+		},
+		"slider": {
+			"title": "Slider",
+			"description": "Одно значение или диапазон `[start, end]`. Три размера, подсказка по hover/focus, риски, форматтер значений, палитровые цвета.",
+			"basic": {
+				"label": "Одно значение"
+			},
+			"sizes": {
+				"label": "Размеры"
+			},
+			"range": {
+				"label": "Диапазон"
+			},
+			"tooltip": {
+				"label": "Подсказка по hover / focus"
+			},
+			"always": {
+				"label": "Подсказка всегда видна"
+			},
+			"format": {
+				"label": "Форматирование (цена)"
+			},
+			"ticks": {
+				"label": "Риски"
+			},
+			"colors": {
+				"label": "Цвета"
+			},
+			"states": {
+				"label": "Состояния",
+				"disabled": "Отключённый"
+			},
+			"value": "значение"
+		},
+		"timePicker": {
+			"title": "DateTime Picker",
+			"description": "Поле ввода с выпадающим колёсным пикером. Ручной ввод, цикличные колёса часов / минут / секунд, опциональный 12-часовой режим, настраиваемая сторона и кастомная иконка.",
+			"basic": {
+				"label": "Базовый"
+			},
+			"withSeconds": {
+				"label": "С секундами"
+			},
+			"colors": {
+				"label": "Цвета"
+			},
+			"states": {
+				"label": "Состояния",
+				"disabled": "Отключённый"
+			},
+			"value": "значение"
+		},
+		"calendar": {
+			"title": "Календарь",
+			"description": "Инлайн-сетка месяца на Temporal. Одиночный день или диапазон, полная клавиатура, локализованные подписи.",
+			"basic": { "label": "Базовый" },
+			"bound": { "label": "Привязанное значение и футер" },
+			"range": { "label": "Режим диапазона" },
+			"sizes": { "label": "Размеры" },
+			"locale": { "label": "Локализованные подписи" },
+			"restricted": {
+				"label": "Min / max + отключённые дни",
+				"hint": "Min — 5 апр., max — 25 апр., выходные отключены"
+			},
+			"colors": { "label": "Цвета" },
+			"states": {
+				"label": "Состояния",
+				"disabled": "Отключённый"
+			},
+			"transparent": {
+				"label": "Прозрачный вариант",
+				"hint": "Убирает фон календаря — он наследует поверхность, на которой стоит. Удобно встраивать в Card, Dialog или собственную панель."
+			},
+			"value": "Значение"
+		},
+		"dates": {
+			"title": "Утилиты дат",
+			"description": "Чистые хелперы на Temporal.PlainDate / PlainTime / PlainDateTime — экспортируются из sveltastic-ui и используются Calendar'ом и семейством пикеров.",
+			"parsing": {
+				"label": "Парсинг и ISO-преобразование",
+				"hint": "Приведение строк, нативного Date и Temporal-типов к plain-формам кита и обратно в ISO-строки, готовые к bind:value."
+			},
+			"formatting": {
+				"label": "Локализованное форматирование",
+				"hint": "Все форматтеры делегируют в Intl.DateTimeFormat — подписи следуют локали пользователя."
+			},
+			"locale": {
+				"label": "Локаль-хелперы",
+				"hint": "Определяют локаль хоста, начало недели (вс/пн) и 12/24-часовой формат без захардкоженных списков."
+			},
+			"types": {
+				"label": "Публичные типы",
+				"hint": "Реэкспортированы из кита — используйте в собственных состояниях."
+			}
+		},
+		"theme": {
+			"title": "Theme",
+			"description": "Реактивный singleton, владеющий состоянием light/dark и RTL всего кита. Сохраняется в localStorage и уважает prefers-color-scheme при первом запуске.",
+			"current": {
+				"label": "Текущее состояние",
+				"hint": "Оба поля — рун-реактивные. Читайте откуда угодно, UI сам перерисуется при изменении."
+			},
+			"controls": {
+				"label": "Управление",
+				"hint": "Попробуйте — весь сайт документации реагирует на singleton."
+			},
+			"api": {
+				"label": "API",
+				"hint": "Всё, что предоставляет theme-singleton.",
+				"themeField": "Текущая тема. Изменения вызывают реактивный re-render.",
+				"rtlField": "Флаг направления текста.",
+				"setTheme": "Установить тему, отзеркалить в <html data-theme>, сохранить в localStorage.",
+				"toggleTheme": "Переключить между light и dark.",
+				"setRtl": "Установить направление, отзеркалить в <html dir>.",
+				"toggleRtl": "Переключить направление.",
+				"hydrate": "Прочитать сохранённую тему и prefers-color-scheme при монтировании. Вызывайте один раз из корневого layout."
+			},
+			"usage": {
+				"label": "Использование",
+				"hint": "Монтируйте один раз — далее читайте и меняйте откуда угодно."
+			}
+		},
+		"upload": {
+			"title": "Upload",
+			"description": "Загрузка через drag-and-drop / клик с превью, multi-select, валидацией accept / размера / количества и миниатюрами для изображений.",
+			"basic": {
+				"label": "Один файл",
+				"label2": "Перетащите файл сюда или нажмите"
+			},
+			"multiple": {
+				"label": "Несколько",
+				"label2": "Бросьте несколько файлов (или клик)",
+				"hint": "До 5 файлов"
+			},
+			"imagesOnly": {
+				"label": "Изображения с превью",
+				"label2": "Бросьте изображения — превью появятся автоматически",
+				"hint": "PNG, JPG, WEBP до 5 МБ"
+			},
+			"variants": {
+				"label": "Варианты",
+				"flat": "Заливка",
+				"border": "Сплошная рамка"
+			},
+			"sizes": {
+				"label": "Размеры"
+			},
+			"withFiles": {
+				"label": "С файлами",
+				"description": "Выбранные элементы рендерятся списком: миниатюра для изображений, иконка типа для остальных, форматированный размер и кнопка удаления."
+			},
+			"customItem": {
+				"label": "Кастомный item-снипет",
+				"description": "Переопределите строку целиком через сниппет `item` — отрендерьте любой layout."
+			},
+			"buttonOnly": {
+				"label": "Только кнопка",
+				"label2": "Выбрать файл"
+			},
+			"validation": {
+				"label": "Валидация",
+				"label2": "Бросьте не-изображение или файл > 100 КБ",
+				"hint": "Только изображения, до 100 КБ",
+				"errorSize": "{name} слишком большой ({size} > 100 КБ)",
+				"errorType": "{name} не изображение",
+				"errorCount": "Можно не больше {max} файлов"
+			},
+			"states": {
+				"label": "Состояния",
+				"disabled": "Отключённый"
+			},
+			"selected": "выбрано"
+		},
+		"tabs": {
+			"title": "Tabs",
+			"description": "Композиционные вкладки — провайдер `<Tabs>`, `<TabList>` + `<Tab>` для переключателей, `<TabPanel>` для контента. Можно ставить в разных местах шаблона, необязательно рядом. Рейка унаследовала визуальный контракт `<Segmented>`: пружинящий ползунок, press-scale, рипл внутрь активной плашки.",
+			"basic": {
+				"label": "Базовый",
+				"hint": "Вариант по умолчанию — `underline`: анимированная полоса снизу следует за активной вкладкой."
+			},
+			"variants": {
+				"label": "Варианты",
+				"hint": "`underline` · `default` · `tonal` · `border` · `relief` — те же, что у `<Segmented>`, плюс классический underline."
+			},
+			"sizes": {
+				"label": "Размеры",
+				"hint": "Общая шкала с Button и Segmented — `xl` · `large` · `medium` · `small` · `mini`."
+			},
+			"block": {
+				"label": "Block",
+				"hint": "`<TabList block>` растягивается на всю ширину контейнера; вкладки делятся поровну."
+			},
+			"composition": {
+				"label": "Раздельное размещение",
+				"hint": "Переключатели — в шапке, панели — в основной области, между ними может быть любая разметка."
+			},
+			"colors": {
+				"label": "Цвета"
+			},
+			"states": {
+				"label": "Состояния",
+				"disabled": "Отключённый"
+			},
+			"keyboard": {
+				"label": "Клавиатура",
+				"hint": "Стрелки ← → (или ↑ ↓), Home/End — переход с активацией."
+			},
+			"cardPanels": {
+				"label": "Card-панели",
+				"hint": "`panelVariant=\"card\"` оборачивает контент в Card-поверхность кита."
+			},
+			"slide": {
+				"label": "Slide-переход",
+				"hint": "`transition=\"slide\"` — вертикальная прокрутка между панелями."
+			},
+			"icons": {
+				"label": "Триггер с иконкой",
+				"hint": "В каждый `<Tab>` можно положить snippet `icon`."
+			},
+			"composed": {
+				"label": "Переиспользуем кит",
+				"hint": "Панели могут содержать любые компоненты — `<Card>`, `<Avatar>`, `<Chip>`, `<List>`."
+			},
+			"panes": {
+				"overview": "Обзор",
+				"overviewBody": "Краткая сводка по проекту.",
+				"details": "Детали",
+				"detailsBody": "Подробные метаданные и конфигурация.",
+				"preview": "Превью",
+				"previewBody": "Живой рендер выбранного.",
+				"history": "История",
+				"historyBody": "Журнал последних изменений."
+			}
+		},
+		"collapse": {
+			"title": "Collapse",
+			"description": "Аккордеон с семью вариантами, размерами, слотами icon + extra, и обёрткой CollapseGroup для single / multiple раскрытия.",
+			"basic": {
+				"label": "Базовый",
+				"title1": "Раздел один",
+				"title2": "Раздел два",
+				"title3": "Раздел три",
+				"body": "Кликните по заголовку, чтобы развернуть или свернуть. Биндите `open` для внешнего управления."
+			},
+			"variants": {
+				"label": "Варианты",
+				"default": "Default",
+				"flat": "Flat",
+				"border": "Border",
+				"solid": "Solid",
+				"gradient": "Gradient",
+				"relief": "Relief",
+				"ghost": "Ghost"
+			},
+			"colors": {
+				"label": "Цвета",
+				"primary": "Primary",
+				"success": "Success",
+				"danger": "Danger",
+				"warning": "Warning",
+				"dark": "Dark"
+			},
+			"sizes": {
+				"label": "Размеры",
+				"xl": "X-Large",
+				"large": "Large",
+				"medium": "Medium",
+				"small": "Small",
+				"mini": "Mini"
+			},
+			"slots": {
+				"label": "Слоты icon, extra и header",
+				"iconTitle": "С ведущей иконкой",
+				"extraTitle": "Уведомления",
+				"headerSnippet": "Кастомный header-snippet",
+				"headerHint": "полный контроль"
+			},
+			"composed": {
+				"label": "Композиция из компонентов кита",
+				"profile": "Иван Стратоник",
+				"online": "онлайн",
+				"profileBody": "Senior product designer из Лиссабона. Восемь лет в финтех-UX, сейчас ведёт переписывание дизайн-системы.",
+				"message": "Написать",
+				"viewProfile": "Открыть профиль",
+				"actionRequired": "Требуется действие",
+				"pending": "ожидание",
+				"actionBody": "Два пул-реквеста ждут вашего ревью. CI прошёл 14 минут назад без регрессий.",
+				"review": "Посмотреть сейчас",
+				"snooze": "Отложить на 24ч"
+			},
+			"group": {
+				"singleLabel": "Группа — single (один открыт)",
+				"multipleLabel": "Группа — multiple (любые сочетания)",
+				"fusedLabel": "Группа — fused (один сплошной блок)",
+				"cardLabel": "Группа — card (общая поверхность с title и footer)",
+				"cardTitle": "Часто задаваемые вопросы",
+				"cardFooter": "Не нашли ответ? Напишите в поддержку.",
+				"q1": "Какая политика возврата?",
+				"a1": "Возврат обрабатывается в течение 14 дней с момента заявки. Товар должен быть неиспользованным и в оригинальной упаковке — держите чек или номер заказа под рукой.",
+				"q2": "Как обновить профиль?",
+				"a2": "Откройте Настройки → Аккаунт. Email и аватар редактируются на месте; смена пароля требует повторной авторизации.",
+				"q3": "Где посмотреть счета?",
+				"a3": "Биллинг → Счета. PDF генерируются в течение часа после оплаты и хранятся семь лет."
+			},
+			"states": {
+				"label": "Состояния",
+				"disabled": "Отключённый (default)",
+				"disabledFlat": "Отключённый (flat / danger)",
+				"disable": "Отключить",
+				"enable": "Включить"
+			},
+			"headerSlot": {
+				"label": "Слот заголовка"
+			}
+		}
+	}
+}

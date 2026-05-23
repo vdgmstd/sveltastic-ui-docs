@@ -1,0 +1,1346 @@
+{
+	"common": {
+		"theme": "Theme",
+		"locale": "Locale",
+		"direction": "Direction",
+		"light": "Light",
+		"dark": "Dark",
+		"ltr": "LTR",
+		"rtl": "RTL"
+	},
+	"playground": {
+		"title": "Sveltastic UI playground",
+		"code": {
+			"label": "Code"
+		},
+		"sections": {
+			"button": "Button",
+			"avatar": "Avatar",
+			"card": "Card",
+			"alert": "Alert",
+			"checkbox": "Checkbox",
+			"radio": "Radio",
+			"segmented": "Segmented",
+			"switch": "Switch",
+			"input": "Input",
+			"tooltip": "Tooltip",
+			"pagination": "Pagination",
+			"divider": "Divider",
+			"select": "Select",
+			"menu": "Menu",
+			"dialog": "Dialog"
+		},
+		"button": {
+			"title": "Button",
+			"description": "Every variant, color, size, shape, animate slot, loading, upload, block, active state.",
+			"variants": {
+				"label": "Variants",
+				"default": "Default",
+				"flat": "Flat",
+				"border": "Border",
+				"gradient": "Gradient",
+				"relief": "Relief",
+				"transparent": "Transparent",
+				"shadow": "Shadow",
+				"floating": "Floating"
+			},
+			"colors": {
+				"label": "Colors",
+				"primary": "Primary",
+				"success": "Success",
+				"danger": "Danger",
+				"warning": "Warning",
+				"dark": "Dark",
+				"hex": "Hex",
+				"rgb": "RGB"
+			},
+			"sizes": {
+				"label": "Sizes",
+				"xl": "XL",
+				"large": "Large",
+				"medium": "Medium",
+				"small": "Small",
+				"mini": "Mini"
+			},
+			"shapes": {
+				"label": "Shape",
+				"default": "Default",
+				"circle": "Circle",
+				"square": "Square",
+				"rounded": "Rounded"
+			},
+			"states": {
+				"label": "States",
+				"loading": "Loading",
+				"disabled": "Disabled",
+				"active": "Active",
+				"pressedDisabled": "Active disabled",
+				"block": "Block button"
+			},
+			"icon": {
+				"label": "Icon",
+				"only": "Icon only",
+				"before": "Like",
+				"after": "Send"
+			},
+			"animate": {
+				"label": "Animate snippet",
+				"home": "Home",
+				"send": "Send",
+				"store": "Store",
+				"dynamicLabel": "Dynamic width — reflows on hover",
+				"fixedLabel": "Fixed width — locked to wider snippet",
+				"reply": "Reply",
+				"replyNow": "Reply now",
+				"add": "Add",
+				"addToCart": "Add to cart",
+				"save": "Save",
+				"savedToFavorites": "Saved to favorites",
+				"download": "Download",
+				"downloadReportPdf": "Download report PDF"
+			},
+			"upload": {
+				"label": "Upload progress",
+				"uploading": "Uploading"
+			},
+			"ripple": {
+				"label": "Ripple",
+				"on": "Ripple on",
+				"off": "Ripple off"
+			},
+			"href": {
+				"label": "Link button",
+				"docs": "Open docs"
+			},
+			"group": {
+				"label": "Button group"
+			},
+			"classOverride": {
+				"label": "Class & style override"
+			},
+			"events": {
+				"label": "Events",
+				"clicked": "Clicked at {time}",
+				"empty": "No events yet"
+			}
+		},
+		"avatar": {
+			"title": "Avatar",
+			"description": "User thumbnails with text fallback, image, icons, badges, loading, history ring, typing indicator, and grouping with overflow counter.",
+			"shapes": {
+				"label": "Shapes",
+				"defaultInitials": "DF",
+				"circleInitials": "CI",
+				"squareInitials": "SQ"
+			},
+			"colors": {
+				"label": "Colors",
+				"primaryInitials": "PR",
+				"successInitials": "SU",
+				"dangerInitials": "DA",
+				"warningInitials": "WA",
+				"darkInitials": "DK",
+				"hexInitials": "HX",
+				"rgbInitials": "RG"
+			},
+			"text": {
+				"label": "Text fallback",
+				"short": "Lee",
+				"long": "Alice Bob Chris",
+				"hint": "Strings up to 5 characters render verbatim; longer strings split on whitespace and take the initials."
+			},
+			"images": {
+				"label": "Images and icons"
+			},
+			"sizes": {
+				"label": "Custom size"
+			},
+			"badge": {
+				"label": "Badge",
+				"top-rightInitials": "TR",
+				"top-leftInitials": "TL",
+				"bottom-rightInitials": "BR",
+				"bottom-leftInitials": "BL"
+			},
+			"writing": {
+				"label": "Writing / typing",
+				"toggle": "Typing"
+			},
+			"history": {
+				"label": "History ring"
+			},
+			"loading": {
+				"label": "Loading"
+			},
+			"icons": {
+				"label": "Icons strip"
+			},
+			"group": {
+				"label": "Group with max and float"
+			},
+			"remount": {
+				"label": "Remount test",
+				"toggle": "Remount"
+			}
+		},
+		"card": {
+			"title": "Card",
+			"description": "All six variants and named snippets (img, title, body, buttons, interactions).",
+			"variants": {
+				"label": "Variants",
+				"default": "Default",
+				"caption": "Caption",
+				"horizontal": "Horizontal",
+				"frosted": "Frosted",
+				"peek": "Peek",
+				"compact": "Compact"
+			},
+			"imgSize": {
+				"label": "Custom imgSize",
+				"description": "The `imgSize` prop overrides the image cell's main dimension per variant — square edge for compact, left column for horizontal, max-height for vertical variants. Accepts a number (px) or any CSS length."
+			},
+			"withButtons": {
+				"label": "Comment form",
+				"description": "Card composed as a chat-style comment input — title, image, and a single bottom row with the kit's Input next to an icon-only send button."
+			},
+			"composition": {
+				"label": "Mini player"
+			}
+		},
+		"alert": {
+			"title": "Alert",
+			"description": "Two-variant feedback strip. Relief is the default; gradient adds a diagonal hue-shifted overlay. Supports icon, title, footer, closable, collapsible, and paged content.",
+			"basic": { "label": "Basic" },
+			"variants": { "label": "Variants" },
+			"icon": { "label": "With icon and footer" },
+			"closable": { "label": "Closable" },
+			"collapsible": { "label": "Collapsible" },
+			"pages": { "label": "Paged walkthrough" }
+		},
+		"checkbox": {
+			"title": "Checkbox",
+			"description": "Every state, every color, label position, custom checked icon, group (multi-select array binding).",
+			"states": {
+				"label": "States",
+				"basic": "Basic",
+				"indeterminate": "Indeterminate",
+				"lineThrough": "Line through",
+				"disabled": "Disabled",
+				"loading": "Loading"
+			},
+			"colors": {
+				"label": "Colors",
+				"primary": "Primary",
+				"success": "Success",
+				"danger": "Danger",
+				"warning": "Warning",
+				"dark": "Dark",
+				"hex": "Hex",
+				"rgb": "RGB"
+			},
+			"label": {
+				"label": "Label position",
+				"before": "Label before",
+				"after": "Label after"
+			},
+			"icon": {
+				"label": "Custom icon",
+				"custom": "Heart"
+			},
+			"group": {
+				"label": "Array group (bind:group)",
+				"description": "Multi-select via a shared array. Each checkbox contributes its `value` token.",
+				"apple": "Apple",
+				"banana": "Banana",
+				"cherry": "Cherry",
+				"selected": "Selected"
+			}
+		},
+		"radio": {
+			"title": "Radio",
+			"description": "Every color, state, label position, custom icon, native group selection.",
+			"basic": {
+				"label": "Group",
+				"apple": "Apple",
+				"banana": "Banana",
+				"cherry": "Cherry",
+				"selected": "Selected"
+			},
+			"colors": {
+				"label": "Colors",
+				"primary": "Primary",
+				"success": "Success",
+				"danger": "Danger",
+				"warning": "Warning",
+				"dark": "Dark"
+			},
+			"states": {
+				"label": "States",
+				"disabled": "Disabled",
+				"loading": "Loading"
+			},
+			"icon": {
+				"label": "Custom icon",
+				"star": "Star",
+				"heart": "Heart",
+				"fire": "Fire",
+				"lightning": "Lightning",
+				"crown": "Crown"
+			},
+			"label": {
+				"label": "Label position",
+				"before": "Label before",
+				"after": "Label after"
+			}
+		},
+		"segmented": {
+			"title": "Segmented",
+			"description": "Single-choice radio group rendered as a sliding-thumb segmented control. Variants, icons, sizes, per-item color, full keyboard support.",
+			"basic": {
+				"label": "Basic",
+				"hint": "Bind a value, pass labelled items, get a smooth-sliding indicator.",
+				"fiveMin": "5 mins",
+				"fifteenMin": "15 mins",
+				"thirtyMin": "30 mins"
+			},
+			"variants": {
+				"label": "Variants",
+				"hint": "`default` — gray-2 track with an accent thumb. `tonal` — accent-tinted track. `border` — outlined track, no fill. `relief` — sunken track with a raised thumb."
+			},
+			"icons": {
+				"label": "With icons",
+				"hint": "Each item accepts an `icon` snippet rendered before the label.",
+				"list": "List",
+				"grid": "Grid",
+				"rows": "Rows"
+			},
+			"iconOnly": {
+				"label": "Icon-only",
+				"hint": "Skip the label to render compact icon-only segments — provide `ariaLabel` for SR users."
+			},
+			"theme": {
+				"label": "Theme switcher",
+				"hint": "Common drop-in for app-wide theme controls.",
+				"light": "Light",
+				"dark": "Dark",
+				"system": "System"
+			},
+			"sizes": {
+				"label": "Sizes",
+				"hint": "Three preset scales — small, medium (default), large."
+			},
+			"colors": {
+				"label": "Colors",
+				"hint": "Group `color` paints the whole group; per-item `color` overrides only that segment — active label and click-ripple bloom follow the pressed item's color."
+			},
+			"perItem": {
+				"approve": "Approve",
+				"review": "Review",
+				"reject": "Reject"
+			},
+			"block": {
+				"label": "Block",
+				"hint": "`block` stretches the group to fill the container with equal segments."
+			},
+			"disabled": {
+				"label": "Disabled",
+				"hint": "Disable per-item or the whole group at once."
+			},
+			"options": {
+				"label": "API",
+				"hint": "Public props.",
+				"value": "Currently selected token; bind with `bind:value`.",
+				"items": "Array of `{ value, label?, icon?, disabled? }`.",
+				"color": "Palette name or CSS color — drives the active label, thumb tint, glow and focus ring.",
+				"size": "Sizing scale.",
+				"block": "Stretch to container width with equal-share segments.",
+				"disabled": "Disable the entire group.",
+				"onchange": "Fired on selection change."
+			}
+		},
+		"switch": {
+			"title": "Switch",
+			"description": "Pill or square track, three sizes, every color, on/off icons or labels, ghost-knob mode, indeterminate, loading, disabled.",
+			"basic": {
+				"label": "Basic"
+			},
+			"sizes": {
+				"label": "Sizes"
+			},
+			"shapes": {
+				"label": "Shapes"
+			},
+			"colors": {
+				"label": "Colors"
+			},
+			"thumbColor": {
+				"label": "Custom thumb color",
+				"description": "Pass `thumbColor` to tint the knob independently of the track. Combine with `color` for two-tone switches."
+			},
+			"thumbColorStates": {
+				"label": "Thumb color per state",
+				"description": "Use `thumbColorOff` and `thumbColorOn` to crossfade the knob between two colors as the switch toggles."
+			},
+			"timing": {
+				"label": "Custom animation timing",
+				"description": "Override `transitionDuration` (ms) and `transitionEasing` (a `(t: number) => number` function from `svelte/easing` or your own) to retune the toggle motion. Defaults: 240ms cubicOut."
+			},
+			"icons": {
+				"label": "Inline & knob icons"
+			},
+			"text": {
+				"label": "On / off text",
+				"on": "On",
+				"off": "Off"
+			},
+			"ghost": {
+				"label": "Ghost knob (theme-toggle style)"
+			},
+			"states": {
+				"label": "States"
+			}
+		},
+		"input": {
+			"title": "Input",
+			"description": "Every label style, every state color, every variant, icon (before / after), password reveal, progress bar, loading, message slot.",
+			"basic": {
+				"label": "Basic",
+				"placeholder": "Enter your name",
+				"readonly": "read-only value"
+			},
+			"label": {
+				"label": "Label styles",
+				"float": "Floating label",
+				"inline": "Inline label",
+				"placeholder": "Placeholder visible"
+			},
+			"icons": {
+				"label": "Icon (before / after)",
+				"search": "Search…",
+				"email": "Email"
+			},
+			"iconColor": {
+				"label": "Icon focus background",
+				"primary": "Primary icon",
+				"warning": "Warning icon"
+			},
+			"variants": {
+				"label": "Variants",
+				"default": "Default",
+				"border": "Border",
+				"shadow": "Shadow"
+			},
+			"states": {
+				"label": "States",
+				"primary": "Primary",
+				"success": "Success",
+				"danger": "Danger",
+				"warning": "Warning"
+			},
+			"password": {
+				"label": "Password reveal",
+				"placeholder": "Password"
+			},
+			"progress": {
+				"label": "Progress bar (password strength)",
+				"password": "Password"
+			},
+			"loading": {
+				"label": "Loading",
+				"placeholder": "Loading…"
+			},
+			"message": {
+				"label": "Message slot",
+				"label2": "Email",
+				"error": "Please enter a valid email address."
+			},
+			"block": {
+				"label": "Block",
+				"placeholder": "Full-width input"
+			},
+			"mask": {
+				"label": "Input masks",
+				"phone": "Phone",
+				"phonePlaceholder": "+1 (___) ___-____",
+				"card": "Card number",
+				"cardPlaceholder": "0000 0000 0000 0000",
+				"date": "Date",
+				"datePlaceholder": "DD.MM.YYYY",
+				"ip": "IPv4",
+				"ipPlaceholder": "0.0.0.0",
+				"license": "License plate",
+				"licensePlaceholder": "AA 1234 BB"
+			}
+		},
+		"tooltip": {
+			"title": "Tooltip",
+			"description": "Placements, variants, hover/click triggers, interactivity, delay, loading.",
+			"placement": {
+				"label": "Placement",
+				"top": "Top",
+				"right": "Right",
+				"bottom": "Bottom",
+				"left": "Left"
+			},
+			"variants": {
+				"label": "Variants",
+				"default": "Default",
+				"shadow": "Shadow",
+				"border": "Border"
+			},
+			"trigger": {
+				"label": "Triggers",
+				"hover": "Hover",
+				"click": "Click",
+				"interactive": "Interactive",
+				"delay": "Delay 500ms",
+				"loading": "Loading"
+			},
+			"color": {
+				"label": "Color",
+				"primary": "Primary",
+				"success": "Success",
+				"danger": "Danger",
+				"warning": "Warning",
+				"dark": "Dark",
+				"hex": "Hex",
+				"rgb": "RGB"
+			}
+		},
+		"divider": {
+			"title": "Divider",
+			"description": "Thin separator line. Horizontal or vertical, dashed / dotted, optional inline label, color and thickness.",
+			"basic": { "label": "Basic" },
+			"variants": { "label": "Variants (solid, dashed, dotted)" },
+			"label": { "label": "With label" },
+			"colors": { "label": "Colors" },
+			"thickness": { "label": "Thickness" },
+			"inset": { "label": "Inset" },
+			"vertical": { "label": "Vertical" }
+		},
+		"pagination": {
+			"title": "Pagination",
+			"description": "Numeric / dot modes, infinite, progress, ellipsis jumps, disabled / loading items.",
+			"basic": {
+				"label": "Basic",
+				"current": "Current page"
+			},
+			"dots": {
+				"label": "Dot indicators"
+			},
+			"options": {
+				"label": "Options (progress, infinite, shape, arrows-only, disabled)"
+			},
+			"disabledItems": {
+				"label": "Disabled and loading items"
+			}
+		},
+		"select": {
+			"title": "Select",
+			"description": "Single / multiple, filter, option groups, chips with collapse, state colors.",
+			"basic": {
+				"label": "Single",
+				"placeholder": "Pick a fruit",
+				"value": "Value",
+				"apple": "Apple",
+				"banana": "Banana",
+				"cherry": "Cherry",
+				"date": "Date"
+			},
+			"multi": {
+				"label": "Multiple with collapsed chips",
+				"placeholder": "Pick fruits",
+				"value": "Value"
+			},
+			"filter": {
+				"label": "Filter + groups",
+				"placeholder": "Search…",
+				"fruits": "Fruits",
+				"veggies": "Vegetables"
+			},
+			"variants": {
+				"label": "Variants",
+				"default": "Default",
+				"border": "Border",
+				"shadow": "Shadow"
+			},
+			"openAnim": {
+				"label": "Open animation",
+				"description": "Pick the dropdown panel motion. `pop` (default) is a snappy back-out scale; `slide` drops in from above; `fade` is a flat opacity tween; `spring` overshoots with elastic-out; `stagger` pops the panel and flies the rows in one after another."
+			},
+			"caret": {
+				"label": "Custom caret icon",
+				"description": "Pass a `caret` snippet to replace the default chevron. The snippet receives `isOpen` so it can rotate or swap glyphs.",
+				"search": "Search a fruit",
+				"toggle": "Toggle a fruit"
+			},
+			"states": {
+				"label": "States",
+				"disabled": "Disabled",
+				"primary": "Primary",
+				"success": "Success",
+				"danger": "Danger",
+				"warning": "Warning",
+				"dark": "Dark"
+			},
+			"custom": {
+				"label": "Custom option slot",
+				"description": "Use the `option`, `selected` and `groupTitle` snippets to render rich rows — tinted icons, multi-line content, badges. Behaviour stays default; only presentation changes.",
+				"placeholder": "Pick a flavour",
+				"value": "Selected",
+				"fruits": "Fruits",
+				"veggies": "Vegetables",
+				"mango": "Sweet, juicy, tropical",
+				"cherry": "Tart and bright",
+				"apple": "Crisp everyday classic",
+				"carrot": "Earthy, sweet, crunchy",
+				"spinach": "Mild, leafy, iron-rich"
+			},
+			"customMulti": {
+				"label": "Custom slots — multi",
+				"description": "Same `option` and `groupTitle` snippets, plus a `chip` snippet for the trigger pills.",
+				"placeholder": "Pick flavours"
+			}
+		},
+		"menu": {
+			"title": "Menu",
+			"description": "Anchored popup with a flexible trigger slot. Click / hover / manual open modes, six placements, click-outside / Esc close.",
+			"basic": {
+				"label": "Basic — Button trigger",
+				"open": "Actions"
+			},
+			"placements": {
+				"label": "Placements"
+			},
+			"hover": {
+				"label": "Hover trigger",
+				"hint": "Open on pointer enter, close after a short grace window when leaving anchor and popup.",
+				"trigger": "Account"
+			},
+			"custom": {
+				"label": "closeOnSelect = false (manual close)",
+				"hint": "Items don't auto-dismiss the menu. Useful for theme pickers or multi-step actions.",
+				"theme": "Theme",
+				"themeLabel": "Choose theme",
+				"light": "Light",
+				"dark": "Dark",
+				"system": "System"
+			},
+			"manual": {
+				"label": "Manual control",
+				"hint": "`triggerOn=\"manual\"` lets you drive `open` from the outside — the trigger snippet still acts as the visual anchor for positioning.",
+				"open": "Open externally",
+				"close": "Close externally",
+				"anchor": "Positioned here"
+			},
+			"block": {
+				"label": "Block anchor",
+				"hint": "`block` makes the anchor wrapper stretch to its parent — useful inside a flex / grid cell.",
+				"trigger": "Full-width trigger"
+			},
+			"openAnim": {
+				"label": "Open animation",
+				"description": "Pick the popup motion via the `openAnim` prop. `pop` (default) is a snappy back-out scale; `slide` drops in from the anchored edge; `fade` is opacity-only; `spring` overshoots with elastic-out."
+			},
+			"timing": {
+				"label": "Custom timing",
+				"description": "Override `openDuration` (ms) and `openEasing` (any CSS easing string — `cubic-bezier(...)`, `ease`, `linear`, etc.) to retune any variant. Defaults pick a sensible duration/curve per `openAnim`."
+			},
+			"actions": {
+				"section": "Account",
+				"edit": "Edit",
+				"duplicate": "Duplicate",
+				"share": "Share",
+				"delete": "Delete",
+				"option": "Option",
+				"profile": "Profile",
+				"settings": "Settings",
+				"logout": "Sign out"
+			},
+			"lastAction": "Last action"
+		},
+		"dialog": {
+			"title": "Dialog",
+			"description": "Modal dialog built on the native <dialog> element. Header / body / footer snippets, size preset, persistent mode, focus-trap and scroll-lock handled for you.",
+			"basic": { "label": "Basic" },
+			"persistent": { "label": "Persistent (no Esc / backdrop close)" },
+			"sizes": { "label": "Sizes" },
+			"form": { "label": "Form dialog" },
+			"scroll": { "label": "Scrollable content" }
+		},
+		"notifications": {
+			"title": "Notifications",
+			"description": "Imperative `notify(...)` API that mounts toasts via NotificationsHost. Six anchor positions, sticky, closable, loading, custom icon, click handler.",
+			"colors": {
+				"label": "Colors",
+				"primary": "Primary",
+				"success": "Success",
+				"danger": "Danger",
+				"warning": "Warning",
+				"dark": "Dark"
+			},
+			"variants": {
+				"label": "Variants",
+				"tint": "Tinted (default)",
+				"border": "Border",
+				"square": "Square"
+			},
+			"states": {
+				"label": "States",
+				"sticky": "Sticky",
+				"closable": "Sticky + closable",
+				"loading": "Loading spinner",
+				"clickable": "Clickable (click-close)"
+			},
+			"positions": {
+				"label": "Positions",
+				"topRight": "Top-right",
+				"topLeft": "Top-left",
+				"topCenter": "Top-center",
+				"bottomRight": "Bottom-right",
+				"bottomLeft": "Bottom-left",
+				"bottomCenter": "Bottom-center"
+			},
+			"icon": {
+				"label": "Custom icon snippet"
+			},
+			"sample": {
+				"title": "Notification",
+				"body": "This is a notification body."
+			}
+		},
+		"chip": {
+			"title": "Chip",
+			"description": "Compact tag, filter, and selection element. Shares Button's variant vocabulary, scale, focus ring, and ripple — chips and buttons read as the same family.",
+			"default": {
+				"label": "Default"
+			},
+			"variants": {
+				"label": "Variants",
+				"default": "Default",
+				"flat": "Flat",
+				"border": "Border",
+				"transparent": "Transparent",
+				"gradient": "Gradient",
+				"shadow": "Shadow"
+			},
+			"colors": {
+				"label": "Colors"
+			},
+			"sizes": {
+				"label": "Sizes",
+				"xl": "Extra-large",
+				"large": "Large",
+				"medium": "Medium",
+				"small": "Small",
+				"mini": "Mini"
+			},
+			"shapes": {
+				"label": "Shapes",
+				"default": "Pill",
+				"square": "Square",
+				"circle": "Circle"
+			},
+			"icon": {
+				"label": "With icon",
+				"tag": "tag",
+				"user": "user",
+				"verified": "verified",
+				"featured": "featured"
+			},
+			"active": {
+				"label": "Active state",
+				"hint": "Click to toggle. Filter / selection chips reuse `active` and announce as `aria-pressed`.",
+				"frontend": "frontend",
+				"backend": "backend",
+				"design": "design",
+				"qa": "qa"
+			},
+			"closable": {
+				"label": "Closable",
+				"frontend": "frontend",
+				"backend": "backend",
+				"design": "design",
+				"clickable": "clickable + closable"
+			},
+			"clickable": {
+				"label": "Clickable",
+				"click": "Click me"
+			},
+			"disabled": {
+				"label": "Disabled"
+			},
+			"samples": {
+				"primary": "Primary",
+				"success": "Success",
+				"danger": "Danger",
+				"warning": "Warning",
+				"dark": "Dark"
+			},
+			"harmony": {
+				"label": "Alongside Input & Button",
+				"hint": "Same surface palette, same focus accent, same radius rhythm — the form, action, and tag layer compose into one input row.",
+				"placeholder": "Add a tag",
+				"add": "Add",
+				"empty": "No tags yet."
+			}
+		},
+		"scrollbar": {
+			"title": "Scrollbar",
+			"description": "Themed, auto-hiding scrollbars applied kit-wide via base styles. Two pieces wire it up: tokens.css sets scrollbar-color on every element from three CSS variables, and <ScrollbarHost> — mounted once at the app root — toggles [data-scrolling] on whatever element is being scrolled so the variables can swap between idle and active.",
+			"default": {
+				"label": "Default — wire-up",
+				"hint": "Import ScrollbarHost from the kit and mount it once at your app root. It installs a single capture-phase scroll listener and toggles [data-scrolling] on the element that emitted the event; tokens.css picks up the attribute and swaps the thumb color. The kit-wide host is already in +layout.svelte — the second mount in this example is a no-op (module-level guard) and exists only to make the contract readable."
+			},
+			"liveState": {
+				"label": "Live [data-scrolling]",
+				"hint": "Same default container with a MutationObserver mirroring the attribute that ScrollbarHost flips. Scroll the box to watch the pill go on, then back off ~1s after the last scroll event — proves the JS/CSS handshake."
+			},
+			"alwaysVisible": {
+				"label": "Always visible",
+				"hint": "Override --scrollbar-thumb with a visible color when discoverability matters more than minimalism. The auto-hide swap to --scrollbar-thumb-hover still fires while scrolling."
+			},
+			"brand": {
+				"label": "Brand-tinted active state",
+				"hint": "Override --scrollbar-thumb-hover to tint the active-state thumb with a kit color token. Rest state stays transparent so the surface reads clean when idle."
+			},
+			"track": {
+				"label": "Tinted track",
+				"hint": "Override --scrollbar-track to give the trough a subtle background — useful when the surface needs a clear scroll affordance even at rest."
+			},
+			"horizontal": {
+				"label": "Horizontal axis",
+				"hint": "scrollbar-color is axis-agnostic — the same three variables retint the horizontal scrollbar too. ScrollbarHost listens to all scroll events, so the active-state swap fires identically."
+			},
+			"variables": {
+				"label": "All variables",
+				"hint": "Override on :root for a global change, on any container for a scoped change.",
+				"thumb": "Thumb color at rest. Transparent enables auto-hide.",
+				"thumbHover": "Thumb color while the container is being scrolled (or 1s after).",
+				"track": "Track color."
+			}
+		},
+		"ripple": {
+			"title": "Ripple",
+			"description": "GPU-composited click bloom packaged as a Svelte action. Drop on any host element with use:ripple — installs its own scoped stylesheet on first use, cleans up on destroy.",
+			"basic": {
+				"label": "Basic",
+				"hint": "use:ripple with no options uses the kit primary color.",
+				"click": "Click anywhere"
+			},
+			"colors": {
+				"label": "Colors",
+				"hint": "Pass color as a kit palette name or any CSS color string — the ripple inherits the accent."
+			},
+			"solidBg": {
+				"label": "Solid background",
+				"hint": "Set solidBg: true when the host's background already IS the accent color (filled buttons). Lifts the disc body so the wave reads against the surface.",
+				"filled": "Filled (solidBg)",
+				"flat": "Flat (default)"
+			},
+			"disabled": {
+				"label": "Disabled",
+				"hint": "disabled: true skips ripple emission entirely without removing the listener."
+			},
+			"textColor": {
+				"label": "Text color shift",
+				"hint": "Host text animates to textColor during the bloom (default rgb(var(--on-accent)) — matches the kit's text-on-accent token, same as Button's default variant) and back on settle.",
+				"defaultLabel": "default (on-accent)",
+				"offLabel": "currentColor (off)"
+			},
+			"surfaces": {
+				"label": "Arbitrary surfaces",
+				"hint": "Ripple respects the host's border-radius — works on cards, circles, anything.",
+				"cardTitle": "Card host",
+				"cardBody": "Click to ripple"
+			},
+			"options": {
+				"label": "Options",
+				"hint": "RippleOptions accepted by use:ripple={ ... }.",
+				"color": "Accent color for this ripple. Palette name or CSS color string.",
+				"solidBg": "Lift the disc body so the wave doesn't blend into a host that's already the accent color.",
+				"disabled": "Skip ripple emission entirely.",
+				"textColor": "Colour the host text animates to during the bloom. Defaults to rgb(var(--on-accent)) — kit's text-on-accent token. Pass 'currentColor' to disable the shift."
+			}
+		},
+		"list": {
+			"title": "List",
+			"description": "Surface for vertical item collections — palette-aware, sized, dividers, sections, listbox selection.",
+			"basic": {
+				"label": "Basic"
+			},
+			"variants": {
+				"label": "Variants",
+				"hint": "default · flat · border · transparent · shadow"
+			},
+			"sizes": {
+				"label": "Sizes"
+			},
+			"colors": {
+				"label": "Color"
+			},
+			"divided": {
+				"label": "Divided"
+			},
+			"withHeader": {
+				"label": "Header & footer",
+				"header": "Inbox",
+				"footer": "4 items"
+			},
+			"withIcons": {
+				"label": "Lead, trail, description",
+				"user": "Joana Doe",
+				"userDesc": "Last seen 2h ago",
+				"userRole": "admin",
+				"settings": "Settings",
+				"settingsDesc": "Workspace preferences",
+				"notifs": "Notifications",
+				"notifsDesc": "Email + push delivery"
+			},
+			"states": {
+				"label": "States",
+				"active": "Active (current)",
+				"selected": "Selected",
+				"disabled": "Disabled",
+				"loading": "Loading",
+				"link": "External link"
+			},
+			"groups": {
+				"label": "Groups & dividers",
+				"workspace": "Workspace",
+				"account": "Account",
+				"projects": "Projects",
+				"members": "Members",
+				"profile": "Profile",
+				"signOut": "Sign out"
+			},
+			"listbox": {
+				"label": "Listbox (single)",
+				"hint": "Arrows / Home / End for keyboard nav.",
+				"red": "Crimson",
+				"blue": "Azure",
+				"green": "Emerald",
+				"yellow": "Amber",
+				"selected": "Selected:"
+			},
+			"multiselect": {
+				"label": "Listbox (multiple)",
+				"hint": "Click toggles each item independently.",
+				"selected": "Selected:"
+			},
+			"empty": {
+				"label": "Empty state",
+				"text": "No items yet."
+			},
+			"items": {
+				"a": "Drafts",
+				"b": "Sent",
+				"c": "Archived",
+				"d": "Trash"
+			}
+		},
+		"progress": {
+			"title": "Progress",
+			"description": "Linear or circular progress with indeterminate, stripes, custom thickness, and palette colors.",
+			"linear": {
+				"label": "Linear"
+			},
+			"colors": {
+				"label": "Colors"
+			},
+			"stripes": {
+				"label": "Stripes"
+			},
+			"indeterminate": {
+				"label": "Indeterminate"
+			},
+			"circular": {
+				"label": "Circular"
+			},
+			"interactive": {
+				"label": "Interactive"
+			},
+			"value": "value"
+		},
+		"inputNumber": {
+			"title": "Input Number",
+			"description": "Numeric stepper with min/max/step, long-press auto-repeat, focus ripple, and the kit's size / shape / palette contract.",
+			"basic": {
+				"label": "Basic"
+			},
+			"stepBounds": {
+				"label": "Step / bounds",
+				"hint": "step={100} — watch the digits roll"
+			},
+			"colors": {
+				"label": "Colors"
+			},
+			"splitColors": {
+				"label": "Split colors (− / +)",
+				"hint": "decrementColor + incrementColor"
+			},
+			"sizes": {
+				"label": "Sizes"
+			},
+			"shapes": {
+				"label": "Shapes",
+				"default": "Default",
+				"square": "Square",
+				"circle": "Circle"
+			},
+			"states": {
+				"label": "States",
+				"square": "Square",
+				"disabled": "Disabled",
+				"readonly": "Read-only",
+				"block": "Block (full-width)"
+			},
+			"animation": {
+				"label": "Animation duration"
+			}
+		},
+		"textarea": {
+			"title": "Textarea",
+			"description": "Multi-line input with all the same variants/states/labels as Input. Auto-grow available.",
+			"basic": {
+				"label": "Basic",
+				"placeholder": "Type a longer message…"
+			},
+			"variants": {
+				"label": "Variants"
+			},
+			"states": {
+				"label": "Field states"
+			},
+			"label": {
+				"label": "Label styles",
+				"default": "Default",
+				"inline": "Inline",
+				"labelText": "Comment",
+				"placeholder": "Placeholder"
+			},
+			"autoGrow": {
+				"label": "Auto-grow",
+				"placeholder": "I grow with what you type…"
+			},
+			"block": {
+				"label": "Block",
+				"placeholder": "Stretches to container width."
+			}
+		},
+		"slider": {
+			"title": "Slider",
+			"description": "Single value or `[start, end]` range. Three sizes, tooltip on hover/focus, optional ticks, value formatter, palette colors.",
+			"basic": {
+				"label": "Single value"
+			},
+			"sizes": {
+				"label": "Sizes"
+			},
+			"range": {
+				"label": "Range"
+			},
+			"tooltip": {
+				"label": "Tooltip on hover / focus"
+			},
+			"always": {
+				"label": "Always-visible tooltip"
+			},
+			"format": {
+				"label": "Custom format (price)"
+			},
+			"ticks": {
+				"label": "Ticks"
+			},
+			"colors": {
+				"label": "Colors"
+			},
+			"states": {
+				"label": "States",
+				"disabled": "Disabled"
+			},
+			"value": "value"
+		},
+		"timePicker": {
+			"title": "DateTime Picker",
+			"description": "Input field with a dropdown wheel picker. Manual typing, cyclic hour/minute/second wheels, optional 12-hour mode, customizable icon side and glyph.",
+			"basic": {
+				"label": "Basic"
+			},
+			"withSeconds": {
+				"label": "With seconds"
+			},
+			"colors": {
+				"label": "Colors"
+			},
+			"states": {
+				"label": "States",
+				"disabled": "Disabled"
+			},
+			"value": "value"
+		},
+		"calendar": {
+			"title": "Calendar",
+			"description": "Inline month grid powered by Temporal. Single-day or range selection, full keyboard navigation, locale-aware labels.",
+			"basic": { "label": "Basic" },
+			"bound": { "label": "Bound value with footer" },
+			"range": { "label": "Range mode" },
+			"sizes": { "label": "Sizes" },
+			"locale": { "label": "Locale-aware labels" },
+			"restricted": {
+				"label": "Min / max + disabled days",
+				"hint": "Min Apr 5, max Apr 25, weekends disabled"
+			},
+			"colors": { "label": "Colors" },
+			"states": {
+				"label": "States",
+				"disabled": "Disabled"
+			},
+			"transparent": {
+				"label": "Transparent variant",
+				"hint": "Drops the calendar's background so it inherits the surface it sits on — handy inside Card, Dialog or any custom panel."
+			},
+			"value": "Value"
+		},
+		"dates": {
+			"title": "Date utilities",
+			"description": "Pure helpers built on Temporal.PlainDate / PlainTime / PlainDateTime — exported from sveltastic-ui and shared by Calendar and the picker family.",
+			"parsing": {
+				"label": "Parsing & ISO conversion",
+				"hint": "Coerce strings, native Date, and Temporal types into the kit's plain shapes — and back to ISO strings safe to bind to inputs."
+			},
+			"formatting": {
+				"label": "Locale formatting",
+				"hint": "All formatters delegate to Intl.DateTimeFormat — labels follow the user's locale."
+			},
+			"locale": {
+				"label": "Locale helpers",
+				"hint": "Resolve the host locale, decide week start (Sun vs Mon) and 12h/24h time without hard-coded lists."
+			},
+			"types": {
+				"label": "Public types",
+				"hint": "Re-exported from the kit barrel — use them on your own state."
+			}
+		},
+		"theme": {
+			"title": "Theme",
+			"description": "Reactive singleton that owns the kit's light/dark and RTL state. Persists to localStorage and respects the user's prefers-color-scheme on first load.",
+			"current": {
+				"label": "Current state",
+				"hint": "Both fields are rune-backed — read them anywhere and the UI re-renders on change."
+			},
+			"controls": {
+				"label": "Controls",
+				"hint": "Try these — the entire docs site reacts to the singleton."
+			},
+			"api": {
+				"label": "API",
+				"hint": "Everything the theme singleton exposes.",
+				"themeField": "Current theme. Updates trigger reactive UI changes.",
+				"rtlField": "Current direction flag.",
+				"setTheme": "Set theme, mirror to <html data-theme>, persist to localStorage.",
+				"toggleTheme": "Flip between light and dark.",
+				"setRtl": "Set direction flag, mirror to <html dir>.",
+				"toggleRtl": "Flip direction.",
+				"hydrate": "Read stored theme + prefers-color-scheme on mount. Call once from your root layout."
+			},
+			"usage": {
+				"label": "Usage",
+				"hint": "Mount once, then read or mutate from anywhere."
+			}
+		},
+		"upload": {
+			"title": "Upload",
+			"description": "Drag-and-drop / click file picker with preview list, multi-select, accept / size / count validation, and per-file thumbnails.",
+			"basic": {
+				"label": "Single file",
+				"label2": "Drag a file here, or click to browse"
+			},
+			"multiple": {
+				"label": "Multiple",
+				"label2": "Drop several files (or click)",
+				"hint": "Up to 5 files"
+			},
+			"imagesOnly": {
+				"label": "Images with preview",
+				"label2": "Drop images — preview shows up automatically",
+				"hint": "PNG, JPG, WEBP up to 5 MB each"
+			},
+			"variants": {
+				"label": "Variants",
+				"flat": "Flat",
+				"border": "Solid border"
+			},
+			"sizes": {
+				"label": "Sizes"
+			},
+			"withFiles": {
+				"label": "With files",
+				"description": "Selected items rendered as a list with thumbnails for images, type icons for everything else, formatted size and a remove button."
+			},
+			"customItem": {
+				"label": "Custom item snippet",
+				"description": "Override the row entirely via the `item` snippet — render any layout you need."
+			},
+			"buttonOnly": {
+				"label": "Button only",
+				"label2": "Choose file"
+			},
+			"validation": {
+				"label": "Validation",
+				"label2": "Drop a non-image, or anything > 100 KB",
+				"hint": "Images only, 100 KB max",
+				"errorSize": "{name} is too large ({size} > 100 KB)",
+				"errorType": "{name} is not an image",
+				"errorCount": "Only {max} files allowed"
+			},
+			"states": {
+				"label": "States",
+				"disabled": "Disabled"
+			},
+			"selected": "selected"
+		},
+		"tabs": {
+			"title": "Tabs",
+			"description": "Composition tabs — `<Tabs>` provider, `<TabList>` + `<Tab>` for triggers, `<TabPanel>` for content. Place them anywhere in the template, not necessarily adjacent. The rail shares its visual contract with `<Segmented>`: spring-animated thumb, press-scale, ripple-into-thumb.",
+			"basic": {
+				"label": "Basic",
+				"hint": "Default `underline` variant — animated bottom bar follows the active tab."
+			},
+			"variants": {
+				"label": "Variants",
+				"hint": "`underline` · `default` · `tonal` · `border` · `relief` — mirrors `<Segmented>` for the four filled looks plus the classic underline."
+			},
+			"sizes": {
+				"label": "Sizes",
+				"hint": "Shared scale with Button and Segmented — `xl` · `large` · `medium` · `small` · `mini`."
+			},
+			"block": {
+				"label": "Block",
+				"hint": "`<TabList block>` stretches to fill its container; tabs distribute evenly."
+			},
+			"composition": {
+				"label": "Decoupled layout",
+				"hint": "Triggers in the header, panels in the main area — separated by other markup."
+			},
+			"colors": {
+				"label": "Colors"
+			},
+			"states": {
+				"label": "States",
+				"disabled": "Disabled"
+			},
+			"keyboard": {
+				"label": "Keyboard nav",
+				"hint": "Arrow Left/Right (or Up/Down), Home/End move focus and activate."
+			},
+			"cardPanels": {
+				"label": "Card panels",
+				"hint": "`panelVariant=\"card\"` wraps panel content in a kit Card-style surface."
+			},
+			"slide": {
+				"label": "Slide transition",
+				"hint": "`transition=\"slide\"` swaps panels via vertical slide."
+			},
+			"icons": {
+				"label": "Trigger with icon",
+				"hint": "Each `<Tab>` accepts an `icon` snippet."
+			},
+			"composed": {
+				"label": "Reusing kit",
+				"hint": "Panels can host any kit component — `<Card>`, `<Avatar>`, `<Chip>`, `<List>`."
+			},
+			"panes": {
+				"overview": "Overview",
+				"overviewBody": "An at-a-glance summary of your project.",
+				"details": "Details",
+				"detailsBody": "Granular metadata and configuration.",
+				"preview": "Preview",
+				"previewBody": "A live render of the current selection.",
+				"history": "History",
+				"historyBody": "Audit log of recent changes."
+			}
+		},
+		"collapse": {
+			"title": "Collapse",
+			"description": "Single accordion item with seven variants, sizes, icon + extra slots, and a CollapseGroup wrapper for single / multiple expansion.",
+			"basic": {
+				"label": "Basic",
+				"title1": "Section one",
+				"title2": "Section two",
+				"title3": "Section three",
+				"body": "Click the header to expand or collapse this panel. Bind `open` to control it from outside."
+			},
+			"variants": {
+				"label": "Variants",
+				"default": "Default",
+				"flat": "Flat",
+				"border": "Border",
+				"solid": "Solid",
+				"gradient": "Gradient",
+				"relief": "Relief",
+				"ghost": "Ghost"
+			},
+			"colors": {
+				"label": "Colors",
+				"primary": "Primary",
+				"success": "Success",
+				"danger": "Danger",
+				"warning": "Warning",
+				"dark": "Dark"
+			},
+			"sizes": {
+				"label": "Sizes",
+				"xl": "X-Large",
+				"large": "Large",
+				"medium": "Medium",
+				"small": "Small",
+				"mini": "Mini"
+			},
+			"slots": {
+				"label": "Icon, extra and header snippet",
+				"iconTitle": "With leading icon",
+				"extraTitle": "Notifications",
+				"headerSnippet": "Custom header snippet",
+				"headerHint": "full control"
+			},
+			"composed": {
+				"label": "Composed with kit components",
+				"profile": "John Stratton",
+				"online": "online",
+				"profileBody": "Senior product designer based in Lisbon. Eight years in fintech UX, currently leading the design system rewrite.",
+				"message": "Message",
+				"viewProfile": "View profile",
+				"actionRequired": "Action required",
+				"pending": "pending",
+				"actionBody": "Two pull requests are waiting on your review. The CI run finished 14 minutes ago without regressions.",
+				"review": "Review now",
+				"snooze": "Snooze 24h"
+			},
+			"group": {
+				"singleLabel": "Group — single expansion",
+				"multipleLabel": "Group — multiple expansion",
+				"fusedLabel": "Group — fused (one continuous block)",
+				"cardLabel": "Group — card (shared surface with title + footer)",
+				"cardTitle": "Frequently asked",
+				"cardFooter": "Need more help? Reach out to the support team.",
+				"q1": "What is the return policy?",
+				"a1": "Refunds are processed within 14 days of the request. Items must be unused and in their original packaging — keep the receipt or order id handy.",
+				"q2": "How do I update my profile?",
+				"a2": "Open Settings → Account. Email and avatar are editable inline; password rotation requires reauthentication.",
+				"q3": "Where can I see my invoices?",
+				"a3": "Billing → Invoices. PDFs are generated within an hour of payment and stay available for seven years."
+			},
+			"states": {
+				"label": "States",
+				"disabled": "Disabled (default)",
+				"disabledFlat": "Disabled (flat / danger)",
+				"disable": "Disable",
+				"enable": "Enable"
+			},
+			"headerSlot": {
+				"label": "Header snippet"
+			}
+		}
+	}
+}

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="text-scale" content="scale" />
+		<script>
+			// No-flash theme bootstrap. Runs synchronously before CSS evaluates,
+			// so [data-theme='dark'] selectors apply on first paint — no white
+			// flash on dark devices, no transition from light to dark on load.
+			// Order of preference: saved choice → OS prefers-color-scheme → light.
+			// Does NOT persist the auto-detected value; only an explicit user
+			// toggle (theme.setTheme) writes to localStorage.
+			(function () {
+				try {
+					var saved = localStorage.getItem('sveltastic-ui:theme');
+					var resolved =
+						saved === 'light' || saved === 'dark'
+							? saved
+							: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+								? 'dark'
+								: 'light';
+					document.documentElement.setAttribute('data-theme', resolved);
+				} catch (_) {
+					// storage/matchMedia unavailable — CSS defaults to light
+				}
+			})();
+		</script>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&family=Geist:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>
