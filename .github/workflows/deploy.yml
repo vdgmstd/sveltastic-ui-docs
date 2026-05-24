@@ -1,4 +1,4 @@
-name: Sveltastic-docs
+name: Deploy docs to GitHub Pages
 
 on:
   push:
@@ -17,24 +17,44 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: docs
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout docs (this repo)
+        uses: actions/checkout@v5
         with:
-          submodules: false
+          path: docs
 
-      - uses: actions/setup-node@v4
+      # docs imports from `sveltastic-ui` via Vite alias to `../ui/src/...`,
+      # including internal *.api.json files used to render the API tables.
+      # Those JSONs aren't part of the published npm tarball, so we check
+      # out the kit repo as a sibling — same layout as the hybrid dev workspace.
+      - name: Checkout ui kit as sibling
+        uses: actions/checkout@v5
         with:
-          node-version: 22
+          repository: vdgmstd/sveltastic-ui
+          ref: master
+          path: ui
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
           cache: npm
+          cache-dependency-path: docs/package-lock.json
 
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
       - name: Build static site
         run: npm run build
+        env:
+          BASE_PATH: /sveltastic-ui-docs
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v4
         with:
-          path: build/
+          path: docs/build
 
   deploy:
     needs: build
