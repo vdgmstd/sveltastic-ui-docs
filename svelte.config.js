@@ -15,6 +15,9 @@ const config = {
 			precompress: false,
 			strict: true
 		}),
+		paths: {
+			base: process.env.BASE_PATH ?? ''
+		},
 		// Order matters: SvelteKit preserves object-key order when translating to Vite resolve.alias,
 		// and Vite's plain-string aliases match as PREFIX. The specific entries (styles, components/*)
 		// must come before the bare 'sveltastic-ui' so the bare entry doesn't swallow subpaths.
