@@ -41,9 +41,18 @@ jobs:
         with:
           node-version: '24'
           cache: npm
-          cache-dependency-path: docs/package-lock.json
+          cache-dependency-path: |
+            docs/package-lock.json
+            ui/package-lock.json
 
-      - name: Install dependencies
+      # tokens.css inside ui/ does `@import 'tailwindcss'`, and @tailwindcss/vite
+      # resolves the package walking UP from the file's path, not from docs/.
+      # So tailwindcss has to be installed inside ui/ too.
+      - name: Install ui dependencies
+        run: npm ci
+        working-directory: ui
+
+      - name: Install docs dependencies
         run: npm ci
 
       - name: Build static site
