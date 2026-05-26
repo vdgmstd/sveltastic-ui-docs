@@ -5,7 +5,6 @@
 	import { SunIcon, MoonIcon, TextAaIcon } from 'phosphor-svelte';
 	import { Button, NotificationsHost, ScrollbarHost, Switch, theme } from 'sveltastic-ui';
 	import 'sveltastic-ui/styles';
-	import favicon from '$lib/assets/favicon.svg';
 	import PaletteSwitcher, { hydratePalette } from './_palette/PaletteSwitcher.svelte';
 	import FontSwitcher, { hydrateFont } from './_palette/FontSwitcher.svelte';
 
@@ -102,7 +101,7 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 </svelte:head>
 
 <div class="bg-backdrop" aria-hidden="true"></div>
@@ -110,8 +109,10 @@
 <header class="app-header">
 	<div class="app-header__inner">
 		<a class="app-header__title" href="/">
+			<img class="app-header__logo" src="/favicon.svg" alt="" aria-hidden="true" />
 			<strong class="app-header__brand">Sveltastic UI</strong>
 			<strong class="app-header__brand app-header__brand--short" aria-hidden="true">SUI</strong>
+			<strong class="app-header__brand--short" >[BETA]</strong>
 			<Chip shape="square" size="mini">{pkgVersion}</Chip>
 		</a>
 		<div class="app-header__controls">
@@ -243,8 +244,8 @@
 		height: 56px;
 		border-bottom: 1px solid rgb(var(--gray-3) / 0.6);
 		background: rgb(var(--background) / 0.55);
-		-webkit-backdrop-filter: blur(14px) saturate(140%);
-		backdrop-filter: blur(14px) saturate(140%);
+		-webkit-backdrop-filter: var(--frost);
+		backdrop-filter: var(--frost);
 	}
 	.app-header__inner {
 		max-width: 1720px;
@@ -273,6 +274,12 @@
 		font-size: 1rem;
 		min-width: 0;
 		flex-shrink: 1;
+	}
+	.app-header__logo {
+		width: 38px;
+		height: 38px;
+		flex-shrink: 0;
+		display: block;
 	}
 	.app-header__brand {
 		white-space: nowrap;

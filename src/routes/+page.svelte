@@ -152,16 +152,6 @@
 
 	$effect(() => {
 		if (!sketchEl || !heroEl) return;
-		// Cross-browser column-lag parallax. Hero column translates down as
-		// the page scrolls, reaching `colDelta = sketchH − heroH` at full
-		// scroll so both columns bottom-out together.
-		//
-		// Perf-critical: heights and max-scroll are cached in closure vars
-		// and refreshed ONLY when something layout-relevant changes
-		// (ResizeObserver on sketch/hero/body, viewport resize, MQ change).
-		// The scroll handler does zero layout reads — it just reads
-		// `scrollY` and writes `transform`, both cheap. This keeps wheel
-		// scrolling at full 60fps on Windows.
 		const desktop = window.matchMedia("(min-width: 1360px)");
 		const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
 		const ac = new AbortController();
@@ -204,8 +194,6 @@
 				hr.style.transform = "";
 				return;
 			}
-			// One reflow batch: read sketch/hero heights and document
-			// scrollable area together, then update transform.
 			const sketchH = sk.offsetHeight;
 			const heroH = hr.offsetHeight;
 			const docH = document.documentElement.scrollHeight;
@@ -296,12 +284,13 @@
 
 		<div class="intro__hero" bind:this={heroEl}>
 			<header class="hero">
+				<img class="hero__logo" src="/favicon.svg" alt="" aria-hidden="true" />
 				<Chip size="small" variant="border" color="primary">
 					{#snippet icon()}<SparkleIcon
 							size={12}
 							weight="fill"
 						/>{/snippet}
-					v{pkgVersion} · {componentCount} components
+					v{pkgVersion} · {componentCount} components [BETA]
 				</Chip>
 
 				<h1 class="intro__title">
@@ -1901,6 +1890,13 @@
 		align-items: stretch;
 		gap: 0.95rem;
 		min-width: 0;
+	}
+	.hero__logo {
+		width: clamp(128px, 8vw, 160px);
+		height: clamp(128px, 8vw, 160px);
+		display: block;
+		align-self: center;
+		margin-bottom: 0.5rem;
 	}
 	/* The version chip should hug its own content rather than stretch to
 	   the column's width (the column is now ~600-720px on wide desktops). */
