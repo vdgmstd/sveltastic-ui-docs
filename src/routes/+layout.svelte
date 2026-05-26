@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { version as pkgVersion } from "../../package.json";
+	import { Chip } from 'sveltastic-ui';
 	import { onMount } from 'svelte';
 	import { SunIcon, MoonIcon, TextAaIcon } from 'phosphor-svelte';
 	import { Button, NotificationsHost, ScrollbarHost, Switch, theme } from 'sveltastic-ui';
@@ -110,7 +112,7 @@
 		<a class="app-header__title" href="/">
 			<strong class="app-header__brand">Sveltastic UI</strong>
 			<strong class="app-header__brand app-header__brand--short" aria-hidden="true">SUI</strong>
-			<span class="app-header__sub">docs</span>
+			<Chip shape="square" size="mini">{pkgVersion}</Chip>
 		</a>
 		<div class="app-header__controls">
 			<FontSwitcher />
@@ -241,8 +243,8 @@
 		height: 56px;
 		border-bottom: 1px solid rgb(var(--gray-3) / 0.6);
 		background: rgb(var(--background) / 0.55);
-		backdrop-filter: blur(14px) saturate(140%);
 		-webkit-backdrop-filter: blur(14px) saturate(140%);
+		backdrop-filter: blur(14px) saturate(140%);
 	}
 	.app-header__inner {
 		max-width: 1720px;
@@ -264,7 +266,7 @@
 	}
 	.app-header__title {
 		display: inline-flex;
-		align-items: baseline;
+		align-items: center;
 		gap: 0.4rem;
 		color: inherit;
 		text-decoration: none;

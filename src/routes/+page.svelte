@@ -336,7 +336,7 @@
 					<Button
 						size="large"
 						variant="border"
-						href="https://github.com/"
+						href="https://github.com/vdgmstd/sveltastic-ui"
 					>
 						<GithubLogoIcon size={16} weight="fill" />
 						GitHub

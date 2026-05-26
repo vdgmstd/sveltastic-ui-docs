@@ -1,41 +1,58 @@
 <script lang="ts">
-	import { page } from '$app/state';
-	import { ListIcon, XIcon } from 'phosphor-svelte';
-	import { componentLinks, helperLinks, type DocCategory } from './nav';
+	import { page } from "$app/state";
+	import { ListIcon, XIcon } from "phosphor-svelte";
+	import {
+		componentLinks,
+		guideLinks,
+		helperLinks,
+		type DocCategory,
+	} from "./nav";
 
 	let { children } = $props();
 	let sidebarOpen = $state(false);
 
 	function closeOnLinkClick(node: HTMLElement) {
 		const handler = (e: MouseEvent): void => {
-			if ((e.target as HTMLElement).closest('a')) sidebarOpen = false;
+			if ((e.target as HTMLElement).closest("a")) sidebarOpen = false;
 		};
-		node.addEventListener('click', handler);
-		return { destroy: () => node.removeEventListener('click', handler) };
+		node.addEventListener("click", handler);
+		return { destroy: () => node.removeEventListener("click", handler) };
 	}
 
-	const componentCategories: DocCategory[] = ['Form controls', 'Display', 'Overlays & feedback', 'Composite'];
-	const helperCategories: DocCategory[] = ['Styling', 'Actions'];
+	const componentCategories: DocCategory[] = [
+		"Form controls",
+		"Display",
+		"Overlays & feedback",
+		"Composite",
+	];
+	const helperCategories: DocCategory[] = ["Styling", "Actions"];
 
 	const componentsByCategory = $derived(
-		componentCategories.map((cat) => ({
-			cat,
-			items: [
-				...componentLinks.filter((l) => l.category === cat),
-				...helperLinks.filter((l) => l.category === cat)
-			]
-		})).filter((g) => g.items.length > 0)
+		componentCategories
+			.map((cat) => ({
+				cat,
+				items: [
+					...componentLinks.filter((l) => l.category === cat),
+					...helperLinks.filter((l) => l.category === cat),
+				],
+			}))
+			.filter((g) => g.items.length > 0),
 	);
 
 	const helpersByCategory = $derived(
-		helperCategories.map((cat) => ({
-			cat,
-			items: helperLinks.filter((l) => l.category === cat)
-		})).filter((g) => g.items.length > 0)
+		helperCategories
+			.map((cat) => ({
+				cat,
+				items: helperLinks.filter((l) => l.category === cat),
+			}))
+			.filter((g) => g.items.length > 0),
 	);
 
 	function isActive(slug: string): boolean {
-		return page.url.pathname === `/docs/${slug}` || page.url.pathname.startsWith(`/docs/${slug}/`);
+		return (
+			page.url.pathname === `/docs/${slug}` ||
+			page.url.pathname.startsWith(`/docs/${slug}/`)
+		);
 	}
 </script>
 
@@ -43,7 +60,7 @@
 	<button
 		type="button"
 		class="docs__burger"
-		aria-label={sidebarOpen ? 'Close navigation' : 'Open navigation'}
+		aria-label={sidebarOpen ? "Close navigation" : "Open navigation"}
 		aria-expanded={sidebarOpen}
 		onclick={() => (sidebarOpen = !sidebarOpen)}
 	>
@@ -63,25 +80,54 @@
 		></div>
 	{/if}
 
-	<aside class="docs__sidebar" aria-label="Documentation navigation" use:closeOnLinkClick>
-		<a class="docs__brand" href="/docs">
-			<strong>Sveltastic UI</strong>
-			<span class="docs__brand-sub">docs</span>
-		</a>
-
+	<aside
+		class="docs__sidebar"
+		aria-label="Documentation navigation"
+		use:closeOnLinkClick
+	>
 		<nav class="docs__nav">
 			<div class="docs__group">
+				<a class="docs__brand" href="/docs">
+					<strong>Sveltastic UI</strong>
+					<span class="docs__brand-sub">docs</span>
+				</a>
+
+				<p class="docs__group-sub">
+					Install the kit and ship your first component.
+				</p>
+				<ul class="docs__list">
+					{#each guideLinks as link (link.slug)}
+						<li>
+							<a
+								href="/docs/{link.slug}"
+								class:docs__active={isActive(link.slug)}
+							>
+								<span>{link.name}</span>
+							</a>
+						</li>
+					{/each}
+				</ul>
+			</div>
+
+			<div class="docs__group">
 				<h2 class="docs__group-title">Components</h2>
-				<p class="docs__group-sub">The kit's public component surface.</p>
+				<p class="docs__group-sub">
+					The kit's public component surface.
+				</p>
 				{#each componentsByCategory as group (group.cat)}
 					<h3 class="docs__cat">{group.cat}</h3>
 					<ul class="docs__list">
 						{#each group.items as link (link.slug)}
 							<li>
-								<a href="/docs/{link.slug}" class:docs__active={isActive(link.slug)}>
+								<a
+									href="/docs/{link.slug}"
+									class:docs__active={isActive(link.slug)}
+								>
 									<span>{link.name}</span>
-									{#if 'source' in link}
-										<span class="docs__src">{link.source} {link.version}</span>
+									{#if "source" in link}
+										<span class="docs__src"
+											>{link.source} {link.version}</span
+										>
 									{/if}
 								</a>
 							</li>
@@ -92,13 +138,18 @@
 
 			<div class="docs__group">
 				<h2 class="docs__group-title">Helpers</h2>
-				<p class="docs__group-sub">Kit-only additions alongside the components.</p>
+				<p class="docs__group-sub">
+					Kit-only additions alongside the components.
+				</p>
 				{#each helpersByCategory as group (group.cat)}
 					<h3 class="docs__cat">{group.cat}</h3>
 					<ul class="docs__list">
 						{#each group.items as link (link.slug)}
 							<li>
-								<a href="/docs/{link.slug}" class:docs__active={isActive(link.slug)}>
+								<a
+									href="/docs/{link.slug}"
+									class:docs__active={isActive(link.slug)}
+								>
 									<span>{link.name}</span>
 								</a>
 							</li>
@@ -277,7 +328,9 @@
 			z-index: 55;
 		}
 	}
-	.docs__content :global(.block) { margin-bottom: 1.75rem; }
+	.docs__content :global(.block) {
+		margin-bottom: 1.75rem;
+	}
 	.docs__content :global(.block > h3) {
 		margin: 0 0 0.5rem;
 		font-size: 0.75rem;
@@ -301,7 +354,11 @@
 		opacity: 0.7;
 		margin: 0.5rem 0 0;
 	}
-	.docs__content :global(.dropdown-demo) { display: flex; flex-direction: column; gap: 4px; }
+	.docs__content :global(.dropdown-demo) {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
 	.docs__content :global(.dropdown-demo button) {
 		text-align: left;
 		padding: 6px 10px;
@@ -310,5 +367,7 @@
 		border-radius: 6px;
 		cursor: pointer;
 	}
-	.docs__content :global(.dropdown-demo button:hover) { background: rgb(var(--gray-2)); }
+	.docs__content :global(.dropdown-demo button:hover) {
+		background: rgb(var(--gray-2));
+	}
 </style>

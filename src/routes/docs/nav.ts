@@ -1,4 +1,4 @@
-export type DocCategory = 'Form controls' | 'Display' | 'Overlays & feedback' | 'Composite' | 'Styling' | 'Actions';
+export type DocCategory = 'Guide' | 'Form controls' | 'Display' | 'Overlays & feedback' | 'Composite' | 'Styling' | 'Actions';
 
 export interface DocLink {
 	slug: string;
@@ -82,7 +82,23 @@ export const helperLinks: readonly HelperLink[] = [
 	}
 ];
 
+export interface GuideLink {
+	slug: string;
+	name: string;
+	/** Short one-line description shown on the docs index tile. */
+	summary: string;
+}
+
+export const guideLinks: readonly GuideLink[] = [
+	{
+		slug: 'getting-started',
+		name: 'Getting Started',
+		summary: 'Install the kit, import the tokens, and ship your first component.'
+	}
+];
+
 export const allLinks = [
+	...guideLinks.map((l) => ({ ...l, kind: 'guide' as const })),
 	...componentLinks.map((l) => ({ ...l, kind: 'component' as const })),
 	...helperLinks.map((l) => ({ ...l, kind: 'helper' as const }))
 ];
