@@ -4,5 +4,5 @@
 	let square = $state(true);
 </script>
 
-<Switch checked />
-<Switch bind:checked={square} shape="square" />
+<Switch.Root checked><Switch.Thumb /></Switch.Root>
+<Switch.Root bind:checked={square} shape="square"><Switch.Thumb /></Switch.Root>

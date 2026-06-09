@@ -4,6 +4,6 @@
 	let checked = $state(true);
 </script>
 
-<Switch bind:checked />
-<Switch checked />
-<Switch />
+<Switch.Root bind:checked><Switch.Thumb /></Switch.Root>
+<Switch.Root checked><Switch.Thumb /></Switch.Root>
+<Switch.Root><Switch.Thumb /></Switch.Root>

@@ -2,7 +2,11 @@
 	import { InputNumber } from 'sveltastic-ui';
 </script>
 
-<InputNumber value={1} decrementColor="danger" incrementColor="success" />
+<InputNumber.Root value={1} decrementColor="danger" incrementColor="success">
+	<InputNumber.Decrement />
+	<InputNumber.Field />
+	<InputNumber.Increment />
+</InputNumber.Root>
 <span class="muted">Per-button colors</span>
 
 <style>

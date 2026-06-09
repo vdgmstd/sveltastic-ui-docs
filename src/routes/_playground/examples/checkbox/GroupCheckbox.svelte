@@ -1,25 +1,29 @@
 <script lang="ts">
 	import { Checkbox } from 'sveltastic-ui';
 
-	let multi = $state<string[]>([]);
+	let fruits = $state<string[]>(['banana']);
 </script>
 
-<div class="row">
-	<Checkbox bind:group={multi} value="apple">Apple</Checkbox>
-	<Checkbox bind:group={multi} value="banana">Banana</Checkbox>
-	<Checkbox bind:group={multi} value="cherry">Cherry</Checkbox>
-</div>
-<p class="selected">Selected: {multi.join(', ') || '—'}</p>
+<Checkbox.Group bind:value={fruits} color="primary">
+	<Checkbox.GroupLabel>Fruits</Checkbox.GroupLabel>
+	<Checkbox.Root value="apple">
+		<Checkbox.Indicator />
+		<Checkbox.Label>Apple</Checkbox.Label>
+	</Checkbox.Root>
+	<Checkbox.Root value="banana">
+		<Checkbox.Indicator />
+		<Checkbox.Label>Banana</Checkbox.Label>
+	</Checkbox.Root>
+	<Checkbox.Root value="cherry">
+		<Checkbox.Indicator />
+		<Checkbox.Label>Cherry</Checkbox.Label>
+	</Checkbox.Root>
+</Checkbox.Group>
+<p class="selected">Selected: {fruits.join(', ') || '—'}</p>
 
 <style>
-	.row {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		gap: 1rem;
-	}
 	.selected {
-		margin: 0.5rem 0 0;
+		margin: 0.75rem 0 0;
 		font-size: 0.85rem;
 		opacity: 0.7;
 	}

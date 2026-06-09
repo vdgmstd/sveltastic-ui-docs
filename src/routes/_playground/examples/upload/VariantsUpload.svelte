@@ -5,5 +5,13 @@
 	let bordered = $state<File[]>([]);
 </script>
 
-<Upload bind:files={flat} variant="flat" color="primary" label="Flat" sublabel="click to browse" />
-<Upload bind:files={bordered} variant="border" color="dark" label="Border" sublabel="click to browse" />
+<Upload.Root bind:files={flat} variant="flat" color="primary">
+	<Upload.List />
+	<Upload.Dropzone label="Flat" sublabel="click to browse" />
+	<Upload.Footer />
+</Upload.Root>
+<Upload.Root bind:files={bordered} variant="border" color="dark">
+	<Upload.List />
+	<Upload.Dropzone label="Border" sublabel="click to browse" />
+	<Upload.Footer />
+</Upload.Root>

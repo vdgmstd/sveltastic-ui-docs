@@ -4,7 +4,7 @@
 
 <div class="col">
 	<p>Above the divider.</p>
-	<Divider />
+	<Divider.Root />
 	<p>Below the divider.</p>
 </div>
 

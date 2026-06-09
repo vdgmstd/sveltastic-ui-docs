@@ -4,7 +4,7 @@
 	let value = $state('');
 </script>
 
-<Calendar bind:value />
+<Calendar.Root type="single" bind:value />
 <span class="muted">Value: {value || '—'}</span>
 
 <style>

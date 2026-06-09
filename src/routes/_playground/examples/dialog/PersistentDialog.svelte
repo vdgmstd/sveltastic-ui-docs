@@ -4,15 +4,20 @@
 	let open = $state(false);
 </script>
 
-<Button variant="border" color="danger" onclick={() => (open = true)}>
-	Open persistent dialog
-</Button>
-
-<Dialog bind:open persistent closable={false} color="danger">
-	{#snippet header()}Discard unsaved changes?{/snippet}
-	<p>Esc and backdrop click are disabled — you must pick an explicit action.</p>
-	{#snippet footer()}
-		<Button variant="flat" onclick={() => (open = false)}>Keep editing</Button>
-		<Button color="danger" onclick={() => (open = false)}>Discard</Button>
-	{/snippet}
-</Dialog>
+<Dialog.Root bind:open persistent color="danger">
+	<Dialog.Trigger>
+		{#snippet child({ props })}
+			<Button.Root variant="border" color="danger" {...props}>Open persistent dialog</Button.Root>
+		{/snippet}
+	</Dialog.Trigger>
+	<Dialog.Content>
+		<Dialog.Title>Discard unsaved changes?</Dialog.Title>
+		<Dialog.Body>
+			<p>Esc and backdrop click are disabled — you must pick an explicit action.</p>
+		</Dialog.Body>
+		<Dialog.Footer>
+			<Button.Root variant="flat" onclick={() => (open = false)}>Keep editing</Button.Root>
+			<Button.Root color="danger" onclick={() => (open = false)}>Discard</Button.Root>
+		</Dialog.Footer>
+	</Dialog.Content>
+</Dialog.Root>

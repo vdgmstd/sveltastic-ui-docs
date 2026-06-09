@@ -4,7 +4,7 @@
 	let value = $state(3);
 </script>
 
-<Pagination bind:value length={20} />
+<Pagination.Root bind:page={value} length={20} />
 <p class="muted">Current: {value}</p>
 
 <style>

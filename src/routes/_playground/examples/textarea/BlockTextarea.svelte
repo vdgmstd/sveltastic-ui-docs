@@ -4,4 +4,8 @@
 	let value = $state('');
 </script>
 
-<Textarea bind:value placeholder="Stretches to full width" block rows={4} />
+<Textarea.Root bind:value block>
+	<Textarea.Control>
+		<Textarea.Field placeholder="Stretches to full width" rows={4} />
+	</Textarea.Control>
+</Textarea.Root>

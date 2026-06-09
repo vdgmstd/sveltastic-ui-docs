@@ -113,10 +113,26 @@
 				"docs": "Open docs"
 			},
 			"group": {
-				"label": "Button group"
+				"label": "Button group",
+				"title": "Button Group",
+				"description": "Fuses adjacent Buttons into one seamless segmented control — the inner radii flatten and `border` seams collapse so the buttons read as a single unit.",
+				"basic": {
+					"label": "Toggle group"
+				},
+				"variants": {
+					"label": "Across variants"
+				},
+				"child": {
+					"label": "Render delegation (child)",
+					"caption": "Render your own group host element via the `child` snippet — spread the merged `props` onto it and place the buttons inside."
+				}
 			},
 			"classOverride": {
 				"label": "Class & style override"
+			},
+			"child": {
+				"label": "Render delegation (child)",
+				"caption": "Render your own host element via the `child` snippet — spread the merged `props` and render the styled `body` inside it."
 			},
 			"events": {
 				"label": "Events",
@@ -178,6 +194,14 @@
 			"group": {
 				"label": "Group with max and float"
 			},
+			"status": {
+				"label": "Loading status",
+				"hint": "Avatar.Image drives loadingStatus; bind it and listen with onLoadingStatusChange. Avatar.Fallback shows while loading or on error."
+			},
+			"child": {
+				"label": "Child render-delegation",
+				"hint": "The child snippet receives the merged root props so you can render your own element, here an anchor."
+			},
 			"remount": {
 				"label": "Remount test",
 				"toggle": "Remount"
@@ -185,41 +209,67 @@
 		},
 		"card": {
 			"title": "Card",
-			"description": "All six variants and named snippets (img, title, body, buttons, interactions).",
+			"description": "Container surface composed from the compound parts (Card.Root, Card.Media, Card.Header, Card.Body, Card.Footer), plus the color and wide modifiers.",
 			"variants": {
 				"label": "Variants",
 				"default": "Default",
-				"caption": "Caption",
 				"horizontal": "Horizontal",
+				"caption": "Caption",
 				"frosted": "Frosted",
 				"peek": "Peek",
 				"compact": "Compact"
 			},
-			"imgSize": {
-				"label": "Custom imgSize",
-				"description": "The `imgSize` prop overrides the image cell's main dimension per variant — square edge for compact, left column for horizontal, max-height for vertical variants. Accepts a number (px) or any CSS length."
+			"compactSizes": {
+				"label": "Compact sizes",
+				"description": "Drive the avatar plate with `imgSize` — a number is treated as px, any CSS length works as a string."
 			},
-			"withButtons": {
+			"player": {
+				"label": "Media player",
+				"description": "Inset image with `imgInset`, a Slider scrub bar in the body, and a centered control row in a non-floating Card.Footer."
+			},
+			"comment": {
 				"label": "Comment form",
-				"description": "Card composed as a chat-style comment input — title, image, and a single bottom row with the kit's Input next to an icon-only send button."
+				"description": "A Card.Footer hosting an inline Input.Root and a send button, each sized to fit its content."
 			},
-			"composition": {
-				"label": "Mini player"
+			"colorWide": {
+				"label": "Color and wide",
+				"description": "The `color` prop exposes `--c` so descendant Buttons and Avatars inherit the card's palette; `wide` bumps the max-width from the default 350px to 480px."
 			}
 		},
 		"alert": {
 			"title": "Alert",
-			"description": "Two-variant feedback strip. Relief is the default; gradient adds a diagonal hue-shifted overlay. Supports icon, title, footer, closable, collapsible, and paged content.",
-			"basic": { "label": "Basic" },
-			"variants": { "label": "Variants" },
-			"icon": { "label": "With icon and footer" },
-			"closable": { "label": "Closable" },
-			"collapsible": { "label": "Collapsible" },
-			"pages": { "label": "Paged walkthrough" }
+			"description": "Two-variant feedback strip built from the compound parts (Alert.Root, Alert.Icon, Alert.Title, Alert.Description, Alert.Action, Alert.Pager). Relief is the default; gradient adds a diagonal hue-shifted overlay. Supports closable, collapsible, and paged content.",
+			"basic": {
+				"label": "Basic"
+			},
+			"variants": {
+				"label": "Variants"
+			},
+			"icon": {
+				"label": "With icon and footer"
+			},
+			"closable": {
+				"label": "Closable"
+			},
+			"collapsible": {
+				"label": "Collapsible"
+			},
+			"pages": {
+				"label": "Paged walkthrough",
+				"hint": "The kit's Pagination (Pagination.Root in dots mode with arrows) drives the step inside Alert.Action, binding the active page to the shown content."
+			},
+			"events": {
+				"label": "Event callbacks",
+				"hint": "onOpenChange fires the moment open flips; onOpenChangeComplete fires after the open/close transition settles."
+			},
+			"child": {
+				"label": "Custom element (child)",
+				"hint": "The child snippet hands you the merged root props and the styled body so you can render your own host element."
+			}
 		},
 		"checkbox": {
 			"title": "Checkbox",
-			"description": "Every state, every color, label position, custom checked icon, group (multi-select array binding).",
+			"description": "Every state, color, label position, custom checked icon, and multi-select via Checkbox.Group.",
 			"states": {
 				"label": "States",
 				"basic": "Basic",
@@ -248,12 +298,17 @@
 				"custom": "Heart"
 			},
 			"group": {
-				"label": "Array group (bind:group)",
-				"description": "Multi-select via a shared array. Each checkbox contributes its `value` token.",
+				"label": "Group (Checkbox.Group)",
+				"description": "Multi-select via <Checkbox.Group bind:value> with a shared <Checkbox.GroupLabel>. Each member contributes its `value` token to the membership array.",
 				"apple": "Apple",
 				"banana": "Banana",
 				"cherry": "Cherry",
+				"fruits": "Fruits",
 				"selected": "Selected"
+			},
+			"events": {
+				"label": "Events & state hooks",
+				"description": "onCheckedChange / onIndeterminateChange callbacks, the published data-state, and a bindable ref to the label element."
 			}
 		},
 		"radio": {
@@ -265,6 +320,10 @@
 				"banana": "Banana",
 				"cherry": "Cherry",
 				"selected": "Selected"
+			},
+			"group": {
+				"label": "Orientation, loop & read-only",
+				"hint": "`RadioGroup.Root` owns selection and arrow-key roving. `orientation` sets both the layout and the arrow axis, `loop` wraps navigation past the ends, and `readonly` keeps focus working while locking the value."
 			},
 			"colors": {
 				"label": "Colors",
@@ -291,25 +350,32 @@
 				"label": "Label position",
 				"before": "Label before",
 				"after": "Label after"
+			},
+			"child": {
+				"label": "Custom element (child)",
+				"hint": "The `child` snippet on `RadioGroup.Root` delegates the group container — spread the merged `props` onto your own element (here a `<fieldset>` with a `<legend>`)."
+			},
+			"events": {
+				"label": "Events, ref & data-state"
 			}
 		},
 		"segmented": {
 			"title": "Segmented",
-			"description": "Single-choice radio group rendered as a sliding-thumb segmented control. Variants, icons, sizes, per-item color, full keyboard support.",
+			"description": "Single-choice radio group rendered as a sliding-thumb segmented control. Compose `Segmented.Root` + `Segmented.Item` (+ `Segmented.ItemIcon` for a leading glyph). Variants, icons, sizes, per-item color, full keyboard support.",
 			"basic": {
 				"label": "Basic",
-				"hint": "Bind a value, pass labelled items, get a smooth-sliding indicator.",
+				"hint": "Bind a value on `Segmented.Root`, list `Segmented.Item` children — the thumb slides smoothly to the active segment.",
 				"fiveMin": "5 mins",
 				"fifteenMin": "15 mins",
 				"thirtyMin": "30 mins"
 			},
 			"variants": {
 				"label": "Variants",
-				"hint": "`default` — gray-2 track with an accent thumb. `tonal` — accent-tinted track. `border` — outlined track, no fill. `relief` — sunken track with a raised thumb."
+				"hint": "`default` — gray-2 track with an accent thumb. `flat` — accent-tinted track. `border` — outlined track, no fill. `relief` — sunken track with a raised thumb."
 			},
 			"icons": {
 				"label": "With icons",
-				"hint": "Each item accepts an `icon` snippet rendered before the label.",
+				"hint": "Place a `Segmented.ItemIcon` inside each `Segmented.Item` before the label; skip the label for compact icon-only segments (give the group an `ariaLabel`).",
 				"list": "List",
 				"grid": "Grid",
 				"rows": "Rows"
@@ -327,7 +393,7 @@
 			},
 			"sizes": {
 				"label": "Sizes",
-				"hint": "Three preset scales — small, medium (default), large."
+				"hint": "Shared scale with Button — `xl` · `large` · `medium` · `small` · `mini`. Outer height matches a Button at the same size."
 			},
 			"colors": {
 				"label": "Colors",
@@ -344,7 +410,15 @@
 			},
 			"disabled": {
 				"label": "Disabled",
-				"hint": "Disable per-item or the whole group at once."
+				"hint": "Disable a single `Segmented.Item` or the whole group at once."
+			},
+			"loop": {
+				"label": "Arrow-key loop",
+				"hint": "`loop` wraps arrow navigation past the first/last segment."
+			},
+			"child": {
+				"label": "Render delegation (child)",
+				"hint": "The `child` snippet on `Segmented.Root` and `Segmented.Item` hands you the merged props so you can render your own element."
 			},
 			"options": {
 				"label": "API",
@@ -373,31 +447,25 @@
 			"colors": {
 				"label": "Colors"
 			},
-			"thumbColor": {
-				"label": "Custom thumb color",
-				"description": "Pass `thumbColor` to tint the knob independently of the track. Combine with `color` for two-tone switches."
-			},
-			"thumbColorStates": {
-				"label": "Thumb color per state",
-				"description": "Use `thumbColorOff` and `thumbColorOn` to crossfade the knob between two colors as the switch toggles."
-			},
-			"timing": {
-				"label": "Custom animation timing",
-				"description": "Override `transitionDuration` (ms) and `transitionEasing` (a `(t: number) => number` function from `svelte/easing` or your own) to retune the toggle motion. Defaults: 240ms cubicOut."
-			},
 			"icons": {
 				"label": "Inline & knob icons"
 			},
 			"text": {
-				"label": "On / off text",
-				"on": "On",
-				"off": "Off"
+				"label": "On / off text"
 			},
 			"ghost": {
 				"label": "Ghost knob (theme-toggle style)"
 			},
+			"thumb": {
+				"label": "Compound thumb part",
+				"description": "Nest a `<Switch.Thumb>` inside `<Switch.Root>` to render content inside the knob. Replaces the deprecated `knob` snippet."
+			},
 			"states": {
 				"label": "States"
+			},
+			"events": {
+				"label": "Events & ref",
+				"description": "Bind `ref` to reach the underlying input and wire `onCheckedChange` to react to toggles; the panel mirrors the published `data-state`."
 			}
 		},
 		"input": {
@@ -461,7 +529,7 @@
 			"mask": {
 				"label": "Input masks",
 				"phone": "Phone",
-				"phonePlaceholder": "+1 (___) ___-____",
+				"phonePlaceholder": "+ (___) ___-____",
 				"card": "Card number",
 				"cardPlaceholder": "0000 0000 0000 0000",
 				"date": "Date",
@@ -470,69 +538,143 @@
 				"ipPlaceholder": "0.0.0.0",
 				"license": "License plate",
 				"licensePlaceholder": "AA 1234 BB"
+			},
+			"child": {
+				"label": "Render delegation (child)",
+				"hint": "The child snippet replaces the inner <input> with your own element while the shell — bg, focus ripple, icon — is preserved. Spread the merged props it hands you."
+			},
+			"events": {
+				"label": "Events & ref",
+				"hint": "onValueChange fires on every edit; bind:ref exposes the underlying <input> element for focus / measurement."
 			}
 		},
 		"tooltip": {
 			"title": "Tooltip",
-			"description": "Placements, variants, hover/click triggers, interactivity, delay, loading.",
+			"description": "Compound Tooltip.Root + Tooltip.Trigger / Tooltip.Content. Placement, variants, colors, triggers, interactivity, delay, shape, arrow, loading, manual control, and the child snippet.",
+			"basic": {
+				"label": "Basic",
+				"hint": "Tooltip.Root wraps a Tooltip.Trigger and a Tooltip.Content."
+			},
 			"placement": {
-				"label": "Placement",
-				"top": "Top",
-				"right": "Right",
-				"bottom": "Bottom",
-				"left": "Left"
+				"label": "Placement"
 			},
 			"variants": {
-				"label": "Variants",
-				"default": "Default",
-				"shadow": "Shadow",
-				"border": "Border"
+				"label": "Variants"
+			},
+			"color": {
+				"label": "Color"
 			},
 			"trigger": {
 				"label": "Triggers",
-				"hover": "Hover",
-				"click": "Click",
-				"interactive": "Interactive",
-				"delay": "Delay 500ms",
-				"loading": "Loading"
+				"hint": "hover opens on hover / focus; click toggles and dismisses on outside click."
 			},
-			"color": {
-				"label": "Color",
-				"primary": "Primary",
-				"success": "Success",
-				"danger": "Danger",
-				"warning": "Warning",
-				"dark": "Dark",
-				"hex": "Hex",
-				"rgb": "RGB"
+			"interactive": {
+				"label": "Interactive",
+				"hint": "Keeps the bubble open while the pointer is over it, so its content stays clickable."
+			},
+			"delay": {
+				"label": "Delay"
+			},
+			"shape": {
+				"label": "Shape"
+			},
+			"arrow": {
+				"label": "Arrow"
+			},
+			"loading": {
+				"label": "Loading"
+			},
+			"manual": {
+				"label": "Manual control",
+				"hint": "trigger=\"manual\" with bind:open; onOpenChange reports each change."
+			},
+			"child": {
+				"label": "Child snippet",
+				"hint": "Render your own trigger element; forceMount lets a consumer transition own the bubble enter / exit."
 			}
 		},
 		"divider": {
 			"title": "Divider",
 			"description": "Thin separator line. Horizontal or vertical, dashed / dotted, optional inline label, color and thickness.",
-			"basic": { "label": "Basic" },
-			"variants": { "label": "Variants (solid, dashed, dotted)" },
-			"label": { "label": "With label" },
-			"colors": { "label": "Colors" },
-			"thickness": { "label": "Thickness" },
-			"inset": { "label": "Inset" },
-			"vertical": { "label": "Vertical" }
+			"basic": {
+				"label": "Basic"
+			},
+			"variants": {
+				"label": "Variants (solid, dashed, dotted)"
+			},
+			"label": {
+				"label": "With label"
+			},
+			"colors": {
+				"label": "Colors"
+			},
+			"thickness": {
+				"label": "Thickness"
+			},
+			"inset": {
+				"label": "Inset"
+			},
+			"vertical": {
+				"label": "Vertical"
+			},
+			"decorative": {
+				"label": "Decorative"
+			},
+			"child": {
+				"label": "Render delegation (child)"
+			}
 		},
 		"pagination": {
 			"title": "Pagination",
-			"description": "Numeric / dot modes, infinite, progress, ellipsis jumps, disabled / loading items.",
+			"description": "Page navigation — `Pagination.Root` renders the full styled control by default (the bare `<Pagination>` is a deprecated alias). Numeric / dot modes, infinite wrap, progress bar, ellipsis jumps, disabled / loading items, plus children render-loop and child render-delegation escape hatches.",
 			"basic": {
 				"label": "Basic",
+				"hint": "`<Pagination.Root bind:value length={20} />` renders arrows, page buttons, and ellipsis jumps with no extra markup.",
 				"current": "Current page"
 			},
+			"variants": {
+				"label": "Variants",
+				"hint": "`default` · `flat` · `border` · `transparent` — the four button looks, set on `Pagination.Root`."
+			},
+			"sizes": {
+				"label": "Sizes",
+				"hint": "Shared scale with Button — `xl` · `large` · `medium` · `small` · `mini`."
+			},
+			"shapes": {
+				"label": "Shapes",
+				"hint": "`default` · `circle` · `square` border-radius applied to every button."
+			},
+			"colors": {
+				"label": "Colors",
+				"hint": "Any palette name or a raw hex / `rgb(...)` flows through to the active button and progress bar."
+			},
 			"dots": {
-				"label": "Dot indicators"
+				"label": "Dot indicators",
+				"hint": "`mode=\"dots\"` swaps numeric buttons for compact dot indicators."
 			},
-			"options": {
-				"label": "Options (progress, infinite, shape, arrows-only, disabled)"
+			"progress": {
+				"label": "Progress bar",
+				"hint": "`progress` adds a thin bar below the control tracking position across the full length."
 			},
-			"disabledItems": {
-				"label": "Disabled and loading items"
+			"infinite": {
+				"label": "Infinite (wrap-around)",
+				"hint": "`infinite` (alias `loop`) wraps the arrows from the last page back to the first."
+			},
+			"arrowsOnly": {
+				"label": "Arrows only",
+				"hint": "`arrowsOnly` hides the page buttons and renders just prev / next."
+			},
+			"states": {
+				"label": "Disabled and loading items",
+				"hint": "`disabledItems` makes individual pages non-clickable; `loadingItems` shows a spinner; `disabled` turns off the whole control."
+			},
+			"renderLoop": {
+				"label": "Render-loop children",
+				"hint": "The `children` snippet receives `{ pages, range, currentPage }` to render your own summary in place of the default control."
+			},
+			"child": {
+				"label": "Child render-delegation",
+				"hint": "The `child` snippet hands you the merged root props (class, data-*, aria-label, color variable) so you render your own `<nav>` element."
 			}
 		},
 		"select": {
@@ -546,6 +688,10 @@
 				"banana": "Banana",
 				"cherry": "Cherry",
 				"date": "Date"
+			},
+			"composed": {
+				"label": "Compound API",
+				"description": "Compose `Select.Root` with `Select.Trigger`, `Select.Content`, `Select.Group`, `Select.GroupHeading` and hand-authored `Select.Item` rows. `items` on the Root still feeds selection state, keyboard navigation and the trigger label."
 			},
 			"multi": {
 				"label": "Multiple with collapsed chips",
@@ -570,7 +716,7 @@
 			},
 			"caret": {
 				"label": "Custom caret icon",
-				"description": "Pass a `caret` snippet to replace the default chevron. The snippet receives `isOpen` so it can rotate or swap glyphs.",
+				"description": "Place `Select.Icon` inside `Select.Trigger` to replace the default chevron; the trigger still rotates it on open. Omit it for the auto-rendered caret.",
 				"search": "Search a fruit",
 				"toggle": "Toggle a fruit"
 			},
@@ -585,7 +731,7 @@
 			},
 			"custom": {
 				"label": "Custom option slot",
-				"description": "Use the `option`, `selected` and `groupTitle` snippets to render rich rows — tinted icons, multi-line content, badges. Behaviour stays default; only presentation changes.",
+				"description": "Hand-author `Select.Item` rows inside `Select.Content` and a `Select.Value` children snippet for the trigger to render rich rows — tinted icons, multi-line content, badges. Behaviour stays default; only presentation changes.",
 				"placeholder": "Pick a flavour",
 				"value": "Selected",
 				"fruits": "Fruits",
@@ -598,7 +744,7 @@
 			},
 			"customMulti": {
 				"label": "Custom slots — multi",
-				"description": "Same `option` and `groupTitle` snippets, plus a `chip` snippet for the trigger pills.",
+				"description": "Same hand-authored `Select.Item` rows, plus a `Select.Chip` template inside `Select.Value` for the trigger pills.",
 				"placeholder": "Pick flavours"
 			}
 		},
@@ -607,6 +753,7 @@
 			"description": "Anchored popup with a flexible trigger slot. Click / hover / manual open modes, six placements, click-outside / Esc close.",
 			"basic": {
 				"label": "Basic — Button trigger",
+				"hint": "Compose Menu.Root with Menu.Trigger, Menu.Content and Menu.Item. The trigger's `child` snippet renders your own anchor element.",
 				"open": "Actions"
 			},
 			"placements": {
@@ -626,6 +773,18 @@
 				"dark": "Dark",
 				"system": "System"
 			},
+			"checkboxRadio": {
+				"label": "Checkbox & radio items",
+				"hint": "Menu.CheckboxItem binds `checked`; Menu.RadioGroup binds a single `value` across its Menu.RadioItem rows. Both publish their state through `data-state` / `aria-checked`."
+			},
+			"groups": {
+				"label": "Groups & shortcuts",
+				"hint": "Menu.Group wraps related rows under a Menu.GroupHeading (wired to `aria-labelledby`). Each Menu.Item's `trailing` snippet holds a shortcut hint."
+			},
+			"headerFooter": {
+				"label": "Sticky header & footer",
+				"hint": "Menu.Content accepts `header` and `footer` snippets that stay pinned around the scrollable rows; both receive a `close` callback."
+			},
 			"manual": {
 				"label": "Manual control",
 				"hint": "`triggerOn=\"manual\"` lets you drive `open` from the outside — the trigger snippet still acts as the visual anchor for positioning.",
@@ -644,7 +803,7 @@
 			},
 			"timing": {
 				"label": "Custom timing",
-				"description": "Override `openDuration` (ms) and `openEasing` (any CSS easing string — `cubic-bezier(...)`, `ease`, `linear`, etc.) to retune any variant. Defaults pick a sensible duration/curve per `openAnim`."
+				"description": "Override `openDuration` (ms) and `openEasing` (any JS easing function from `svelte/easing` — `expoOut`, `backOut`, … — or your own) to retune any variant. Defaults pick a sensible duration/curve per `openAnim`."
 			},
 			"actions": {
 				"section": "Account",
@@ -661,52 +820,54 @@
 		},
 		"dialog": {
 			"title": "Dialog",
-			"description": "Modal dialog built on the native <dialog> element. Header / body / footer snippets, size preset, persistent mode, focus-trap and scroll-lock handled for you.",
-			"basic": { "label": "Basic" },
-			"persistent": { "label": "Persistent (no Esc / backdrop close)" },
-			"sizes": { "label": "Sizes" },
-			"form": { "label": "Form dialog" },
-			"scroll": { "label": "Scrollable content" }
+			"description": "Modal dialog built on the native <dialog> element. Compound parts — Dialog.Root, Trigger, Content, Title, Description, Body, Footer, Close — with size preset, persistent mode, focus-trap and scroll-lock handled for you.",
+			"basic": {
+				"label": "Basic"
+			},
+			"native": {
+				"label": "Native trigger (no child snippet)"
+			},
+			"persistent": {
+				"label": "Persistent (no Esc / backdrop close)"
+			},
+			"sizes": {
+				"label": "Sizes"
+			},
+			"form": {
+				"label": "Form dialog"
+			},
+			"scroll": {
+				"label": "Scrollable content"
+			}
 		},
 		"notifications": {
 			"title": "Notifications",
-			"description": "Imperative `notify(...)` API that mounts toasts via NotificationsHost. Six anchor positions, sticky, closable, loading, custom icon, click handler.",
+			"description": "Imperative `notify(...)` API that mounts toasts via NotificationsHost. Auto-dismisses after 5s by default; sticky pins it, duration tunes the timeout. Six anchor positions, closable, loading, custom icon, click handler.",
 			"colors": {
-				"label": "Colors",
-				"primary": "Primary",
-				"success": "Success",
-				"danger": "Danger",
-				"warning": "Warning",
-				"dark": "Dark"
+				"label": "Colors"
 			},
-			"variants": {
-				"label": "Variants",
-				"tint": "Tinted (default)",
-				"border": "Border",
-				"square": "Square"
+			"border": {
+				"label": "Border (outline ring)"
 			},
-			"states": {
-				"label": "States",
-				"sticky": "Sticky",
-				"closable": "Sticky + closable",
-				"loading": "Loading spinner",
-				"clickable": "Clickable (click-close)"
+			"closable": {
+				"label": "Closable"
+			},
+			"loading": {
+				"label": "Loading spinner"
 			},
 			"positions": {
-				"label": "Positions",
-				"topRight": "Top-right",
-				"topLeft": "Top-left",
-				"topCenter": "Top-center",
-				"bottomRight": "Bottom-right",
-				"bottomLeft": "Bottom-left",
-				"bottomCenter": "Bottom-center"
+				"label": "Positions"
 			},
 			"icon": {
 				"label": "Custom icon snippet"
 			},
-			"sample": {
-				"title": "Notification",
-				"body": "This is a notification body."
+			"sticky": {
+				"label": "Sticky (no auto-dismiss)",
+				"caption": "Set `sticky: true` to keep the toast until it is closed — pair it with `closable` so the user can still dismiss it."
+			},
+			"duration": {
+				"label": "Custom duration",
+				"caption": "Override the 5s default with `duration` (in ms). Ignored when `sticky` is set."
 			}
 		},
 		"chip": {
@@ -756,6 +917,10 @@
 				"design": "design",
 				"qa": "qa"
 			},
+			"onActiveChange": {
+				"label": "onActiveChange callback",
+				"hint": "A clickable chip is controllable via `bind:active` plus `onActiveChange` — the callback fires with the next pressed value."
+			},
 			"closable": {
 				"label": "Closable",
 				"frontend": "frontend",
@@ -766,6 +931,10 @@
 			"clickable": {
 				"label": "Clickable",
 				"click": "Click me"
+			},
+			"child": {
+				"label": "child snippet",
+				"hint": "Render-delegation: a clickable chip's body forwards its merged props to your own host element — here an `<a>` link — while keeping the styled chip content."
 			},
 			"disabled": {
 				"label": "Disabled"
@@ -914,6 +1083,10 @@
 				"profile": "Profile",
 				"signOut": "Sign out"
 			},
+			"label": {
+				"label": "Section labels",
+				"hint": "List.Label renders an inline caption inside the surface."
+			},
 			"listbox": {
 				"label": "Listbox (single)",
 				"hint": "Arrows / Home / End for keyboard nav.",
@@ -927,6 +1100,10 @@
 				"label": "Listbox (multiple)",
 				"hint": "Click toggles each item independently.",
 				"selected": "Selected:"
+			},
+			"child": {
+				"label": "Custom element",
+				"hint": "The child snippet delegates a row to your own element via the merged props."
 			},
 			"empty": {
 				"label": "Empty state",
@@ -959,6 +1136,12 @@
 			},
 			"interactive": {
 				"label": "Interactive"
+			},
+			"range": {
+				"label": "Min / max + ariaValueText"
+			},
+			"child": {
+				"label": "Render delegation (child)"
 			},
 			"value": "value"
 		},
@@ -995,8 +1178,20 @@
 				"readonly": "Read-only",
 				"block": "Block (full-width)"
 			},
+			"customIcons": {
+				"label": "Custom stepper icons",
+				"hint": "A glyph passed as children of InputNumber.Increment / InputNumber.Decrement replaces the default ± icons; incrementLabel / decrementLabel set their aria-labels."
+			},
+			"child": {
+				"label": "Render delegation (child)",
+				"hint": "The child snippet hands you the merged root props — input-number classes, data-* state hooks, style and the bindable ref — so you render your own root element and own its body."
+			},
 			"animation": {
 				"label": "Animation duration"
+			},
+			"events": {
+				"label": "Events & ref",
+				"hint": "onValueChange fires on every committed change (after clamping); bind:ref exposes the root <div>; InputNumber.Field labelId wires an external label via aria-labelledby."
 			}
 		},
 		"textarea": {
@@ -1012,6 +1207,9 @@
 			"states": {
 				"label": "Field states"
 			},
+			"color": {
+				"label": "Custom color"
+			},
 			"label": {
 				"label": "Label styles",
 				"default": "Default",
@@ -1026,6 +1224,14 @@
 			"block": {
 				"label": "Block",
 				"placeholder": "Stretches to container width."
+			},
+			"mask": {
+				"label": "Mask",
+				"hint": "A mask pattern restricts input to the given shape. Tokens: # digit, @ letter, * alphanumeric."
+			},
+			"events": {
+				"label": "Events & ref",
+				"hint": "onValueChange fires on every edit; bind:ref exposes the wrapper <div> for focus / measurement."
 			}
 		},
 		"slider": {
@@ -1033,6 +1239,14 @@
 			"description": "Single value or `[start, end]` range. Three sizes, tooltip on hover/focus, optional ticks, value formatter, palette colors.",
 			"basic": {
 				"label": "Single value"
+			},
+			"composed": {
+				"label": "Compound API",
+				"hint": "Slider.Root + Slider.Track / Range / Thumb / Tooltip. This is exactly what the bare <Slider> renders by default — compose the parts when you need custom markup."
+			},
+			"composedRange": {
+				"label": "Compound API — range",
+				"hint": "type=\"multiple\" yields two thumbs and tooltips; add one Slider.Tick per step you want marked."
 			},
 			"sizes": {
 				"label": "Sizes"
@@ -1059,39 +1273,107 @@
 				"label": "States",
 				"disabled": "Disabled"
 			},
+			"events": {
+				"label": "Events & ref",
+				"hint": "onValueChange fires with the next value (number, or [start, end] for a range); bind:ref exposes the wrapper <div> for focus / measurement. ariaLabel names the control for assistive tech."
+			},
 			"value": "value"
 		},
 		"timePicker": {
 			"title": "DateTime Picker",
-			"description": "Input field with a dropdown wheel picker. Manual typing, cyclic hour/minute/second wheels, optional 12-hour mode, customizable icon side and glyph.",
-			"basic": {
-				"label": "Basic"
+			"description": "A single polymorphic field with a dropdown panel. Set type to time, date or datetime and bind:value — the matching panel (wheels, calendar, or both) loads on demand. Manual typing, optional seconds and 12-hour mode, locale-aware calendar, min/max bounds, customizable icon side and glyph.",
+			"types": {
+				"label": "Types",
+				"hint": "One component, three modes. Pick a type — the right panel chunk loads on demand. The bound value is HH:MM[:SS] / YYYY-MM-DD / YYYY-MM-DDTHH:MM[:SS]."
 			},
 			"withSeconds": {
-				"label": "With seconds"
+				"label": "With seconds",
+				"hint": "showSeconds adds a third wheel and a seconds segment to time-bearing types."
+			},
+			"hour12": {
+				"label": "12-hour mode",
+				"hint": "hour12 shows AM/PM in the input and a segmented switcher in the panel. The bound value stays 24-hour ISO."
+			},
+			"label": {
+				"label": "With label",
+				"hint": "Floating, inline and static labels via the same label / labelStyle props as the kit's Input."
+			},
+			"locale": {
+				"label": "Locale & week start",
+				"hint": "locale drives the calendar's month / weekday names; weekStart overrides the first column (0 = Sunday, 1 = Monday)."
+			},
+			"restricted": {
+				"label": "Min / max bounds",
+				"hint": "min and max clamp the selectable range on date-bearing types (inclusive). Out-of-range days are disabled in the calendar."
+			},
+			"iconPosition": {
+				"label": "Icon position",
+				"hint": "iconPosition=\"before\" moves the glyph to the leading edge of the field."
+			},
+			"customIcon": {
+				"label": "Custom icon",
+				"hint": "Pass an icon snippet to override the default clock (time) / calendar (date · datetime) glyph."
+			},
+			"placement": {
+				"label": "Placement & block",
+				"hint": "placement anchors the panel relative to the trigger; block stretches the field to its container."
+			},
+			"events": {
+				"label": "Events & open state",
+				"hint": "onValueChange fires on every committed value change; onOpenChange reports the dropdown state, which is also bindable via bind:open."
 			},
 			"colors": {
-				"label": "Colors"
+				"label": "Colors",
+				"hint": "color flows through the input, calendar chrome, time wheels and AM/PM segmented."
 			},
 			"states": {
 				"label": "States",
+				"hint": "disabled makes both trigger and panel inert; readonly keeps the value visible but blocks edits.",
 				"disabled": "Disabled"
 			},
 			"value": "value"
 		},
 		"calendar": {
 			"title": "Calendar",
-			"description": "Inline month grid powered by Temporal. Single-day or range selection, full keyboard navigation, locale-aware labels.",
-			"basic": { "label": "Basic" },
-			"bound": { "label": "Bound value with footer" },
-			"range": { "label": "Range mode" },
-			"sizes": { "label": "Sizes" },
-			"locale": { "label": "Locale-aware labels" },
+			"description": "Compound month grid powered by Temporal. Calendar.Root drives single-day or range selection; compose Header / Grid yourself or let the default month view render. Full keyboard navigation, locale-aware labels.",
+			"basic": {
+				"label": "Basic"
+			},
+			"bound": {
+				"label": "Bound value with footer"
+			},
+			"range": {
+				"label": "Range mode"
+			},
+			"events": {
+				"label": "Events & placeholder",
+				"hint": "onValueChange fires on pick, onValueChangeComplete after the pill settles; placeholder + onPlaceholderChange control and report the view month."
+			},
+			"composed": {
+				"label": "Compound parts",
+				"hint": "Calendar.Root + Calendar.Header (PrevButton / Heading / NextButton) + Calendar.Grid. This is exactly what the bare default renders — compose the parts when you need custom markup."
+			},
+			"customDay": {
+				"label": "Custom day snippet",
+				"hint": "The day snippet receives the Temporal.PlainDate and its CalendarDayState (today / selected / range flags) so you can render dots, prices or any custom cell content."
+			},
+			"readonly": {
+				"label": "Readonly · week start · weekday format",
+				"hint": "readonly keeps the calendar navigable but blocks selection; weekStart and weekdayFormat tune the header row."
+			},
+			"sizes": {
+				"label": "Sizes"
+			},
+			"locale": {
+				"label": "Locale-aware labels"
+			},
 			"restricted": {
 				"label": "Min / max + disabled days",
 				"hint": "Min Apr 5, max Apr 25, weekends disabled"
 			},
-			"colors": { "label": "Colors" },
+			"colors": {
+				"label": "Colors"
+			},
 			"states": {
 				"label": "States",
 				"disabled": "Disabled"
@@ -1179,8 +1461,16 @@
 				"description": "Selected items rendered as a list with thumbnails for images, type icons for everything else, formatted size and a remove button."
 			},
 			"customItem": {
-				"label": "Custom item snippet",
-				"description": "Override the row entirely via the `item` snippet — render any layout you need."
+				"label": "Custom row",
+				"description": "Render your own rows with a consumer #each loop over Upload.Item — any layout you need."
+			},
+			"childDropzone": {
+				"label": "Custom trigger (child)",
+				"description": "Render-delegate the drop zone with the `child` snippet — receive the merged props and spread them onto your own button."
+			},
+			"mobile": {
+				"label": "Mobile / narrow",
+				"description": "Container query — at < 460px wide, hero shifts below the list."
 			},
 			"buttonOnly": {
 				"label": "Button only",
@@ -1202,14 +1492,14 @@
 		},
 		"tabs": {
 			"title": "Tabs",
-			"description": "Composition tabs — `<Tabs>` provider, `<TabList>` + `<Tab>` for triggers, `<TabPanel>` for content. Place them anywhere in the template, not necessarily adjacent. The rail shares its visual contract with `<Segmented>`: spring-animated thumb, press-scale, ripple-into-thumb.",
+			"description": "Composition tabs — `Tabs.Root` provider, `Tabs.List` + `Tabs.Trigger` for triggers, `Tabs.Content` for panels. Place them anywhere in the template, not necessarily adjacent. The rail shares its visual contract with `Segmented`: spring-animated thumb, press-scale, ripple-into-thumb.",
 			"basic": {
 				"label": "Basic",
 				"hint": "Default `underline` variant — animated bottom bar follows the active tab."
 			},
 			"variants": {
 				"label": "Variants",
-				"hint": "`underline` · `default` · `tonal` · `border` · `relief` — mirrors `<Segmented>` for the four filled looks plus the classic underline."
+				"hint": "`underline` · `default` · `flat` · `border` · `relief` — mirrors `Segmented` for the four filled looks plus the classic underline."
 			},
 			"sizes": {
 				"label": "Sizes",
@@ -1217,7 +1507,19 @@
 			},
 			"block": {
 				"label": "Block",
-				"hint": "`<TabList block>` stretches to fill its container; tabs distribute evenly."
+				"hint": "`<Tabs.List block>` stretches to fill its container; tabs distribute evenly."
+			},
+			"vertical": {
+				"label": "Vertical orientation",
+				"hint": "`orientation=\"vertical\"` stacks the triggers and switches arrow navigation to Up/Down."
+			},
+			"manualLoop": {
+				"label": "Manual activation + loop",
+				"hint": "`activationMode=\"manual\"` moves focus with arrows but selects only on Enter/Space; `loop` wraps past the first/last tab."
+			},
+			"child": {
+				"label": "Render delegation (child)",
+				"hint": "The `child` snippet on every part hands you the merged props so you can render your own element; `Tabs.Content`'s `child` also receives an `active` flag."
 			},
 			"composition": {
 				"label": "Decoupled layout",
@@ -1227,8 +1529,7 @@
 				"label": "Colors"
 			},
 			"states": {
-				"label": "States",
-				"disabled": "Disabled"
+				"label": "States"
 			},
 			"keyboard": {
 				"label": "Keyboard nav",
@@ -1244,26 +1545,16 @@
 			},
 			"icons": {
 				"label": "Trigger with icon",
-				"hint": "Each `<Tab>` accepts an `icon` snippet."
+				"hint": "Each `Tabs.Trigger` accepts an `icon` snippet."
 			},
 			"composed": {
 				"label": "Reusing kit",
 				"hint": "Panels can host any kit component — `<Card>`, `<Avatar>`, `<Chip>`, `<List>`."
-			},
-			"panes": {
-				"overview": "Overview",
-				"overviewBody": "An at-a-glance summary of your project.",
-				"details": "Details",
-				"detailsBody": "Granular metadata and configuration.",
-				"preview": "Preview",
-				"previewBody": "A live render of the current selection.",
-				"history": "History",
-				"historyBody": "Audit log of recent changes."
 			}
 		},
 		"collapse": {
 			"title": "Collapse",
-			"description": "Single accordion item with seven variants, sizes, icon + extra slots, and a CollapseGroup wrapper for single / multiple expansion.",
+			"description": "Single accordion item with seven variants, sizes, icon + extra slots, and a Collapse.Group wrapper for single / multiple expansion.",
 			"basic": {
 				"label": "Basic",
 				"title1": "Section one",
@@ -1297,6 +1588,9 @@
 				"small": "Small",
 				"mini": "Mini"
 			},
+			"shapeGradient": {
+				"label": "Shape and gradient end-stop"
+			},
 			"slots": {
 				"label": "Icon, extra and header snippet",
 				"iconTitle": "With leading icon",
@@ -1316,6 +1610,12 @@
 				"actionBody": "Two pull requests are waiting on your review. The CI run finished 14 minutes ago without regressions.",
 				"review": "Review now",
 				"snooze": "Snooze 24h"
+			},
+			"child": {
+				"label": "Compound parts via child snippet"
+			},
+			"events": {
+				"label": "Open events and status panel"
 			},
 			"group": {
 				"singleLabel": "Group — single expansion",

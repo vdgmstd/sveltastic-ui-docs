@@ -79,33 +79,37 @@
 	}
 </script>
 
-<Menu placement="bottom-end" offset={8} popupRole="dialog" closeOnSelect={false}>
-	{#snippet trigger(open)}
-		<Button
-			variant="border"
-			color="dark"
-			size="small"
-			iconOnly
-			active={open}
-			aria-label="Pick font"
-		>
-			<TextAaIcon size={18} weight="bold" />
-		</Button>
-	{/snippet}
+<Menu.Root placement="bottom-end" offset={8} popupRole="dialog" closeOnSelect={false}>
+	<Menu.Trigger>
+		{#snippet child({ props, open })}
+			<Button.Root
+				variant="border"
+				color="dark"
+				size="small"
+				iconOnly
+				active={open}
+				aria-label="Pick font"
+				{...props}
+			>
+				<TextAaIcon size={18} weight="bold" />
+			</Button.Root>
+		{/snippet}
+	</Menu.Trigger>
 
-	{#snippet children(close)}
-		<div class="font-picker">
+	<Menu.Content>
+		{#snippet children(close)}
+			<div class="font-picker">
 			<header class="font-picker__head">
 				<span class="font-picker__title">Font</span>
 			</header>
 
-			<Divider />
+			<Divider.Root />
 
 			<ul class="font-picker__list" role="listbox" aria-label="Fonts">
 				{#each FONTS as f (f.key)}
 					{@const isActive = activeKey === f.key}
 					<li>
-						<Button
+						<Button.Root
 							variant={isActive ? 'flat' : 'transparent'}
 							color={isActive ? 'primary' : 'dark'}
 							size="medium"
@@ -126,13 +130,14 @@
 									<CheckIcon size={14} weight="bold" />
 								{/if}
 							</span>
-						</Button>
+						</Button.Root>
 					</li>
 				{/each}
 			</ul>
 		</div>
-	{/snippet}
-</Menu>
+		{/snippet}
+	</Menu.Content>
+</Menu.Root>
 
 <style>
 	.font-picker {
@@ -146,7 +151,7 @@
 		gap: 8px;
 		padding: 4px 8px 8px;
 	}
-	.font-picker > :global(.divider) {
+	.font-picker > :global(.separator) {
 		margin: 0 0 4px;
 	}
 	.font-picker__title {

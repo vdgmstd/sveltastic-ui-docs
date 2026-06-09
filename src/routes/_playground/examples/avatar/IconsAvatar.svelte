@@ -3,29 +3,33 @@
 	import { PencilSimple, Trash } from 'phosphor-svelte';
 </script>
 
-<Avatar shape="circle" color="primary" text="JD">
-	{#snippet icons()}
+<Avatar.Root shape="circle" color="primary">
+	<Avatar.Fallback>JD</Avatar.Fallback>
+	<Avatar.Icons>
 		<PencilSimple weight="fill" />
 		<Trash weight="fill" />
-	{/snippet}
-</Avatar>
-<Avatar shape="circle">
-	<img src="/avatars/4.jpg" alt="" />
-	{#snippet icons()}
+	</Avatar.Icons>
+</Avatar.Root>
+<Avatar.Root shape="circle">
+	<Avatar.Image src="/avatars/4.jpg" alt="" />
+	<Avatar.Fallback>4</Avatar.Fallback>
+	<Avatar.Icons>
 		<PencilSimple weight="fill" />
 		<Trash weight="fill" />
-	{/snippet}
-</Avatar>
-<Avatar shape="circle" color="success" text="AM" iconsPlacement="horizontal">
-	{#snippet icons()}
+	</Avatar.Icons>
+</Avatar.Root>
+<Avatar.Root shape="circle" color="success">
+	<Avatar.Fallback>AM</Avatar.Fallback>
+	<Avatar.Icons placement="horizontal">
 		<PencilSimple weight="fill" />
 		<Trash weight="fill" />
-	{/snippet}
-</Avatar>
-<Avatar shape="circle" iconsPlacement="horizontal">
-	<img src="/avatars/5.jpg" alt="" />
-	{#snippet icons()}
+	</Avatar.Icons>
+</Avatar.Root>
+<Avatar.Root shape="circle">
+	<Avatar.Image src="/avatars/5.jpg" alt="" />
+	<Avatar.Fallback>5</Avatar.Fallback>
+	<Avatar.Icons placement="horizontal">
 		<PencilSimple weight="fill" />
 		<Trash weight="fill" />
-	{/snippet}
-</Avatar>
+	</Avatar.Icons>
+</Avatar.Root>

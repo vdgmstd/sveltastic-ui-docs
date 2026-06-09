@@ -42,7 +42,7 @@
 	</div>
 	<details class="example">
 		<summary>{codeLabel}</summary>
-		<Divider />
+		<Divider.Root />
 		<pre class="example__code"><code>{src}</code></pre>
 	</details>
 </div>

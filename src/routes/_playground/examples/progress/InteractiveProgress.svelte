@@ -5,7 +5,9 @@
 </script>
 
 <div class="col">
-	<Progress {value} color="primary" />
+	<Progress.Root {value} color="primary">
+		<Progress.Track><Progress.Indicator /></Progress.Track>
+	</Progress.Root>
 	<div class="row">
 		<input type="range" min="0" max="100" bind:value aria-label="Value" />
 		<span class="muted">Value: {value}</span>

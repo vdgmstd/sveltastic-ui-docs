@@ -4,7 +4,8 @@
 	let withText = $state(true);
 </script>
 
-<Switch bind:checked={withText} color="success">
-	{#snippet iconOn()}On{/snippet}
-	{#snippet iconOff()}Off{/snippet}
-</Switch>
+<Switch.Root bind:checked={withText} color="success">
+	<Switch.Thumb />
+	<Switch.Icon state="on">On</Switch.Icon>
+	<Switch.Icon state="off">Off</Switch.Icon>
+</Switch.Root>

@@ -2,15 +2,13 @@
 	import { Segmented } from 'sveltastic-ui';
 
 	let interval = $state<'5' | '15' | '30'>('15');
-
-	const items = [
-		{ value: '5', label: '5 min' },
-		{ value: '15', label: '15 min' },
-		{ value: '30', label: '30 min' }
-	];
 </script>
 
-<Segmented bind:value={interval} {items} />
+<Segmented.Root bind:value={interval} ariaLabel="Refresh interval">
+	<Segmented.Item value="5">5 min</Segmented.Item>
+	<Segmented.Item value="15">15 min</Segmented.Item>
+	<Segmented.Item value="30">30 min</Segmented.Item>
+</Segmented.Root>
 <span class="muted">→ {interval} min</span>
 
 <style>

@@ -3,9 +3,15 @@
 	import { MagnifyingGlassIcon, EnvelopeIcon } from 'phosphor-svelte';
 </script>
 
-<Input placeholder="Search">
-	{#snippet icon()}<MagnifyingGlassIcon size={16} />{/snippet}
-</Input>
-<Input placeholder="Email" iconPosition="after">
-	{#snippet icon()}<EnvelopeIcon size={16} />{/snippet}
-</Input>
+<Input.Root>
+	<Input.Control>
+		<Input.Icon><MagnifyingGlassIcon size={16} /></Input.Icon>
+		<Input.Field placeholder="Search" />
+	</Input.Control>
+</Input.Root>
+<Input.Root iconPosition="after">
+	<Input.Control>
+		<Input.Icon><EnvelopeIcon size={16} /></Input.Icon>
+		<Input.Field placeholder="Email" />
+	</Input.Control>
+</Input.Root>

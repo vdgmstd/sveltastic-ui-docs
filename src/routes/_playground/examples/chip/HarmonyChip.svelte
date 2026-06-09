@@ -18,18 +18,22 @@
 </script>
 
 <div class="harmony">
-	<Input bind:value={tagInput} block placeholder="Add a tag">
-		{#snippet icon()}<TagIcon size={16} weight="regular" />{/snippet}
-	</Input>
-	<Button color="primary" onclick={addTag}>
+	<Input.Root bind:value={tagInput} block>
+		<Input.Control>
+			<Input.Icon><TagIcon size={16} weight="regular" /></Input.Icon>
+			<Input.Field placeholder="Add a tag" />
+		</Input.Control>
+	</Input.Root>
+	<Button.Root color="primary" onclick={addTag}>
 		<PlusIcon size={14} weight="bold" /> Add
-	</Button>
+	</Button.Root>
 </div>
 <div class="row">
 	{#each tags as tag (tag)}
-		<Chip variant="flat" color="primary" closable onclose={() => removeTag(tag)}>
+		<Chip.Root variant="flat" color="primary">
 			{tag}
-		</Chip>
+			<Chip.Close onclose={() => removeTag(tag)} />
+		</Chip.Root>
 	{/each}
 	{#if tags.length === 0}
 		<span class="muted">No tags yet.</span>

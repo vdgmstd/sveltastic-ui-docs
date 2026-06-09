@@ -4,9 +4,9 @@
 
 <div class="row">
 	<button class="link">Profile</button>
-	<Divider orientation="vertical" />
+	<Divider.Root orientation="vertical" />
 	<button class="link">Settings</button>
-	<Divider orientation="vertical" />
+	<Divider.Root orientation="vertical" />
 	<button class="link">Logout</button>
 </div>
 

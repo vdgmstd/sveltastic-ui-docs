@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { Component } from 'svelte';
 	import { i18n } from '$lib/i18n/index.svelte';
 	import DemoBlock from './DemoBlock.svelte';
 
@@ -7,16 +8,20 @@
 	import LabelCheckbox from './examples/checkbox/LabelCheckbox.svelte';
 	import IconCheckbox from './examples/checkbox/IconCheckbox.svelte';
 	import GroupCheckbox from './examples/checkbox/GroupCheckbox.svelte';
+	import EventsCheckbox from './examples/checkbox/EventsCheckbox.svelte';
 
 	import statesSrc from './examples/checkbox/StatesCheckbox.svelte?raw';
 	import colorsSrc from './examples/checkbox/ColorsCheckbox.svelte?raw';
 	import labelSrc from './examples/checkbox/LabelCheckbox.svelte?raw';
 	import iconSrc from './examples/checkbox/IconCheckbox.svelte?raw';
 	import groupSrc from './examples/checkbox/GroupCheckbox.svelte?raw';
+	import eventsSrc from './examples/checkbox/EventsCheckbox.svelte?raw';
 
 	const t = (key: string) => i18n.t(key);
 
-	const blocks = [
+	type Block = { labelKey: string; descriptionKey?: string; Component: Component; src: string };
+
+	const blocks: Block[] = [
 		{ labelKey: 'playground.checkbox.states.label', Component: StatesCheckbox, src: statesSrc },
 		{ labelKey: 'playground.checkbox.colors.label', Component: ColorsCheckbox, src: colorsSrc },
 		{ labelKey: 'playground.checkbox.label.label', Component: LabelCheckbox, src: labelSrc },
@@ -26,6 +31,12 @@
 			descriptionKey: 'playground.checkbox.group.description',
 			Component: GroupCheckbox,
 			src: groupSrc
+		},
+		{
+			labelKey: 'playground.checkbox.events.label',
+			descriptionKey: 'playground.checkbox.events.description',
+			Component: EventsCheckbox,
+			src: eventsSrc
 		}
 	];
 </script>

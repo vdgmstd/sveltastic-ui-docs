@@ -4,16 +4,24 @@
 	let disabled = $state(false);
 </script>
 
-<Collapse variant="default" {disabled} title="Disabled (toggle below)">
-	<p>Body content goes here.</p>
-</Collapse>
-<Collapse variant="flat" disabled color="danger" title="Always disabled flat">
-	<p>Body content goes here.</p>
-</Collapse>
+<Collapse.Root variant="default" {disabled}>
+	<Collapse.Trigger>
+		<Collapse.Title>Disabled (toggle below)</Collapse.Title>
+		<Collapse.Caret />
+	</Collapse.Trigger>
+	<Collapse.Content><p>Body content goes here.</p></Collapse.Content>
+</Collapse.Root>
+<Collapse.Root variant="flat" disabled color="danger">
+	<Collapse.Trigger>
+		<Collapse.Title>Always disabled flat</Collapse.Title>
+		<Collapse.Caret />
+	</Collapse.Trigger>
+	<Collapse.Content><p>Body content goes here.</p></Collapse.Content>
+</Collapse.Root>
 <div class="row">
-	<Button variant="flat" color="primary" size="small" onclick={() => (disabled = !disabled)}>
+	<Button.Root variant="flat" color="primary" size="small" onclick={() => (disabled = !disabled)}>
 		{disabled ? 'Enable' : 'Disable'}
-	</Button>
+	</Button.Root>
 </div>
 
 <style>

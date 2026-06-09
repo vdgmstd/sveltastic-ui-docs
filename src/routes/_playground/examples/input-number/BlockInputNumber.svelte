@@ -4,4 +4,8 @@
 	let value = $state(50);
 </script>
 
-<InputNumber bind:value block min={0} max={100} step={5} />
+<InputNumber.Root bind:value block min={0} max={100} step={5}>
+	<InputNumber.Decrement />
+	<InputNumber.Field />
+	<InputNumber.Increment />
+</InputNumber.Root>

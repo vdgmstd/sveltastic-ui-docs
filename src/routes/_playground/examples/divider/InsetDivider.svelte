@@ -7,12 +7,12 @@
 		<span class="avatar">A</span>
 		<span class="label">Alpha</span>
 	</div>
-	<Divider inset="3rem" />
+	<Divider.Root inset="3rem" />
 	<div class="item">
 		<span class="avatar">B</span>
 		<span class="label">Bravo</span>
 	</div>
-	<Divider inset="3rem" />
+	<Divider.Root inset="3rem" />
 	<div class="item">
 		<span class="avatar">C</span>
 		<span class="label">Charlie</span>

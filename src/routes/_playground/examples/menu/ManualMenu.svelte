@@ -1,23 +1,24 @@
 <script lang="ts">
-	import { Menu, Button, type MenuEntry } from 'sveltastic-ui';
+	import { Menu, Button } from 'sveltastic-ui';
 
 	let open = $state(false);
-
-	const items: MenuEntry[] = [
-		{ type: 'item', label: 'Option 1' },
-		{ type: 'item', label: 'Option 2' },
-		{ type: 'item', label: 'Option 3' }
-	];
 </script>
 
-<Button onclick={() => (open = !open)}>
+<Button.Root onclick={() => (open = !open)}>
 	{open ? 'Close menu' : 'Open menu'}
-</Button>
-<Menu bind:open triggerOn="manual" placement="bottom" {items}>
-	{#snippet trigger()}
-		<span class="anchor">Anchor</span>
-	{/snippet}
-</Menu>
+</Button.Root>
+<Menu.Root bind:open triggerOn="manual" placement="bottom">
+	<Menu.Trigger>
+		{#snippet child({ props })}
+			<span class="anchor" {...props}>Anchor</span>
+		{/snippet}
+	</Menu.Trigger>
+	<Menu.Content>
+		<Menu.Item>Option 1</Menu.Item>
+		<Menu.Item>Option 2</Menu.Item>
+		<Menu.Item>Option 3</Menu.Item>
+	</Menu.Content>
+</Menu.Root>
 
 <style>
 	.anchor {

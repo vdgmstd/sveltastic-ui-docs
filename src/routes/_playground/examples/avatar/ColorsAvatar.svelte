@@ -2,10 +2,10 @@
 	import { Avatar } from 'sveltastic-ui';
 </script>
 
-<Avatar color="primary" text="PR" />
-<Avatar color="success" text="SU" />
-<Avatar color="danger" text="DA" />
-<Avatar color="warning" text="WA" />
-<Avatar color="dark" text="DK" />
-<Avatar color="#7d33ff" text="HX" />
-<Avatar color="rgb(59,222,200)" text="RG" />
+<Avatar.Root color="primary"><Avatar.Fallback>PR</Avatar.Fallback></Avatar.Root>
+<Avatar.Root color="success"><Avatar.Fallback>SU</Avatar.Fallback></Avatar.Root>
+<Avatar.Root color="danger"><Avatar.Fallback>DA</Avatar.Fallback></Avatar.Root>
+<Avatar.Root color="warning"><Avatar.Fallback>WA</Avatar.Fallback></Avatar.Root>
+<Avatar.Root color="dark"><Avatar.Fallback>DK</Avatar.Fallback></Avatar.Root>
+<Avatar.Root color="#7d33ff"><Avatar.Fallback>HX</Avatar.Fallback></Avatar.Root>
+<Avatar.Root color="rgb(59,222,200)"><Avatar.Fallback>RG</Avatar.Fallback></Avatar.Root>

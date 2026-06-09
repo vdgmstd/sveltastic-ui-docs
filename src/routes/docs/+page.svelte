@@ -111,17 +111,19 @@
 					{@const Icon = componentIcons[link.slug] ?? CursorClickIcon}
 					<li>
 						<a href="/docs/{link.slug}" class="tile" use:ripple={{ color: 'primary', soft: true }}>
-							<Card variant="compact" imgSize={64}>
-								{#snippet img()}
-									<div class="tile__icon"><Icon size={32} weight="duotone" /></div>
-								{/snippet}
-								{#snippet title()}
-									<h4>{link.name}</h4>
-								{/snippet}
-								{#snippet body()}
+							<Card.Root variant="compact" imgSize={64}>
+								<Card.Media>
+									<Card.Image>
+										<div class="tile__icon"><Icon size={32} weight="duotone" /></div>
+									</Card.Image>
+								</Card.Media>
+								<Card.Body>
+									<Card.Header>
+										<h4>{link.name}</h4>
+									</Card.Header>
 									<p>{link.summary}</p>
-								{/snippet}
-							</Card>
+								</Card.Body>
+							</Card.Root>
 						</a>
 					</li>
 				{/each}
@@ -144,17 +146,19 @@
 					{@const Icon = helperIcons[link.slug] ?? DropIcon}
 					<li>
 						<a href="/docs/{link.slug}" class="tile" use:ripple={{ color: 'primary', soft: true }}>
-							<Card variant="compact" imgSize={64}>
-								{#snippet img()}
-									<div class="tile__icon"><Icon size={32} weight="duotone" /></div>
-								{/snippet}
-								{#snippet title()}
-									<h4>{link.name}</h4>
-								{/snippet}
-								{#snippet body()}
+							<Card.Root variant="compact" imgSize={64}>
+								<Card.Media>
+									<Card.Image>
+										<div class="tile__icon"><Icon size={32} weight="duotone" /></div>
+									</Card.Image>
+								</Card.Media>
+								<Card.Body>
+									<Card.Header>
+										<h4>{link.name}</h4>
+									</Card.Header>
 									<p>{link.summary}</p>
-								{/snippet}
-							</Card>
+								</Card.Body>
+							</Card.Root>
 						</a>
 					</li>
 				{/each}
@@ -244,7 +248,7 @@
 	.tile :global(.card-content) {
 		height: 100%;
 	}
-	.tile :global(.vs-ripple__layer) {
+	.tile :global(.ripple__layer) {
 		z-index: 5;
 	}
 	.tile :global(.card-content--compact .card) {

@@ -1,23 +1,26 @@
 <script lang="ts">
-	import { Radio } from 'sveltastic-ui';
+	import { RadioGroup } from 'sveltastic-ui';
 
-	let basic = $state<string | number>('apple');
+	let basic = $state('apple');
 </script>
 
-<div class="row">
-	<Radio bind:group={basic} value="apple">Apple</Radio>
-	<Radio bind:group={basic} value="banana">Banana</Radio>
-	<Radio bind:group={basic} value="cherry">Cherry</Radio>
-</div>
+<RadioGroup.Root bind:value={basic} orientation="horizontal" ariaLabel="Fruit">
+	<RadioGroup.Item value="apple">
+		<RadioGroup.Indicator />
+		<RadioGroup.Label>Apple</RadioGroup.Label>
+	</RadioGroup.Item>
+	<RadioGroup.Item value="banana">
+		<RadioGroup.Indicator />
+		<RadioGroup.Label>Banana</RadioGroup.Label>
+	</RadioGroup.Item>
+	<RadioGroup.Item value="cherry">
+		<RadioGroup.Indicator />
+		<RadioGroup.Label>Cherry</RadioGroup.Label>
+	</RadioGroup.Item>
+</RadioGroup.Root>
 <p class="selected">Selected: {basic}</p>
 
 <style>
-	.row {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		gap: 1rem;
-	}
 	.selected {
 		margin: 0.5rem 0 0;
 		font-size: 0.85rem;

@@ -3,24 +3,41 @@
 	import type { DialogSize } from 'sveltastic-ui';
 
 	const sizes: DialogSize[] = ['small', 'medium', 'large', 'fullscreen'];
-	let active = $state<DialogSize | null>(null);
+	let open = $state<Record<DialogSize, boolean>>({
+		small: false,
+		medium: false,
+		large: false,
+		fullscreen: false
+	});
 </script>
 
 <div class="row">
 	{#each sizes as size (size)}
-		<Button variant="flat" size="small" onclick={() => (active = size)}>{size}</Button>
+		<Dialog.Root bind:open={open[size]} {size}>
+			<Dialog.Trigger>
+				{#snippet child({ props })}
+					<Button.Root variant="flat" size="small" {...props}>{size}</Button.Root>
+				{/snippet}
+			</Dialog.Trigger>
+			<Dialog.Content>
+				<Dialog.Close />
+				<Dialog.Title>{size} dialog</Dialog.Title>
+				<Dialog.Body>
+					<p>Resizing presets: small (400px), medium (520px), large (720px), and fullscreen.</p>
+					<p>All sizes respect the viewport with a 92vw max-width and 90vh max-height.</p>
+				</Dialog.Body>
+				<Dialog.Footer>
+					<Button.Root variant="flat" onclick={() => (open[size] = false)}>Close</Button.Root>
+				</Dialog.Footer>
+			</Dialog.Content>
+		</Dialog.Root>
 	{/each}
 </div>
 
-<Dialog open={active !== null} size={active ?? 'medium'} onclose={() => (active = null)}>
-	{#snippet header()}{active} dialog{/snippet}
-	<p>Resizing presets: small (400px), medium (520px), large (720px), and fullscreen.</p>
-	<p>All sizes respect the viewport with a 92vw max-width and 90vh max-height.</p>
-	{#snippet footer()}
-		<Button variant="flat" onclick={() => (active = null)}>Close</Button>
-	{/snippet}
-</Dialog>
-
 <style>
-	.row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+	.row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
 </style>

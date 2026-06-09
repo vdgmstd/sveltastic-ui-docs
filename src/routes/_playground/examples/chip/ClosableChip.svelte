@@ -7,20 +7,24 @@
 </script>
 
 {#if frontend}
-	<Chip variant="flat" color="primary" closable onclose={() => (frontend = false)}>
+	<Chip.Root variant="flat" color="primary">
 		Frontend
-	</Chip>
+		<Chip.Close onclose={() => (frontend = false)} />
+	</Chip.Root>
 {/if}
 {#if backend}
-	<Chip variant="flat" color="success" closable onclose={() => (backend = false)}>
+	<Chip.Root variant="flat" color="success">
 		Backend
-	</Chip>
+		<Chip.Close onclose={() => (backend = false)} />
+	</Chip.Root>
 {/if}
 {#if design}
-	<Chip variant="flat" color="warning" closable onclose={() => (design = false)}>
+	<Chip.Root variant="flat" color="warning">
 		Design
-	</Chip>
+		<Chip.Close onclose={() => (design = false)} />
+	</Chip.Root>
 {/if}
-<Chip variant="border" color="primary" closable onclick={() => {}} onclose={() => {}}>
+<Chip.Root variant="border" color="primary" onclick={() => {}}>
 	Click + close
-</Chip>
+	<Chip.Close onclose={() => {}} />
+</Chip.Root>

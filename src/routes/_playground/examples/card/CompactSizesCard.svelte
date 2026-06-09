@@ -5,23 +5,35 @@
 </script>
 
 <div class="row">
-	<Card variant="compact" imgSize={64}>
-		{#snippet img()}<img {src} alt="Sara Lindqvist" />{/snippet}
-		{#snippet title()}<h4>Small — 64px</h4>{/snippet}
-		{#snippet body()}<p>Tighter plate for dense tile grids.</p>{/snippet}
-	</Card>
+	<Card.Root variant="compact" imgSize={64}>
+		<Card.Media>
+			<Card.Image><img {src} alt="Sara Lindqvist" /></Card.Image>
+		</Card.Media>
+		<Card.Body>
+			<Card.Header><h4>Small — 64px</h4></Card.Header>
+			<p>Tighter plate for dense tile grids.</p>
+		</Card.Body>
+	</Card.Root>
 
-	<Card variant="compact">
-		{#snippet img()}<img {src} alt="Sara Lindqvist" />{/snippet}
-		{#snippet title()}<h4>Default — 100px</h4>{/snippet}
-		{#snippet body()}<p>The avatar-sized default the variant ships with.</p>{/snippet}
-	</Card>
+	<Card.Root variant="compact">
+		<Card.Media>
+			<Card.Image><img {src} alt="Sara Lindqvist" /></Card.Image>
+		</Card.Media>
+		<Card.Body>
+			<Card.Header><h4>Default — 100px</h4></Card.Header>
+			<p>The avatar-sized default the variant ships with.</p>
+		</Card.Body>
+	</Card.Root>
 
-	<Card variant="compact" imgSize="140px">
-		{#snippet img()}<img {src} alt="Sara Lindqvist" />{/snippet}
-		{#snippet title()}<h4>Large — 140px</h4>{/snippet}
-		{#snippet body()}<p>Hero-style row card with a bigger portrait.</p>{/snippet}
-	</Card>
+	<Card.Root variant="compact" imgSize="140px">
+		<Card.Media>
+			<Card.Image><img {src} alt="Sara Lindqvist" /></Card.Image>
+		</Card.Media>
+		<Card.Body>
+			<Card.Header><h4>Large — 140px</h4></Card.Header>
+			<p>Hero-style row card with a bigger portrait.</p>
+		</Card.Body>
+	</Card.Root>
 </div>
 
 <style>

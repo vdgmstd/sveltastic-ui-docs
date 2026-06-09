@@ -4,12 +4,8 @@
 	let files = $state<File[]>([]);
 </script>
 
-<Upload
-	bind:files
-	multiple
-	maxFiles={5}
-	clearable
-	color="success"
-	label="Drop files"
-	hint="Up to 5 files"
-/>
+<Upload.Root bind:files multiple maxFiles={5} clearable color="success" hint="Up to 5 files">
+	<Upload.List />
+	<Upload.Dropzone label="Drop files" />
+	<Upload.Footer />
+</Upload.Root>

@@ -2,4 +2,8 @@
 	import { Input } from 'sveltastic-ui';
 </script>
 
-<Input placeholder="Loading…" loading />
+<Input.Root loading>
+	<Input.Control>
+		<Input.Field placeholder="Loading…" />
+	</Input.Control>
+</Input.Root>

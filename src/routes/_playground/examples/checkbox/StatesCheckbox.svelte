@@ -6,9 +6,27 @@
 	let lineThrough = $state(false);
 </script>
 
-<Checkbox bind:checked={basic}>Basic</Checkbox>
-<Checkbox bind:checked={indeterminate} indeterminate={indeterminate}>Indeterminate</Checkbox>
-<Checkbox lineThrough bind:checked={lineThrough}>Line through</Checkbox>
-<Checkbox disabled>Disabled</Checkbox>
-<Checkbox disabled checked>Disabled</Checkbox>
-<Checkbox loading checked>Loading</Checkbox>
+<Checkbox.Root bind:checked={basic}>
+	<Checkbox.Indicator />
+	<Checkbox.Label>Basic</Checkbox.Label>
+</Checkbox.Root>
+<Checkbox.Root bind:checked={indeterminate} indeterminate={indeterminate}>
+	<Checkbox.Indicator />
+	<Checkbox.Label>Indeterminate</Checkbox.Label>
+</Checkbox.Root>
+<Checkbox.Root lineThrough bind:checked={lineThrough}>
+	<Checkbox.Indicator />
+	<Checkbox.Label>Line through</Checkbox.Label>
+</Checkbox.Root>
+<Checkbox.Root disabled>
+	<Checkbox.Indicator />
+	<Checkbox.Label>Disabled</Checkbox.Label>
+</Checkbox.Root>
+<Checkbox.Root disabled checked>
+	<Checkbox.Indicator />
+	<Checkbox.Label>Disabled</Checkbox.Label>
+</Checkbox.Root>
+<Checkbox.Root loading checked>
+	<Checkbox.Indicator />
+	<Checkbox.Label>Loading</Checkbox.Label>
+</Checkbox.Root>

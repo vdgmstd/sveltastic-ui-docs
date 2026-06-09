@@ -22,4 +22,7 @@
 	];
 </script>
 
-<Select bind:value items={groups} filter placeholder="Search…" />
+<Select.Root type="single" bind:value items={groups} filter placeholder="Search…">
+	<Select.Trigger />
+	<Select.Content />
+</Select.Root>

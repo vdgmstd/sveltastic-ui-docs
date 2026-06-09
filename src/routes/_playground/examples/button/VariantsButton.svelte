@@ -2,11 +2,11 @@
 	import { Button } from 'sveltastic-ui';
 </script>
 
-<Button variant="default">Default</Button>
-<Button variant="flat">Flat</Button>
-<Button variant="border">Border</Button>
-<Button variant="gradient">Gradient</Button>
-<Button variant="relief">Relief</Button>
-<Button variant="transparent">Transparent</Button>
-<Button variant="shadow">Shadow</Button>
-<Button variant="floating">Floating</Button>
+<Button.Root variant="default">Default</Button.Root>
+<Button.Root variant="flat">Flat</Button.Root>
+<Button.Root variant="border">Border</Button.Root>
+<Button.Root variant="gradient">Gradient</Button.Root>
+<Button.Root variant="relief">Relief</Button.Root>
+<Button.Root variant="transparent">Transparent</Button.Root>
+<Button.Root variant="shadow">Shadow</Button.Root>
+<Button.Root variant="floating">Floating</Button.Root>

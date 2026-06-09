@@ -10,15 +10,18 @@
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"test:e2e": "playwright test --project=chromium --project=firefox",
+		"test:e2e:all": "playwright test",
 		"prepare": "svelte-kit sync || echo ''"
 	},
 	"dependencies": {
 		"phosphor-svelte": "^3.1.0",
-		"svelte": "^5.55.8",
 		"sveltastic-ui": "file:../ui",
+		"svelte": "^5.55.8",
 		"tailwindcss": "^4.3.0"
 	},
 	"devDependencies": {
+		"@playwright/test": "^1.60.0",
 		"@sveltejs/adapter-static": "^3.0.10",
 		"@sveltejs/kit": "^2.60.1",
 		"@sveltejs/vite-plugin-svelte": "^7.1.2",

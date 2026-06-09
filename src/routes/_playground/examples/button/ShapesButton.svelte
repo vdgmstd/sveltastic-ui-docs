@@ -2,6 +2,6 @@
 	import { Button } from 'sveltastic-ui';
 </script>
 
-<Button>Default</Button>
-<Button shape="circle">Circle</Button>
-<Button shape="square">Square</Button>
+<Button.Root>Default</Button.Root>
+<Button.Root shape="circle">Circle</Button.Root>
+<Button.Root shape="square">Square</Button.Root>

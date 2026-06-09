@@ -4,4 +4,4 @@
 	let value = $state(35);
 </script>
 
-<Slider bind:value alwaysShowTooltip color="primary" />
+<Slider.Root bind:value alwaysShowTooltip color="primary" />

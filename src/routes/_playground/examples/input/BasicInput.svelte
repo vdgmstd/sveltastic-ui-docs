@@ -4,6 +4,18 @@
 	let value = $state('');
 </script>
 
-<Input bind:value placeholder="Type something" />
-<Input value="" placeholder="Disabled" disabled />
-<Input value="Read only" readonly />
+<Input.Root bind:value>
+	<Input.Control>
+		<Input.Field placeholder="Type something" />
+	</Input.Control>
+</Input.Root>
+<Input.Root value="" disabled>
+	<Input.Control>
+		<Input.Field placeholder="Disabled" />
+	</Input.Control>
+</Input.Root>
+<Input.Root value="Read only" readonly>
+	<Input.Control>
+		<Input.Field />
+	</Input.Control>
+</Input.Root>

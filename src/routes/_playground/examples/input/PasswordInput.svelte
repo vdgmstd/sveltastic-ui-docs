@@ -4,4 +4,8 @@
 	let pwd = $state('');
 </script>
 
-<Input type="password" passwordReveal placeholder="Password" bind:value={pwd} />
+<Input.Root bind:value={pwd}>
+	<Input.Control>
+		<Input.Field type="password" passwordReveal placeholder="Password" />
+	</Input.Control>
+</Input.Root>

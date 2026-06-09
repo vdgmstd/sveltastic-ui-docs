@@ -3,17 +3,17 @@
 	import { Heart, PaperPlaneTilt } from 'phosphor-svelte';
 </script>
 
-<Button iconOnly aria-label="Like">
+<Button.Root iconOnly aria-label="Like">
 	<Heart size={18} weight="fill" />
-</Button>
-<Button iconOnly shape="circle" variant="flat" color="danger" aria-label="Like">
+</Button.Root>
+<Button.Root iconOnly shape="circle" variant="flat" color="danger" aria-label="Like">
 	<Heart size={18} weight="fill" />
-</Button>
-<Button>
+</Button.Root>
+<Button.Root>
 	<Heart size={16} weight="fill" />
 	Like
-</Button>
-<Button variant="gradient" color="success">
+</Button.Root>
+<Button.Root variant="gradient" color="success">
 	Send
 	<PaperPlaneTilt size={16} weight="fill" />
-</Button>
+</Button.Root>

@@ -2,7 +2,7 @@
 	import { Slider } from 'sveltastic-ui';
 </script>
 
-<Slider value={40} disabled />
+<Slider.Root value={40} disabled />
 <p class="muted">Disabled</p>
 
 <style>

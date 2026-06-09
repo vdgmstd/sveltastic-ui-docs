@@ -2,9 +2,10 @@
 	import { Calendar } from 'sveltastic-ui';
 </script>
 
-<Calendar value="2026-04-15" size="large" color="primary" />
-<Calendar value="2026-04-15" color="warning" />
-<Calendar
+<Calendar.Root type="single" value="2026-04-15" size="large" color="primary" />
+<Calendar.Root type="single" value="2026-04-15" color="warning" />
+<Calendar.Root
+	type="single"
 	value="2026-04-15"
 	size="small"
 	dayColor={(d) => {

@@ -1,25 +1,41 @@
 <script lang="ts">
-	import { List, ListItem, Avatar, Chip } from 'sveltastic-ui';
+	import { List, Avatar, Chip } from 'sveltastic-ui';
 	import { CaretRightIcon, GearIcon, BellIcon } from 'phosphor-svelte';
+
+	let active = $state('account');
 </script>
 
-<List>
-	<ListItem>
-		{#snippet lead()}<Avatar text="JD" color="primary" size={32} />{/snippet}
-		{#snippet trail()}<Chip variant="flat" color="primary">Owner</Chip>{/snippet}
-		{#snippet description()}Account holder{/snippet}
-		John Doe
-	</ListItem>
-	<ListItem>
-		{#snippet lead()}<GearIcon size={20} />{/snippet}
-		{#snippet trail()}<CaretRightIcon size={14} />{/snippet}
-		{#snippet description()}Workspace defaults, billing, exports{/snippet}
-		Settings
-	</ListItem>
-	<ListItem>
-		{#snippet lead()}<BellIcon size={20} />{/snippet}
-		{#snippet trail()}<Chip variant="flat" color="danger">3</Chip>{/snippet}
-		{#snippet description()}Mentions, comments, reactions{/snippet}
-		Notifications
-	</ListItem>
-</List>
+<List.Root>
+	<List.Body>
+		<List.Item active={active === 'account'} onclick={() => (active = 'account')}>
+			<List.ItemLead>
+				<Avatar.Root color="primary" size={32}><Avatar.Fallback>JD</Avatar.Fallback></Avatar.Root>
+			</List.ItemLead>
+			<List.ItemContent>
+				<List.ItemLabel>John Doe</List.ItemLabel>
+				<List.ItemDescription>Account holder</List.ItemDescription>
+			</List.ItemContent>
+			<List.ItemTrail>
+				<Chip.Root variant="flat" color="primary">Owner</Chip.Root>
+			</List.ItemTrail>
+		</List.Item>
+		<List.Item active={active === 'settings'} onclick={() => (active = 'settings')}>
+			<List.ItemLead><GearIcon size={20} /></List.ItemLead>
+			<List.ItemContent>
+				<List.ItemLabel>Settings</List.ItemLabel>
+				<List.ItemDescription>Workspace defaults, billing, exports</List.ItemDescription>
+			</List.ItemContent>
+			<List.ItemTrail><CaretRightIcon size={14} /></List.ItemTrail>
+		</List.Item>
+		<List.Item active={active === 'notifications'} onclick={() => (active = 'notifications')}>
+			<List.ItemLead><BellIcon size={20} /></List.ItemLead>
+			<List.ItemContent>
+				<List.ItemLabel>Notifications</List.ItemLabel>
+				<List.ItemDescription>Mentions, comments, reactions</List.ItemDescription>
+			</List.ItemContent>
+			<List.ItemTrail>
+				<Chip.Root variant="flat" color="danger">3</Chip.Root>
+			</List.ItemTrail>
+		</List.Item>
+	</List.Body>
+</List.Root>

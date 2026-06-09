@@ -20,23 +20,23 @@
 
 <div class="row">
 	{#each filters as key (key)}
-		<Chip variant="flat" color="primary" active={active.has(key)} onclick={() => toggle(key)}>
+		<Chip.Root variant="flat" color="primary" active={active.has(key)} onclick={() => toggle(key)}>
 			{labels[key]}
-		</Chip>
+		</Chip.Root>
 	{/each}
 </div>
 <div class="row">
 	{#each filters as key (key)}
-		<Chip variant="border" color="success" active={active.has(key)} onclick={() => toggle(key)}>
+		<Chip.Root variant="border" color="success" active={active.has(key)} onclick={() => toggle(key)}>
 			{labels[key]}
-		</Chip>
+		</Chip.Root>
 	{/each}
 </div>
 <div class="row">
 	{#each filters as key (key)}
-		<Chip variant="shadow" active={active.has(key)} onclick={() => toggle(key)}>
+		<Chip.Root variant="shadow" active={active.has(key)} onclick={() => toggle(key)}>
 			{labels[key]}
-		</Chip>
+		</Chip.Root>
 	{/each}
 </div>
 

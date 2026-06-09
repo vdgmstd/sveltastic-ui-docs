@@ -3,9 +3,15 @@
 </script>
 
 <div class="col">
-	<Progress value={45} stripes color="primary" />
-	<Progress value={70} stripes color="success" />
-	<Progress value={90} stripes color="danger" />
+	<Progress.Root value={45} color="primary">
+		<Progress.Track><Progress.Indicator stripes /></Progress.Track>
+	</Progress.Root>
+	<Progress.Root value={70} color="success">
+		<Progress.Track><Progress.Indicator stripes /></Progress.Track>
+	</Progress.Root>
+	<Progress.Root value={90} color="danger">
+		<Progress.Track><Progress.Indicator stripes /></Progress.Track>
+	</Progress.Root>
 </div>
 
 <style>

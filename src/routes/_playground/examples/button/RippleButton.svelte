@@ -2,5 +2,5 @@
 	import { Button } from 'sveltastic-ui';
 </script>
 
-<Button>Ripple on</Button>
-<Button ripple={false} variant="flat" color="success">Ripple off</Button>
+<Button.Root>Ripple on</Button.Root>
+<Button.Root ripple={false} variant="flat" color="success">Ripple off</Button.Root>

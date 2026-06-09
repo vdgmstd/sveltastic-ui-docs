@@ -3,12 +3,12 @@
 </script>
 
 <div class="row">
-	<Button loading>Loading</Button>
-	<Button disabled>Disabled</Button>
-	<Button active>Active</Button>
-	<Button pressedDisabled active>Active disabled</Button>
+	<Button.Root loading>Loading</Button.Root>
+	<Button.Root disabled>Disabled</Button.Root>
+	<Button.Root active>Active</Button.Root>
+	<Button.Root pressedDisabled active>Active disabled</Button.Root>
 </div>
-<Button block variant="border" color="primary">Block button</Button>
+<Button.Root block variant="border" color="primary">Block button</Button.Root>
 
 <style>
 	.row {

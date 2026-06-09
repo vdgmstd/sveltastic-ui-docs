@@ -2,8 +2,8 @@
 	import { Button } from 'sveltastic-ui';
 </script>
 
-<Button size="xl">XL</Button>
-<Button size="large">Large</Button>
-<Button size="medium">Medium</Button>
-<Button size="small">Small</Button>
-<Button size="mini">Mini</Button>
+<Button.Root size="xl">XL</Button.Root>
+<Button.Root size="large">Large</Button.Root>
+<Button.Root size="medium">Medium</Button.Root>
+<Button.Root size="small">Small</Button.Root>
+<Button.Root size="mini">Mini</Button.Root>

@@ -7,9 +7,9 @@
 </script>
 
 <div class="col">
-	<Pagination bind:value={dflt} length={8} shape="default" />
-	<Pagination bind:value={circle} length={8} shape="circle" />
-	<Pagination bind:value={square} length={8} shape="square" />
+	<Pagination.Root bind:page={dflt} length={8} shape="default" />
+	<Pagination.Root bind:page={circle} length={8} shape="circle" />
+	<Pagination.Root bind:page={square} length={8} shape="square" />
 </div>
 
 <style>

@@ -6,13 +6,14 @@
 </script>
 
 {#if open}
-	<Alert bind:open closable color="success">
-		{#snippet icon()}<CheckCircleIcon size={22} weight="fill" />{/snippet}
-		{#snippet title()}Changes saved{/snippet}
-		Your preferences were saved successfully.
-	</Alert>
+	<Alert.Root bind:open color="success">
+		<Alert.Icon><CheckCircleIcon size={22} weight="fill" /></Alert.Icon>
+		<Alert.Title>Changes saved</Alert.Title>
+		<Alert.Description>Your preferences were saved successfully.</Alert.Description>
+		<Alert.Close ariaLabel="Dismiss" />
+	</Alert.Root>
 {:else}
-	<Button variant="flat" color="success" onclick={() => (open = true)}>
+	<Button.Root variant="flat" color="success" onclick={() => (open = true)}>
 		Reopen alert
-	</Button>
+	</Button.Root>
 {/if}

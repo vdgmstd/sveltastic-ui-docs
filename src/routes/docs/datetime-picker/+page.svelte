@@ -7,8 +7,12 @@
 	import SecondsDateTimePicker from '../../_playground/examples/datetime-picker/SecondsDateTimePicker.svelte';
 	import Hour12DateTimePicker from '../../_playground/examples/datetime-picker/Hour12DateTimePicker.svelte';
 	import LabelDateTimePicker from '../../_playground/examples/datetime-picker/LabelDateTimePicker.svelte';
+	import LocaleDateTimePicker from '../../_playground/examples/datetime-picker/LocaleDateTimePicker.svelte';
+	import RestrictedDateTimePicker from '../../_playground/examples/datetime-picker/RestrictedDateTimePicker.svelte';
 	import IconPositionDateTimePicker from '../../_playground/examples/datetime-picker/IconPositionDateTimePicker.svelte';
 	import CustomIconDateTimePicker from '../../_playground/examples/datetime-picker/CustomIconDateTimePicker.svelte';
+	import PlacementDateTimePicker from '../../_playground/examples/datetime-picker/PlacementDateTimePicker.svelte';
+	import EventsDateTimePicker from '../../_playground/examples/datetime-picker/EventsDateTimePicker.svelte';
 	import ColorsDateTimePicker from '../../_playground/examples/datetime-picker/ColorsDateTimePicker.svelte';
 	import StatesDateTimePicker from '../../_playground/examples/datetime-picker/StatesDateTimePicker.svelte';
 
@@ -16,65 +20,124 @@
 	import secondsSrc from '../../_playground/examples/datetime-picker/SecondsDateTimePicker.svelte?raw';
 	import hour12Src from '../../_playground/examples/datetime-picker/Hour12DateTimePicker.svelte?raw';
 	import labelSrc from '../../_playground/examples/datetime-picker/LabelDateTimePicker.svelte?raw';
+	import localeSrc from '../../_playground/examples/datetime-picker/LocaleDateTimePicker.svelte?raw';
+	import restrictedSrc from '../../_playground/examples/datetime-picker/RestrictedDateTimePicker.svelte?raw';
 	import iconPositionSrc from '../../_playground/examples/datetime-picker/IconPositionDateTimePicker.svelte?raw';
 	import customIconSrc from '../../_playground/examples/datetime-picker/CustomIconDateTimePicker.svelte?raw';
+	import placementSrc from '../../_playground/examples/datetime-picker/PlacementDateTimePicker.svelte?raw';
+	import eventsSrc from '../../_playground/examples/datetime-picker/EventsDateTimePicker.svelte?raw';
 	import colorsSrc from '../../_playground/examples/datetime-picker/ColorsDateTimePicker.svelte?raw';
 	import statesSrc from '../../_playground/examples/datetime-picker/StatesDateTimePicker.svelte?raw';
 
+	import ApiTable from '../_ApiTable.svelte';
+	import type { ApiProp } from '../_ApiTable.svelte';
+
 	const t = (key: string) => i18n.t(key);
+
+	const rootApi: ApiProp[] = [
+		{ name: 'type', type: "'time' | 'date' | 'datetime'", required: false, default: "'time'", description: 'What kind of value the field captures. Loads the matching panel (wheels, calendar, or both).' },
+		{ name: 'value', type: 'string', required: false, default: "$bindable('')", description: "Bound value — 'HH:MM[:SS]' (time), 'YYYY-MM-DD' (date), 'YYYY-MM-DDTHH:MM[:SS]' (datetime)." },
+		{ name: 'open', type: 'boolean', required: false, default: '$bindable(false)', description: 'Dropdown open state. Two-way bindable.' },
+		{ name: 'closeOnClickOutside', type: 'boolean', required: false, default: 'true', description: 'Close the dropdown on an outside pointerdown.' },
+		{ name: 'closeOnEsc', type: 'boolean', required: false, default: 'true', description: 'Close the dropdown on Escape.' },
+		{ name: 'showSeconds', type: 'boolean', required: false, default: 'false', description: 'Add the seconds wheel + segment on time-bearing types.' },
+		{ name: 'hour12', type: 'boolean', required: false, default: 'false', description: 'Render AM/PM and a 12-hour display. The bound value stays 24-hour ISO.' },
+		{ name: 'locale', type: 'string', required: false, default: "'en-US'", description: "Calendar locale for month / weekday names (date-bearing types)." },
+		{ name: 'weekStart', type: 'WeekStart', required: false, default: null, description: "First day of the week (0 = Sunday … 6). Defaults to the locale's convention." },
+		{ name: 'min', type: 'DateLike', required: false, default: null, description: 'Lower bound for date-bearing types (inclusive).' },
+		{ name: 'max', type: 'DateLike', required: false, default: null, description: 'Upper bound for date-bearing types (inclusive).' },
+		{ name: 'disabled', type: 'boolean', required: false, default: 'false', description: 'Disable the field and panel.' },
+		{ name: 'readonly', type: 'boolean', required: false, default: 'false', description: 'Keep the value visible but inert — trigger and panel both blocked.' },
+		{ name: 'color', type: 'Color', required: false, default: "'primary'", description: 'Palette accent for the input, calendar chrome, time wheels and AM/PM segmented.' },
+		{ name: 'placeholder', type: 'string', required: false, default: null, description: 'Placeholder text for the trigger input.' },
+		{ name: 'label', type: 'string', required: false, default: null, description: 'Field label.' },
+		{ name: 'labelStyle', type: 'InputLabelStyle', required: false, default: null, description: "Label placement / behaviour, mirrors Input: 'default' | 'placeholder' | 'inline'." },
+		{ name: 'ariaLabel', type: 'string', required: false, default: null, description: 'Accessible name for the field + panel when no visible label is set.' },
+		{ name: 'block', type: 'boolean', required: false, default: 'false', description: 'Stretch the trigger to its container width.' },
+		{ name: 'placement', type: 'PopoverPlacement', required: false, default: "'bottom-start'", description: 'Dropdown placement relative to the trigger.' },
+		{ name: 'iconPosition', type: "'before' | 'after'", required: false, default: "'after'", description: 'Side of the field where the icon sits.' },
+		{ name: 'mask', type: 'MaskOptions', required: false, default: null, description: 'Override the input mask. Defaults are derived from type, showSeconds and hour12.' },
+		{ name: 'icon', type: 'Snippet', required: false, default: null, description: 'Custom icon glyph (render-prop). Falls back to a clock (time) or calendar (date / datetime).' },
+		{ name: 'onValueChange', type: '(value: string) => void', required: false, default: null, description: 'Fires on every committed value change (kit controlled-state idiom).' },
+		{ name: 'onOpenChange', type: '(open: boolean) => void', required: false, default: null, description: 'Fires whenever the dropdown open state changes.' },
+		{ name: 'class', type: 'string', required: false, default: null, description: 'Class merged onto the trigger wrapper.' },
+		{ name: 'style', type: 'string', required: false, default: null, description: 'Inline style merged onto the trigger wrapper.' }
+	];
 
 	const blocks = [
 		{
-			label: 'Types',
-			description: 'A single polymorphic component. Pick a `type` — the right panel chunk is loaded on demand.',
+			labelKey: 'playground.timePicker.types.label',
+			hintKey: 'playground.timePicker.types.hint',
 			Component: TypesDateTimePicker,
 			src: typesSrc
 		},
 		{
-			label: t('playground.timePicker.withSeconds.label'),
-			description: '`showSeconds` adds a third wheel for time-bearing types.',
+			labelKey: 'playground.timePicker.withSeconds.label',
+			hintKey: 'playground.timePicker.withSeconds.hint',
 			Component: SecondsDateTimePicker,
 			src: secondsSrc
 		},
 		{
-			label: '12-hour mode',
-			description: '`hour12` toggles AM/PM display in the input + segmented switcher in the panel. The bound value stays 24-hour ISO.',
+			labelKey: 'playground.timePicker.hour12.label',
+			hintKey: 'playground.timePicker.hour12.hint',
 			Component: Hour12DateTimePicker,
 			src: hour12Src
 		},
 		{
-			label: 'With label',
-			description: 'Floating / inline / static — same `label` / `labelStyle` props as the kit\'s Input.',
+			labelKey: 'playground.timePicker.label.label',
+			hintKey: 'playground.timePicker.label.hint',
 			Component: LabelDateTimePicker,
 			src: labelSrc
 		},
 		{
-			label: 'Icon position',
-			description: '`iconPosition="before"` puts the glyph on the leading edge of the field.',
+			labelKey: 'playground.timePicker.locale.label',
+			hintKey: 'playground.timePicker.locale.hint',
+			Component: LocaleDateTimePicker,
+			src: localeSrc
+		},
+		{
+			labelKey: 'playground.timePicker.restricted.label',
+			hintKey: 'playground.timePicker.restricted.hint',
+			Component: RestrictedDateTimePicker,
+			src: restrictedSrc
+		},
+		{
+			labelKey: 'playground.timePicker.iconPosition.label',
+			hintKey: 'playground.timePicker.iconPosition.hint',
 			Component: IconPositionDateTimePicker,
 			src: iconPositionSrc
 		},
 		{
-			label: 'Custom icon',
-			description: 'Pass an `icon` snippet to override the default clock / calendar glyph.',
+			labelKey: 'playground.timePicker.customIcon.label',
+			hintKey: 'playground.timePicker.customIcon.hint',
 			Component: CustomIconDateTimePicker,
 			src: customIconSrc
 		},
 		{
-			label: t('playground.timePicker.colors.label'),
-			description: 'Accent flows through input, calendar, time-wheels, and AM/PM segmented.',
+			labelKey: 'playground.timePicker.placement.label',
+			hintKey: 'playground.timePicker.placement.hint',
+			Component: PlacementDateTimePicker,
+			src: placementSrc
+		},
+		{
+			labelKey: 'playground.timePicker.events.label',
+			hintKey: 'playground.timePicker.events.hint',
+			Component: EventsDateTimePicker,
+			src: eventsSrc
+		},
+		{
+			labelKey: 'playground.timePicker.colors.label',
+			hintKey: 'playground.timePicker.colors.hint',
 			Component: ColorsDateTimePicker,
 			src: colorsSrc
 		},
 		{
-			label: t('playground.timePicker.states.label'),
-			description: '`disabled` makes both trigger and panel inert; `readonly` keeps the value visible but blocks edits.',
+			labelKey: 'playground.timePicker.states.label',
+			hintKey: 'playground.timePicker.states.hint',
 			Component: StatesDateTimePicker,
 			src: statesSrc
 		}
 	];
-	import ApiTable from '../_ApiTable.svelte';
-	import dateTimePickerApi from 'sveltastic-ui/components/DateTimePicker/DateTimePicker.api.json';
 </script>
 
 <DocHeader category="Form controls" />
@@ -84,10 +147,10 @@
 	<p>{t('playground.timePicker.description')}</p>
 </header>
 
-{#each blocks as block (block.label)}
+{#each blocks as block (block.labelKey)}
 	<DemoBlock
-		label={block.label}
-		description={block.description}
+		label={t(block.labelKey)}
+		description={t(block.hintKey)}
 		codeLabel={t('playground.code.label')}
 		Component={block.Component}
 		src={block.src}
@@ -95,9 +158,9 @@
 {/each}
 
 <ApiTable
-	title="DateTimePicker"
-	api={dateTimePickerApi}
-	hint="Plus every native HTML attribute (id, aria-*, data-*, class, style, …) forwarded to <datetimepicker>'s root element."
+	title="DateTimePicker.Root"
+	api={rootApi}
+	hint="The single part — compose as <DateTimePicker.Root> (the field and panels are internal). One polymorphic field: set type to 'time' | 'date' | 'datetime' and bind:value. Plus every native HTML attribute (id, aria-*, data-*, …) forwarded to the trigger input."
 />
 
 <style>

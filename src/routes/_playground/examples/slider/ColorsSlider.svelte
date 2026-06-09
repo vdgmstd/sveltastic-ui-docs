@@ -3,12 +3,12 @@
 </script>
 
 <div class="stack">
-	<Slider value={30} color="primary" />
-	<Slider value={50} color="success" />
-	<Slider value={70} color="danger" />
-	<Slider value={90} color="warning" />
-	<Slider value={40} color="dark" />
-	<Slider value={60} color="#7d22f0" />
+	<Slider.Root value={30} color="primary" />
+	<Slider.Root value={50} color="success" />
+	<Slider.Root value={70} color="danger" />
+	<Slider.Root value={90} color="warning" />
+	<Slider.Root value={40} color="dark" />
+	<Slider.Root value={60} color="#7d22f0" />
 </div>
 
 <style>

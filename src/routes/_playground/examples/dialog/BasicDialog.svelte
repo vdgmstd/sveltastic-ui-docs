@@ -4,13 +4,19 @@
 	let open = $state(false);
 </script>
 
-<Button onclick={() => (open = true)}>Open dialog</Button>
-
-<Dialog bind:open>
-	{#snippet header()}Confirm action{/snippet}
-	<p>Are you sure you want to proceed? This change can be reverted from Settings.</p>
-	{#snippet footer()}
-		<Button variant="flat" onclick={() => (open = false)}>Cancel</Button>
-		<Button onclick={() => (open = false)}>Confirm</Button>
-	{/snippet}
-</Dialog>
+<Dialog.Root bind:open>
+	<Dialog.Trigger>
+		{#snippet child({ props })}<Button.Root {...props}>Open dialog</Button.Root>{/snippet}
+	</Dialog.Trigger>
+	<Dialog.Content>
+		<Dialog.Close />
+		<Dialog.Title>Confirm action</Dialog.Title>
+		<Dialog.Body>
+			<p>Are you sure you want to proceed? This change can be reverted from Settings.</p>
+		</Dialog.Body>
+		<Dialog.Footer>
+			<Button.Root variant="flat" onclick={() => (open = false)}>Cancel</Button.Root>
+			<Button.Root onclick={() => (open = false)}>Confirm</Button.Root>
+		</Dialog.Footer>
+	</Dialog.Content>
+</Dialog.Root>

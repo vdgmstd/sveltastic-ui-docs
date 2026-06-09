@@ -14,11 +14,15 @@
 </script>
 
 {#if visible}
-	<Avatar color="primary" text="JD" shape="circle" />
-	<Avatar badge badgeColor="success" text="AM" shape="circle" />
-	<Avatar history historyGradient shape="circle">
-		<img src="/avatars/6.jpg" alt="" />
-	</Avatar>
+	<Avatar.Root color="primary" shape="circle"><Avatar.Fallback>JD</Avatar.Fallback></Avatar.Root>
+	<Avatar.Root shape="circle">
+		<Avatar.Fallback>AM</Avatar.Fallback>
+		<Avatar.Badge color="success" />
+	</Avatar.Root>
+	<Avatar.Root history historyGradient shape="circle">
+		<Avatar.Image src="/avatars/6.jpg" alt="" />
+		<Avatar.Fallback>6</Avatar.Fallback>
+	</Avatar.Root>
 {/if}
 <button type="button" class="remount" onclick={remount}>
 	Remount ({toggleCount})

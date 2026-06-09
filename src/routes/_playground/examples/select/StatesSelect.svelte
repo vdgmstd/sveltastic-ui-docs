@@ -8,9 +8,27 @@
 	];
 </script>
 
-<Select placeholder="Disabled" disabled items={[]} />
-<Select placeholder="Primary" fieldState="primary" {items} />
-<Select placeholder="Success" fieldState="success" {items} />
-<Select placeholder="Danger" fieldState="danger" {items} />
-<Select placeholder="Warning" fieldState="warning" {items} />
-<Select placeholder="Dark" fieldState="dark" {items} />
+<Select.Root type="single" placeholder="Disabled" disabled items={[]}>
+	<Select.Trigger />
+	<Select.Content />
+</Select.Root>
+<Select.Root type="single" placeholder="Primary" fieldState="primary" {items}>
+	<Select.Trigger />
+	<Select.Content />
+</Select.Root>
+<Select.Root type="single" placeholder="Success" fieldState="success" {items}>
+	<Select.Trigger />
+	<Select.Content />
+</Select.Root>
+<Select.Root type="single" placeholder="Danger" fieldState="danger" {items}>
+	<Select.Trigger />
+	<Select.Content />
+</Select.Root>
+<Select.Root type="single" placeholder="Warning" fieldState="warning" {items}>
+	<Select.Trigger />
+	<Select.Content />
+</Select.Root>
+<Select.Root type="single" placeholder="Dark" fieldState="dark" {items}>
+	<Select.Trigger />
+	<Select.Content />
+</Select.Root>

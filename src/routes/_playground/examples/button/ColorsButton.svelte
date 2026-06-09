@@ -2,10 +2,10 @@
 	import { Button } from 'sveltastic-ui';
 </script>
 
-<Button color="primary">Primary</Button>
-<Button color="success">Success</Button>
-<Button color="danger">Danger</Button>
-<Button color="warning">Warning</Button>
-<Button color="dark">Dark</Button>
-<Button color="#7d33ff">Hex</Button>
-<Button color="rgb(59,222,200)">RGB</Button>
+<Button.Root color="primary">Primary</Button.Root>
+<Button.Root color="success">Success</Button.Root>
+<Button.Root color="danger">Danger</Button.Root>
+<Button.Root color="warning">Warning</Button.Root>
+<Button.Root color="dark">Dark</Button.Root>
+<Button.Root color="#7d33ff">Hex</Button.Root>
+<Button.Root color="rgb(59,222,200)">RGB</Button.Root>

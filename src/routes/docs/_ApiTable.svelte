@@ -10,7 +10,7 @@
 	export type ApiTableProps = {
 		/** Component name shown as the table caption (e.g. `Button`). */
 		title: string;
-		/** Auto-generated props array, imported from the component's `*.api.json`. */
+		/** Props rows for this part, defined inline on the page. */
 		api: ApiProp[];
 		/** Free-form note rendered above the table (e.g. "Plus all `<button>` HTML attributes"). */
 		hint?: string;

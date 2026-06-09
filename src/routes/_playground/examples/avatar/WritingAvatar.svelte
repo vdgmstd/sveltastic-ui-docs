@@ -4,18 +4,19 @@
 	let writingOn = $state(true);
 </script>
 
-<Avatar writing={writingOn} badgeColor="primary" shape="circle">
-	<img src="/avatars/8.jpg" alt="" />
-</Avatar>
-<Avatar writing={writingOn} badgeColor="success" shape="circle" color="primary" text="JD" />
-<Avatar
-	writing={writingOn}
-	badgeColor="warning"
-	shape="circle"
-	color="danger"
-	text="AB"
-	badgePosition="top-right"
-/>
+<Avatar.Root shape="circle">
+	<Avatar.Image src="/avatars/8.jpg" alt="" />
+	<Avatar.Fallback>8</Avatar.Fallback>
+	{#if writingOn}<Avatar.Badge writing color="primary" />{/if}
+</Avatar.Root>
+<Avatar.Root shape="circle" color="primary">
+	<Avatar.Fallback>JD</Avatar.Fallback>
+	{#if writingOn}<Avatar.Badge writing color="success" />{/if}
+</Avatar.Root>
+<Avatar.Root shape="circle" color="danger">
+	<Avatar.Fallback>AB</Avatar.Fallback>
+	{#if writingOn}<Avatar.Badge writing color="warning" position="top-right" />{/if}
+</Avatar.Root>
 <label class="toggle">
 	<input type="checkbox" bind:checked={writingOn} />
 	Typing

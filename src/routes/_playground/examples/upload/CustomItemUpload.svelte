@@ -18,27 +18,39 @@
 	}
 </script>
 
-<Upload bind:files multiple color="dark" variant="border" label="Drop documents" sublabel="any layout you want">
-	{#snippet item({ file, remove })}
-		{@const Glyph = customGlyph(file)}
-		<div class="row">
-			<div class="row__icon">
-				<Glyph size={22} weight="duotone" />
-			</div>
-			<div class="row__main">
-				<span class="row__name">{file.name}</span>
-				<span class="row__meta">
-					<span>{file.type || 'file'}</span>
-					<span class="row__sep">·</span>
-					<span>{formatSize(file.size)}</span>
-				</span>
-			</div>
-			<Button color="danger" variant="flat" size="small" iconOnly onclick={remove}>
-				<TrashIcon size={14} weight="bold" />
-			</Button>
-		</div>
-	{/snippet}
-</Upload>
+<Upload.Root bind:files multiple color="dark" variant="border">
+	<Upload.List>
+		{#each files as file (file.name + file.size + file.lastModified)}
+			<Upload.Item {file}>
+				{@const Glyph = customGlyph(file)}
+				<div class="row">
+					<div class="row__icon">
+						<Glyph size={22} weight="duotone" />
+					</div>
+					<div class="row__main">
+						<span class="row__name">{file.name}</span>
+						<span class="row__meta">
+							<span>{file.type || 'file'}</span>
+							<span class="row__sep">·</span>
+							<span>{formatSize(file.size)}</span>
+						</span>
+					</div>
+					<Button.Root
+						color="danger"
+						variant="flat"
+						size="small"
+						iconOnly
+						onclick={() => (files = files.filter((f) => f !== file))}
+					>
+						<TrashIcon size={14} weight="bold" />
+					</Button.Root>
+				</div>
+			</Upload.Item>
+		{/each}
+	</Upload.List>
+	<Upload.Dropzone label="Drop documents" sublabel="any layout you want" />
+	<Upload.Footer />
+</Upload.Root>
 
 <style>
 	.row {

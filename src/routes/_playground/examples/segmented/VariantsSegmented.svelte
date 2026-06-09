@@ -1,18 +1,28 @@
 <script lang="ts">
 	import { Segmented } from 'sveltastic-ui';
-
-	const items = [
-		{ value: '5', label: '5 min' },
-		{ value: '15', label: '15 min' },
-		{ value: '30', label: '30 min' }
-	];
 </script>
 
 <div class="stack">
-	<Segmented variant="default" {items} />
-	<Segmented variant="tonal" {items} />
-	<Segmented variant="border" {items} />
-	<Segmented variant="relief" {items} />
+	<Segmented.Root variant="default" ariaLabel="Default variant">
+		<Segmented.Item value="5">5 min</Segmented.Item>
+		<Segmented.Item value="15">15 min</Segmented.Item>
+		<Segmented.Item value="30">30 min</Segmented.Item>
+	</Segmented.Root>
+	<Segmented.Root variant="flat" ariaLabel="Flat variant">
+		<Segmented.Item value="5">5 min</Segmented.Item>
+		<Segmented.Item value="15">15 min</Segmented.Item>
+		<Segmented.Item value="30">30 min</Segmented.Item>
+	</Segmented.Root>
+	<Segmented.Root variant="border" ariaLabel="Border variant">
+		<Segmented.Item value="5">5 min</Segmented.Item>
+		<Segmented.Item value="15">15 min</Segmented.Item>
+		<Segmented.Item value="30">30 min</Segmented.Item>
+	</Segmented.Root>
+	<Segmented.Root variant="relief" ariaLabel="Relief variant">
+		<Segmented.Item value="5">5 min</Segmented.Item>
+		<Segmented.Item value="15">15 min</Segmented.Item>
+		<Segmented.Item value="30">30 min</Segmented.Item>
+	</Segmented.Root>
 </div>
 
 <style>

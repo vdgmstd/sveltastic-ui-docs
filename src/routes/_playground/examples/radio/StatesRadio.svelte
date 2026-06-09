@@ -1,7 +1,22 @@
 <script lang="ts">
-	import { Radio } from 'sveltastic-ui';
+	import { RadioGroup } from 'sveltastic-ui';
 </script>
 
-<Radio disabled group="x" value="x">Disabled</Radio>
-<Radio loading group="x" value="x">Loading</Radio>
-<Radio loading value="y">Loading</Radio>
+<RadioGroup.Root value="x" orientation="horizontal" ariaLabel="Disabled and loading, checked">
+	<RadioGroup.Item value="x" disabled>
+		<RadioGroup.Indicator />
+		<RadioGroup.Label>Disabled</RadioGroup.Label>
+	</RadioGroup.Item>
+</RadioGroup.Root>
+<RadioGroup.Root value="x" orientation="horizontal" ariaLabel="Loading, checked">
+	<RadioGroup.Item value="x" loading>
+		<RadioGroup.Indicator />
+		<RadioGroup.Label>Loading</RadioGroup.Label>
+	</RadioGroup.Item>
+</RadioGroup.Root>
+<RadioGroup.Root orientation="horizontal" ariaLabel="Loading, unchecked">
+	<RadioGroup.Item value="y" loading>
+		<RadioGroup.Indicator />
+		<RadioGroup.Label>Loading</RadioGroup.Label>
+	</RadioGroup.Item>
+</RadioGroup.Root>

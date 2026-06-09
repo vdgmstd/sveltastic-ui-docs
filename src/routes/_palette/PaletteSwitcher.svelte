@@ -127,25 +127,29 @@
 	}
 </script>
 
-<Menu placement="bottom-end" offset={8} popupRole="dialog" closeOnSelect={false}>
-	{#snippet trigger(open)}
-		<Button
-			variant="border"
-			color="dark"
-			size="small"
-			iconOnly
-			active={open}
-			aria-label="Pick theme"
-		>
-			<PaletteIcon size={18} weight="bold" />
-		</Button>
-	{/snippet}
+<Menu.Root placement="bottom-end" offset={8} popupRole="dialog" closeOnSelect={false}>
+	<Menu.Trigger>
+		{#snippet child({ props, open })}
+			<Button.Root
+				variant="border"
+				color="dark"
+				size="small"
+				iconOnly
+				active={open}
+				aria-label="Pick theme"
+				{...props}
+			>
+				<PaletteIcon size={18} weight="bold" />
+			</Button.Root>
+		{/snippet}
+	</Menu.Trigger>
 
-	{#snippet children(close)}
-		<div class="palette">
+	<Menu.Content>
+		{#snippet children(close)}
+			<div class="palette">
 			<header class="palette__head">
 				<span class="palette__title">Theme</span>
-				<Button
+				<Button.Root
 					variant="flat"
 					color="primary"
 					size="mini"
@@ -156,16 +160,16 @@
 				>
 					<DownloadSimpleIcon size={12} weight="bold" />
 					tokens.css
-				</Button>
+				</Button.Root>
 			</header>
 
-			<Divider />
+			<Divider.Root />
 
 			<ul class="palette__list" role="listbox" aria-label="Themes">
 				{#each THEMES as t (t.key)}
 					{@const isActive = activeKey === t.key}
 					<li>
-						<Button
+						<Button.Root
 							variant={isActive ? 'flat' : 'transparent'}
 							color={isActive ? 'primary' : 'dark'}
 							size="medium"
@@ -190,13 +194,14 @@
 									<CheckIcon size={14} weight="bold" />
 								{/if}
 							</span>
-						</Button>
+						</Button.Root>
 					</li>
 				{/each}
 			</ul>
 		</div>
-	{/snippet}
-</Menu>
+		{/snippet}
+	</Menu.Content>
+</Menu.Root>
 
 <style>
 	.palette {
@@ -210,7 +215,7 @@
 		gap: 8px;
 		padding: 4px 8px 8px;
 	}
-	.palette > :global(.divider) {
+	.palette > :global(.separator) {
 		margin: 0 0 4px;
 	}
 	.palette__title {

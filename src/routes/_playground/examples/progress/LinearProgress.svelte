@@ -3,9 +3,15 @@
 </script>
 
 <div class="col">
-	<Progress value={20} />
-	<Progress value={50} />
-	<Progress value={80} />
+	<Progress.Root value={20}>
+		<Progress.Track><Progress.Indicator /></Progress.Track>
+	</Progress.Root>
+	<Progress.Root value={50}>
+		<Progress.Track><Progress.Indicator /></Progress.Track>
+	</Progress.Root>
+	<Progress.Root value={80}>
+		<Progress.Track><Progress.Indicator /></Progress.Track>
+	</Progress.Root>
 </div>
 
 <style>

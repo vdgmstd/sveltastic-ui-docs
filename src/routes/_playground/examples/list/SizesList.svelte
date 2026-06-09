@@ -1,28 +1,23 @@
 <script lang="ts">
-	import { List, ListItem } from 'sveltastic-ui';
+	import { List } from 'sveltastic-ui';
+
+	const sizes = ['xl', 'large', 'medium', 'small', 'mini'] as const;
+	let active = $state<Record<string, number>>({ xl: -1, large: -1, medium: -1, small: -1, mini: -1 });
 </script>
 
 <div class="stack">
-	<List size="xl">
-		<ListItem>xl</ListItem>
-		<ListItem>xl</ListItem>
-	</List>
-	<List size="large">
-		<ListItem>large</ListItem>
-		<ListItem>large</ListItem>
-	</List>
-	<List size="medium">
-		<ListItem>medium</ListItem>
-		<ListItem>medium</ListItem>
-	</List>
-	<List size="small">
-		<ListItem>small</ListItem>
-		<ListItem>small</ListItem>
-	</List>
-	<List size="mini">
-		<ListItem>mini</ListItem>
-		<ListItem>mini</ListItem>
-	</List>
+	{#each sizes as size (size)}
+		<List.Root {size}>
+			<List.Body>
+				<List.Item active={active[size] === 0} onclick={() => (active[size] = 0)}>
+					<List.ItemContent><List.ItemLabel>{size}</List.ItemLabel></List.ItemContent>
+				</List.Item>
+				<List.Item active={active[size] === 1} onclick={() => (active[size] = 1)}>
+					<List.ItemContent><List.ItemLabel>{size}</List.ItemLabel></List.ItemContent>
+				</List.Item>
+			</List.Body>
+		</List.Root>
+	{/each}
 </div>
 
 <style>

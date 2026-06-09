@@ -4,7 +4,8 @@
 	let value = $state('');
 </script>
 
-<Calendar
+<Calendar.Root
+	type="single"
 	bind:value
 	min="2026-04-05"
 	max="2026-04-25"

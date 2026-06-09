@@ -41,54 +41,63 @@
 
 	const lookup = new Map<string, RichItem>();
 	for (const g of richItems) for (const it of g.items) lookup.set(it.value, it);
+
+	// flat index across all sections, for Select.Item keyboard navigation
+	let flat = $derived(richItems.flatMap((g) => g.items));
 </script>
 
-<Select bind:value items={richItems} placeholder="Pick a topping">
-	{#snippet selected(item)}
-		{@const meta = lookup.get(item.value as string)}
-		{#if meta}
-			<span class="rich-trigger">
-				<span class="rich-trigger__icon" style:background={meta.tone}>
-					<meta.Icon size={14} weight="fill" color="#fff" />
-				</span>
-				<span class="rich-trigger__label">{meta.label}</span>
-			</span>
-		{:else}
-			{item.label}
-		{/if}
-	{/snippet}
-
-	{#snippet groupTitle(title)}
-		<div class="rich-group">{title}</div>
-	{/snippet}
-
-	{#snippet option(item, isSel)}
-		{@const meta = lookup.get(item.value as string)}
-		<div class="rich-row" class:rich-row--selected={isSel}>
-			{#if meta}
-				<span class="rich-row__icon" style:background={meta.tone}>
-					<meta.Icon size={14} weight="fill" color="#fff" />
-				</span>
-				<span class="rich-row__main">
-					<span class="rich-row__title">{meta.label}</span>
-					<span class="rich-row__hint">{meta.hint}</span>
-				</span>
-				<span class="rich-row__indicator">
-					{#if isSel}
-						<span class="rich-row__check">
-							<CheckIcon size={11} weight="bold" />
+<Select.Root type="single" bind:value items={richItems} placeholder="Pick a topping">
+	<Select.Trigger>
+		<Select.Value>
+			{#snippet children({ selected })}
+				{@const meta = lookup.get(selected.value as string)}
+				{#if meta}
+					<span class="rich-trigger">
+						<span class="rich-trigger__icon" style:background={meta.tone}>
+							<meta.Icon size={14} weight="fill" color="#fff" />
 						</span>
-					{:else}
-						<span class="rich-row__tag">
-							<StarIcon size={9} weight="fill" />
-							{meta.tag}
-						</span>
-					{/if}
-				</span>
-			{/if}
-		</div>
-	{/snippet}
-</Select>
+						<span class="rich-trigger__label">{meta.label}</span>
+					</span>
+				{:else}
+					{selected.label}
+				{/if}
+			{/snippet}
+		</Select.Value>
+	</Select.Trigger>
+	<Select.Content>
+		{#each richItems as group (group.title)}
+			<Select.Group>
+				<Select.GroupHeading>{group.title}</Select.GroupHeading>
+				{#each group.items as meta (meta.value)}
+					{@const isSel = value === meta.value}
+					<Select.Item value={meta.value} label={meta.label} index={flat.indexOf(meta)}>
+						<div class="rich-row" class:rich-row--selected={isSel}>
+							<span class="rich-row__icon" style:background={meta.tone}>
+								<meta.Icon size={14} weight="fill" color="#fff" />
+							</span>
+							<span class="rich-row__main">
+								<span class="rich-row__title">{meta.label}</span>
+								<span class="rich-row__hint">{meta.hint}</span>
+							</span>
+							<span class="rich-row__indicator">
+								{#if isSel}
+									<span class="rich-row__check">
+										<CheckIcon size={11} weight="bold" />
+									</span>
+								{:else}
+									<span class="rich-row__tag">
+										<StarIcon size={9} weight="fill" />
+										{meta.tag}
+									</span>
+								{/if}
+							</span>
+						</div>
+					</Select.Item>
+				{/each}
+			</Select.Group>
+		{/each}
+	</Select.Content>
+</Select.Root>
 
 <style>
 	.rich-trigger {
@@ -106,14 +115,6 @@
 		height: 22px;
 		border-radius: 6px;
 		flex-shrink: 0;
-	}
-	.rich-group {
-		padding: 8px 10px 4px;
-		font-size: 0.6rem;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		font-weight: 600;
-		opacity: 0.5;
 	}
 	.rich-row {
 		display: flex;

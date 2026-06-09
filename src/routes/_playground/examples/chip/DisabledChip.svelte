@@ -2,7 +2,7 @@
 	import { Chip } from 'sveltastic-ui';
 </script>
 
-<Chip disabled>Default</Chip>
-<Chip variant="flat" color="danger" disabled closable onclose={() => {}}>Flat</Chip>
-<Chip variant="border" color="dark" disabled onclick={() => {}}>Click me</Chip>
-<Chip variant="shadow" disabled>Shadow</Chip>
+<Chip.Root disabled>Default</Chip.Root>
+<Chip.Root variant="flat" color="danger" disabled>Flat<Chip.Close onclose={() => {}} /></Chip.Root>
+<Chip.Root variant="border" color="dark" disabled onclick={() => {}}>Click me</Chip.Root>
+<Chip.Root variant="shadow" disabled>Shadow</Chip.Root>

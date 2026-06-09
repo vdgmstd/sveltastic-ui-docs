@@ -3,7 +3,7 @@
 </script>
 
 <div class="surface">
-	<Calendar value="2026-04-15" variant="transparent" />
+	<Calendar.Root type="single" value="2026-04-15" variant="transparent" />
 </div>
 
 <style>

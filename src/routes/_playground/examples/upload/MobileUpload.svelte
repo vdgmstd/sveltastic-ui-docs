@@ -5,7 +5,11 @@
 </script>
 
 <div class="frame">
-	<Upload bind:files multiple clearable color="primary" label="Mobile" sublabel="add more" />
+	<Upload.Root bind:files multiple clearable color="primary">
+		<Upload.List />
+		<Upload.Dropzone label="Mobile" sublabel="add more" />
+		<Upload.Footer />
+	</Upload.Root>
 </div>
 
 <style>

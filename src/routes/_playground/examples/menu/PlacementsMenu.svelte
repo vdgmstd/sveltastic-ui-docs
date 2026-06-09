@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Menu, Button, type MenuEntry } from 'sveltastic-ui';
+	import { Menu, Button } from 'sveltastic-ui';
 
 	const placements = [
 		'bottom-start',
@@ -9,23 +9,28 @@
 		'top',
 		'top-end'
 	] as const;
-
-	const items: MenuEntry[] = [
-		{ type: 'item', label: 'Option 1' },
-		{ type: 'item', label: 'Option 2' },
-		{ type: 'item', label: 'Option 3' }
-	];
 </script>
 
 <div class="grid">
 	{#each placements as placement (placement)}
-		<Menu {placement} {items}>
-			{#snippet trigger()}
-				<Button variant="flat" size="small" color={placement.startsWith('top') ? 'success' : 'primary'}>
-					{placement}
-				</Button>
-			{/snippet}
-		</Menu>
+		<Menu.Root {placement}>
+			<Menu.Trigger>
+				{#snippet child({ props })}
+					<Button.Root
+						variant="flat"
+						size="small"
+						{...props}
+					>
+						{placement}
+					</Button.Root>
+				{/snippet}
+			</Menu.Trigger>
+			<Menu.Content>
+				<Menu.Item>Option 1</Menu.Item>
+				<Menu.Item>Option 2</Menu.Item>
+				<Menu.Item>Option 3</Menu.Item>
+			</Menu.Content>
+		</Menu.Root>
 	{/each}
 </div>
 

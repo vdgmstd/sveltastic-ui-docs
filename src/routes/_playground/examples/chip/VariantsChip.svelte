@@ -2,9 +2,9 @@
 	import { Chip } from 'sveltastic-ui';
 </script>
 
-<Chip variant="default">Default</Chip>
-<Chip variant="flat">Flat</Chip>
-<Chip variant="border">Border</Chip>
-<Chip variant="transparent">Transparent</Chip>
-<Chip variant="gradient">Gradient</Chip>
-<Chip variant="shadow">Shadow</Chip>
+<Chip.Root variant="default">Default</Chip.Root>
+<Chip.Root variant="flat">Flat</Chip.Root>
+<Chip.Root variant="border">Border</Chip.Root>
+<Chip.Root variant="transparent">Transparent</Chip.Root>
+<Chip.Root variant="gradient">Gradient</Chip.Root>
+<Chip.Root variant="shadow">Shadow</Chip.Root>

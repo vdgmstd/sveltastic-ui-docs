@@ -2,10 +2,31 @@
 	import { Checkbox } from 'sveltastic-ui';
 </script>
 
-<Checkbox color="primary" checked>Primary</Checkbox>
-<Checkbox color="success" checked>Success</Checkbox>
-<Checkbox color="danger" checked>Danger</Checkbox>
-<Checkbox color="warning" checked>Warning</Checkbox>
-<Checkbox color="dark" checked>Dark</Checkbox>
-<Checkbox color="#7d33ff" checked>Hex</Checkbox>
-<Checkbox color="rgb(59,222,200)" checked>RGB</Checkbox>
+<Checkbox.Root color="primary" checked>
+	<Checkbox.Indicator />
+	<Checkbox.Label>Primary</Checkbox.Label>
+</Checkbox.Root>
+<Checkbox.Root color="success" checked>
+	<Checkbox.Indicator />
+	<Checkbox.Label>Success</Checkbox.Label>
+</Checkbox.Root>
+<Checkbox.Root color="danger" checked>
+	<Checkbox.Indicator />
+	<Checkbox.Label>Danger</Checkbox.Label>
+</Checkbox.Root>
+<Checkbox.Root color="warning" checked>
+	<Checkbox.Indicator />
+	<Checkbox.Label>Warning</Checkbox.Label>
+</Checkbox.Root>
+<Checkbox.Root color="dark" checked>
+	<Checkbox.Indicator />
+	<Checkbox.Label>Dark</Checkbox.Label>
+</Checkbox.Root>
+<Checkbox.Root color="#7d33ff" checked>
+	<Checkbox.Indicator />
+	<Checkbox.Label>Hex</Checkbox.Label>
+</Checkbox.Root>
+<Checkbox.Root color="rgb(59,222,200)" checked>
+	<Checkbox.Indicator />
+	<Checkbox.Label>RGB</Checkbox.Label>
+</Checkbox.Root>

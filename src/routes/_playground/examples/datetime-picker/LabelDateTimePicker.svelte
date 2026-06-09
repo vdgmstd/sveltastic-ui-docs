@@ -6,6 +6,17 @@
 	let datetime = $state('');
 </script>
 
-<DateTimePicker type="time" bind:value={time} label="Reminder time" labelStyle="placeholder" />
-<DateTimePicker type="date" bind:value={date} label="Birthday" labelStyle="inline" />
-<DateTimePicker type="datetime" bind:value={datetime} label="Meeting" />
+<div class="row">
+	<DateTimePicker.Root type="time" bind:value={time} label="Reminder time" labelStyle="placeholder" />
+	<DateTimePicker.Root type="date" bind:value={date} label="Birthday" labelStyle="inline" />
+	<DateTimePicker.Root type="datetime" bind:value={datetime} label="Meeting" />
+</div>
+
+<style>
+	.row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		align-items: flex-start;
+	}
+</style>

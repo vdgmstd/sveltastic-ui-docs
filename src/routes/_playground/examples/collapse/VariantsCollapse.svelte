@@ -5,27 +5,55 @@
 </script>
 
 <div class="stack">
-	<Collapse variant="default" bind:open={basicA} title="Default">
-		<p>Body content goes here.</p>
-	</Collapse>
-	<Collapse variant="flat" title="Flat">
-		<p>Body content goes here.</p>
-	</Collapse>
-	<Collapse variant="border" title="Border">
-		<p>Body content goes here.</p>
-	</Collapse>
-	<Collapse variant="solid" title="Solid">
-		<p>Body content goes here.</p>
-	</Collapse>
-	<Collapse variant="gradient" title="Gradient">
-		<p>Body content goes here.</p>
-	</Collapse>
-	<Collapse variant="relief" title="Relief">
-		<p>Body content goes here.</p>
-	</Collapse>
-	<Collapse variant="ghost" title="Ghost">
-		<p>Body content goes here.</p>
-	</Collapse>
+	<Collapse.Root variant="default" bind:open={basicA}>
+		<Collapse.Trigger>
+			<Collapse.Title>Default</Collapse.Title>
+			<Collapse.Caret />
+		</Collapse.Trigger>
+		<Collapse.Content><p>Body content goes here.</p></Collapse.Content>
+	</Collapse.Root>
+	<Collapse.Root variant="flat">
+		<Collapse.Trigger>
+			<Collapse.Title>Flat</Collapse.Title>
+			<Collapse.Caret />
+		</Collapse.Trigger>
+		<Collapse.Content><p>Body content goes here.</p></Collapse.Content>
+	</Collapse.Root>
+	<Collapse.Root variant="border">
+		<Collapse.Trigger>
+			<Collapse.Title>Border</Collapse.Title>
+			<Collapse.Caret />
+		</Collapse.Trigger>
+		<Collapse.Content><p>Body content goes here.</p></Collapse.Content>
+	</Collapse.Root>
+	<Collapse.Root variant="solid">
+		<Collapse.Trigger>
+			<Collapse.Title>Solid</Collapse.Title>
+			<Collapse.Caret />
+		</Collapse.Trigger>
+		<Collapse.Content><p>Body content goes here.</p></Collapse.Content>
+	</Collapse.Root>
+	<Collapse.Root variant="gradient">
+		<Collapse.Trigger>
+			<Collapse.Title>Gradient</Collapse.Title>
+			<Collapse.Caret />
+		</Collapse.Trigger>
+		<Collapse.Content><p>Body content goes here.</p></Collapse.Content>
+	</Collapse.Root>
+	<Collapse.Root variant="relief">
+		<Collapse.Trigger>
+			<Collapse.Title>Relief</Collapse.Title>
+			<Collapse.Caret />
+		</Collapse.Trigger>
+		<Collapse.Content><p>Body content goes here.</p></Collapse.Content>
+	</Collapse.Root>
+	<Collapse.Root variant="ghost">
+		<Collapse.Trigger>
+			<Collapse.Title>Ghost</Collapse.Title>
+			<Collapse.Caret />
+		</Collapse.Trigger>
+		<Collapse.Content><p>Body content goes here.</p></Collapse.Content>
+	</Collapse.Root>
 </div>
 
 <style>

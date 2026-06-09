@@ -1,11 +1,29 @@
 <script lang="ts">
-	import { Collapse, CollapseGroup } from 'sveltastic-ui';
+	import { Collapse } from 'sveltastic-ui';
 
 	let value = $state<string | null>('a');
 </script>
 
-<CollapseGroup mode="single" layout="fused" variant="border" color="dark" bind:value>
-	<Collapse key="a" title="Section 1"><p>Body 1</p></Collapse>
-	<Collapse key="b" title="Section 2"><p>Body 2</p></Collapse>
-	<Collapse key="c" title="Section 3"><p>Body 3</p></Collapse>
-</CollapseGroup>
+<Collapse.Group type="single" layout="fused" variant="border" color="dark" bind:value>
+	<Collapse.Root key="a">
+		<Collapse.Trigger>
+			<Collapse.Title>Section 1</Collapse.Title>
+			<Collapse.Caret />
+		</Collapse.Trigger>
+		<Collapse.Content><p>Body 1</p></Collapse.Content>
+	</Collapse.Root>
+	<Collapse.Root key="b">
+		<Collapse.Trigger>
+			<Collapse.Title>Section 2</Collapse.Title>
+			<Collapse.Caret />
+		</Collapse.Trigger>
+		<Collapse.Content><p>Body 2</p></Collapse.Content>
+	</Collapse.Root>
+	<Collapse.Root key="c">
+		<Collapse.Trigger>
+			<Collapse.Title>Section 3</Collapse.Title>
+			<Collapse.Caret />
+		</Collapse.Trigger>
+		<Collapse.Content><p>Body 3</p></Collapse.Content>
+	</Collapse.Root>
+</Collapse.Group>

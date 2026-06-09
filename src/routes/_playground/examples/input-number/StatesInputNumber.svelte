@@ -4,9 +4,17 @@
 	let readonlyVal = $state(7);
 </script>
 
-<InputNumber value={2} disabled />
+<InputNumber.Root value={2} disabled>
+	<InputNumber.Decrement />
+	<InputNumber.Field />
+	<InputNumber.Increment />
+</InputNumber.Root>
 <span class="muted">disabled</span>
-<InputNumber bind:value={readonlyVal} readonly />
+<InputNumber.Root bind:value={readonlyVal} readonly>
+	<InputNumber.Decrement />
+	<InputNumber.Field />
+	<InputNumber.Increment />
+</InputNumber.Root>
 <span class="muted">readonly</span>
 
 <style>

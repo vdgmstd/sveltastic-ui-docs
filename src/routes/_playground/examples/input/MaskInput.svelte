@@ -8,21 +8,40 @@
 	let plate = $state('');
 </script>
 
-<Input label="Phone" labelStyle="placeholder" bind:value={phone} mask="+1 (###) ###-####" />
-<Input label="Card" labelStyle="inline" bind:value={card} mask="#### #### #### ####" />
-<Input label="Date" labelStyle="placeholder" bind:value={date} mask="##.##.####" />
-<Input
-	label="IP"
-	labelStyle="inline"
-	bind:value={ip}
-	mask={{ mask: '###.###.###.###', eager: true }}
-/>
-<Input
-	label="License plate"
+<Input.Root labelStyle="placeholder" bind:value={phone} mask="+# (###) ###-####">
+	<Input.Control>
+		<Input.Field />
+		<Input.Label>Phone</Input.Label>
+	</Input.Control>
+</Input.Root>
+<Input.Root labelStyle="inline" bind:value={card} mask="#### #### #### ####">
+	<Input.Control>
+		<Input.Field />
+		<Input.Label>Card</Input.Label>
+	</Input.Control>
+</Input.Root>
+<Input.Root labelStyle="placeholder" bind:value={date} mask="##.##.####">
+	<Input.Control>
+		<Input.Field />
+		<Input.Label>Date</Input.Label>
+	</Input.Control>
+</Input.Root>
+<Input.Root labelStyle="inline" bind:value={ip} mask={{ mask: '###.###.###.###', eager: true }}>
+	<Input.Control>
+		<Input.Field />
+		<Input.Label>IP</Input.Label>
+	</Input.Control>
+</Input.Root>
+<Input.Root
 	labelStyle="placeholder"
 	bind:value={plate}
 	mask={{
 		mask: 'A ### AA',
 		tokens: { A: { pattern: /[A-Za-zА-Яа-я]/, transform: (c) => c.toUpperCase() } }
 	}}
-/>
+>
+	<Input.Control>
+		<Input.Field />
+		<Input.Label>License plate</Input.Label>
+	</Input.Control>
+</Input.Root>

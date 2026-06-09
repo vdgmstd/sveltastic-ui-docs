@@ -4,4 +4,4 @@
 	let value = $state(3);
 </script>
 
-<Pagination bind:value length={10} mode="dots" />
+<Pagination.Root bind:page={value} length={10} mode="dots" />

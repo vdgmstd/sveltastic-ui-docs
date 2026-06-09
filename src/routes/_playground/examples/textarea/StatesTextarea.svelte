@@ -2,8 +2,28 @@
 	import { Textarea } from 'sveltastic-ui';
 </script>
 
-<Textarea fieldState="primary" placeholder="primary" rows={3} />
-<Textarea fieldState="success" placeholder="success" rows={3} />
-<Textarea fieldState="danger" placeholder="danger" rows={3} />
-<Textarea fieldState="warning" placeholder="warning" rows={3} />
-<Textarea fieldState="dark" placeholder="dark" rows={3} />
+<Textarea.Root fieldState="primary">
+	<Textarea.Control>
+		<Textarea.Field placeholder="primary" rows={3} />
+	</Textarea.Control>
+</Textarea.Root>
+<Textarea.Root fieldState="success">
+	<Textarea.Control>
+		<Textarea.Field placeholder="success" rows={3} />
+	</Textarea.Control>
+</Textarea.Root>
+<Textarea.Root fieldState="danger">
+	<Textarea.Control>
+		<Textarea.Field placeholder="danger" rows={3} />
+	</Textarea.Control>
+</Textarea.Root>
+<Textarea.Root fieldState="warning">
+	<Textarea.Control>
+		<Textarea.Field placeholder="warning" rows={3} />
+	</Textarea.Control>
+</Textarea.Root>
+<Textarea.Root fieldState="dark">
+	<Textarea.Control>
+		<Textarea.Field placeholder="dark" rows={3} />
+	</Textarea.Control>
+</Textarea.Root>

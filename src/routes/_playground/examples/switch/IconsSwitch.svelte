@@ -6,10 +6,11 @@
 	let bell = $state(false);
 </script>
 
-<Switch bind:checked={withIcons} color="success">
-	{#snippet iconOn()}<CheckIcon size={12} weight="bold" />{/snippet}
-	{#snippet iconOff()}<XIcon size={12} weight="bold" />{/snippet}
-</Switch>
-<Switch bind:checked={bell} size="large">
-	{#snippet knob()}<BellIcon size={14} weight="fill" />{/snippet}
-</Switch>
+<Switch.Root bind:checked={withIcons} color="success" ariaLabel="Inline icons">
+	<Switch.Thumb />
+	<Switch.Icon state="on"><CheckIcon size={12} weight="bold" /></Switch.Icon>
+	<Switch.Icon state="off"><XIcon size={12} weight="bold" /></Switch.Icon>
+</Switch.Root>
+<Switch.Root bind:checked={bell} size="large" ariaLabel="Knob icon">
+	<Switch.Thumb><BellIcon size={14} weight="fill" /></Switch.Thumb>
+</Switch.Root>

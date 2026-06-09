@@ -53,20 +53,18 @@
 	import {
 		Alert,
 		Avatar,
-		AvatarGroup,
 		Button,
 		Calendar,
 		Card,
 		Checkbox,
 		Chip,
 		Collapse,
-		CollapseGroup,
 		Divider,
 		Input,
 		InputNumber,
 		Pagination,
 		Progress,
-		Radio,
+		RadioGroup,
 		Segmented,
 		Select,
 		Slider,
@@ -150,91 +148,25 @@
 	let sketchEl = $state<HTMLElement>();
 	let heroEl = $state<HTMLElement>();
 
+	// Measure `--col-delta` for the CSS scroll-driven parallax (see .intro__hero).
 	$effect(() => {
 		if (!sketchEl || !heroEl) return;
-		const desktop = window.matchMedia("(min-width: 1360px)");
-		const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-		const ac = new AbortController();
 		const sk = sketchEl;
 		const hr = heroEl;
 
-		let active = false;
-		let colDelta = 0;
-		let maxScroll = 0;
-		let ticking = false;
-
-		const scrollY = (): number => {
-			const se = document.scrollingElement as HTMLElement | null;
-			return se?.scrollTop ?? window.pageYOffset ?? 0;
-		};
-
-		const write = (): void => {
-			if (!active || colDelta <= 0 || maxScroll <= 0) {
-				hr.style.transform = "";
-				return;
-			}
-			const p = Math.min(1, Math.max(0, scrollY() / maxScroll));
-			hr.style.transform = `translate3d(0, ${(p * colDelta).toFixed(1)}px, 0)`;
-		};
-
-		const onScroll = (): void => {
-			if (ticking) return;
-			ticking = true;
-			requestAnimationFrame(() => {
-				write();
-				ticking = false;
-			});
-		};
-
 		const measure = (): void => {
-			active = desktop.matches && !reduced.matches;
-			if (!active) {
-				colDelta = 0;
-				maxScroll = 0;
-				hr.style.transform = "";
-				return;
-			}
-			const sketchH = sk.offsetHeight;
-			const heroH = hr.offsetHeight;
-			const docH = document.documentElement.scrollHeight;
-			colDelta = Math.max(0, sketchH - heroH);
-			maxScroll = Math.max(0, docH - window.innerHeight);
-			write();
+			const delta = Math.max(0, sk.offsetHeight - hr.offsetHeight);
+			hr.style.setProperty('--col-delta', `${delta}px`);
 		};
 
 		measure();
-		if (document.readyState === "complete") {
-			requestAnimationFrame(measure);
-		} else {
-			window.addEventListener("load", measure, {
-				once: true,
-				signal: ac.signal,
-			});
-		}
-
-		// Re-measure on any layout change: sketch/hero column height
-		// (fonts/images settling, content edits) or document height
-		// (anything below the fold appearing/disappearing).
 		const ro = new ResizeObserver(measure);
 		ro.observe(sk);
 		ro.observe(hr);
-		ro.observe(document.documentElement);
-
-		window.addEventListener("scroll", onScroll, {
-			passive: true,
-			signal: ac.signal,
-		});
-		window.addEventListener("resize", measure, {
-			passive: true,
-			signal: ac.signal,
-		});
-		desktop.addEventListener("change", measure, { signal: ac.signal });
-		reduced.addEventListener("change", measure, { signal: ac.signal });
 
 		return () => {
-			ac.abort();
 			ro.disconnect();
-			hr.style.transform = "";
+			hr.style.removeProperty('--col-delta');
 		};
 	});
 </script>
@@ -285,13 +217,10 @@
 		<div class="intro__hero" bind:this={heroEl}>
 			<header class="hero">
 				<img class="hero__logo" src="/favicon.svg" alt="" aria-hidden="true" />
-				<Chip size="small" variant="border" color="primary">
-					{#snippet icon()}<SparkleIcon
-							size={12}
-							weight="fill"
-						/>{/snippet}
+				<Chip.Root size="small" variant="border" color="primary">
+					<Chip.Icon><SparkleIcon size={12} weight="fill" /></Chip.Icon>
 					v{pkgVersion} · {componentCount} components [BETA]
-				</Chip>
+				</Chip.Root>
 
 				<h1 class="intro__title">
 					A <em>sharper</em> kit for
@@ -306,7 +235,7 @@
 				</p>
 
 				<div class="intro__actions">
-					<Button
+					<Button.Root
 						color="primary"
 						size="large"
 						variant="gradient"
@@ -321,22 +250,22 @@
 								/></span
 							>
 						{/snippet}
-					</Button>
-					<Button
+					</Button.Root>
+					<Button.Root
 						size="large"
 						variant="border"
 						href="https://github.com/vdgmstd/sveltastic-ui"
 					>
 						<GithubLogoIcon size={16} weight="fill" />
 						GitHub
-					</Button>
+					</Button.Root>
 				</div>
 
-				<Divider />
+				<Divider.Root />
 
 				<div class="intro__meta">
-					<Card>
-						{#snippet body()}
+					<Card.Root>
+						<Card.Body>
 							<div class="cell">
 								<span class="cell__mark"
 									><PackageIcon
@@ -349,10 +278,10 @@
 									<span class="muted">tree-shaken</span>
 								</div>
 							</div>
-						{/snippet}
-					</Card>
-					<Card>
-						{#snippet body()}
+						</Card.Body>
+					</Card.Root>
+					<Card.Root>
+						<Card.Body>
 							<div class="cell">
 								<span class="cell__mark"
 									><LightningIcon
@@ -365,10 +294,10 @@
 									<span class="muted">SSR-safe</span>
 								</div>
 							</div>
-						{/snippet}
-					</Card>
-					<Card>
-						{#snippet body()}
+						</Card.Body>
+					</Card.Root>
+					<Card.Root>
+						<Card.Body>
 							<div class="cell">
 								<span class="cell__mark"
 									><PaletteIcon
@@ -381,8 +310,8 @@
 									<span class="muted">1 CSS line</span>
 								</div>
 							</div>
-						{/snippet}
-					</Card>
+						</Card.Body>
+					</Card.Root>
 				</div>
 			</header>
 			<section class="info">
@@ -418,10 +347,10 @@
 				<div class="comp-chips">
 					{#each componentNames as name (name)}
 						{@const Icon = componentIcons[name] ?? PackageIcon}
-						<Chip size="small" variant="flat" color="primary">
-							{#snippet icon()}<Icon size={11} weight="fill" />{/snippet}
+						<Chip.Root size="small" variant="flat" color="primary">
+							<Chip.Icon><Icon size={11} weight="fill" /></Chip.Icon>
 							{name}
-						</Chip>
+						</Chip.Root>
 					{/each}
 				</div>
 			</section>
@@ -433,26 +362,26 @@
 					CSS line, no overrides.
 				</p>
 				<div class="palette-row">
-					<Chip size="medium" variant="border" color="rgb(6 148 178)">
-						{#snippet icon()}<span class="swatch-dot" style="--c: 6 148 178"></span>{/snippet}
+					<Chip.Root size="medium" variant="border" color="rgb(6 148 178)">
+						<Chip.Icon><span class="swatch-dot" style="--c: 6 148 178"></span></Chip.Icon>
 						Petrol
-					</Chip>
-					<Chip size="medium" variant="border" color="rgb(99 102 241)">
-						{#snippet icon()}<span class="swatch-dot" style="--c: 99 102 241"></span>{/snippet}
+					</Chip.Root>
+					<Chip.Root size="medium" variant="border" color="rgb(99 102 241)">
+						<Chip.Icon><span class="swatch-dot" style="--c: 99 102 241"></span></Chip.Icon>
 						Indigo
-					</Chip>
-					<Chip size="medium" variant="border" color="rgb(5 150 105)">
-						{#snippet icon()}<span class="swatch-dot" style="--c: 5 150 105"></span>{/snippet}
+					</Chip.Root>
+					<Chip.Root size="medium" variant="border" color="rgb(5 150 105)">
+						<Chip.Icon><span class="swatch-dot" style="--c: 5 150 105"></span></Chip.Icon>
 						Pine
-					</Chip>
-					<Chip size="medium" variant="border" color="rgb(225 29 72)">
-						{#snippet icon()}<span class="swatch-dot" style="--c: 225 29 72"></span>{/snippet}
+					</Chip.Root>
+					<Chip.Root size="medium" variant="border" color="rgb(225 29 72)">
+						<Chip.Icon><span class="swatch-dot" style="--c: 225 29 72"></span></Chip.Icon>
 						Wine
-					</Chip>
-					<Chip size="medium" variant="border" color="rgb(234 88 12)">
-						{#snippet icon()}<span class="swatch-dot" style="--c: 234 88 12"></span>{/snippet}
+					</Chip.Root>
+					<Chip.Root size="medium" variant="border" color="rgb(234 88 12)">
+						<Chip.Icon><span class="swatch-dot" style="--c: 234 88 12"></span></Chip.Icon>
 						Bronze
-					</Chip>
+					</Chip.Root>
 				</div>
 			</section>
 
@@ -477,7 +406,7 @@
 					</div>
 				</div>
 			</section>
-			<Button
+			<Button.Root
 				size="medium"
 				color="primary"
 				variant="gradient"
@@ -492,7 +421,7 @@
 						/></span
 					>
 				{/snippet}
-			</Button>
+			</Button.Root>
 		</div>
 	</div>
 </section>
@@ -501,8 +430,8 @@
 
 {#snippet authCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="auth">
 					<div class="auth__brand">
 						<span class="auth__mark"
@@ -513,52 +442,51 @@
 							<span class="muted">Sign in to continue</span>
 						</div>
 					</div>
-					<Input
-						bind:value={signInEmail}
-						label="Email"
-						labelStyle="placeholder"
-						block
-					/>
-					<Input
-						bind:value={signInPassword}
-						type="password"
-						label="Password"
-						labelStyle="placeholder"
-						passwordReveal
-						block
-					/>
+					<Input.Root bind:value={signInEmail} labelStyle="placeholder" block>
+						<Input.Control>
+							<Input.Field />
+							<Input.Label>Email</Input.Label>
+						</Input.Control>
+					</Input.Root>
+					<Input.Root bind:value={signInPassword} labelStyle="placeholder" block>
+						<Input.Control>
+							<Input.Field type="password" passwordReveal />
+							<Input.Label>Password</Input.Label>
+						</Input.Control>
+					</Input.Root>
 					<div class="row-between auth__remember">
-						<Checkbox bind:checked={rememberMe}
-							>Remember me</Checkbox
-						>
+						<Checkbox.Root bind:checked={rememberMe}>
+							<Checkbox.Indicator />
+							<Checkbox.Label>Remember me</Checkbox.Label>
+						</Checkbox.Root>
 						<a class="auth__forgot" href="#forgot">Forgot?</a>
 					</div>
-					<Button
+					<Button.Root
 						color="primary"
 						variant="gradient"
 						size="small"
-						block>Continue</Button
+						block>Continue</Button.Root
 					>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet themeCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="cell">
-					<Switch bind:checked={darkPreview} size="medium" ghostKnob>
-						{#snippet knob()}
+					<Switch.Root bind:checked={darkPreview} size="medium" ghostKnob>
+						<Switch.Thumb>
 							{#if darkPreview}
 								<MoonIcon size={14} weight="fill" />
 							{:else}
 								<SunIcon size={14} weight="fill" />
 							{/if}
-						{/snippet}
-					</Switch>
+						</Switch.Thumb>
+					</Switch.Root>
 					<div class="cell__text">
 						<strong>Appearance</strong>
 						<span class="muted"
@@ -566,72 +494,74 @@
 						>
 					</div>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet inviteCard()}
 	<div class="tile">
-		<Card variant="compact">
-			{#snippet img()}
-				<img
-					src="/card-demo/avatar-portrait.jpg"
-					alt="Sara Lindqvist"
-				/>
-			{/snippet}
-			{#snippet interactions()}Pro{/snippet}
-			{#snippet title()}
-				<h4>Sara Lindqvist</h4>
-			{/snippet}
-			{#snippet body()}
+		<Card.Root variant="compact">
+			<Card.Media>
+				<Card.Image>
+					<img
+						src="/card-demo/avatar-portrait.jpg"
+						alt="Sara Lindqvist"
+					/>
+				</Card.Image>
+				<Card.Overlay>Pro</Card.Overlay>
+			</Card.Media>
+			<Card.Body>
+				<Card.Header>
+					<h4>Sara Lindqvist</h4>
+				</Card.Header>
 				<p>
 					Your account manager · Stripe Enterprise · weekdays 9-6 CET.
 				</p>
-			{/snippet}
-			{#snippet actions()}
-				<Button block color="primary" size="small">Message</Button>
-				<Button block variant="shadow" color="dark" size="small"
-					>Schedule</Button
+			</Card.Body>
+			<Card.Footer floating>
+				<Button.Root block color="primary" size="small">Message</Button.Root>
+				<Button.Root block variant="shadow" color="dark" size="small"
+					>Schedule</Button.Root
 				>
-			{/snippet}
-		</Card>
+			</Card.Footer>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet volumeCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="kv">
 					<header class="row-between">
 						<strong class="kv__title">Volume</strong>
-						<Chip size="mini" variant="transparent" color="primary"
-							>{volume}%</Chip
+						<Chip.Root size="mini" variant="transparent" color="primary"
+							>{volume}%</Chip.Root
 						>
 					</header>
-					<Slider
+					<Slider.Root
 						bind:value={volume}
 						color="primary"
 						size="small"
 						showTooltip
 					/>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet pagiCard()}
 	<div class="tile tile--bare tile--center">
-		<Pagination bind:value={page} length={5} max={5} size="small" arrows />
+		<Pagination.Root bind:page length={5} max={5} size="small" arrows />
 	</div>
 {/snippet}
 
 {#snippet workspaceCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="workspace">
 					<header class="workspace__head">
 						<div class="workspace__brand">
@@ -640,10 +570,10 @@
 							>
 							<strong>Notifications</strong>
 						</div>
-						<Chip size="mini" variant="transparent">2/5</Chip>
+						<Chip.Root size="mini" variant="transparent">2/5</Chip.Root>
 					</header>
 
-					<Divider />
+					<Divider.Root />
 
 					<div class="workspace__rows">
 						<div class="row-between">
@@ -651,20 +581,19 @@
 								<strong>Push</strong>
 								<span class="muted xs">to all devices</span>
 							</div>
-							<Switch
+							<Switch.Root
 								bind:checked={push}
 								size="small"
 								color="primary"
 							>
-								{#snippet iconOn()}<CheckIcon
-										size={10}
-										weight="bold"
-									/>{/snippet}
-								{#snippet iconOff()}<XIcon
-										size={10}
-										weight="bold"
-									/>{/snippet}
-							</Switch>
+								<Switch.Thumb />
+								<Switch.Icon state="on"
+									><CheckIcon size={10} weight="bold" /></Switch.Icon
+								>
+								<Switch.Icon state="off"
+									><XIcon size={10} weight="bold" /></Switch.Icon
+								>
+							</Switch.Root>
 						</div>
 						<div class="row-between">
 							<div class="kv__row">
@@ -673,69 +602,72 @@
 									>{darkPreview ? "Dark" : "Light"} mode</span
 								>
 							</div>
-							<Switch
+							<Switch.Root
 								bind:checked={darkPreview}
 								size="small"
 								ghostKnob
 							>
-								{#snippet knob()}
+								<Switch.Thumb>
 									{#if darkPreview}
 										<MoonIcon size={12} weight="fill" />
 									{:else}
 										<SunIcon size={12} weight="fill" />
 									{/if}
-								{/snippet}
-							</Switch>
+								</Switch.Thumb>
+							</Switch.Root>
 						</div>
 						<div class="row-between">
 							<div class="kv__row">
 								<strong>Sound effects</strong>
 								<span class="muted xs">square shape</span>
 							</div>
-							<Switch
+							<Switch.Root
 								bind:checked={sync}
 								size="small"
 								shape="square"
 								color="success"
-							/>
+							>
+								<Switch.Thumb />
+							</Switch.Root>
 						</div>
 						<div class="row-between">
 							<div class="kv__row">
 								<strong>Auto-update</strong>
 								<span class="muted xs">checking…</span>
 							</div>
-							<Switch checked size="small" loading color="warn" />
+							<Switch.Root checked size="small" loading color="warn">
+								<Switch.Thumb />
+							</Switch.Root>
 						</div>
 						<div class="row-between">
 							<div class="kv__row">
 								<strong>Beta features</strong>
 								<span class="muted xs">indeterminate</span>
 							</div>
-							<Switch indeterminate size="small" color="dark" />
+							<Switch.Root indeterminate size="small" color="dark">
+								<Switch.Thumb />
+							</Switch.Root>
 						</div>
 					</div>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet searchCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="search">
-					<Input
-						bind:value={searchValue}
-						placeholder="Search components"
-						block
-					>
-						{#snippet icon()}<MagnifyingGlassIcon
-								size={16}
-							/>{/snippet}
-					</Input>
+					<Input.Root bind:value={searchValue} block>
+						<Input.Control>
+							<Input.Icon><MagnifyingGlassIcon size={16} /></Input.Icon>
+							<Input.Field placeholder="Search components" />
+						</Input.Control>
+					</Input.Root>
 					<div class="row-wrap">
-						<Chip
+						<Chip.Root
 							size="small"
 							variant={chipFilters.buttons ? "default" : "border"}
 							color="primary"
@@ -744,8 +676,8 @@
 								(chipFilters.buttons = !chipFilters.buttons)}
 						>
 							Buttons
-						</Chip>
-						<Chip
+						</Chip.Root>
+						<Chip.Root
 							size="small"
 							variant={chipFilters.forms ? "default" : "border"}
 							color="primary"
@@ -754,8 +686,8 @@
 								(chipFilters.forms = !chipFilters.forms)}
 						>
 							Forms
-						</Chip>
-						<Chip
+						</Chip.Root>
+						<Chip.Root
 							size="small"
 							variant={chipFilters.motion ? "default" : "border"}
 							color="primary"
@@ -764,8 +696,8 @@
 								(chipFilters.motion = !chipFilters.motion)}
 						>
 							Motion
-						</Chip>
-						<Chip
+						</Chip.Root>
+						<Chip.Root
 							size="small"
 							variant={chipFilters.a11y ? "default" : "border"}
 							color="primary"
@@ -774,82 +706,86 @@
 								(chipFilters.a11y = !chipFilters.a11y)}
 						>
 							A11y
-						</Chip>
+						</Chip.Root>
 					</div>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet sprintCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="sprint">
 					<header class="row-between">
 						<strong class="kv__title">Sprint&nbsp;24</strong>
-						<Chip size="mini" variant="flat" color="warn">
-							{#snippet icon()}<FlagIcon
-									size={11}
-									weight="fill"
-								/>{/snippet}
+						<Chip.Root size="mini" variant="flat" color="warn">
+							<Chip.Icon><FlagIcon size={11} weight="fill" /></Chip.Icon>
 							2&nbsp;days
-						</Chip>
+						</Chip.Root>
 					</header>
-					<Progress
+					<Progress.Root
 						value={sprintProgress}
 						thickness={6}
 						color="primary"
-					/>
+					>
+						<Progress.Track>
+							<Progress.Indicator />
+						</Progress.Track>
+					</Progress.Root>
 					<div class="sprint__foot">
 						<span class="muted xs"
 							>{sprintProgress}% · 9/14 tasks</span
 						>
-						<AvatarGroup max={3}>
-							<Avatar text="AL" color="primary" size={20} />
-							<Avatar text="MP" color="warn" size={20} />
-							<Avatar text="SK" color="danger" size={20} />
-						</AvatarGroup>
+						<Avatar.Group max={3}>
+							<Avatar.Root color="primary" size={20}><Avatar.Fallback>AL</Avatar.Fallback></Avatar.Root>
+							<Avatar.Root color="warn" size={20}><Avatar.Fallback>MP</Avatar.Fallback></Avatar.Root>
+							<Avatar.Root color="danger" size={20}><Avatar.Fallback>SK</Avatar.Fallback></Avatar.Root>
+						</Avatar.Group>
 					</div>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet coverageCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="coverage">
-					<Progress
+					<Progress.Root
 						shape="circular"
 						value={coverage}
 						size={68}
 						thickness={7}
 						color="success"
 					>
-						<strong>{coverage}%</strong>
-					</Progress>
+						<Progress.Track>
+							<Progress.Indicator />
+						</Progress.Track>
+						<Progress.Label><strong>{coverage}%</strong></Progress.Label>
+					</Progress.Root>
 					<div class="coverage__text">
 						<strong>Coverage</strong>
 						<span class="muted xs">a11y · 142 / 148 rules</span>
 					</div>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet connectCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="connect">
 					<header class="row-between">
 						<strong class="kv__title">Connect</strong>
-						<Chip size="mini" variant="transparent">3 / 4</Chip>
+						<Chip.Root size="mini" variant="transparent">3 / 4</Chip.Root>
 					</header>
 					<div class="connect__row">
 						<div class="connect__lhs">
@@ -858,11 +794,9 @@
 							>
 							<span>Push notifications</span>
 						</div>
-						<Switch
-							bind:checked={push}
-							size="small"
-							color="primary"
-						/>
+						<Switch.Root bind:checked={push} size="small" color="primary">
+							<Switch.Thumb />
+						</Switch.Root>
 					</div>
 					<div class="connect__row">
 						<div class="connect__lhs">
@@ -871,11 +805,9 @@
 							>
 							<span>Do not disturb</span>
 						</div>
-						<Switch
-							bind:checked={dnd}
-							size="small"
-							color="success"
-						/>
+						<Switch.Root bind:checked={dnd} size="small" color="success">
+							<Switch.Thumb />
+						</Switch.Root>
 					</div>
 					<div class="connect__row">
 						<div class="connect__lhs">
@@ -884,43 +816,37 @@
 							>
 							<span>Analytics</span>
 						</div>
-						<Switch
-							bind:checked={analytics}
-							size="small"
-							color="warn"
-						/>
+						<Switch.Root bind:checked={analytics} size="small" color="warn">
+							<Switch.Thumb />
+						</Switch.Root>
 					</div>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet planCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="plan">
 					<header class="plan__head">
 						<strong>Premium</strong>
-						<Chip size="mini" variant="flat" color="warn">
-							{#snippet icon()}<StarIcon
-									size={11}
-									weight="fill"
-								/>{/snippet}
+						<Chip.Root size="mini" variant="flat" color="warn">
+							<Chip.Icon><StarIcon size={11} weight="fill" /></Chip.Icon>
 							Best
-						</Chip>
+						</Chip.Root>
 					</header>
-					<Segmented
+					<Segmented.Root
 						bind:value={plan}
-						items={[
-							{ value: "monthly", label: "Monthly" },
-							{ value: "yearly", label: "Yearly" },
-						]}
 						size="small"
 						color="primary"
 						block
-					/>
+					>
+						<Segmented.Item value="monthly">Monthly</Segmented.Item>
+						<Segmented.Item value="yearly">Yearly</Segmented.Item>
+					</Segmented.Root>
 					<div class="plan__price">
 						<span class="plan__amount"
 							>${plan === "yearly" ? 19 : 24}</span
@@ -938,121 +864,125 @@
 							<CheckIcon size={12} weight="bold" /> Priority support
 						</li>
 					</ul>
-					<Button
+					<Button.Root
 						color="primary"
 						variant="gradient"
 						size="small"
-						block>Subscribe</Button
+						block>Subscribe</Button.Root
 					>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet activityCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="feed">
 					<header class="row-between">
 						<strong class="kv__title">Activity</strong>
-						<Chip size="mini" variant="transparent" color="primary"
-							>today</Chip
+						<Chip.Root size="mini" variant="transparent" color="primary"
+							>today</Chip.Root
 						>
 					</header>
 					<div class="feed__row">
-						<Avatar size={28}>
-							<img src="/avatars/1.jpg" alt="" />
-						</Avatar>
+						<Avatar.Root size={28}>
+								<Avatar.Image src="/avatars/1.jpg" alt="" />
+							</Avatar.Root>
 						<div>
 							<strong>Lev shipped</strong>
 							<span class="muted xs">Login revamp · 2m</span>
 						</div>
 					</div>
 					<div class="feed__row">
-						<Avatar size={28}>
-							<img src="/avatars/4.jpg" alt="" />
-						</Avatar>
+						<Avatar.Root size={28}>
+								<Avatar.Image src="/avatars/4.jpg" alt="" />
+							</Avatar.Root>
 						<div>
 							<strong>Marina commented</strong>
 							<span class="muted xs">on Buttons RFC · 14m</span>
 						</div>
 					</div>
 					<div class="feed__row">
-						<Avatar size={28}>
-							<img src="/avatars/7.jpg" alt="" />
-						</Avatar>
+						<Avatar.Root size={28}>
+								<Avatar.Image src="/avatars/7.jpg" alt="" />
+							</Avatar.Root>
 						<div>
 							<strong>Sasha opened</strong>
 							<span class="muted xs">PR #428 · 1h</span>
 						</div>
 					</div>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet checkoutCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="kv">
 					<header class="row-between">
 						<strong class="kv__title">Almost done</strong>
-						<Chip size="mini" variant="transparent" color="success"
-							>3/4</Chip
+						<Chip.Root size="mini" variant="transparent" color="success"
+							>3/4</Chip.Root
 						>
 					</header>
-					<Checkbox bind:checked={agree}
-						>Accept terms of service</Checkbox
-					>
-					<Checkbox bind:checked={news} color="success">
-						Subscribe to changelog
-					</Checkbox>
-					<Checkbox bind:checked={early} color="warn"
-						>Join beta program</Checkbox
-					>
+					<Checkbox.Root bind:checked={agree}>
+						<Checkbox.Indicator />
+						<Checkbox.Label>Accept terms of service</Checkbox.Label>
+					</Checkbox.Root>
+					<Checkbox.Root bind:checked={news} color="success">
+						<Checkbox.Indicator />
+						<Checkbox.Label>Subscribe to changelog</Checkbox.Label>
+					</Checkbox.Root>
+					<Checkbox.Root bind:checked={early} color="warn">
+						<Checkbox.Indicator />
+						<Checkbox.Label>Join beta program</Checkbox.Label>
+					</Checkbox.Root>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet likedCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="liked">
-					<Avatar size={38} badge badgeColor="danger">
-						<img src="/avatars/8.jpg" alt="" />
-					</Avatar>
+					<Avatar.Root size={38}>
+						<Avatar.Image src="/avatars/8.jpg" alt="" />
+						<Avatar.Badge color="danger" />
+					</Avatar.Root>
 					<div class="liked__text">
 						<strong>Iris liked your post</strong>
 						<span class="muted xs"
 							>“Springs in Svelte&nbsp;5” · 2m</span
 						>
 					</div>
-					<Button
+					<Button.Root
 						iconOnly
 						size="mini"
 						variant="transparent"
 						color="danger"
 					>
 						<HeartIcon size={14} weight="fill" />
-					</Button>
+					</Button.Root>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet calendarCard()}
 	<div class="tile tile--bare">
-		<Calendar
-			bind:range={calendarRange}
-			mode="range"
+		<Calendar.Root
+			type="range"
+			bind:value={calendarRange}
 			size="small"
 			color="primary"
 			showFooter
@@ -1062,128 +992,136 @@
 
 {#snippet articleCard()}
 	<div class="tile">
-		<Card variant="peek">
-			{#snippet img()}
-				<img
-					src="/card-demo/mountain-sunrise.jpg"
-					alt="Mountain sunrise"
-				/>
-			{/snippet}
-			{#snippet title()}
-				<h3>Release notes · v{pkgVersion}</h3>
-			{/snippet}
-			{#snippet body()}
+		<Card.Root variant="peek">
+			<Card.Media>
+				<Card.Image>
+					<img
+						src="/card-demo/mountain-sunrise.jpg"
+						alt="Mountain sunrise"
+					/>
+				</Card.Image>
+				<Card.Overlay>
+					<Button.Root
+						iconOnly
+						color="danger"
+						shape="circle"
+						aria-label="Reactions"
+					>
+						<HeartIcon size={16} weight="fill" />
+					</Button.Root>
+					<Button.Root variant="shadow" color="primary" aria-label="Comments">
+						<ChatCircleIcon size={18} weight="fill" />
+						<span>32</span>
+					</Button.Root>
+				</Card.Overlay>
+			</Card.Media>
+			<Card.Body>
+				<Card.Header>
+					<h3>Release notes · v{pkgVersion}</h3>
+				</Card.Header>
 				<p>
 					Springs land in the motion toolkit. 12 new components and a
 					frosted Card variant.
 				</p>
-			{/snippet}
-			{#snippet interactions()}
-				<Button
-					iconOnly
-					color="danger"
-					shape="circle"
-					aria-label="Reactions"
-				>
-					<HeartIcon size={16} weight="fill" />
-				</Button>
-				<Button variant="shadow" color="primary" aria-label="Comments">
-					<ChatCircleIcon size={18} weight="fill" />
-					<span>32</span>
-				</Button>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet peekCard()}
 	<div class="tile">
-		<Card variant="peek">
-			{#snippet img()}
-				<img
-					src="/card-demo/reykjavik-church.jpg"
-					alt="Hallgrímskirkja"
-				/>
-			{/snippet}
-			{#snippet title()}
-				<h3>Three days in Reykjavik</h3>
-			{/snippet}
-			{#snippet body()}
+		<Card.Root variant="peek">
+			<Card.Media>
+				<Card.Image>
+					<img
+						src="/card-demo/reykjavik-church.jpg"
+						alt="Hallgrímskirkja"
+					/>
+				</Card.Image>
+				<Card.Overlay>
+					<Button.Root
+						iconOnly
+						color="danger"
+						shape="circle"
+						size="small"
+						aria-label="Like"
+					>
+						<HeartIcon size={14} weight="fill" />
+					</Button.Root>
+					<Button.Root
+						variant="shadow"
+						color="primary"
+						size="small"
+						aria-label="Chat"
+					>
+						<ChatCircleIcon size={14} weight="fill" />
+						<span>54</span>
+					</Button.Root>
+				</Card.Overlay>
+			</Card.Media>
+			<Card.Body>
+				<Card.Header>
+					<h3>Three days in Reykjavik</h3>
+				</Card.Header>
 				<p>
 					Geothermal pools and the world's quietest city after
 					midnight.
 				</p>
-			{/snippet}
-			{#snippet interactions()}
-				<Button
-					iconOnly
-					color="danger"
-					shape="circle"
-					size="small"
-					aria-label="Like"
-				>
-					<HeartIcon size={14} weight="fill" />
-				</Button>
-				<Button
-					variant="shadow"
-					color="primary"
-					size="small"
-					aria-label="Chat"
-				>
-					<ChatCircleIcon size={14} weight="fill" />
-					<span>54</span>
-				</Button>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet captionCard()}
 	<div class="tile">
-		<Card variant="caption">
-			{#snippet img()}
-				<img
-					src="/card-demo/tokyo-alley.jpg"
-					alt="Tokyo alley at night"
-				/>
-			{/snippet}
-			{#snippet title()}
-				<Button color="primary" variant="relief" size="small">
-					Shinjuku
-					<ArrowUpRightIcon size={12} weight="bold" />
-				</Button>
-			{/snippet}
-			{#snippet body()}
+		<Card.Root variant="caption">
+			<Card.Media>
+				<Card.Image>
+					<img
+						src="/card-demo/tokyo-alley.jpg"
+						alt="Tokyo alley at night"
+					/>
+				</Card.Image>
+			</Card.Media>
+			<Card.Body>
+				<Card.Header>
+					<Button.Root color="primary" variant="relief" size="small">
+						Shinjuku
+						<ArrowUpRightIcon size={12} weight="bold" />
+					</Button.Root>
+				</Card.Header>
 				<p>Twelve nights, one camera, vending-machine coffee.</p>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet playerCard()}
 	<div class="tile">
-		<Card imgInset>
-			{#snippet img()}
-				<img src="/card-demo/desk-workspace.jpg" alt="Album art" />
-			{/snippet}
-			{#snippet title()}
-				<h3>Late night focus</h3>
-			{/snippet}
-			{#snippet body()}
+		<Card.Root imgInset>
+			<Card.Media>
+				<Card.Image>
+					<img src="/card-demo/desk-workspace.jpg" alt="Album art" />
+				</Card.Image>
+			</Card.Media>
+			<Card.Body>
+				<Card.Header>
+					<h3>Late night focus</h3>
+				</Card.Header>
 				<p>Lo-fi study mix</p>
 				<div class="scrub">
 					<span>02:14</span>
-					<Slider
+					<Slider.Root
 						bind:value={scrubProgress}
 						size="small"
 						color="primary"
 					/>
 					<span>04:38</span>
 				</div>
-			{/snippet}
-			{#snippet buttons()}
+			</Card.Body>
+			<Card.Footer>
 				<div class="player-controls">
-					<Button
+					<Button.Root
 						iconOnly
 						variant="transparent"
 						shape="circle"
@@ -1191,8 +1129,8 @@
 						aria-label="Volume"
 					>
 						<SpeakerHighIcon size={18} weight="fill" />
-					</Button>
-					<Button
+					</Button.Root>
+					<Button.Root
 						iconOnly
 						variant="transparent"
 						shape="circle"
@@ -1200,8 +1138,8 @@
 						aria-label="Previous track"
 					>
 						<SkipBackIcon size={22} weight="fill" />
-					</Button>
-					<Button
+					</Button.Root>
+					<Button.Root
 						iconOnly
 						shape="circle"
 						color="primary"
@@ -1209,8 +1147,8 @@
 						aria-label="Play"
 					>
 						<PlayIcon size={26} weight="fill" />
-					</Button>
-					<Button
+					</Button.Root>
+					<Button.Root
 						iconOnly
 						variant="transparent"
 						shape="circle"
@@ -1218,8 +1156,8 @@
 						aria-label="Next track"
 					>
 						<SkipForwardIcon size={22} weight="fill" />
-					</Button>
-					<Button
+					</Button.Root>
+					<Button.Root
 						iconOnly
 						variant="transparent"
 						shape="circle"
@@ -1227,36 +1165,38 @@
 						aria-label="Favorite"
 					>
 						<HeartIcon size={18} weight="fill" />
-					</Button>
+					</Button.Root>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Footer>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet commentCard()}
 	<div class="tile">
-		<Card>
-			{#snippet img()}
-				<img
-					src="/card-demo/coffee-espresso.jpg"
-					alt="Espresso shot pouring"
-				/>
-			{/snippet}
-			{#snippet title()}
-				<h3>Leave a comment</h3>
-			{/snippet}
-			{#snippet body()}
-				<p>Share what you thought about this guide.</p>
-			{/snippet}
-			{#snippet buttons()}
-				<div class="comment-form">
-					<Input
-						bind:value={commentValue}
-						placeholder="Write..."
-						block
+		<Card.Root>
+			<Card.Media>
+				<Card.Image>
+					<img
+						src="/card-demo/coffee-espresso.jpg"
+						alt="Espresso shot pouring"
 					/>
-					<Button
+				</Card.Image>
+			</Card.Media>
+			<Card.Body>
+				<Card.Header>
+					<h3>Leave a comment</h3>
+				</Card.Header>
+				<p>Share what you thought about this guide.</p>
+			</Card.Body>
+			<Card.Footer>
+				<div class="comment-form">
+					<Input.Root bind:value={commentValue} block>
+						<Input.Control>
+							<Input.Field placeholder="Write..." />
+						</Input.Control>
+					</Input.Root>
+					<Button.Root
 						iconOnly
 						variant="gradient"
 						color="primary"
@@ -1264,26 +1204,26 @@
 						aria-label="Send"
 					>
 						<PaperPlaneTiltIcon size={14} weight="fill" />
-					</Button>
+					</Button.Root>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Footer>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet tagsCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="kv">
 					<header class="row-between">
 						<strong class="kv__title">Labels · #428</strong>
-						<Chip size="mini" variant="flat" color="warn">p1</Chip>
+						<Chip.Root size="mini" variant="flat" color="warn">p1</Chip.Root>
 					</header>
 					<span class="muted xs">Linked to the active sprint.</span>
-					<Select
+					<Select.Root
+						type="multiple"
 						bind:value={postTags}
-						multiple
 						items={[
 							{ value: "bug", label: "bug" },
 							{ value: "p1", label: "p1" },
@@ -1298,25 +1238,28 @@
 						color="primary"
 						collapseChips
 						block
-					/>
+					>
+						<Select.Trigger />
+						<Select.Content />
+					</Select.Root>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet cartCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="cart">
 					<header class="cart__head">
 						<div>
 							<strong>Workspace seats</strong>
 							<span class="muted xs">Pro · billed monthly</span>
 						</div>
-						<Chip size="mini" variant="flat" color="primary"
-							>Pro</Chip
+						<Chip.Root size="mini" variant="flat" color="primary"
+							>Pro</Chip.Root
 						>
 					</header>
 					<div class="cart__row">
@@ -1324,132 +1267,145 @@
 							<strong>Active seats</strong>
 							<span class="muted xs">4 used · 12 max</span>
 						</div>
-						<InputNumber
+						<InputNumber.Root
 							bind:value={cartQty}
 							min={1}
 							max={12}
 							size="small"
-						/>
+						>
+							<InputNumber.Decrement />
+							<InputNumber.Field />
+							<InputNumber.Increment />
+						</InputNumber.Root>
 					</div>
-					<Divider />
+					<Divider.Root />
 					<div class="cart__foot">
 						<span class="cart__price"
 							><strong>${cartQty * 19}</strong>
 							<span class="muted xs">/ month</span></span
 						>
-						<Button color="primary" variant="gradient" size="small"
-							>Update billing</Button
+						<Button.Root color="primary" variant="gradient" size="small"
+							>Update billing</Button.Root
 						>
 					</div>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet commentComposerCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="composer">
 					<header class="composer__head">
-						<Avatar size={28}>
-							<img src="/avatars/3.jpg" alt="" />
-						</Avatar>
+						<Avatar.Root size={28}>
+								<Avatar.Image src="/avatars/3.jpg" alt="" />
+							</Avatar.Root>
 						<div>
 							<strong>Code review · PR #428</strong>
 							<span class="muted xs">Replying to @ada</span>
 						</div>
 					</header>
-					<Textarea
+					<Textarea.Root
 						bind:value={commentValue}
-						label="Comment"
 						labelStyle="placeholder"
 						variant="border"
 						block
 						autoGrow
-					/>
+					>
+						<Textarea.Control>
+							<Textarea.Field />
+						</Textarea.Control>
+						<Textarea.Label>Comment</Textarea.Label>
+					</Textarea.Root>
 					<div class="row-end">
-						<Button size="small" variant="transparent"
-							>Cancel</Button
+						<Button.Root size="small" variant="transparent"
+							>Cancel</Button.Root
 						>
-						<Button color="primary" variant="gradient" size="small">
+						<Button.Root color="primary" variant="gradient" size="small">
 							Send
-						</Button>
+						</Button.Root>
 					</div>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet faqCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="kv">
 					<header class="row-between">
 						<strong class="kv__title">Setup checklist</strong>
-						<Chip size="mini" variant="flat" color="success"
-							>2 / 4 done</Chip
+						<Chip.Root size="mini" variant="flat" color="success"
+							>2 / 4 done</Chip.Root
 						>
 					</header>
-					<CollapseGroup>
-						<Collapse
-							title="Connect a repository"
-							key="repo"
-							bind:open={faqOpen}
-							size="small"
-						>
-							<p class="muted xs">
-								Link GitHub or GitLab to enable preview
-								deployments.
-							</p>
-						</Collapse>
-						<Collapse
-							title="Invite your team"
-							key="invite"
-							size="small"
-						>
-							<p class="muted xs">
-								Members get billed at the Pro seat rate.
-							</p>
-						</Collapse>
-						<Collapse
-							title="Configure environments"
-							key="env"
-							size="small"
-						>
-							<p class="muted xs">
-								Production, preview, and local — separate
-								secrets each.
-							</p>
-						</Collapse>
-					</CollapseGroup>
+					<Collapse.Group>
+						<Collapse.Root key="repo" bind:open={faqOpen} size="small">
+							<Collapse.Trigger>
+								<Collapse.Title>Connect a repository</Collapse.Title>
+								<Collapse.Caret />
+							</Collapse.Trigger>
+							<Collapse.Content>
+								<p class="muted xs">
+									Link GitHub or GitLab to enable preview
+									deployments.
+								</p>
+							</Collapse.Content>
+						</Collapse.Root>
+						<Collapse.Root key="invite" size="small">
+							<Collapse.Trigger>
+								<Collapse.Title>Invite your team</Collapse.Title>
+								<Collapse.Caret />
+							</Collapse.Trigger>
+							<Collapse.Content>
+								<p class="muted xs">
+									Members get billed at the Pro seat rate.
+								</p>
+							</Collapse.Content>
+						</Collapse.Root>
+						<Collapse.Root key="env" size="small">
+							<Collapse.Trigger>
+								<Collapse.Title>Configure environments</Collapse.Title>
+								<Collapse.Caret />
+							</Collapse.Trigger>
+							<Collapse.Content>
+								<p class="muted xs">
+									Production, preview, and local — separate
+									secrets each.
+								</p>
+							</Collapse.Content>
+						</Collapse.Root>
+					</Collapse.Group>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet tabsCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="tabs-card">
-					<Tabs bind:value={activeTab} size="small">
+					<Tabs.Root bind:value={activeTab} size="small">
 						<Tabs.List>
-							<Tabs.Tab value="preview">Production</Tabs.Tab>
-							<Tabs.Tab value="code">Preview</Tabs.Tab>
-							<Tabs.Tab value="docs">Local</Tabs.Tab>
+							<Tabs.Trigger value="preview">Production</Tabs.Trigger>
+							<Tabs.Trigger value="code">Preview</Tabs.Trigger>
+							<Tabs.Trigger value="docs">Local</Tabs.Trigger>
 						</Tabs.List>
-						<Tabs.Panel value="preview">
+						<Tabs.Content value="preview">
 							<div class="tabs-card__panel">
 								<div class="env-row">
-									<Chip
+									<Chip.Root
 										size="mini"
 										variant="flat"
-										color="success">Ready</Chip
+										color="success">Ready</Chip.Root
 									>
 									<span class="muted xs"
 										>main · deployed 2m ago</span
@@ -1459,14 +1415,14 @@
 									>https://acme.vercel.app</code
 								>
 							</div>
-						</Tabs.Panel>
-						<Tabs.Panel value="code">
+						</Tabs.Content>
+						<Tabs.Content value="code">
 							<div class="tabs-card__panel">
 								<div class="env-row">
-									<Chip
+									<Chip.Root
 										size="mini"
 										variant="flat"
-										color="warn">Building</Chip
+										color="warn">Building</Chip.Root
 									>
 									<span class="muted xs"
 										>feat/checkout · 14s</span
@@ -1476,14 +1432,14 @@
 									>https://feat-checkout-acme.vercel.app</code
 								>
 							</div>
-						</Tabs.Panel>
-						<Tabs.Panel value="docs">
+						</Tabs.Content>
+						<Tabs.Content value="docs">
 							<div class="tabs-card__panel">
 								<div class="env-row">
-									<Chip
+									<Chip.Root
 										size="mini"
 										variant="flat"
-										color="dark">Stopped</Chip
+										color="dark">Stopped</Chip.Root
 									>
 									<span class="muted xs"
 										>npm run dev — last ran 4h ago</span
@@ -1493,316 +1449,317 @@
 									>http://localhost:5173</code
 								>
 							</div>
-						</Tabs.Panel>
-					</Tabs>
+						</Tabs.Content>
+					</Tabs.Root>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet alertCard()}
 	<div class="tile tile--bare">
-		<Alert color="success" closable progress={100}>
-			{#snippet icon()}<CheckIcon size={18} weight="bold" />{/snippet}
-			{#snippet title()}
-				<strong>Deployment ready</strong>
-			{/snippet}
-			Production · <code>a14f8e2</code> · live in 12s
-			{#snippet footer()}
+		<Alert.Root color="success">
+			<Alert.Icon><CheckIcon size={18} weight="bold" /></Alert.Icon>
+			<Alert.Title><strong>Deployment ready</strong></Alert.Title>
+			<Alert.Description>
+				Production · <code>a14f8e2</code> · live in 12s
+			</Alert.Description>
+			<Alert.Action>
 				<div class="row-end">
-					<Button size="mini" variant="transparent" color="success"
-						>View logs</Button
+					<Button.Root size="mini" variant="transparent" color="success"
+						>View logs</Button.Root
 					>
 				</div>
-			{/snippet}
-		</Alert>
+			</Alert.Action>
+			<Alert.Close ariaLabel="Dismiss" />
+			<Alert.Progress percent={100} ariaLabel="Deployment progress" />
+		</Alert.Root>
 	</div>
 {/snippet}
 
 {#snippet surveyCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="survey">
 					<header class="row-between">
 						<strong class="kv__title">Email cadence</strong>
-						<Chip size="mini" variant="transparent" color="primary"
-							>team</Chip
+						<Chip.Root size="mini" variant="transparent" color="primary"
+							>team</Chip.Root
 						>
 					</header>
 					<span class="muted xs"
 						>When should we send the team digest?</span
 					>
-					<div class="survey__opts">
-						<Radio
-							bind:group={surveyChoice}
-							value="daily"
-							color="primary">Daily summary</Radio
-						>
-						<Radio
-							bind:group={surveyChoice}
-							value="weekly"
-							color="primary">Monday digest</Radio
-						>
-						<Radio
-							bind:group={surveyChoice}
-							value="monthly"
-							color="primary">Monthly only</Radio
-						>
-						<Radio
-							bind:group={surveyChoice}
-							value="never"
-							color="dark">Pause emails</Radio
-						>
-					</div>
+					<RadioGroup.Root bind:value={surveyChoice} ariaLabel="Email cadence">
+						{#snippet child({ props })}
+							<div {...props} class="survey__opts">
+								<RadioGroup.Item value="daily" color="primary">
+									<RadioGroup.Indicator />
+									<RadioGroup.Label>Daily summary</RadioGroup.Label>
+								</RadioGroup.Item>
+								<RadioGroup.Item value="weekly" color="primary">
+									<RadioGroup.Indicator />
+									<RadioGroup.Label>Monday digest</RadioGroup.Label>
+								</RadioGroup.Item>
+								<RadioGroup.Item value="monthly" color="primary">
+									<RadioGroup.Indicator />
+									<RadioGroup.Label>Monthly only</RadioGroup.Label>
+								</RadioGroup.Item>
+								<RadioGroup.Item value="never" color="dark">
+									<RadioGroup.Indicator />
+									<RadioGroup.Label>Pause emails</RadioGroup.Label>
+								</RadioGroup.Item>
+							</div>
+						{/snippet}
+					</RadioGroup.Root>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet stepsCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="kv">
 					<header class="row-between">
 						<strong class="kv__title">Project setup</strong>
-						<Chip size="mini" variant="flat" color="primary"
-							>{pageStep} / 4</Chip
+						<Chip.Root size="mini" variant="flat" color="primary"
+							>{pageStep} / 4</Chip.Root
 						>
 					</header>
 					<span class="muted xs"
 						>Connect tooling — 2 min remaining</span
 					>
-					<Progress
+					<Progress.Root
 						value={(pageStep / 4) * 100}
 						thickness={6}
 						color="primary"
-						stripes
-					/>
+					>
+						<Progress.Track>
+							<Progress.Indicator stripes />
+						</Progress.Track>
+					</Progress.Root>
 					<div class="row-between">
-						<Pagination
-							bind:value={pageStep}
+						<Pagination.Root
+							bind:page={pageStep}
 							length={4}
 							arrows
 							size="small"
 						/>
 					</div>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet teamGroupCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="team">
 					<header class="row-between">
 						<strong class="kv__title">Design crew</strong>
-						<Chip size="mini" variant="transparent" color="success"
-							>5 online</Chip
+						<Chip.Root size="mini" variant="transparent" color="success"
+							>5 online</Chip.Root
 						>
 					</header>
-					<AvatarGroup max={6}>
-						<Avatar
-							size={34}
-							badge
-							badgeColor="success"
-							history
-							historyGradient
-						>
-							<img src="/avatars/1.jpg" alt="" />
-						</Avatar>
-						<Avatar size={34} badge badgeColor="warn" history>
-							<img src="/avatars/2.jpg" alt="" />
-						</Avatar>
-						<Avatar
-							size={34}
-							badge
-							badgeColor="primary"
-							writing
-							history
-						>
-							<img src="/avatars/3.jpg" alt="" />
-						</Avatar>
-						<Avatar size={34} history>
-							<img src="/avatars/4.jpg" alt="" />
-						</Avatar>
-						<Avatar size={34}>
-							<img src="/avatars/5.jpg" alt="" />
-						</Avatar>
-						<Avatar size={34}>
-							<img src="/avatars/6.jpg" alt="" />
-						</Avatar>
-						<Avatar size={34}>
-							<img src="/avatars/7.jpg" alt="" />
-						</Avatar>
-					</AvatarGroup>
+					<Avatar.Group max={6}>
+						<Avatar.Root size={34} history historyGradient>
+							<Avatar.Image src="/avatars/1.jpg" alt="" />
+							<Avatar.Badge color="success" />
+						</Avatar.Root>
+						<Avatar.Root size={34} history>
+							<Avatar.Image src="/avatars/2.jpg" alt="" />
+							<Avatar.Badge color="warn" />
+						</Avatar.Root>
+						<Avatar.Root size={34} history>
+							<Avatar.Image src="/avatars/3.jpg" alt="" />
+							<Avatar.Badge writing color="primary" />
+						</Avatar.Root>
+						<Avatar.Root size={34} history>
+							<Avatar.Image src="/avatars/4.jpg" alt="" />
+						</Avatar.Root>
+						<Avatar.Root size={34}>
+							<Avatar.Image src="/avatars/5.jpg" alt="" />
+						</Avatar.Root>
+						<Avatar.Root size={34}>
+							<Avatar.Image src="/avatars/6.jpg" alt="" />
+						</Avatar.Root>
+						<Avatar.Root size={34}>
+							<Avatar.Image src="/avatars/7.jpg" alt="" />
+						</Avatar.Root>
+					</Avatar.Group>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet switchesCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="variants">
 					<header class="row-between">
 						<strong class="kv__title">Switch</strong>
-						<Chip size="mini" variant="transparent">5 props</Chip>
+						<Chip.Root size="mini" variant="transparent">5 props</Chip.Root>
 					</header>
 					<div class="variants__row">
 						<span class="variants__lbl">ghostKnob</span>
-						<Switch
+						<Switch.Root
 							bind:checked={darkPreview}
 							size="small"
 							ghostKnob
 						>
-							{#snippet knob()}
+							<Switch.Thumb>
 								{#if darkPreview}
 									<MoonIcon size={12} weight="fill" />
 								{:else}
 									<SunIcon size={12} weight="fill" />
 								{/if}
-							{/snippet}
-						</Switch>
+							</Switch.Thumb>
+						</Switch.Root>
 					</div>
 					<div class="variants__row">
 						<span class="variants__lbl">iconOn / iconOff</span>
-						<Switch
+						<Switch.Root
 							bind:checked={push}
 							size="small"
 							color="success"
 						>
-							{#snippet iconOn()}<CheckIcon
-									size={10}
-									weight="bold"
-								/>{/snippet}
-							{#snippet iconOff()}<XIcon
-									size={10}
-									weight="bold"
-								/>{/snippet}
-						</Switch>
+							<Switch.Thumb />
+							<Switch.Icon state="on"
+								><CheckIcon size={10} weight="bold" /></Switch.Icon
+							>
+							<Switch.Icon state="off"
+								><XIcon size={10} weight="bold" /></Switch.Icon
+							>
+						</Switch.Root>
 					</div>
 					<div class="variants__row">
 						<span class="variants__lbl">shape="square"</span>
-						<Switch
+						<Switch.Root
 							bind:checked={sync}
 							size="small"
 							shape="square"
 							color="primary"
-						/>
+						>
+							<Switch.Thumb />
+						</Switch.Root>
 					</div>
 					<div class="variants__row">
 						<span class="variants__lbl">loading</span>
-						<Switch checked size="small" loading color="warn" />
+						<Switch.Root checked size="small" loading color="warn">
+							<Switch.Thumb />
+						</Switch.Root>
 					</div>
 					<div class="variants__row">
 						<span class="variants__lbl">indeterminate</span>
-						<Switch indeterminate size="small" color="dark" />
+						<Switch.Root indeterminate size="small" color="dark">
+							<Switch.Thumb />
+						</Switch.Root>
 					</div>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet categoriesCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="variants">
 					<header class="row-between">
 						<strong class="kv__title">Checkbox</strong>
-						<Chip size="mini" variant="transparent" color="primary"
-							>5 props</Chip
+						<Chip.Root size="mini" variant="transparent" color="primary"
+							>5 props</Chip.Root
 						>
 					</header>
-					<Checkbox bind:checked={agree} color="danger">
-						{#snippet iconChecked()}<HeartIcon
-								size={11}
-								weight="fill"
-							/>{/snippet}
-						<span class="muted xs">iconChecked = heart</span>
-					</Checkbox>
-					<Checkbox indeterminate color="warn">
-						<span class="muted xs">indeterminate</span>
-					</Checkbox>
-					<Checkbox checked lineThrough color="success">
-						<span class="muted xs">lineThrough · done</span>
-					</Checkbox>
-					<Checkbox checked loading color="primary">
-						<span class="muted xs">loading</span>
-					</Checkbox>
-					<Checkbox
-						bind:checked={news}
-						labelPosition="before"
-						color="dark"
-					>
-						<span class="muted xs">labelPosition = before</span>
-					</Checkbox>
+					<Checkbox.Root bind:checked={agree} color="danger">
+						<Checkbox.Indicator>
+							<Checkbox.Icon><HeartIcon size={11} weight="fill" /></Checkbox.Icon>
+						</Checkbox.Indicator>
+						<Checkbox.Label><span class="muted xs">iconChecked = heart</span></Checkbox.Label>
+					</Checkbox.Root>
+					<Checkbox.Root indeterminate color="warn">
+						<Checkbox.Indicator />
+						<Checkbox.Label><span class="muted xs">indeterminate</span></Checkbox.Label>
+					</Checkbox.Root>
+					<Checkbox.Root checked lineThrough color="success">
+						<Checkbox.Indicator />
+						<Checkbox.Label><span class="muted xs">lineThrough · done</span></Checkbox.Label>
+					</Checkbox.Root>
+					<Checkbox.Root checked loading color="primary">
+						<Checkbox.Indicator />
+						<Checkbox.Label><span class="muted xs">loading</span></Checkbox.Label>
+					</Checkbox.Root>
+					<Checkbox.Root bind:checked={news} labelPosition="before" color="dark">
+						<Checkbox.Indicator />
+						<Checkbox.Label><span class="muted xs">labelPosition = before</span></Checkbox.Label>
+					</Checkbox.Root>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet inputsCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="fields">
 					<header class="row-between">
 						<strong class="kv__title">Input</strong>
-						<Chip size="mini" variant="transparent" color="primary"
-							>4</Chip
+						<Chip.Root size="mini" variant="transparent" color="primary"
+							>4</Chip.Root
 						>
 					</header>
-					<Input
-						value="Ada"
-						label="default"
-						labelStyle="placeholder"
-						variant="default"
-						block
-					/>
-					<Input
-						value="border"
-						label="border"
-						labelStyle="placeholder"
-						variant="border"
-						block
-					/>
-					<Input
-						value="shadow"
-						label="shadow"
-						labelStyle="placeholder"
-						variant="shadow"
-						block
-					/>
-					<Input
+					<Input.Root value="Ada" labelStyle="placeholder" variant="default" block>
+						<Input.Control>
+							<Input.Field />
+							<Input.Label>default</Input.Label>
+						</Input.Control>
+					</Input.Root>
+					<Input.Root value="border" labelStyle="placeholder" variant="border" block>
+						<Input.Control>
+							<Input.Field />
+							<Input.Label>border</Input.Label>
+						</Input.Control>
+					</Input.Root>
+					<Input.Root value="shadow" labelStyle="placeholder" variant="shadow" block>
+						<Input.Control>
+							<Input.Field />
+							<Input.Label>shadow</Input.Label>
+						</Input.Control>
+					</Input.Root>
+					<Input.Root
 						value="success"
-						label="fieldState"
 						labelStyle="placeholder"
 						fieldState="success"
 						block
 						progress={68}
-					/>
+					>
+						<Input.Control>
+							<Input.Field />
+							<Input.Label>fieldState</Input.Label>
+						</Input.Control>
+					</Input.Root>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
 {#snippet eventCard()}
 	<div class="tile">
-		<Card>
-			{#snippet body()}
+		<Card.Root>
+			<Card.Body>
 				<div class="event">
 					<header class="event__head">
 						<div class="event__date">
@@ -1815,18 +1772,18 @@
 						</div>
 					</header>
 					<div class="event__foot">
-						<AvatarGroup max={3}>
-							<Avatar text="AL" color="primary" size={20} />
-							<Avatar text="MP" color="warn" size={20} />
-							<Avatar text="LE" color="success" size={20} />
-						</AvatarGroup>
-						<Chip size="mini" variant="flat" color="primary"
-							>In&nbsp;1h</Chip
+						<Avatar.Group max={3}>
+							<Avatar.Root color="primary" size={20}><Avatar.Fallback>AL</Avatar.Fallback></Avatar.Root>
+							<Avatar.Root color="warn" size={20}><Avatar.Fallback>MP</Avatar.Fallback></Avatar.Root>
+							<Avatar.Root color="success" size={20}><Avatar.Fallback>LE</Avatar.Fallback></Avatar.Root>
+						</Avatar.Group>
+						<Chip.Root size="mini" variant="flat" color="primary"
+							>In&nbsp;1h</Chip.Root
 						>
 					</div>
 				</div>
-			{/snippet}
-		</Card>
+			</Card.Body>
+		</Card.Root>
 	</div>
 {/snippet}
 
@@ -1861,11 +1818,6 @@
 			padding-inline: clamp(1rem, 2vw, 1.5rem);
 		}
 	}
-	/* Hero column: scrolls naturally; the parallax lag is applied via
-	   inline `transform` from the rAF scroll handler. `padding-top` pushes
-	   the first elements down so the title sits roughly at viewport middle
-	   on first paint, while the sketch on the left starts from the top —
-	   the asymmetry frames the headline. */
 	.intro__hero {
 		display: flex;
 		flex-direction: column;
@@ -1873,11 +1825,23 @@
 		min-width: 0;
 		max-width: 510px;
 		width: 100%;
-		/* Push the headline toward the upper-third of the viewport so it
-		   reads at glance, but keep enough space below for the column-lag
-		   parallax to have a sizable `colDelta = sketchH − heroH` range. */
+		/* room below for the parallax `--col-delta` range. */
 		padding-top: clamp(2rem, 14vh, 9rem);
 		will-change: transform;
+	}
+
+	/* @supports is mandatory — without scroll-timeline the keyframe fills to its end-state at 0s and pins the hero shifted. */
+	@keyframes hero-parallax {
+		from { transform: translate3d(0, 0, 0); }
+		to   { transform: translate3d(0, var(--col-delta, 0px), 0); }
+	}
+	@supports (animation-timeline: scroll()) {
+		@media (min-width: 1360px) and (prefers-reduced-motion: no-preference) {
+			.intro__hero {
+				animation: hero-parallax linear both;
+				animation-timeline: scroll(root block);
+			}
+		}
 	}
 	@media (prefers-reduced-motion: reduce) {
 		.intro__hero {
@@ -2089,29 +2053,33 @@
 
 	/* ── Tile shell ─────────────────────────────────────────────────── */
 	.tile {
-		filter: drop-shadow(
-				0 10px 16px rgb(0 0 0 / calc(var(--shadow-opacity) * 1.2))
-			)
-			drop-shadow(
-				0 2px 4px rgb(0 0 0 / calc(var(--shadow-opacity) * 0.85))
-			);
+		/* box-shadow, not filter:drop-shadow — WebKit won't paint a filter'd element with composited descendants (the auth card went invisible until a hover repaint). */
+		border-radius: var(--rad-xl);
 		transition:
 			transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1),
-			filter 0.35s ease;
+			box-shadow 0.35s ease;
 		position: relative;
 	}
 	.tile:hover {
 		transform: translateY(-8px) scale(1.035);
-		filter: drop-shadow(
-				0 22px 38px rgb(0 0 0 / calc(var(--shadow-opacity) * 1.7))
-			)
-			drop-shadow(0 4px 8px rgb(0 0 0 / calc(var(--shadow-opacity) * 1)));
 		z-index: 5;
 	}
 	.tile--bare {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		/* Bare tiles wrap a self-shaped component (Calendar/Alert/Pagination); drop-shadow hugs its shape. */
+		border-radius: 0;
+		box-shadow: none;
+		filter:
+			drop-shadow(0 10px 16px rgb(0 0 0 / calc(var(--shadow-opacity) * 1.2)))
+			drop-shadow(0 2px 4px rgb(0 0 0 / calc(var(--shadow-opacity) * 0.85)));
+	}
+	.tile--bare:hover {
+		box-shadow: none;
+		filter:
+			drop-shadow(0 22px 38px rgb(0 0 0 / calc(var(--shadow-opacity) * 1.7)))
+			drop-shadow(0 4px 8px rgb(0 0 0 / calc(var(--shadow-opacity) * 1)));
 	}
 	.tile--center {
 		padding: 0.5rem 0;
@@ -2765,6 +2733,12 @@
 		}
 		.tile:hover {
 			transform: none;
+		}
+		/* Kill the infinite float on phones: an animating ancestor over a
+		   filter:drop-shadow tile makes iOS Safari skip painting the card
+		   until a tap-repaint. No float also saves battery. */
+		.bob {
+			animation: none;
 		}
 	}
 

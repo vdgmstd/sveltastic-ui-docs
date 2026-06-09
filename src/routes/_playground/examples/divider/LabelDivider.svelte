@@ -3,9 +3,21 @@
 </script>
 
 <div class="col">
-	<Divider>Center</Divider>
-	<Divider labelPlacement="start">Start</Divider>
-	<Divider labelPlacement="end">End</Divider>
+	<Divider.Root>
+		<Divider.Line />
+		<Divider.Label>Center</Divider.Label>
+		<Divider.Line />
+	</Divider.Root>
+	<Divider.Root labelPlacement="start">
+		<Divider.Line />
+		<Divider.Label>Start</Divider.Label>
+		<Divider.Line />
+	</Divider.Root>
+	<Divider.Root labelPlacement="end">
+		<Divider.Line />
+		<Divider.Label>End</Divider.Label>
+		<Divider.Line />
+	</Divider.Root>
 </div>
 
 <style>

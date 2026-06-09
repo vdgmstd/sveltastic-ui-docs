@@ -4,4 +4,8 @@
 	let value = $state('');
 </script>
 
-<Textarea bind:value placeholder="Type something — auto-grows…" autoGrow block />
+<Textarea.Root bind:value autoGrow block>
+	<Textarea.Control>
+		<Textarea.Field placeholder="Type something — auto-grows…" />
+	</Textarea.Control>
+</Textarea.Root>

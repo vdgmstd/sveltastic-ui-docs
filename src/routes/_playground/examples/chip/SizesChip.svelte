@@ -3,18 +3,18 @@
 </script>
 
 <div class="row">
-	<Chip size="xl">XL</Chip>
-	<Chip size="large">Large</Chip>
-	<Chip size="medium">Medium</Chip>
-	<Chip size="small">Small</Chip>
-	<Chip size="mini">Mini</Chip>
+	<Chip.Root size="xl">XL</Chip.Root>
+	<Chip.Root size="large">Large</Chip.Root>
+	<Chip.Root size="medium">Medium</Chip.Root>
+	<Chip.Root size="small">Small</Chip.Root>
+	<Chip.Root size="mini">Mini</Chip.Root>
 </div>
 <div class="row">
-	<Chip variant="flat" size="xl" closable onclose={() => {}}>XL</Chip>
-	<Chip variant="flat" size="large" closable onclose={() => {}}>Large</Chip>
-	<Chip variant="flat" size="medium" closable onclose={() => {}}>Medium</Chip>
-	<Chip variant="flat" size="small" closable onclose={() => {}}>Small</Chip>
-	<Chip variant="flat" size="mini" closable onclose={() => {}}>Mini</Chip>
+	<Chip.Root variant="flat" size="xl">XL<Chip.Close onclose={() => {}} /></Chip.Root>
+	<Chip.Root variant="flat" size="large">Large<Chip.Close onclose={() => {}} /></Chip.Root>
+	<Chip.Root variant="flat" size="medium">Medium<Chip.Close onclose={() => {}} /></Chip.Root>
+	<Chip.Root variant="flat" size="small">Small<Chip.Close onclose={() => {}} /></Chip.Root>
+	<Chip.Root variant="flat" size="mini">Mini<Chip.Close onclose={() => {}} /></Chip.Root>
 </div>
 
 <style>

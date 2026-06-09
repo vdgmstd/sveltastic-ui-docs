@@ -5,9 +5,11 @@
 	let custom = $state(false);
 </script>
 
-<Checkbox bind:checked={custom} color="danger">
-	{#snippet iconChecked()}
-		<HeartIcon size={14} weight="fill" />
-	{/snippet}
-	Custom checked icon
-</Checkbox>
+<Checkbox.Root bind:checked={custom} color="danger">
+	<Checkbox.Indicator>
+		<Checkbox.Icon>
+			<HeartIcon size={14} weight="fill" />
+		</Checkbox.Icon>
+	</Checkbox.Indicator>
+	<Checkbox.Label>Custom checked icon</Checkbox.Label>
+</Checkbox.Root>

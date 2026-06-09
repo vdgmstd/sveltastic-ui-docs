@@ -1,15 +1,24 @@
 <script lang="ts">
-	import { List, ListItem } from 'sveltastic-ui';
+	import { List } from 'sveltastic-ui';
 
 	let selected = $state<string[]>(['blue']);
+	const options = [
+		{ value: 'red', label: 'Red', color: 'danger' },
+		{ value: 'blue', label: 'Blue', color: 'primary' },
+		{ value: 'green', label: 'Green', color: 'success' },
+		{ value: 'yellow', label: 'Yellow', color: 'warning' }
+	] as const;
 </script>
 
-<List role="listbox" multiple bind:selected>
-	<ListItem value="red" color="danger">Red</ListItem>
-	<ListItem value="blue" color="primary">Blue</ListItem>
-	<ListItem value="green" color="success">Green</ListItem>
-	<ListItem value="yellow" color="warning">Yellow</ListItem>
-</List>
+<List.Root type="multiple" bind:selected>
+	<List.Body ariaLabel="Pick colors">
+		{#each options as option (option.value)}
+			<List.Item value={option.value} color={option.color}>
+				<List.ItemContent><List.ItemLabel>{option.label}</List.ItemLabel></List.ItemContent>
+			</List.Item>
+		{/each}
+	</List.Body>
+</List.Root>
 <p class="hint">Selected: <code>{selected.join(', ') || '—'}</code></p>
 
 <style>

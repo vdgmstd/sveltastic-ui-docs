@@ -3,34 +3,44 @@
 	import { UserIcon, LightningIcon } from 'phosphor-svelte';
 </script>
 
-<Collapse variant="default" color="primary">
-	{#snippet icon()}<UserIcon size={18} weight="fill" />{/snippet}
-	{#snippet header()}
-		<Avatar size="small" color="primary">JS</Avatar>
-		<strong>Profile</strong>
-	{/snippet}
-	{#snippet extra()}
-		<Chip variant="flat" color="success">Online</Chip>
-	{/snippet}
-	<p>Profile body — composed with avatar, header snippet and extra chip.</p>
-	<div class="row">
-		<Button variant="default" color="primary" size="small">Message</Button>
-		<Button variant="flat" color="dark" size="small">View profile</Button>
-	</div>
-</Collapse>
+<Collapse.Root variant="default" color="primary">
+	<Collapse.Trigger>
+		<Collapse.Icon><UserIcon size={18} weight="fill" /></Collapse.Icon>
+		<Collapse.Title>
+			<Avatar.Root color="primary"><Avatar.Fallback>JS</Avatar.Fallback></Avatar.Root>
+			<strong>Profile</strong>
+		</Collapse.Title>
+		<Collapse.Extra>
+			<Chip.Root variant="flat" color="success">Online</Chip.Root>
+		</Collapse.Extra>
+		<Collapse.Caret />
+	</Collapse.Trigger>
+	<Collapse.Content>
+		<p>Profile body — composed with avatar, header snippet and extra chip.</p>
+		<div class="row">
+			<Button.Root variant="default" color="primary" size="small">Message</Button.Root>
+			<Button.Root variant="flat" color="dark" size="small">View profile</Button.Root>
+		</div>
+	</Collapse.Content>
+</Collapse.Root>
 
-<Collapse variant="flat" color="warn">
-	{#snippet icon()}<LightningIcon size={18} weight="fill" />{/snippet}
-	{#snippet header()}<strong>Action required</strong>{/snippet}
-	{#snippet extra()}
-		<Chip variant="flat" color="warn">Pending</Chip>
-	{/snippet}
-	<p>Three pending invoices need review before the end of the week.</p>
-	<div class="row">
-		<Button variant="default" color="warn" size="small">Review</Button>
-		<Button variant="border" color="warn" size="small">Snooze</Button>
-	</div>
-</Collapse>
+<Collapse.Root variant="flat" color="warn">
+	<Collapse.Trigger>
+		<Collapse.Icon><LightningIcon size={18} weight="fill" /></Collapse.Icon>
+		<Collapse.Title><strong>Action required</strong></Collapse.Title>
+		<Collapse.Extra>
+			<Chip.Root variant="flat" color="warn">Pending</Chip.Root>
+		</Collapse.Extra>
+		<Collapse.Caret />
+	</Collapse.Trigger>
+	<Collapse.Content>
+		<p>Three pending invoices need review before the end of the week.</p>
+		<div class="row">
+			<Button.Root variant="default" color="warn" size="small">Review</Button.Root>
+			<Button.Root variant="border" color="warn" size="small">Snooze</Button.Root>
+		</div>
+	</Collapse.Content>
+</Collapse.Root>
 
 <style>
 	.row {

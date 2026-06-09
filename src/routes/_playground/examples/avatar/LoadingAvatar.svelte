@@ -2,8 +2,9 @@
 	import { Avatar } from 'sveltastic-ui';
 </script>
 
-<Avatar loading color="primary" text="JD" />
-<Avatar loading shape="circle">
-	<img src="/avatars/3.jpg" alt="" />
-</Avatar>
-<Avatar loading shape="square" color="warning" text="WA" />
+<Avatar.Root loading color="primary"><Avatar.Fallback>JD</Avatar.Fallback></Avatar.Root>
+<Avatar.Root loading shape="circle">
+	<Avatar.Image src="/avatars/3.jpg" alt="" />
+	<Avatar.Fallback>3</Avatar.Fallback>
+</Avatar.Root>
+<Avatar.Root loading shape="square" color="warning"><Avatar.Fallback>WA</Avatar.Fallback></Avatar.Root>

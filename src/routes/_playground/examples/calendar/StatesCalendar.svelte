@@ -2,7 +2,7 @@
 	import { Calendar } from 'sveltastic-ui';
 </script>
 
-<Calendar value="2026-04-15" disabled />
+<Calendar.Root type="single" value="2026-04-15" disabled />
 <span class="muted">Disabled</span>
 
 <style>

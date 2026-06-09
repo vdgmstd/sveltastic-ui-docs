@@ -4,4 +4,4 @@
 	let value = $state(4);
 </script>
 
-<Pagination bind:value length={5} infinite color="success" />
+<Pagination.Root bind:page={value} length={5} infinite color="success" />

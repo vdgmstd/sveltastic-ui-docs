@@ -2,18 +2,38 @@
 	import { Collapse } from 'sveltastic-ui';
 </script>
 
-<Collapse variant="flat" color="primary" title="Primary">
-	<p>Body content goes here.</p>
-</Collapse>
-<Collapse variant="flat" color="success" title="Success">
-	<p>Body content goes here.</p>
-</Collapse>
-<Collapse variant="flat" color="danger" title="Danger">
-	<p>Body content goes here.</p>
-</Collapse>
-<Collapse variant="flat" color="warn" title="Warning">
-	<p>Body content goes here.</p>
-</Collapse>
-<Collapse variant="flat" color="dark" title="Dark">
-	<p>Body content goes here.</p>
-</Collapse>
+<Collapse.Root variant="flat" color="primary">
+	<Collapse.Trigger>
+		<Collapse.Title>Primary</Collapse.Title>
+		<Collapse.Caret />
+	</Collapse.Trigger>
+	<Collapse.Content><p>Body content goes here.</p></Collapse.Content>
+</Collapse.Root>
+<Collapse.Root variant="flat" color="success">
+	<Collapse.Trigger>
+		<Collapse.Title>Success</Collapse.Title>
+		<Collapse.Caret />
+	</Collapse.Trigger>
+	<Collapse.Content><p>Body content goes here.</p></Collapse.Content>
+</Collapse.Root>
+<Collapse.Root variant="flat" color="danger">
+	<Collapse.Trigger>
+		<Collapse.Title>Danger</Collapse.Title>
+		<Collapse.Caret />
+	</Collapse.Trigger>
+	<Collapse.Content><p>Body content goes here.</p></Collapse.Content>
+</Collapse.Root>
+<Collapse.Root variant="flat" color="warn">
+	<Collapse.Trigger>
+		<Collapse.Title>Warning</Collapse.Title>
+		<Collapse.Caret />
+	</Collapse.Trigger>
+	<Collapse.Content><p>Body content goes here.</p></Collapse.Content>
+</Collapse.Root>
+<Collapse.Root variant="flat" color="dark">
+	<Collapse.Trigger>
+		<Collapse.Title>Dark</Collapse.Title>
+		<Collapse.Caret />
+	</Collapse.Trigger>
+	<Collapse.Content><p>Body content goes here.</p></Collapse.Content>
+</Collapse.Root>

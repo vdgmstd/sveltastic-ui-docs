@@ -26,16 +26,18 @@
 	});
 </script>
 
-<Upload
+<Upload.Root
 	bind:files
 	multiple
 	accept="image/*"
 	maxSize={100 * 1024}
 	maxFiles={3}
 	color="primary"
-	label="Drop images"
-	sublabel="under 100 KB"
 	hint="Images only, up to 3 files, each under 100 KB"
 	error={errorMessage || undefined}
 	onerror={handleErrors}
-/>
+>
+	<Upload.List />
+	<Upload.Dropzone label="Drop images" sublabel="under 100 KB" />
+	<Upload.Footer />
+</Upload.Root>

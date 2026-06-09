@@ -7,9 +7,9 @@
 </script>
 
 <div class="row">
-	<DateTimePicker type="time" bind:value={time} label="Time" labelStyle="placeholder" />
-	<DateTimePicker type="date" bind:value={date} label="Date" labelStyle="placeholder" />
-	<DateTimePicker type="datetime" bind:value={datetime} label="Date + time" labelStyle="placeholder" />
+	<DateTimePicker.Root type="time" bind:value={time} label="Time" labelStyle="placeholder" />
+	<DateTimePicker.Root type="date" bind:value={date} label="Date" labelStyle="placeholder" />
+	<DateTimePicker.Root type="datetime" bind:value={datetime} label="Date + time" labelStyle="placeholder" />
 </div>
 <dl class="values">
 	<dt>time</dt>

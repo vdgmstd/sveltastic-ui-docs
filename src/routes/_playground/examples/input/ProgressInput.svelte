@@ -1,19 +1,31 @@
 <script lang="ts">
 	import { Input } from 'sveltastic-ui';
 
-	let progress = $state(45);
-	let pwd = $state('');
+	let password = $state('');
+
+	// Strength 0..100 from length + character variety; the progress bar tints red -> amber -> green.
+	let strength = $derived.by(() => {
+		const value = password;
+		if (!value) return 0;
+		let score = Math.min(value.length, 10) * 6;
+		if (/[a-z]/.test(value)) score += 10;
+		if (/[A-Z]/.test(value)) score += 10;
+		if (/\d/.test(value)) score += 10;
+		if (/[^A-Za-z0-9]/.test(value)) score += 10;
+		return Math.min(score, 100);
+	});
+
+	let strengthLabel = $derived(
+		strength === 0 ? 'Type a password' : strength < 33 ? 'Weak' : strength < 66 ? 'Fair' : 'Strong'
+	);
 </script>
 
-<Input placeholder="Password strength" {progress} bind:value={pwd} />
-<input
-	type="range"
-	min="0"
-	max="100"
-	bind:value={progress}
-	aria-label="Progress"
-/>
-<span class="muted">{progress}%</span>
+<Input.Root bind:value={password} progress={strength}>
+	<Input.Control>
+		<Input.Field type="password" passwordReveal placeholder="Password strength" />
+	</Input.Control>
+</Input.Root>
+<span class="muted">{strengthLabel} — {strength}%</span>
 
 <style>
 	.muted {

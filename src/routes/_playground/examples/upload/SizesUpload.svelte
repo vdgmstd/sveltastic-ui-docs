@@ -5,5 +5,13 @@
 	let small = $state<File[]>([]);
 </script>
 
-<Upload bind:files={xl} size="xl" color="primary" label="XL" sublabel="extra large" />
-<Upload bind:files={small} size="small" color="success" label="Small" sublabel="compact" />
+<Upload.Root bind:files={xl} size="xl" color="primary">
+	<Upload.List />
+	<Upload.Dropzone label="XL" sublabel="extra large" />
+	<Upload.Footer />
+</Upload.Root>
+<Upload.Root bind:files={small} size="small" color="success">
+	<Upload.List />
+	<Upload.Dropzone label="Small" sublabel="compact" />
+	<Upload.Footer />
+</Upload.Root>

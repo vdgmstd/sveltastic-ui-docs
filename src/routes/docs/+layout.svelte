@@ -172,14 +172,12 @@
 		gap: 0;
 		min-height: calc(100vh - 56px);
 	}
+	/* Sticky (in-flow), not fixed: a fixed sidebar escapes to viewport-top and paints over the
+	   previous page during SvelteKit's ~250ms teardown coexistence; in-flow it stays inside .docs. */
 	.docs__sidebar {
-		position: fixed;
+		position: sticky;
 		top: 56px;
-		/* Anchor to the visual left of `.app-main` (which is exactly
-		   `max-width: 1720px`, centered in viewport, with no horizontal
-		   padding). Stays bolted to the header regardless of body scroll. */
-		left: max(1.25rem, calc(50% - 860px));
-		width: 292px;
+		align-self: start;
 		height: calc(100vh - 56px);
 		box-sizing: border-box;
 		overflow-y: auto;

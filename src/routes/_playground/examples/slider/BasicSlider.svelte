@@ -4,7 +4,7 @@
 	let value = $state(40);
 </script>
 
-<Slider bind:value />
+<Slider.Root bind:value />
 <p class="muted">Value: {value}</p>
 
 <style>

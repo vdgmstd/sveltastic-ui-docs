@@ -9,6 +9,8 @@
 	import ThicknessDivider from './examples/divider/ThicknessDivider.svelte';
 	import InsetDivider from './examples/divider/InsetDivider.svelte';
 	import VerticalDivider from './examples/divider/VerticalDivider.svelte';
+	import DecorativeDivider from './examples/divider/DecorativeDivider.svelte';
+	import ChildDivider from './examples/divider/ChildDivider.svelte';
 
 	import basicSrc from './examples/divider/BasicDivider.svelte?raw';
 	import variantsSrc from './examples/divider/VariantsDivider.svelte?raw';
@@ -17,6 +19,8 @@
 	import thicknessSrc from './examples/divider/ThicknessDivider.svelte?raw';
 	import insetSrc from './examples/divider/InsetDivider.svelte?raw';
 	import verticalSrc from './examples/divider/VerticalDivider.svelte?raw';
+	import decorativeSrc from './examples/divider/DecorativeDivider.svelte?raw';
+	import childSrc from './examples/divider/ChildDivider.svelte?raw';
 
 	const t = (key: string) => i18n.t(key);
 
@@ -27,7 +31,9 @@
 		{ label: t('playground.divider.colors.label'), Component: ColorsDivider, src: colorsSrc },
 		{ label: t('playground.divider.thickness.label'), Component: ThicknessDivider, src: thicknessSrc },
 		{ label: t('playground.divider.inset.label'), Component: InsetDivider, src: insetSrc },
-		{ label: t('playground.divider.vertical.label'), Component: VerticalDivider, src: verticalSrc }
+		{ label: t('playground.divider.vertical.label'), Component: VerticalDivider, src: verticalSrc },
+		{ label: t('playground.divider.decorative.label'), Component: DecorativeDivider, src: decorativeSrc },
+		{ label: t('playground.divider.child.label'), Component: ChildDivider, src: childSrc }
 	];
 </script>
 

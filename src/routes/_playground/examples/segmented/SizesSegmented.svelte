@@ -6,34 +6,34 @@
 	let medium = $state<'a' | 'b' | 'c'>('b');
 	let small = $state<'a' | 'b' | 'c'>('a');
 	let mini = $state<'a' | 'b' | 'c'>('a');
-
-	const abc = [
-		{ value: 'a' as const, label: 'A' },
-		{ value: 'b' as const, label: 'B' },
-		{ value: 'c' as const, label: 'C' }
-	];
 </script>
+
+{#snippet abc()}
+	<Segmented.Item value="a">A</Segmented.Item>
+	<Segmented.Item value="b">B</Segmented.Item>
+	<Segmented.Item value="c">C</Segmented.Item>
+{/snippet}
 
 <div class="grid">
 	<span class="muted">xl</span>
-	<Segmented bind:value={xl} size="xl" items={abc} />
-	<Button size="xl">Button</Button>
+	<Segmented.Root bind:value={xl} size="xl" ariaLabel="xl size">{@render abc()}</Segmented.Root>
+	<Button.Root size="xl">Button</Button.Root>
 
 	<span class="muted">large</span>
-	<Segmented bind:value={large} size="large" items={abc} />
-	<Button size="large">Button</Button>
+	<Segmented.Root bind:value={large} size="large" ariaLabel="large size">{@render abc()}</Segmented.Root>
+	<Button.Root size="large">Button</Button.Root>
 
 	<span class="muted">medium</span>
-	<Segmented bind:value={medium} size="medium" items={abc} />
-	<Button size="medium">Button</Button>
+	<Segmented.Root bind:value={medium} size="medium" ariaLabel="medium size">{@render abc()}</Segmented.Root>
+	<Button.Root size="medium">Button</Button.Root>
 
 	<span class="muted">small</span>
-	<Segmented bind:value={small} size="small" items={abc} />
-	<Button size="small">Button</Button>
+	<Segmented.Root bind:value={small} size="small" ariaLabel="small size">{@render abc()}</Segmented.Root>
+	<Button.Root size="small">Button</Button.Root>
 
 	<span class="muted">mini</span>
-	<Segmented bind:value={mini} size="mini" items={abc} />
-	<Button size="mini">Button</Button>
+	<Segmented.Root bind:value={mini} size="mini" ariaLabel="mini size">{@render abc()}</Segmented.Root>
+	<Button.Root size="mini">Button</Button.Root>
 </div>
 
 <style>

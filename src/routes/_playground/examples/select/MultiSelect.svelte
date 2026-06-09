@@ -11,7 +11,10 @@
 	];
 </script>
 
-<Select bind:value {items} multiple placeholder="Pick multiple fruits" />
+<Select.Root type="multiple" bind:value {items} placeholder="Pick multiple fruits">
+	<Select.Trigger />
+	<Select.Content />
+</Select.Root>
 <p class="muted">Value: {value.join(', ') || '—'}</p>
 
 <style>

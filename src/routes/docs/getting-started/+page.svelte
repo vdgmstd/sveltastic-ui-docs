@@ -9,7 +9,7 @@
 	<p>
 		A Svelte 5 + Tailwind v4 component kit. Featherweight runtime, SSR-safe,
 		tree-shakable to the byte. This page gets you from a blank project to a
-		working <code>&lt;Button&gt;</code> in under a minute.
+		working <code>&lt;Button.Root&gt;</code> in under a minute.
 	</p>
 </header>
 
@@ -51,7 +51,7 @@
   import { Button } from 'sveltastic-ui';
 <\/script>
 
-<Button color="primary" variant="gradient">Ship it</Button>`}</code></pre>
+<Button.Root color="primary" variant="gradient">Ship it</Button.Root>`}</code></pre>
 </div>
 
 <div class="block">

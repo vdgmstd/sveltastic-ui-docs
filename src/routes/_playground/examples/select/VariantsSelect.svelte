@@ -8,6 +8,15 @@
 	];
 </script>
 
-<Select placeholder="Default" {items} />
-<Select placeholder="Border" variant="border" {items} />
-<Select placeholder="Shadow" variant="shadow" {items} />
+<Select.Root type="single" placeholder="Default" {items}>
+	<Select.Trigger />
+	<Select.Content />
+</Select.Root>
+<Select.Root type="single" placeholder="Border" variant="border" {items}>
+	<Select.Trigger />
+	<Select.Content />
+</Select.Root>
+<Select.Root type="single" placeholder="Shadow" variant="shadow" {items}>
+	<Select.Trigger />
+	<Select.Content />
+</Select.Root>

@@ -9,11 +9,11 @@
 </script>
 
 <div class="col">
-	<Pagination bind:value={xl} length={8} size="xl" />
-	<Pagination bind:value={large} length={8} size="large" />
-	<Pagination bind:value={medium} length={8} size="medium" />
-	<Pagination bind:value={small} length={8} size="small" />
-	<Pagination bind:value={mini} length={8} size="mini" />
+	<Pagination.Root bind:page={xl} length={8} size="xl" />
+	<Pagination.Root bind:page={large} length={8} size="large" />
+	<Pagination.Root bind:page={medium} length={8} size="medium" />
+	<Pagination.Root bind:page={small} length={8} size="small" />
+	<Pagination.Root bind:page={mini} length={8} size="mini" />
 </div>
 
 <style>

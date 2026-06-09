@@ -3,19 +3,19 @@
 	import { TagIcon, UserIcon, SealCheckIcon, StarIcon } from 'phosphor-svelte';
 </script>
 
-<Chip variant="flat" color="primary">
-	{#snippet icon()}<TagIcon size={12} weight="fill" />{/snippet}
+<Chip.Root variant="flat" color="primary">
+	<Chip.Icon><TagIcon size={12} weight="fill" /></Chip.Icon>
 	Tag
-</Chip>
-<Chip variant="border" color="success">
-	{#snippet icon()}<UserIcon size={12} weight="fill" />{/snippet}
+</Chip.Root>
+<Chip.Root variant="border" color="success">
+	<Chip.Icon><UserIcon size={12} weight="fill" /></Chip.Icon>
 	User
-</Chip>
-<Chip variant="gradient" color="warning">
-	{#snippet icon()}<SealCheckIcon size={12} weight="fill" />{/snippet}
+</Chip.Root>
+<Chip.Root variant="gradient" color="warning">
+	<Chip.Icon><SealCheckIcon size={12} weight="fill" /></Chip.Icon>
 	Verified
-</Chip>
-<Chip variant="shadow">
-	{#snippet icon()}<StarIcon size={12} weight="fill" />{/snippet}
+</Chip.Root>
+<Chip.Root variant="shadow">
+	<Chip.Icon><StarIcon size={12} weight="fill" /></Chip.Icon>
 	Featured
-</Chip>
+</Chip.Root>

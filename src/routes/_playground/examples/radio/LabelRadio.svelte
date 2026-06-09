@@ -1,8 +1,16 @@
 <script lang="ts">
-	import { Radio } from 'sveltastic-ui';
+	import { RadioGroup } from 'sveltastic-ui';
 
-	let labels = $state<string | number>('after');
+	let labels = $state('after');
 </script>
 
-<Radio labelPosition="before" bind:group={labels} value="before">Label before</Radio>
-<Radio labelPosition="after" bind:group={labels} value="after">Label after</Radio>
+<RadioGroup.Root bind:value={labels} orientation="horizontal" ariaLabel="Label position">
+	<RadioGroup.Item value="before" labelPosition="before">
+		<RadioGroup.Indicator />
+		<RadioGroup.Label>Label before</RadioGroup.Label>
+	</RadioGroup.Item>
+	<RadioGroup.Item value="after" labelPosition="after">
+		<RadioGroup.Indicator />
+		<RadioGroup.Label>Label after</RadioGroup.Label>
+	</RadioGroup.Item>
+</RadioGroup.Root>

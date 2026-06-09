@@ -7,9 +7,9 @@
 </script>
 
 <div class="stack">
-	<Slider bind:value={small} size="small" />
-	<Slider bind:value={medium} size="medium" />
-	<Slider bind:value={large} size="large" />
+	<Slider.Root bind:value={small} size="small" />
+	<Slider.Root bind:value={medium} size="medium" />
+	<Slider.Root bind:value={large} size="large" />
 </div>
 
 <style>

@@ -5,5 +5,5 @@
 	let datetime = $state('');
 </script>
 
-<DateTimePicker type="time" bind:value={time} showSeconds />
-<DateTimePicker type="datetime" bind:value={datetime} showSeconds />
+<DateTimePicker.Root type="time" bind:value={time} showSeconds />
+<DateTimePicker.Root type="datetime" bind:value={datetime} showSeconds />

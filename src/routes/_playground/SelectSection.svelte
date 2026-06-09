@@ -3,6 +3,7 @@
 	import DemoBlock from './DemoBlock.svelte';
 
 	import BasicSelect from './examples/select/BasicSelect.svelte';
+	import ComposedSelect from './examples/select/ComposedSelect.svelte';
 	import OpenAnimSelect from './examples/select/OpenAnimSelect.svelte';
 	import MultiSelect from './examples/select/MultiSelect.svelte';
 	import FilterSelect from './examples/select/FilterSelect.svelte';
@@ -13,6 +14,7 @@
 	import CustomMultiSelect from './examples/select/CustomMultiSelect.svelte';
 
 	import basicSrc from './examples/select/BasicSelect.svelte?raw';
+	import composedSrc from './examples/select/ComposedSelect.svelte?raw';
 	import openAnimSrc from './examples/select/OpenAnimSelect.svelte?raw';
 	import multiSrc from './examples/select/MultiSelect.svelte?raw';
 	import filterSrc from './examples/select/FilterSelect.svelte?raw';
@@ -26,6 +28,7 @@
 
 	const blocks = [
 		{ labelKey: 'playground.select.basic.label', Component: BasicSelect, src: basicSrc },
+		{ labelKey: 'playground.select.composed.label', descriptionKey: 'playground.select.composed.description', Component: ComposedSelect, src: composedSrc },
 		{ labelKey: 'playground.select.openAnim.label', descriptionKey: 'playground.select.openAnim.description', Component: OpenAnimSelect, src: openAnimSrc },
 		{ labelKey: 'playground.select.multi.label', Component: MultiSelect, src: multiSrc },
 		{ labelKey: 'playground.select.filter.label', Component: FilterSelect, src: filterSrc },

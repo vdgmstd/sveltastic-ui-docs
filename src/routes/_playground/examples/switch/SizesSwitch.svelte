@@ -6,6 +6,6 @@
 	let large = $state(true);
 </script>
 
-<Switch bind:checked={small} size="small" />
-<Switch bind:checked={medium} size="medium" />
-<Switch bind:checked={large} size="large" />
+<Switch.Root bind:checked={small} size="small"><Switch.Thumb /></Switch.Root>
+<Switch.Root bind:checked={medium} size="medium"><Switch.Thumb /></Switch.Root>
+<Switch.Root bind:checked={large} size="large"><Switch.Thumb /></Switch.Root>

@@ -2,11 +2,23 @@
 	import { InputNumber } from 'sveltastic-ui';
 </script>
 
-<InputNumber value={1} shape="default" />
+<InputNumber.Root value={1} shape="default">
+	<InputNumber.Decrement />
+	<InputNumber.Field />
+	<InputNumber.Increment />
+</InputNumber.Root>
 <span class="muted">default</span>
-<InputNumber value={1} shape="square" color="danger" />
+<InputNumber.Root value={1} shape="square" color="danger">
+	<InputNumber.Decrement />
+	<InputNumber.Field />
+	<InputNumber.Increment />
+</InputNumber.Root>
 <span class="muted">square</span>
-<InputNumber value={1} shape="circle" color="success" />
+<InputNumber.Root value={1} shape="circle" color="success">
+	<InputNumber.Decrement />
+	<InputNumber.Field />
+	<InputNumber.Increment />
+</InputNumber.Root>
 <span class="muted">circle</span>
 
 <style>

@@ -4,4 +4,8 @@
 	let value = $state('');
 </script>
 
-<Textarea bind:value placeholder="Type a few words…" rows={3} />
+<Textarea.Root bind:value>
+	<Textarea.Control>
+		<Textarea.Field placeholder="Type a few words…" rows={3} />
+	</Textarea.Control>
+</Textarea.Root>

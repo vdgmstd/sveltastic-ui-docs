@@ -3,11 +3,11 @@
 </script>
 
 <div class="col">
-	<Divider color="primary" />
-	<Divider color="success" />
-	<Divider color="danger" />
-	<Divider color="warning" />
-	<Divider color="#7d22f0" />
+	<Divider.Root color="primary" />
+	<Divider.Root color="success" />
+	<Divider.Root color="danger" />
+	<Divider.Root color="warning" />
+	<Divider.Root color="#7d22f0" />
 </div>
 
 <style>

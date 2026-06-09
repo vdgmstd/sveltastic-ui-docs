@@ -6,8 +6,8 @@
 </script>
 
 <div class="col">
-	<Pagination bind:value={states} length={10} disabledItems={[3, 7]} loadingItems={[5]} />
-	<Pagination bind:value={off} length={20} disabled />
+	<Pagination.Root bind:page={states} length={10} disabledItems={[3, 7]} loadingItems={[5]} />
+	<Pagination.Root bind:page={off} length={20} disabled />
 </div>
 
 <style>

@@ -1,18 +1,28 @@
 <script lang="ts">
-	import { Menu, Button, type MenuEntry } from 'sveltastic-ui';
+	import { Menu, Button } from 'sveltastic-ui';
 	import { UserIcon, GearIcon, SignOutIcon } from 'phosphor-svelte';
-
-	const items: MenuEntry[] = [
-		{ type: 'label', text: 'Account' },
-		{ type: 'item', label: 'Profile', icon: UserIcon },
-		{ type: 'item', label: 'Settings', icon: GearIcon },
-		{ type: 'divider' },
-		{ type: 'item', label: 'Logout', icon: SignOutIcon }
-	];
 </script>
 
-<Menu triggerOn="hover" placement="bottom-start" {items}>
-	{#snippet trigger()}
-		<Button variant="default" color="primary">Hover me</Button>
-	{/snippet}
-</Menu>
+<Menu.Root triggerOn="hover" placement="bottom-start">
+	<Menu.Trigger>
+		{#snippet child({ props })}
+			<Button.Root variant="default" color="primary" {...props}>Hover me</Button.Root>
+		{/snippet}
+	</Menu.Trigger>
+	<Menu.Content>
+		<Menu.GroupHeading>Account</Menu.GroupHeading>
+		<Menu.Item>
+			<Menu.ItemIcon><UserIcon size={14} /></Menu.ItemIcon>
+			Profile
+		</Menu.Item>
+		<Menu.Item>
+			<Menu.ItemIcon><GearIcon size={14} /></Menu.ItemIcon>
+			Settings
+		</Menu.Item>
+		<Menu.Separator />
+		<Menu.Item>
+			<Menu.ItemIcon><SignOutIcon size={14} /></Menu.ItemIcon>
+			Logout
+		</Menu.Item>
+	</Menu.Content>
+</Menu.Root>

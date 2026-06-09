@@ -4,7 +4,9 @@
 	let files = $state<File[]>([]);
 </script>
 
-<Upload bind:files buttonOnly variant="flat" color="danger" label="Choose files…" />
+<Upload.Root bind:files buttonOnly variant="flat" color="danger">
+	<Upload.Dropzone label="Choose files…" />
+</Upload.Root>
 <p class="muted">{files.length} selected</p>
 
 <style>

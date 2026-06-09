@@ -10,12 +10,12 @@
 </script>
 
 <div class="col">
-	<Pagination bind:value={primary} length={8} color="primary" />
-	<Pagination bind:value={success} length={8} color="success" />
-	<Pagination bind:value={danger} length={8} color="danger" />
-	<Pagination bind:value={warning} length={8} color="warning" />
-	<Pagination bind:value={dark} length={8} color="dark" />
-	<Pagination bind:value={hex} length={8} color="#7d22f0" />
+	<Pagination.Root bind:page={primary} length={8} color="primary" />
+	<Pagination.Root bind:page={success} length={8} color="success" />
+	<Pagination.Root bind:page={danger} length={8} color="danger" />
+	<Pagination.Root bind:page={warning} length={8} color="warning" />
+	<Pagination.Root bind:page={dark} length={8} color="dark" />
+	<Pagination.Root bind:page={hex} length={8} color="#7d22f0" />
 </div>
 
 <style>

@@ -42,75 +42,78 @@
 
 	const lookup = new Map<string, RichItem>();
 	for (const g of richItems) for (const it of g.items) lookup.set(it.value, it);
+
+	// flat index across all sections, for Select.Item keyboard navigation
+	let flat = $derived(richItems.flatMap((g) => g.items));
 </script>
 
-<Select bind:value items={richItems} multiple placeholder="Pick toppings">
-	{#snippet chip(item, remove)}
-		{@const meta = lookup.get(item.value as string)}
-		<span class="rich-chip">
-			{#if meta}
-				<span class="rich-chip__icon" style:background={meta.tone}>
-					<meta.Icon size={10} weight="fill" color="#fff" />
-				</span>
-				<span class="rich-chip__label">{meta.label}</span>
-			{:else}
-				<span class="rich-chip__label">{item.label}</span>
-			{/if}
-			<button
-				type="button"
-				class="rich-chip__close"
-				aria-label="Remove"
-				onclick={(e) => {
-					e.stopPropagation();
-					remove();
-				}}
-			>
-				<XIcon size={9} weight="bold" />
-			</button>
-		</span>
-	{/snippet}
-
-	{#snippet groupTitle(title)}
-		<div class="rich-group">{title}</div>
-	{/snippet}
-
-	{#snippet option(item, isSel)}
-		{@const meta = lookup.get(item.value as string)}
-		<div class="rich-row" class:rich-row--selected={isSel}>
-			{#if meta}
-				<span class="rich-row__icon" style:background={meta.tone}>
-					<meta.Icon size={14} weight="fill" color="#fff" />
-				</span>
-				<span class="rich-row__main">
-					<span class="rich-row__title">{meta.label}</span>
-					<span class="rich-row__hint">{meta.hint}</span>
-				</span>
-				<span class="rich-row__indicator">
-					{#if isSel}
-						<span class="rich-row__check">
-							<CheckIcon size={11} weight="bold" />
-						</span>
-					{:else}
-						<span class="rich-row__tag">
-							<StarIcon size={9} weight="fill" />
-							{meta.tag}
-						</span>
-					{/if}
-				</span>
-			{/if}
-		</div>
-	{/snippet}
-</Select>
+<Select.Root type="multiple" bind:value items={richItems} placeholder="Pick toppings">
+	<Select.Trigger>
+		<Select.Value>
+			<Select.Chip>
+				{#snippet children({ item, remove })}
+					{@const meta = lookup.get(item.value as string)}
+					<span class="rich-chip">
+						{#if meta}
+							<span class="rich-chip__icon" style:background={meta.tone}>
+								<meta.Icon size={10} weight="fill" color="#fff" />
+							</span>
+							<span class="rich-chip__label">{meta.label}</span>
+						{:else}
+							<span class="rich-chip__label">{item.label}</span>
+						{/if}
+						<button
+							type="button"
+							class="rich-chip__close"
+							aria-label="Remove"
+							onclick={(e) => {
+								e.stopPropagation();
+								remove();
+							}}
+						>
+							<XIcon size={9} weight="bold" />
+						</button>
+					</span>
+				{/snippet}
+			</Select.Chip>
+		</Select.Value>
+	</Select.Trigger>
+	<Select.Content>
+		{#each richItems as group (group.title)}
+			<Select.Group>
+				<Select.GroupHeading>{group.title}</Select.GroupHeading>
+				{#each group.items as meta (meta.value)}
+					{@const isSel = value.includes(meta.value)}
+					<Select.Item value={meta.value} label={meta.label} index={flat.indexOf(meta)}>
+						<div class="rich-row" class:rich-row--selected={isSel}>
+							<span class="rich-row__icon" style:background={meta.tone}>
+								<meta.Icon size={14} weight="fill" color="#fff" />
+							</span>
+							<span class="rich-row__main">
+								<span class="rich-row__title">{meta.label}</span>
+								<span class="rich-row__hint">{meta.hint}</span>
+							</span>
+							<span class="rich-row__indicator">
+								{#if isSel}
+									<span class="rich-row__check">
+										<CheckIcon size={11} weight="bold" />
+									</span>
+								{:else}
+									<span class="rich-row__tag">
+										<StarIcon size={9} weight="fill" />
+										{meta.tag}
+									</span>
+								{/if}
+							</span>
+						</div>
+					</Select.Item>
+				{/each}
+			</Select.Group>
+		{/each}
+	</Select.Content>
+</Select.Root>
 
 <style>
-	.rich-group {
-		padding: 8px 10px 4px;
-		font-size: 0.6rem;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		font-weight: 600;
-		opacity: 0.5;
-	}
 	.rich-row {
 		display: flex;
 		align-items: center;

@@ -25,8 +25,23 @@
 	];
 </script>
 
-<Select {items} openAnim="pop" placeholder="pop" />
-<Select {items} openAnim="slide" placeholder="slide" />
-<Select {items} openAnim="fade" placeholder="fade" />
-<Select {items} openAnim="spring" placeholder="spring" />
-<Select items={groups} openAnim="stagger" placeholder="stagger" />
+<Select.Root type="single" {items} openAnim="pop" placeholder="pop">
+	<Select.Trigger />
+	<Select.Content />
+</Select.Root>
+<Select.Root type="single" {items} openAnim="slide" placeholder="slide">
+	<Select.Trigger />
+	<Select.Content />
+</Select.Root>
+<Select.Root type="single" {items} openAnim="fade" placeholder="fade">
+	<Select.Trigger />
+	<Select.Content />
+</Select.Root>
+<Select.Root type="single" {items} openAnim="spring" placeholder="spring">
+	<Select.Trigger />
+	<Select.Content />
+</Select.Root>
+<Select.Root type="single" items={groups} openAnim="stagger" placeholder="stagger">
+	<Select.Trigger />
+	<Select.Content />
+</Select.Root>

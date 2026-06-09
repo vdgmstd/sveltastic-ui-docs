@@ -8,15 +8,27 @@
 
 <label>
 	<span>120 ms</span>
-	<InputNumber bind:value={snappy} step={10} animationDuration={120} />
+	<InputNumber.Root bind:value={snappy} step={10} animationDuration={120}>
+		<InputNumber.Decrement />
+		<InputNumber.Field />
+		<InputNumber.Increment />
+	</InputNumber.Root>
 </label>
 <label>
 	<span>500 ms (default)</span>
-	<InputNumber bind:value={smooth} step={10} />
+	<InputNumber.Root bind:value={smooth} step={10}>
+		<InputNumber.Decrement />
+		<InputNumber.Field />
+		<InputNumber.Increment />
+	</InputNumber.Root>
 </label>
 <label>
 	<span>1200 ms</span>
-	<InputNumber bind:value={slow} step={10} animationDuration={1200} />
+	<InputNumber.Root bind:value={slow} step={10} animationDuration={1200}>
+		<InputNumber.Decrement />
+		<InputNumber.Field />
+		<InputNumber.Increment />
+	</InputNumber.Root>
 </label>
 
 <style>

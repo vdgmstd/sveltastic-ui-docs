@@ -5,27 +5,41 @@
 	const src = '/card-demo/reykjavik-church.jpg';
 </script>
 
-<Card variant="peek">
-	{#snippet img()}
-		<img {src} alt="Hallgrímskirkja church standing over Reykjavik" />
-	{/snippet}
-	{#snippet title()}
-		<h3>Three days in Reykjavik</h3>
-	{/snippet}
-	{#snippet body()}
+<Card.Root variant="peek">
+	<Card.Media>
+		<Card.Image>
+			<img {src} alt="Hallgrímskirkja church standing over Reykjavik" />
+		</Card.Image>
+		<Card.Overlay>
+			<Button.Root iconOnly color="danger" shape="circle" aria-label="Like">
+				<HeartIcon size={16} weight="fill" />
+			</Button.Root>
+			<Button.Root variant="shadow" color="primary" aria-label="Chat">
+				<ChatCircleIcon size={18} weight="fill" />
+				<span>54</span>
+			</Button.Root>
+		</Card.Overlay>
+	</Card.Media>
+	<Card.Body>
+		<Card.Header><h3>Three days in Reykjavik</h3></Card.Header>
 		<p>Geothermal pools, black-sand coastlines, and the world's quietest city after midnight.</p>
-	{/snippet}
-	{#snippet interactions()}
-		<Button iconOnly color="danger" shape="circle" aria-label="Like">
-			<HeartIcon size={16} weight="fill" />
-		</Button>
-		<Button variant="shadow" color="primary" aria-label="Chat">
-			<ChatCircleIcon size={18} weight="fill" />
-			<span>54</span>
-		</Button>
-	{/snippet}
-	{#snippet actions()}
-		<Button block>Open</Button>
-		<Button block variant="shadow" color="danger">Cancel</Button>
-	{/snippet}
-</Card>
+	</Card.Body>
+	<Card.Footer floating>
+		<div class="actions">
+			<Button.Root>Open</Button.Root>
+			<Button.Root variant="shadow" color="danger">Cancel</Button.Root>
+		</div>
+	</Card.Footer>
+</Card.Root>
+
+<style>
+	.actions {
+		display: flex;
+		gap: var(--space-2);
+		width: 100%;
+	}
+	.actions :global(.button) {
+		flex: 1;
+		margin: 0;
+	}
+</style>

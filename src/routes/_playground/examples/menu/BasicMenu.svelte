@@ -1,26 +1,39 @@
 <script lang="ts">
-	import { Menu, Button, type MenuEntry } from 'sveltastic-ui';
+	import { Menu, Button } from 'sveltastic-ui';
 	import { CaretDownIcon, PencilSimpleIcon, CopyIcon, ShareNetworkIcon, TrashIcon } from 'phosphor-svelte';
 
 	let lastAction = $state('—');
-
-	const items: MenuEntry[] = [
-		{ type: 'item', label: 'Edit', icon: PencilSimpleIcon, onclick: () => (lastAction = 'Edit') },
-		{ type: 'item', label: 'Duplicate', icon: CopyIcon, onclick: () => (lastAction = 'Duplicate') },
-		{ type: 'item', label: 'Share', icon: ShareNetworkIcon, onclick: () => (lastAction = 'Share') },
-		{ type: 'divider' },
-		{ type: 'item', label: 'Delete', icon: TrashIcon, danger: true, onclick: () => (lastAction = 'Delete') }
-	];
 </script>
 
-<Menu {items}>
-	{#snippet trigger()}
-		<Button variant="border">
-			Open menu
-			<CaretDownIcon size={12} weight="bold" />
-		</Button>
-	{/snippet}
-</Menu>
+<Menu.Root>
+	<Menu.Trigger>
+		{#snippet child({ props })}
+			<Button.Root variant="border" {...props}>
+				Open menu
+				<CaretDownIcon size={12} weight="bold" />
+			</Button.Root>
+		{/snippet}
+	</Menu.Trigger>
+	<Menu.Content>
+		<Menu.Item onSelect={() => (lastAction = 'Edit')}>
+			<Menu.ItemIcon><PencilSimpleIcon size={14} /></Menu.ItemIcon>
+			Edit
+		</Menu.Item>
+		<Menu.Item onSelect={() => (lastAction = 'Duplicate')}>
+			<Menu.ItemIcon><CopyIcon size={14} /></Menu.ItemIcon>
+			Duplicate
+		</Menu.Item>
+		<Menu.Item onSelect={() => (lastAction = 'Share')}>
+			<Menu.ItemIcon><ShareNetworkIcon size={14} /></Menu.ItemIcon>
+			Share
+		</Menu.Item>
+		<Menu.Separator />
+		<Menu.Item danger onSelect={() => (lastAction = 'Delete')}>
+			<Menu.ItemIcon><TrashIcon size={14} /></Menu.ItemIcon>
+			Delete
+		</Menu.Item>
+	</Menu.Content>
+</Menu.Root>
 <p class="muted">Last action: {lastAction}</p>
 
 <style>

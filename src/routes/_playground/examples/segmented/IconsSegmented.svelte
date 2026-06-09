@@ -10,25 +10,31 @@
 	} from 'phosphor-svelte';
 </script>
 
-<Segmented
-	items={[
-		{ value: 'light', label: 'Light', icon: sunIcon },
-		{ value: 'dark', label: 'Dark', icon: moonIcon },
-		{ value: 'system', label: 'System', icon: monitorIcon }
-	]}
-/>
-<Segmented
-	ariaLabel="Text alignment"
-	items={[
-		{ value: 'left', icon: alignLeftIcon },
-		{ value: 'center', icon: alignCenterIcon },
-		{ value: 'right', icon: alignRightIcon }
-	]}
-/>
+<Segmented.Root ariaLabel="Theme">
+	<Segmented.Item value="light">
+		<Segmented.ItemIcon><SunIcon size={15} weight="fill" /></Segmented.ItemIcon>
+		Light
+	</Segmented.Item>
+	<Segmented.Item value="dark">
+		<Segmented.ItemIcon><MoonIcon size={15} weight="fill" /></Segmented.ItemIcon>
+		Dark
+	</Segmented.Item>
+	<Segmented.Item value="system">
+		<Segmented.ItemIcon><MonitorIcon size={14} weight="fill" /></Segmented.ItemIcon>
+		System
+	</Segmented.Item>
+</Segmented.Root>
 
-{#snippet sunIcon()}<SunIcon size={15} weight="fill" />{/snippet}
-{#snippet moonIcon()}<MoonIcon size={15} weight="fill" />{/snippet}
-{#snippet monitorIcon()}<MonitorIcon size={14} weight="fill" />{/snippet}
-{#snippet alignLeftIcon()}<AlignLeftIcon size={16} weight="bold" />{/snippet}
-{#snippet alignCenterIcon()}<AlignCenterHorizontalIcon size={16} weight="bold" />{/snippet}
-{#snippet alignRightIcon()}<AlignRightIcon size={16} weight="bold" />{/snippet}
+<Segmented.Root ariaLabel="Text alignment">
+	<Segmented.Item value="left">
+		<Segmented.ItemIcon><AlignLeftIcon size={16} weight="bold" /></Segmented.ItemIcon>
+	</Segmented.Item>
+	<Segmented.Item value="center">
+		<Segmented.ItemIcon
+			><AlignCenterHorizontalIcon size={16} weight="bold" /></Segmented.ItemIcon
+		>
+	</Segmented.Item>
+	<Segmented.Item value="right">
+		<Segmented.ItemIcon><AlignRightIcon size={16} weight="bold" /></Segmented.ItemIcon>
+	</Segmented.Item>
+</Segmented.Root>

@@ -4,11 +4,11 @@
 
 <div class="col">
 	<span class="tag">solid</span>
-	<Divider variant="solid" />
+	<Divider.Root variant="solid" />
 	<span class="tag">dashed</span>
-	<Divider variant="dashed" />
+	<Divider.Root variant="dashed" />
 	<span class="tag">dotted</span>
-	<Divider variant="dotted" />
+	<Divider.Root variant="dotted" />
 </div>
 
 <style>

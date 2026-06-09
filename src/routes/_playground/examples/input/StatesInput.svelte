@@ -3,11 +3,25 @@
 	import { CheckCircleIcon, WarningCircleIcon } from 'phosphor-svelte';
 </script>
 
-<Input placeholder="Success" fieldState="success">
-	{#snippet icon()}<CheckCircleIcon size={16} />{/snippet}
-</Input>
-<Input placeholder="Danger" fieldState="danger" />
-<Input placeholder="Warning" fieldState="warning">
-	{#snippet icon()}<WarningCircleIcon size={16} />{/snippet}
-</Input>
-<Input placeholder="Primary" fieldState="primary" />
+<Input.Root fieldState="success">
+	<Input.Control>
+		<Input.Icon><CheckCircleIcon size={16} /></Input.Icon>
+		<Input.Field placeholder="Success" />
+	</Input.Control>
+</Input.Root>
+<Input.Root fieldState="danger">
+	<Input.Control>
+		<Input.Field placeholder="Danger" />
+	</Input.Control>
+</Input.Root>
+<Input.Root fieldState="warning">
+	<Input.Control>
+		<Input.Icon><WarningCircleIcon size={16} /></Input.Icon>
+		<Input.Field placeholder="Warning" />
+	</Input.Control>
+</Input.Root>
+<Input.Root fieldState="primary">
+	<Input.Control>
+		<Input.Field placeholder="Primary" />
+	</Input.Control>
+</Input.Root>

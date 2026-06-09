@@ -3,10 +3,10 @@
 	import { Heart } from 'phosphor-svelte';
 </script>
 
-<Button upload>Uploading</Button>
-<Button upload variant="border" color="danger">
+<Button.Root upload>Uploading</Button.Root>
+<Button.Root upload variant="border" color="danger">
 	<Heart size={16} weight="fill" />
 	Uploading
-</Button>
-<Button upload variant="gradient" color="warning">Uploading</Button>
-<Button upload variant="transparent" color="dark">Uploading</Button>
+</Button.Root>
+<Button.Root upload variant="gradient" color="warning">Uploading</Button.Root>
+<Button.Root upload variant="transparent" color="dark">Uploading</Button.Root>

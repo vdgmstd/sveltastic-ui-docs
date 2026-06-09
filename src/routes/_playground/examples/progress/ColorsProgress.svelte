@@ -3,12 +3,24 @@
 </script>
 
 <div class="col">
-	<Progress value={70} color="primary" />
-	<Progress value={70} color="success" />
-	<Progress value={70} color="danger" />
-	<Progress value={70} color="warning" />
-	<Progress value={70} color="dark" />
-	<Progress value={70} color="#7d22f0" />
+	<Progress.Root value={70} color="primary">
+		<Progress.Track><Progress.Indicator /></Progress.Track>
+	</Progress.Root>
+	<Progress.Root value={70} color="success">
+		<Progress.Track><Progress.Indicator /></Progress.Track>
+	</Progress.Root>
+	<Progress.Root value={70} color="danger">
+		<Progress.Track><Progress.Indicator /></Progress.Track>
+	</Progress.Root>
+	<Progress.Root value={70} color="warning">
+		<Progress.Track><Progress.Indicator /></Progress.Track>
+	</Progress.Root>
+	<Progress.Root value={70} color="dark">
+		<Progress.Track><Progress.Indicator /></Progress.Track>
+	</Progress.Root>
+	<Progress.Root value={70} color="#7d22f0">
+		<Progress.Track><Progress.Indicator /></Progress.Track>
+	</Progress.Root>
 </div>
 
 <style>

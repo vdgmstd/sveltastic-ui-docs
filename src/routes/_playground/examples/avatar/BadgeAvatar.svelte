@@ -4,31 +4,51 @@
 </script>
 
 <div class="row">
-	<Avatar badge badgePosition="top-right" color="primary" text="TR" />
-	<Avatar badge badgePosition="top-left" color="primary" text="TL" />
-	<Avatar badge badgePosition="bottom-right" color="primary" text="BR" />
-	<Avatar badge badgePosition="bottom-left" color="primary" text="BL" />
-	<Avatar badge badgeColor="danger" shape="circle">
-		<img src="/avatars/5.jpg" alt="" />
-	</Avatar>
-	<Avatar badge badgeColor="success" shape="circle">
-		<img src="/avatars/6.jpg" alt="" />
-	</Avatar>
-	<Avatar badge badgeColor="#ff66cc" shape="circle">
-		<img src="/avatars/7.jpg" alt="" />
-	</Avatar>
+	<Avatar.Root color="primary">
+		<Avatar.Fallback>TR</Avatar.Fallback>
+		<Avatar.Badge position="top-right" />
+	</Avatar.Root>
+	<Avatar.Root color="primary">
+		<Avatar.Fallback>TL</Avatar.Fallback>
+		<Avatar.Badge position="top-left" />
+	</Avatar.Root>
+	<Avatar.Root color="primary">
+		<Avatar.Fallback>BR</Avatar.Fallback>
+		<Avatar.Badge position="bottom-right" />
+	</Avatar.Root>
+	<Avatar.Root color="primary">
+		<Avatar.Fallback>BL</Avatar.Fallback>
+		<Avatar.Badge position="bottom-left" />
+	</Avatar.Root>
+	<Avatar.Root shape="circle">
+		<Avatar.Image src="/avatars/5.jpg" alt="" />
+		<Avatar.Fallback>5</Avatar.Fallback>
+		<Avatar.Badge color="danger" />
+	</Avatar.Root>
+	<Avatar.Root shape="circle">
+		<Avatar.Image src="/avatars/6.jpg" alt="" />
+		<Avatar.Fallback>6</Avatar.Fallback>
+		<Avatar.Badge color="success" />
+	</Avatar.Root>
+	<Avatar.Root shape="circle">
+		<Avatar.Image src="/avatars/7.jpg" alt="" />
+		<Avatar.Fallback>7</Avatar.Fallback>
+		<Avatar.Badge color="#ff66cc" />
+	</Avatar.Root>
 </div>
 <div class="row">
-	<Avatar badgeColor="danger" shape="circle" color="primary" text="JD">
-		{#snippet badgeContent()}
+	<Avatar.Root shape="circle" color="primary">
+		<Avatar.Fallback>JD</Avatar.Fallback>
+		<Avatar.Badge color="danger">
 			<Bell size={10} weight="fill" />
-		{/snippet}
-	</Avatar>
-	<Avatar badgeColor="success" shape="circle" color="primary" text="JD">
-		{#snippet badgeContent()}
+		</Avatar.Badge>
+	</Avatar.Root>
+	<Avatar.Root shape="circle" color="primary">
+		<Avatar.Fallback>JD</Avatar.Fallback>
+		<Avatar.Badge color="success">
 			<span>12</span>
-		{/snippet}
-	</Avatar>
+		</Avatar.Badge>
+	</Avatar.Root>
 </div>
 
 <style>

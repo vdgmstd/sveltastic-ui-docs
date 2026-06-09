@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { List, ListItem } from 'sveltastic-ui';
+	import { List } from 'sveltastic-ui';
 	import {
 		CaretRightIcon,
 		TrayIcon,
@@ -14,16 +14,19 @@
 		{ id: 'c', label: 'Archive', icon: ArchiveIcon },
 		{ id: 'd', label: 'Trash', icon: TrashIcon }
 	];
+	let active = $state('a');
 </script>
 
-<List>
-	{#snippet header()}Folders{/snippet}
-	{#snippet footer()}4 folders{/snippet}
-	{#each folders as f (f.id)}
-		<ListItem>
-			{#snippet lead()}<f.icon size={18} />{/snippet}
-			{#snippet trail()}<CaretRightIcon size={14} />{/snippet}
-			{f.label}
-		</ListItem>
-	{/each}
-</List>
+<List.Root>
+	<List.Header>Folders</List.Header>
+	<List.Body>
+		{#each folders as f (f.id)}
+			<List.Item active={active === f.id} onclick={() => (active = f.id)}>
+				<List.ItemLead><f.icon size={18} /></List.ItemLead>
+				<List.ItemContent><List.ItemLabel>{f.label}</List.ItemLabel></List.ItemContent>
+				<List.ItemTrail><CaretRightIcon size={14} /></List.ItemTrail>
+			</List.Item>
+		{/each}
+	</List.Body>
+	<List.Footer>4 folders</List.Footer>
+</List.Root>

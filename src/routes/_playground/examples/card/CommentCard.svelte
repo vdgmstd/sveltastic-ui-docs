@@ -5,25 +5,29 @@
 	const src = '/card-demo/coffee-espresso.jpg';
 </script>
 
-<Card>
-	{#snippet img()}
-		<img {src} alt="Espresso machine pouring a fresh shot" />
-	{/snippet}
-	{#snippet title()}
-		<h3>Leave a comment</h3>
-	{/snippet}
-	{#snippet body()}
+<Card.Root>
+	<Card.Media>
+		<Card.Image>
+			<img {src} alt="Espresso machine pouring a fresh shot" />
+		</Card.Image>
+	</Card.Media>
+	<Card.Body>
+		<Card.Header><h3>Leave a comment</h3></Card.Header>
 		<p>Share what you thought about this guide.</p>
-	{/snippet}
-	{#snippet buttons()}
+	</Card.Body>
+	<Card.Footer>
 		<div class="comment-form">
-			<Input block placeholder="Write your comment..." />
-			<Button iconOnly variant="gradient" color="primary" aria-label="Send">
+			<Input.Root block>
+				<Input.Control>
+					<Input.Field placeholder="Write your comment..." />
+				</Input.Control>
+			</Input.Root>
+			<Button.Root iconOnly variant="gradient" color="primary" aria-label="Send">
 				<PaperPlaneTiltIcon size={16} weight="fill" />
-			</Button>
+			</Button.Root>
 		</div>
-	{/snippet}
-</Card>
+	</Card.Footer>
+</Card.Root>
 
 <style>
 	.comment-form {

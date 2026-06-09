@@ -1,18 +1,19 @@
 <script lang="ts">
-	import { Menu, Button, type MenuEntry } from 'sveltastic-ui';
-
-	const items: MenuEntry[] = [
-		{ type: 'item', label: 'Option 1' },
-		{ type: 'item', label: 'Option 2' }
-	];
+	import { Menu, Button } from 'sveltastic-ui';
 </script>
 
 <div class="frame">
-	<Menu block matchWidth placement="bottom-start" {items}>
-		{#snippet trigger()}
-			<Button block variant="border">Stretches to the parent</Button>
-		{/snippet}
-	</Menu>
+	<Menu.Root block matchWidth placement="bottom-start">
+		<Menu.Trigger>
+			{#snippet child({ props })}
+				<Button.Root block variant="border" {...props}>Stretches to the parent</Button.Root>
+			{/snippet}
+		</Menu.Trigger>
+		<Menu.Content>
+			<Menu.Item>Option 1</Menu.Item>
+			<Menu.Item>Option 2</Menu.Item>
+		</Menu.Content>
+	</Menu.Root>
 </div>
 
 <style>

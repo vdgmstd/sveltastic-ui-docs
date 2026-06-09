@@ -11,6 +11,9 @@
 	let { children } = $props();
 	let themeSwitchEl: HTMLElement | undefined = $state();
 
+	type VT = { finished: Promise<void> };
+	type DocVT = Document & { startViewTransition?: (cb: () => void | Promise<void>) => VT };
+
 	onMount(() => {
 		try {
 			localStorage.removeItem('sveltastic-ui:theme-preset');
@@ -48,7 +51,7 @@
 		};
 	});
 
-	function handleThemeToggle(_event: Event, checked: boolean): void {
+	function handleThemeToggle(checked: boolean): void {
 		const next = checked ? 'dark' : 'light';
 		const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 		const supportsVT =
@@ -68,18 +71,16 @@
 		root.style.setProperty('--vt-y', `${y}px`);
 
 		if (supportsVT) {
-			(
-				document as Document & { startViewTransition: (cb: () => void) => unknown }
-			).startViewTransition(() => {
+			root.classList.add('theme-vt');
+			const vt = (document as DocVT).startViewTransition!(() => {
 				theme.setTheme(next);
 			});
+			vt.finished.finally(() => root.classList.remove('theme-vt'));
 			return;
 		}
 
 		// Fallback for browsers without View Transitions (e.g. Firefox on Windows).
-		// Capture the current background color, apply the next theme, then mask the
-		// page with an overlay of the *old* background and shrink it to a circle
-		// at the toggle's origin. The new theme is revealed underneath.
+		// Capture the current background, apply the next theme, then shrink an overlay of the old background to a circle at the toggle origin.
 		const oldBg = getComputedStyle(root).getPropertyValue('--background').trim();
 		const overlay = document.createElement('div');
 		overlay.setAttribute('aria-hidden', 'true');
@@ -113,28 +114,28 @@
 			<strong class="app-header__brand">Sveltastic UI</strong>
 			<strong class="app-header__brand app-header__brand--short" aria-hidden="true">SUI</strong>
 			<strong class="app-header__brand--short" >[BETA]</strong>
-			<Chip shape="square" size="mini">{pkgVersion}</Chip>
+			<Chip.Root shape="square" size="mini">{pkgVersion}</Chip.Root>
 		</a>
 		<div class="app-header__controls">
 			<FontSwitcher />
 			<PaletteSwitcher />
 			<span bind:this={themeSwitchEl} class="theme-switch" aria-label="Toggle dark mode">
-				<Switch
+				<Switch.Root
 					checked={theme.theme === 'dark'}
-					onchange={handleThemeToggle}
+					onCheckedChange={handleThemeToggle}
 					size="medium"
 					ghostKnob
 				>
-					{#snippet knob()}
+					<Switch.Thumb>
 						{#if theme.theme === 'dark'}
 							<MoonIcon size={14} weight="fill" />
 						{:else}
 							<SunIcon size={14} weight="fill" />
 						{/if}
-					{/snippet}
-				</Switch>
+					</Switch.Thumb>
+				</Switch.Root>
 			</span>
-			<Button
+			<Button.Root
 				size="small"
 				variant="border"
 				color="dark"
@@ -142,7 +143,7 @@
 				aria-label="Toggle text direction"
 			>
 				{theme.rtl ? 'RTL' : 'LTR'}
-			</Button>
+			</Button.Root>
 		</div>
 	</div>
 </header>
@@ -155,10 +156,14 @@
 <ScrollbarHost />
 
 <style>
+	/* clip, not hidden — hidden makes <html> a scroll container and the fixed app-header overlaps the native scrollbar. */
+	:global(html) {
+		overflow-x: clip;
+	}
 	:global(body) {
 		margin: 0;
 		position: relative;
-		overflow-x: hidden;
+		overflow-x: clip;
 	}
 
 	/* SVG decoration spans the full page, sits behind everything, and
@@ -202,22 +207,17 @@
 		filter: invert(1);
 	}
 
-	/*
-	 * View Transitions: theme reveal radiates out from the toggle.
-	 * Old snapshot (current theme) stays underneath; new snapshot
-	 * (next theme) clips in as a circle expanding from --vt-x/--vt-y.
-	 * Falls back silently in browsers without ::view-transition support.
-	 */
+	/* Theme reveal: the next theme clips in as a circle expanding from the toggle (--vt-x/--vt-y). Gated to html.theme-vt so it never touches nav. */
 	:global {
-		::view-transition-old(root),
-		::view-transition-new(root) {
+		html.theme-vt::view-transition-old(root),
+		html.theme-vt::view-transition-new(root) {
 			animation: none;
 			mix-blend-mode: normal;
 		}
-		::view-transition-old(root) {
+		html.theme-vt::view-transition-old(root) {
 			z-index: 1;
 		}
-		::view-transition-new(root) {
+		html.theme-vt::view-transition-new(root) {
 			z-index: 2;
 			animation: theme-reveal 600ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 		}
@@ -287,13 +287,6 @@
 	.app-header__brand--short {
 		display: none;
 	}
-	.app-header__sub {
-		font-size: 0.7rem;
-		opacity: 0.55;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		white-space: nowrap;
-	}
 	.app-header__controls {
 		display: flex;
 		align-items: center;
@@ -312,7 +305,6 @@
 		.app-header__inner { gap: 0.4rem; }
 		.app-header__brand { display: none; }
 		.app-header__brand--short { display: inline; }
-		.app-header__sub { display: none; }
 		.app-header__controls { gap: 0.3rem; }
 	}
 </style>

@@ -13,6 +13,8 @@
 	import LoadingAvatar from './examples/avatar/LoadingAvatar.svelte';
 	import IconsAvatar from './examples/avatar/IconsAvatar.svelte';
 	import GroupAvatar from './examples/avatar/GroupAvatar.svelte';
+	import StatusAvatar from './examples/avatar/StatusAvatar.svelte';
+	import ChildAvatar from './examples/avatar/ChildAvatar.svelte';
 	import RemountAvatar from './examples/avatar/RemountAvatar.svelte';
 
 	import shapesSrc from './examples/avatar/ShapesAvatar.svelte?raw';
@@ -26,6 +28,8 @@
 	import loadingSrc from './examples/avatar/LoadingAvatar.svelte?raw';
 	import iconsSrc from './examples/avatar/IconsAvatar.svelte?raw';
 	import groupSrc from './examples/avatar/GroupAvatar.svelte?raw';
+	import statusSrc from './examples/avatar/StatusAvatar.svelte?raw';
+	import childSrc from './examples/avatar/ChildAvatar.svelte?raw';
 	import remountSrc from './examples/avatar/RemountAvatar.svelte?raw';
 
 	const t = (key: string) => i18n.t(key);
@@ -42,6 +46,8 @@
 		{ labelKey: 'playground.avatar.loading.label', Component: LoadingAvatar, src: loadingSrc },
 		{ labelKey: 'playground.avatar.icons.label', Component: IconsAvatar, src: iconsSrc },
 		{ labelKey: 'playground.avatar.group.label', Component: GroupAvatar, src: groupSrc },
+		{ labelKey: 'playground.avatar.status.label', descriptionKey: 'playground.avatar.status.hint', Component: StatusAvatar, src: statusSrc },
+		{ labelKey: 'playground.avatar.child.label', descriptionKey: 'playground.avatar.child.hint', Component: ChildAvatar, src: childSrc },
 		{ labelKey: 'playground.avatar.remount.label', Component: RemountAvatar, src: remountSrc }
 	];
 </script>

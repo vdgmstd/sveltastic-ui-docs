@@ -2,8 +2,8 @@
 	import { Avatar } from 'sveltastic-ui';
 </script>
 
-<Avatar size={30} text="XS" />
-<Avatar size={44} text="S" />
-<Avatar size="60" text="M" />
-<Avatar size={80} text="L" />
-<Avatar size={120} text="XL" />
+<Avatar.Root size={30}><Avatar.Fallback>XS</Avatar.Fallback></Avatar.Root>
+<Avatar.Root size={44}><Avatar.Fallback>S</Avatar.Fallback></Avatar.Root>
+<Avatar.Root size="60"><Avatar.Fallback>M</Avatar.Fallback></Avatar.Root>
+<Avatar.Root size={80}><Avatar.Fallback>L</Avatar.Fallback></Avatar.Root>
+<Avatar.Root size={120}><Avatar.Fallback>XL</Avatar.Fallback></Avatar.Root>

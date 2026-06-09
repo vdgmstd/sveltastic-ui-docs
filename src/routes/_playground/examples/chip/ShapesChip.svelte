@@ -3,15 +3,15 @@
 	import { StarIcon, HeartIcon, FireIcon } from 'phosphor-svelte';
 </script>
 
-<Chip shape="default">Default</Chip>
-<Chip shape="square">Square</Chip>
-<Chip shape="circle">C</Chip>
-<Chip shape="circle" variant="flat" color="success">
-	{#snippet icon()}<StarIcon size={12} weight="fill" />{/snippet}
-</Chip>
-<Chip shape="circle" variant="border" color="danger">
-	{#snippet icon()}<HeartIcon size={12} weight="fill" />{/snippet}
-</Chip>
-<Chip shape="circle" variant="default" color="warning">
-	{#snippet icon()}<FireIcon size={12} weight="fill" />{/snippet}
-</Chip>
+<Chip.Root shape="default">Default</Chip.Root>
+<Chip.Root shape="square">Square</Chip.Root>
+<Chip.Root shape="circle">C</Chip.Root>
+<Chip.Root shape="circle" variant="flat" color="success">
+	<Chip.Icon><StarIcon size={12} weight="fill" /></Chip.Icon>
+</Chip.Root>
+<Chip.Root shape="circle" variant="border" color="danger">
+	<Chip.Icon><HeartIcon size={12} weight="fill" /></Chip.Icon>
+</Chip.Root>
+<Chip.Root shape="circle" variant="default" color="warning">
+	<Chip.Icon><FireIcon size={12} weight="fill" /></Chip.Icon>
+</Chip.Root>

@@ -8,10 +8,10 @@
 </script>
 
 <div class="col">
-	<Pagination bind:value={p1} length={10} variant="default" />
-	<Pagination bind:value={p2} length={10} variant="flat" />
-	<Pagination bind:value={p3} length={10} variant="border" />
-	<Pagination bind:value={p4} length={10} variant="transparent" />
+	<Pagination.Root bind:page={p1} length={10} variant="default" />
+	<Pagination.Root bind:page={p2} length={10} variant="flat" />
+	<Pagination.Root bind:page={p3} length={10} variant="border" />
+	<Pagination.Root bind:page={p4} length={10} variant="transparent" />
 </div>
 
 <style>

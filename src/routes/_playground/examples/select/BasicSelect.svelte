@@ -11,7 +11,10 @@
 	];
 </script>
 
-<Select bind:value {items} placeholder="Pick a fruit" />
+<Select.Root type="single" bind:value {items} placeholder="Pick a fruit">
+	<Select.Trigger />
+	<Select.Content />
+</Select.Root>
 <p class="muted">Value: {value}</p>
 
 <style>
