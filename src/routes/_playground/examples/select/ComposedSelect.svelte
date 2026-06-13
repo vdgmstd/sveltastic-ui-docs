@@ -26,14 +26,14 @@
 	<Select.Content>
 		<Select.Group>
 			<Select.GroupHeading>Fruits</Select.GroupHeading>
-			<Select.Item value="apple" label="Apple" index={0}>Apple</Select.Item>
-			<Select.Item value="banana" label="Banana" index={1}>Banana</Select.Item>
-			<Select.Item value="cherry" label="Cherry" index={2}>Cherry</Select.Item>
+			<Select.Item value="apple" label="Apple">Apple</Select.Item>
+			<Select.Item value="banana" label="Banana">Banana</Select.Item>
+			<Select.Item value="cherry" label="Cherry">Cherry</Select.Item>
 		</Select.Group>
 		<Select.Group>
 			<Select.GroupHeading>Vegetables</Select.GroupHeading>
-			<Select.Item value="carrot" label="Carrot" index={3}>Carrot</Select.Item>
-			<Select.Item value="spinach" label="Spinach" index={4} disabled>Spinach</Select.Item>
+			<Select.Item value="carrot" label="Carrot">Carrot</Select.Item>
+			<Select.Item value="spinach" label="Spinach" disabled>Spinach</Select.Item>
 		</Select.Group>
 	</Select.Content>
 </Select.Root>

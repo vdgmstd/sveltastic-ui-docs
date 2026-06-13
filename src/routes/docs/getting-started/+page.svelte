@@ -35,9 +35,17 @@
 <div class="block">
 	<h3>3. Import the tokens</h3>
 	<p class="muted">
-		One CSS line in your root layout or app entry. Brings in the design tokens,
-		base reset, and themed scrollbars. Drop it into <code>+layout.svelte</code> for
-		a SvelteKit app, or wherever you bootstrap your styles.
+		Brings in the design tokens, base reset, and themed scrollbars. The
+		recommended form is a CSS <code>@import</code> in your global stylesheet,
+		placed <strong>before</strong> Tailwind so the kit's <code>@theme</code> tokens
+		are in scope.
+	</p>
+	<pre class="snippet"><code>{`/* src/app.css */
+@import 'sveltastic-ui/styles';
+@import 'tailwindcss';`}</code></pre>
+	<p class="muted">
+		The side-effect JS import in <code>+layout.svelte</code> also works and
+		type-checks in a TypeScript-strict app:
 	</p>
 	<pre class="snippet"><code>{`<script lang="ts">
   import 'sveltastic-ui/styles';

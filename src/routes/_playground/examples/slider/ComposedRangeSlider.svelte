@@ -19,9 +19,9 @@
 >
 	<Slider.Track>
 		<Slider.Range />
-		<Slider.Tick index={0} />
+		<Slider.Tick index={2} />
 		<Slider.Tick index={5} />
-		<Slider.Tick index={10} />
+		<Slider.Tick index={8} />
 		<Slider.Thumb index={0} />
 		<Slider.Thumb index={1} />
 		<Slider.Tooltip index={0} />

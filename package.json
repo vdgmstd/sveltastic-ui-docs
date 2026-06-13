@@ -1,6 +1,6 @@
 {
 	"name": "sveltastic-ui-docs",
-	"version": "1.1.0",
+	"version": "1.1.5",
 	"private": true,
 	"description": "Documentation site and playground for sveltastic-ui.",
 	"type": "module",
@@ -17,7 +17,7 @@
 	"dependencies": {
 		"phosphor-svelte": "^3.1.0",
 		"sveltastic-ui": "file:../ui",
-		"svelte": "^5.55.8",
+		"svelte": "^5.56.3",
 		"tailwindcss": "^4.3.0"
 	},
 	"devDependencies": {

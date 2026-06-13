@@ -41,9 +41,6 @@
 
 	const lookup = new Map<string, RichItem>();
 	for (const g of richItems) for (const it of g.items) lookup.set(it.value, it);
-
-	// flat index across all sections, for Select.Item keyboard navigation
-	let flat = $derived(richItems.flatMap((g) => g.items));
 </script>
 
 <Select.Root type="single" bind:value items={richItems} placeholder="Pick a topping">
@@ -70,7 +67,7 @@
 				<Select.GroupHeading>{group.title}</Select.GroupHeading>
 				{#each group.items as meta (meta.value)}
 					{@const isSel = value === meta.value}
-					<Select.Item value={meta.value} label={meta.label} index={flat.indexOf(meta)}>
+					<Select.Item value={meta.value} label={meta.label}>
 						<div class="rich-row" class:rich-row--selected={isSel}>
 							<span class="rich-row__icon" style:background={meta.tone}>
 								<meta.Icon size={14} weight="fill" color="#fff" />

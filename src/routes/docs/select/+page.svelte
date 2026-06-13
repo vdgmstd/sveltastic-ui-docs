@@ -3,6 +3,8 @@
 	import Section from '../../_playground/SelectSection.svelte';
 	import ApiTable from '../_ApiTable.svelte';
 	import type { ApiProp } from '../_ApiTable.svelte';
+	import { Select } from 'sveltastic-ui';
+	let tmpInlineValue = $state<string>();
 
 	const rootApi: ApiProp[] = [
 		{ name: 'type', type: "'single' | 'multiple'", required: false, default: "'single'", description: 'Selection mode. Discriminates the value type (V vs V[]).' },
@@ -62,7 +64,7 @@
 		{ name: 'value', type: 'V', required: true, default: null, description: 'Stored when this row is picked.' },
 		{ name: 'label', type: 'string', required: false, default: null, description: 'Visible label, used by the default row and typeahead. Defaults to String(value).' },
 		{ name: 'disabled', type: 'boolean', required: false, default: 'false', description: 'Inert row — cannot be picked.' },
-		{ name: 'index', type: 'number', required: false, default: '0', description: 'Global row index for keyboard navigation; auto-supplied when rows come from items, set it yourself for hand-authored rows.' },
+		{ name: 'index', type: 'number', required: false, default: null, description: 'Override the flat row index used for keyboard navigation. Auto-derived from mount order for hand-authored rows; pass this only to force a position.' },
 		{ name: 'children', type: 'Snippet', required: false, default: null, description: 'Custom row content (compose Select.ItemText / Select.ItemIndicator). Omit for the default label row.' },
 		{ name: 'child', type: 'Snippet<[{ props }]>', required: false, default: null, description: 'Render-delegation: receive the merged option props and render your own element.' },
 		{ name: 'ref', type: 'HTMLElement | null', required: false, default: '$bindable(null)', description: 'Bindable ref to the row element.' }
@@ -103,6 +105,22 @@
 
 <DocHeader category="Form controls" />
 <Section />
+
+<div data-testid="tmp-inline-select" style="padding:2rem;">
+	<Select.Root
+		bind:value={tmpInlineValue}
+		label="Country"
+		labelStyle="inline"
+		items={[
+			{ value: 'us', label: 'United States' },
+			{ value: 'gb', label: 'United Kingdom' },
+			{ value: 'de', label: 'Germany' }
+		]}
+	>
+		<Select.Trigger />
+		<Select.Content />
+	</Select.Root>
+</div>
 
 <ApiTable
 	title="Select.Root"
