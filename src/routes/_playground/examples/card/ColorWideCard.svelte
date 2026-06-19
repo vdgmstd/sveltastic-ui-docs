@@ -6,7 +6,7 @@
 	const colors = ['primary', 'success', 'danger'] as const;
 </script>
 
-<!-- color sets --c for descendants; wide bumps the max-width to 480px. -->
+<!-- color sets --c for descendants; cardStyle reaches the inner .card surface (here a max-width). -->
 <div class="stack">
 	<div class="row">
 		{#each colors as color (color)}
@@ -30,15 +30,19 @@
 		{/each}
 	</div>
 
-	<Card.Root wide color="dark">
+	<Card.Root color="dark" cardStyle="max-width: 450px">
 		<Card.Media>
 			<Card.Image>
 				<img {src} alt="Sunrise over a mountain ridge" />
 			</Card.Image>
 		</Card.Media>
 		<Card.Body>
-			<Card.Header><h3>Wide card — 480px</h3></Card.Header>
-			<p>Set <code>wide</code> for a roomier 480px max-width instead of the default 350px.</p>
+			<Card.Header><h3>Constrained — 450px</h3></Card.Header>
+			<p>
+				Cards fill their container by default. Use <code>cardStyle</code> /
+				<code>cardClass</code> to style or size the inner <code>.card</code> surface — here a
+				<code>max-width</code>.
+			</p>
 		</Card.Body>
 	</Card.Root>
 </div>

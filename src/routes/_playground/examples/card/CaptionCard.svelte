@@ -5,7 +5,7 @@
 	const src = '/card-demo/tokyo-alley.jpg';
 </script>
 
-<Card.Root variant="caption">
+<Card.Root variant="caption" cardStyle="max-width: 450px">
 	<Card.Media>
 		<Card.Image>
 			<img {src} alt="Neon-lit narrow alley in Tokyo at night" />

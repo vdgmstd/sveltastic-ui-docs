@@ -50,7 +50,11 @@
 	];
 
 	const contentApi: ApiProp[] = [
-		{ name: 'children', type: 'Snippet', required: false, default: null, description: 'Hand-authored rows (Select.Group / Select.Item / Select.Empty). When omitted, rows are generated from Select.Root items.' }
+		{ name: 'children', type: 'Snippet', required: false, default: null, description: 'Hand-authored rows (Select.Group / Select.Item / Select.Empty). When omitted, rows are generated from Select.Root items.' },
+		{ name: 'child', type: 'Snippet<[{ props, body }]>', required: false, default: null, description: 'Render-delegation: spread props on your own panel-body element and {@render body()} for the rows.' },
+		{ name: 'ref', type: 'HTMLDivElement | null', required: false, default: 'null', description: 'Bindable reference to the rendered panel-body element.' },
+		{ name: 'class', type: 'string', required: false, default: null, description: 'Class merged onto the panel-body element.' },
+		{ name: '…rest', type: 'HTMLAttributes', required: false, default: null, description: 'Every native HTML / data-* / aria-* attribute, forwarded to the panel-body element.' }
 	];
 
 	const viewportApi: ApiProp[] = [
@@ -145,7 +149,7 @@
 <ApiTable
 	title="Select.Content"
 	api={contentApi}
-	hint="The dropdown panel. Omit children to render rows from Select.Root items; pass children to hand-author Select.Group / Select.Item / Select.Empty. Publishes a data-state hook."
+	hint="The dropdown panel body. Omit children to render rows from Select.Root items; pass children to hand-author Select.Group / Select.Item / Select.Empty. Exposes ref, the child render-delegation snippet, class / data-* pass-through and a data-state hook."
 />
 <ApiTable
 	title="Select.Viewport"

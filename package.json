@@ -1,6 +1,6 @@
 {
 	"name": "sveltastic-ui-docs",
-	"version": "1.1.5",
+	"version": "1.1.8",
 	"private": true,
 	"description": "Documentation site and playground for sveltastic-ui.",
 	"type": "module",

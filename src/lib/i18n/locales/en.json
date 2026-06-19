@@ -209,7 +209,7 @@
 		},
 		"card": {
 			"title": "Card",
-			"description": "Container surface composed from the compound parts (Card.Root, Card.Media, Card.Header, Card.Body, Card.Footer), plus the color and wide modifiers.",
+			"description": "Container surface composed from the compound parts (Card.Root, Card.Media, Card.Header, Card.Body, Card.Footer), plus the color modifier and the cardClass / cardStyle surface hooks.",
 			"variants": {
 				"label": "Variants",
 				"default": "Default",
@@ -232,8 +232,8 @@
 				"description": "A Card.Footer hosting an inline Input.Root and a send button, each sized to fit its content."
 			},
 			"colorWide": {
-				"label": "Color and wide",
-				"description": "The `color` prop exposes `--c` so descendant Buttons and Avatars inherit the card's palette; `wide` bumps the max-width from the default 350px to 480px."
+				"label": "Color and surface",
+				"description": "The `color` prop exposes `--c` so descendant Buttons and Avatars inherit the card's palette. Cards fill their container by default; use `cardStyle` / `cardClass` to style or size the inner `.card` surface — here a `max-width`."
 			}
 		},
 		"alert": {
@@ -358,6 +358,55 @@
 			"events": {
 				"label": "Events, ref & data-state"
 			}
+		},
+		"pinInput": {
+			"title": "Pin Input",
+			"description": "OTP / one-time-code field (bits-ui v2 PinInput). A single hidden input (autocomplete=one-time-code, for SMS autofill + paste) drives a row of per-character cells. Sanitizes by type (numeric / alphanumeric), fires onComplete when full, and supports a custom cells loop.",
+			"basic": {
+				"label": "Basic",
+				"hint": "Bind `value` on `PinInput.Root` — the default renders 6 numeric cells; type / paste fills them, the active cell shows a blinking caret."
+			},
+			"complete": {
+				"label": "onComplete",
+				"hint": "`maxLength={4}` + `onComplete` fires once every cell is filled — wire your verification call here."
+			},
+			"alphanumeric": {
+				"label": "Alphanumeric",
+				"hint": "`type=\"alphanumeric\"` allows letters + digits (e.g. a redeem code); `type=\"text\"` allows anything, or pass a custom `pattern` RegExp."
+			},
+			"separated": {
+				"label": "Custom cells (separator)",
+				"hint": "Use the `children` snippet `{ cells }` to lay the cells out yourself — here split 3–3 with a dash between."
+			},
+			"invalid": {
+				"label": "Invalid",
+				"hint": "`invalid` flags the cells red via data-invalid. Try `424242` — anything else turns red on completion."
+			}
+		},
+		"toggle": {
+			"title": "Toggle",
+			"description": "Pressed-state toggle button (bits-ui v2 Toggle) and ToggleGroup — built on the kit's button-core, so every Button variant / size / color applies. Use Toggle.Root standalone, or ToggleGroup.Root + ToggleGroup.Item for a single- or multiple-select toolbar with roving keyboard focus.",
+			"basic": {
+				"label": "Basic",
+				"hint": "Bind `pressed` on `Toggle.Root`; it flips on/off on click and publishes `data-state` + `aria-pressed`."
+			},
+			"variants": {
+				"label": "Variants",
+				"hint": "Any Button variant works — `transparent` (default) is subtle until on; `flat` / `border` / `default` / `shadow` give heavier surfaces."
+			},
+			"groupSingle": {
+				"label": "Group — single select",
+				"hint": "`ToggleGroup.Root type=\"single\"` keeps at most one item on; clicking the active item toggles it off (value becomes empty). Arrows move focus, Space/Enter toggle."
+			},
+			"groupMultiple": {
+				"label": "Group — multiple select",
+				"hint": "`type=\"multiple\"` binds a `string[]`; each item toggles independently — the classic bold / italic / underline formatting toolbar."
+			},
+			"groupVertical": {
+				"label": "Group — vertical",
+				"hint": "`orientation=\"vertical\"` stacks the items and switches arrow navigation to Up/Down."
+			},
+			"vsSegmented": "Toggle vs Segmented: use Segmented for an exclusive single choice rendered as one sliding-thumb track (a radiogroup). Use ToggleGroup for independent press buttons (multiple), or a single-select that can be cleared — rendered as separate toggle buttons."
 		},
 		"segmented": {
 			"title": "Segmented",
@@ -748,6 +797,90 @@
 				"placeholder": "Pick flavours"
 			}
 		},
+		"combobox": {
+			"title": "Combobox",
+			"description": "Editable typeahead picker (bits-ui v2 Combobox). Type to filter, arrow / Enter to choose. Single or multiple selection, grouped sections, built-in or consumer-controlled filtering — built on the same listbox engine as Select, with an editable input as the trigger.",
+			"basic": {
+				"label": "Basic",
+				"hint": "Bind `value`, pass `items`; the field filters as you type. Arrow keys move, Enter picks, Escape closes."
+			},
+			"grouped": {
+				"label": "Grouped",
+				"hint": "Pass grouped `items` ({ title, items }); headings render as section labels and the filter narrows within each group."
+			},
+			"multiple": {
+				"label": "Multiple",
+				"hint": "`type=\"multiple\"` toggles several values, keeps the panel open, and marks chosen rows with a check (aria-multiselectable)."
+			},
+			"manual": {
+				"label": "Manual filter",
+				"hint": "`filter={false}` + `bind:inputValue` — you narrow `items` yourself (here a starts-with match) for async or custom matching."
+			},
+			"custom": {
+				"label": "Custom rows",
+				"hint": "Hand-author the rows with Combobox.Item + ItemText + ItemIndicator; `items` still feeds the filter and keyboard nav."
+			}
+		},
+		"toast": {
+			"title": "Toast",
+			"description": "Toast notifications (bits-ui ships none — this is the kit's answer to svelte-sonner). The imperative toast() / notify() queues a styled toast; pass a content snippet to compose Toast.Root + Icon / Title / Description / Action / Close for a fully custom body. Mount one Toast.Provider (or NotificationsHost) near the app root.",
+			"basic": {
+				"label": "Imperative",
+				"hint": "toast({ title, description, color }) queues a toast and returns an { id, close() } handle. notify() is the legacy alias."
+			},
+			"custom": {
+				"label": "Custom content",
+				"hint": "Pass a `content` snippet and compose Toast.Root + parts for a fully custom toast body."
+			},
+			"action": {
+				"label": "Action + Undo",
+				"hint": "Toast.Action runs a handler and dismisses the toast (sticky here, so it waits for you). Toast.Close dismisses without acting."
+			},
+			"loading": {
+				"label": "Loading → done",
+				"hint": "A loading toast stays until you close its handle; resolve it, then fire the success toast."
+			}
+		},
+		"popover": {
+			"title": "Popover",
+			"description": "Anchored floating panel — the kit's overlay escape hatch (build color pickers, filter panels, hover cards, custom dropdowns). Promotes the engine behind Select / Menu / Combobox to a public Popover.Root + Trigger / Portal / Content / Close, with anchored positioning, portal, focus-trap, and the escape + outside-click layers built in.",
+			"basic": {
+				"label": "Basic",
+				"hint": "Popover.Trigger (delegate to Button.Root via `child`) + Popover.Content + Popover.Close. Click outside or press Escape to dismiss."
+			},
+			"controlled": {
+				"label": "Controlled",
+				"hint": "Bind `open` for full control — an external button and the trigger share state; read changes via onOpenChange."
+			},
+			"form": {
+				"label": "Form + focus trap",
+				"hint": "popupRole=\"dialog\" (default) traps focus while open — Tab cycles inside, and focus returns to the trigger on close."
+			},
+			"hover": {
+				"label": "Hover card",
+				"hint": "triggerOn=\"hover\" + modal={false} for a non-trapping hover card; placement=\"top\" anchors it above the trigger."
+			}
+		},
+		"ratingGroup": {
+			"title": "Rating",
+			"description": "Star rating (bits-ui v2 RatingGroup). A single focusable slider-role widget — click or hover the stars, or use the arrow keys / Home / End / digit keys. Supports half-steps, a hover preview, vertical layout, custom icons, and a hidden form input.",
+			"basic": {
+				"label": "Basic",
+				"hint": "Bind `value`; click a star to set it, hover for a live preview, arrows / Home / End / digits adjust from the keyboard."
+			},
+			"half": {
+				"label": "Half stars",
+				"hint": "`allowHalf` enables half values — clicking or hovering the left half of a star sets the .5 step."
+			},
+			"readonly": {
+				"label": "Readonly (display)",
+				"hint": "`readonly` shows an average without accepting input — pair it with a review count."
+			},
+			"custom": {
+				"label": "Custom icon",
+				"hint": "Hand-place RatingGroup.Item and use its `children` snippet `{ state }` to swap the glyph (here hearts, color=\"danger\")."
+			}
+		},
 		"menu": {
 			"title": "Menu",
 			"description": "Anchored popup with a flexible trigger slot. Click / hover / manual open modes, six placements, click-outside / Esc close.",
@@ -832,6 +965,9 @@
 			},
 			"sizes": {
 				"label": "Sizes"
+			},
+			"drawer": {
+				"label": "Edge drawers (start / end / bottom)"
 			},
 			"form": {
 				"label": "Form dialog"

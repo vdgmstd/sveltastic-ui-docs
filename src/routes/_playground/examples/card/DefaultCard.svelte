@@ -5,7 +5,7 @@
 	const src = '/card-demo/coffee-espresso.jpg';
 </script>
 
-<Card.Root>
+<Card.Root cardStyle="max-width: 450px">
 	<Card.Media>
 		<Card.Image>
 			<img {src} alt="Espresso machine pouring a fresh shot" />

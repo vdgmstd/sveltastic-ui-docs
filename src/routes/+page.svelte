@@ -4,6 +4,7 @@
 		ArrowRightIcon,
 		ArrowUpRightIcon,
 		BellIcon,
+		BellRingingIcon,
 		BookmarkSimpleIcon,
 		BowlFoodIcon,
 		BrowserIcon,
@@ -32,9 +33,11 @@
 		PackageIcon,
 		PaletteIcon,
 		PaperPlaneTiltIcon,
+		PasswordIcon,
 		PlayIcon,
 		PlusIcon,
 		RadioButtonIcon,
+		RowsIcon,
 		SkipBackIcon,
 		SkipForwardIcon,
 		SlidersIcon,
@@ -45,6 +48,7 @@
 		SunIcon,
 		TagIcon,
 		ThumbsUpIcon,
+		ToggleLeftIcon,
 		ToggleRightIcon,
 		UploadIcon,
 		UserIcon,
@@ -83,6 +87,7 @@
 		Checkbox: CheckIcon,
 		Chip: TagIcon,
 		Collapse: CaretDownIcon,
+		Combobox: MagnifyingGlassIcon,
 		DateTimePicker: ClockIcon,
 		Dialog: AppWindowIcon,
 		Divider: MinusIcon,
@@ -91,14 +96,20 @@
 		List: ListIcon,
 		Menu: ListDashesIcon,
 		Pagination: DotsThreeIcon,
+		PinInput: PasswordIcon,
+		Popover: ChatCircleTextIcon,
 		Progress: ChartLineIcon,
 		Radio: RadioButtonIcon,
+		RatingGroup: StarIcon,
 		Segmented: SquaresFourIcon,
 		Select: CaretCircleDownIcon,
 		Slider: SlidersIcon,
 		Switch: ToggleRightIcon,
 		Tabs: BrowserIcon,
 		Textarea: NotePencilIcon,
+		Toast: BellRingingIcon,
+		Toggle: ToggleLeftIcon,
+		ToggleGroup: RowsIcon,
 		Tooltip: ChatCircleIcon,
 		Upload: UploadIcon,
 	};
@@ -148,25 +159,52 @@
 	let sketchEl = $state<HTMLElement>();
 	let heroEl = $state<HTMLElement>();
 
-	// Measure `--col-delta` for the CSS scroll-driven parallax (see .intro__hero).
+	// Cross-browser hero parallax: drift the (shorter) hero column down as the page
+	// scrolls so it stays balanced with the taller sketch column. Driven by a
+	// rAF-throttled scroll listener (transform) instead of `animation-timeline:
+	// scroll()`, which Safari does not support — so the effect now works everywhere.
 	$effect(() => {
 		if (!sketchEl || !heroEl) return;
 		const sk = sketchEl;
 		const hr = heroEl;
+		const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+		let colDelta = 0;
+		let raf = 0;
 
 		const measure = (): void => {
-			const delta = Math.max(0, sk.offsetHeight - hr.offsetHeight);
-			hr.style.setProperty('--col-delta', `${delta}px`);
+			colDelta = Math.max(0, sk.offsetHeight - hr.offsetHeight);
+		};
+		const apply = (): void => {
+			raf = 0;
+			if (reduced || window.innerWidth < 1360 || colDelta <= 0) {
+				hr.style.transform = '';
+				return;
+			}
+			const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+			const p = Math.min(1, Math.max(0, window.scrollY / max));
+			hr.style.transform = `translate3d(0, ${p * colDelta}px, 0)`;
+		};
+		const onScroll = (): void => {
+			if (!raf) raf = requestAnimationFrame(apply);
 		};
 
 		measure();
-		const ro = new ResizeObserver(measure);
+		apply();
+		const ro = new ResizeObserver(() => {
+			measure();
+			apply();
+		});
 		ro.observe(sk);
 		ro.observe(hr);
+		window.addEventListener('scroll', onScroll, { passive: true });
+		window.addEventListener('resize', onScroll, { passive: true });
 
 		return () => {
 			ro.disconnect();
-			hr.style.removeProperty('--col-delta');
+			window.removeEventListener('scroll', onScroll);
+			window.removeEventListener('resize', onScroll);
+			if (raf) cancelAnimationFrame(raf);
+			hr.style.transform = '';
 		};
 	});
 </script>
@@ -444,13 +482,13 @@
 					</div>
 					<Input.Root bind:value={signInEmail} labelStyle="placeholder" block>
 						<Input.Control>
-							<Input.Field />
+							<Input.Field autocomplete="off" name="demo-field-1" />
 							<Input.Label>Email</Input.Label>
 						</Input.Control>
 					</Input.Root>
 					<Input.Root bind:value={signInPassword} labelStyle="placeholder" block>
 						<Input.Control>
-							<Input.Field type="password" passwordReveal />
+							<Input.Field type="password" passwordReveal autocomplete="off" name="demo-field-2" data-1p-ignore data-lpignore="true" />
 							<Input.Label>Password</Input.Label>
 						</Input.Control>
 					</Input.Root>
@@ -1020,8 +1058,8 @@
 					<h3>Release notes · v{pkgVersion}</h3>
 				</Card.Header>
 				<p>
-					Springs land in the motion toolkit. 12 new components and a
-					frosted Card variant.
+					Seven new components — Combobox, PinInput, Popover, Rating,
+					Toast, Toggle & ToggleGroup — plus Portal parts on every overlay.
 				</p>
 			</Card.Body>
 		</Card.Root>
@@ -1825,28 +1863,8 @@
 		min-width: 0;
 		max-width: 510px;
 		width: 100%;
-		/* room below for the parallax `--col-delta` range. */
+		/* room below for the JS parallax drift range (see the scroll effect in <script>). */
 		padding-top: clamp(2rem, 14vh, 9rem);
-		will-change: transform;
-	}
-
-	/* @supports is mandatory — without scroll-timeline the keyframe fills to its end-state at 0s and pins the hero shifted. */
-	@keyframes hero-parallax {
-		from { transform: translate3d(0, 0, 0); }
-		to   { transform: translate3d(0, var(--col-delta, 0px), 0); }
-	}
-	@supports (animation-timeline: scroll()) {
-		@media (min-width: 1360px) and (prefers-reduced-motion: no-preference) {
-			.intro__hero {
-				animation: hero-parallax linear both;
-				animation-timeline: scroll(root block);
-			}
-		}
-	}
-	@media (prefers-reduced-motion: reduce) {
-		.intro__hero {
-			transform: none !important;
-		}
 	}
 	.hero {
 		display: flex;

@@ -3,9 +3,10 @@ import { expect, type Page } from '@playwright/test';
 // Every documented component route — the broad mount/hydrate net runs across all of them.
 export const DOC_ROUTES = [
 	'alert', 'avatar', 'button', 'calendar', 'card', 'checkbox', 'chip', 'collapse',
-	'datetime-picker', 'dialog', 'divider', 'input', 'input-number', 'list', 'menu',
-	'pagination', 'progress', 'radio', 'ripple', 'segmented', 'select', 'slider',
-	'switch', 'tabs', 'textarea', 'tooltip', 'upload'
+	'combobox', 'datetime-picker', 'dialog', 'divider', 'input', 'input-number', 'list',
+	'menu', 'pagination', 'pin-input', 'popover', 'progress', 'radio', 'rating-group',
+	'ripple', 'segmented', 'select', 'slider', 'switch', 'tabs', 'textarea', 'toast',
+	'toggle', 'tooltip', 'upload'
 ] as const;
 
 // Vite/browser noise that is not a kit defect.

@@ -103,6 +103,33 @@ test.describe('Progress', () => {
 		await expect(label).toHaveText(/\d+\s*\/\s*100/);
 	});
 
+	test('a circular determinate ring is a progressbar with data-shape=circular and a valuenow in range', async ({
+		page
+	}) => {
+		const ring = page.locator('[role="progressbar"][data-shape="circular"][data-value]').first();
+		await expect(ring).toBeVisible();
+		const now = Number(await ring.getAttribute('aria-valuenow'));
+		const min = Number(await ring.getAttribute('aria-valuemin'));
+		const max = Number(await ring.getAttribute('aria-valuemax'));
+		expect(Number.isNaN(now)).toBe(false);
+		expect(now).toBeGreaterThanOrEqual(min);
+		expect(now).toBeLessThanOrEqual(max);
+		// The ring renders an SVG indicator rather than a linear bar.
+		await expect(ring.locator('svg')).not.toHaveCount(0);
+	});
+
+	test('a circular indeterminate ring omits aria-valuenow and reports data-indeterminate', async ({
+		page
+	}) => {
+		const ring = page
+			.locator('[role="progressbar"][data-shape="circular"][data-indeterminate]')
+			.first();
+		await expect(ring).toBeVisible();
+		await expect(ring).not.toHaveAttribute('aria-valuenow', /.*/);
+		await expect(ring).toHaveAttribute('aria-busy', 'true');
+		await expect(ring).toHaveAttribute('data-state', 'indeterminate');
+	});
+
 	test('aria-valuenow tracks the controlled value when the range input changes', async ({
 		page
 	}) => {

@@ -2,6 +2,7 @@
 	import { version as pkgVersion } from "../../package.json";
 	import { Chip } from 'sveltastic-ui';
 	import { onMount } from 'svelte';
+	import { page } from '$app/state';
 	import { SunIcon, MoonIcon, TextAaIcon } from 'phosphor-svelte';
 	import { Button, NotificationsHost, ScrollbarHost, Switch, theme } from 'sveltastic-ui';
 	import 'sveltastic-ui/styles';
@@ -10,6 +11,8 @@
 
 	let { children } = $props();
 	let themeSwitchEl: HTMLElement | undefined = $state();
+	// The decorative canvas pattern reads as visual noise on docs pages — veil it (fade) on /docs/* routes.
+	let isDocsRoute = $derived(page.url.pathname.startsWith('/docs'));
 
 	type VT = { finished: Promise<void> };
 	type DocVT = Document & { startViewTransition?: (cb: () => void | Promise<void>) => VT };
@@ -26,28 +29,24 @@
 		hydrateFont();
 	});
 
+	// Scroll parallax for the page-canvas backdrop: shift the html background-position. The pattern lives on the <html> canvas (not a fixed element), so the compositor can never cull it — it cannot disappear during the mosaic's transforms / theme transition.
 	onMount(() => {
-		// Native CSS scroll-driven animation does the actual translate (see
-		// `.bg-backdrop` style). JS only needs to keep `--bg-max-py` in sync
-		// with the current document height — the browser interpolates between
-		// 0 and that maximum based on scroll progress, entirely on the
-		// compositor thread. No scroll listener, no rAF loop, no smoothing
-		// — touchpad / mouse wheel / touch all feel native.
-		const root = document.documentElement;
-
-		const setMax = (): void => {
-			const max = Math.max(0, root.scrollHeight - window.innerHeight) * 0.15;
-			root.style.setProperty('--bg-max-py', `${max}px`);
+		const el = document.documentElement;
+		if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+		let raf = 0;
+		const update = (): void => {
+			raf = 0;
+			el.style.backgroundPositionY = `${-window.scrollY * 0.15}px`;
 		};
-
-		setMax();
-		const ro = new ResizeObserver(setMax);
-		ro.observe(document.body);
-		window.addEventListener('resize', setMax, { passive: true });
-
+		const onScroll = (): void => {
+			if (!raf) raf = requestAnimationFrame(update);
+		};
+		update();
+		window.addEventListener('scroll', onScroll, { passive: true });
 		return () => {
-			ro.disconnect();
-			window.removeEventListener('resize', setMax);
+			window.removeEventListener('scroll', onScroll);
+			if (raf) cancelAnimationFrame(raf);
+			el.style.backgroundPositionY = '';
 		};
 	});
 
@@ -105,7 +104,7 @@
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 </svelte:head>
 
-<div class="bg-backdrop" aria-hidden="true"></div>
+<div class="bg-veil" class:isDocs={isDocsRoute} aria-hidden="true"></div>
 
 <header class="app-header">
 	<div class="app-header__inner">
@@ -157,8 +156,21 @@
 
 <style>
 	/* clip, not hidden — hidden makes <html> a scroll container and the fixed app-header overlaps the native scrollbar. */
+	/* Decorative pattern lives on the <html> canvas — it is never a composited layer, so it cannot be culled (disappear) during the mosaic's transforms or the theme transition. A near-opaque overlay of the page colour fades it to ~10%; a pre-inverted asset handles dark mode without a compositing filter. */
 	:global(html) {
 		overflow-x: clip;
+		background-image:
+			linear-gradient(rgb(var(--background) / 0.9), rgb(var(--background) / 0.9)),
+			url('/background.svg');
+		background-repeat: repeat;
+		background-size: 100% auto;
+		background-position: top center;
+		background-attachment: fixed;
+	}
+	:global(html[data-theme='dark']) {
+		background-image:
+			linear-gradient(rgb(var(--background) / 0.9), rgb(var(--background) / 0.9)),
+			url('/background-dark.svg');
 	}
 	:global(body) {
 		margin: 0;
@@ -166,45 +178,18 @@
 		overflow-x: clip;
 	}
 
-	/* SVG decoration spans the full page, sits behind everything, and
-	   translates on scroll for a parallax feel. The header sits above with a
-	   translucent background + backdrop-filter, so the pattern blurs through.
-	   Tiles vertically when the page is taller than one image's natural-aspect
-	   height. Inverts in dark mode so the same asset works for both themes. */
-	.bg-backdrop {
-		position: absolute;
+	/* Veils the canvas pattern (solid page colour) — transparent on the homepage, fades opaque on /docs/* so the pattern doesn't distract from docs content. Fixed + below content; on docs there are no mosaic transforms, so this layer never composites/culls. */
+	.bg-veil {
+		position: fixed;
 		inset: 0;
-		opacity: 0.1;
+		z-index: 0;
+		background: rgb(var(--background));
+		opacity: 0;
 		pointer-events: none;
-		z-index: -1;
-		overflow: hidden;
-		background-image: url('/background.svg');
-		background-repeat: repeat;
-		background-size: 100% auto;
-		background-position: top center;
-		will-change: transform;
-		/* Native scroll-driven parallax: linear 0 → max as the page scrolls
-		   0 → end. Runs on the compositor without a JS listener. Gracefully
-		   degrades to no parallax in browsers without animation-timeline
-		   (currently Firefox). */
-		animation: bg-parallax linear forwards;
-		animation-timeline: scroll(root block);
+		transition: opacity 450ms var(--ease-standard, cubic-bezier(0.4, 0, 0.2, 1));
 	}
-	@keyframes bg-parallax {
-		from {
-			transform: translate3d(0, 0, 0);
-		}
-		to {
-			transform: translate3d(0, var(--bg-max-py, 0px), 0);
-		}
-	}
-	@media (prefers-reduced-motion: reduce) {
-		.bg-backdrop {
-			animation: none;
-		}
-	}
-	:global([data-theme='dark']) .bg-backdrop {
-		filter: invert(1);
+	.bg-veil.isDocs {
+		opacity: 1;
 	}
 
 	/* Theme reveal: the next theme clips in as a circle expanding from the toggle (--vt-x/--vt-y). Gated to html.theme-vt so it never touches nav. */
@@ -299,6 +284,8 @@
 		margin: 0 auto;
 		padding: 56px 0 0;
 		box-sizing: border-box;
+		position: relative;
+		z-index: 1;
 	}
 
 	@media (max-width: 520px) {

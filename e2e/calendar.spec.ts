@@ -114,6 +114,39 @@ test.describe('Calendar', () => {
 		expect(sink.errors, sink.errors.join('\n')).toEqual([]);
 	});
 
+	test('PageDown / PageUp move the calendar by one month from the keyboard', async ({ page }) => {
+		const sink = collectErrors(page);
+		const root = page.locator('[data-testid="calendar"]').first();
+		await expect(root.locator('[role="grid"]')).toHaveCount(1);
+		const before = await root.locator('[role="grid"]').getAttribute('aria-label');
+		expect(before).toBeTruthy();
+
+		await root.locator('[role="gridcell"][tabindex="0"]').focus();
+		await page.keyboard.press('PageDown');
+		await expect(root.locator('[role="grid"]')).toHaveCount(1);
+		expect(await root.locator('[role="grid"]').getAttribute('aria-label')).not.toBe(before);
+
+		await page.keyboard.press('PageUp');
+		await expect(root.locator('[role="grid"]')).toHaveCount(1);
+		await expect(root.locator('[role="grid"]')).toHaveAttribute('aria-label', before!);
+		expect(sink.errors, sink.errors.join('\n')).toEqual([]);
+	});
+
+	test('Shift+PageDown jumps the calendar forward by one year', async ({ page }) => {
+		const root = page.locator('[data-testid="calendar"]').first();
+		await expect(root.locator('[role="grid"]')).toHaveCount(1);
+		// The grid label is month-only; read the year off the roving cell's ISO data-value instead.
+		const beforeIso = await root.locator('[role="gridcell"][tabindex="0"]').getAttribute('data-value');
+		const yearBefore = Number(beforeIso?.slice(0, 4));
+		expect(Number.isNaN(yearBefore)).toBe(false);
+
+		await root.locator('[role="gridcell"][tabindex="0"]').focus();
+		await page.keyboard.press('Shift+PageDown');
+		await expect(root.locator('[role="grid"]')).toHaveCount(1);
+		const afterIso = await root.locator('[role="gridcell"][tabindex="0"]').getAttribute('data-value');
+		expect(Number(afterIso?.slice(0, 4))).toBe(yearBefore + 1);
+	});
+
 	test('a disabled calendar exposes disabled, non-selectable day cells', async ({ page }) => {
 		// The States section renders a fully-disabled calendar (the doc page has no
 		// mixed enabled/disabled fixture, so we assert the whole-grid disabled contract).

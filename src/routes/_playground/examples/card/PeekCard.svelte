@@ -5,7 +5,7 @@
 	const src = '/card-demo/reykjavik-church.jpg';
 </script>
 
-<Card.Root variant="peek">
+<Card.Root variant="peek" cardStyle="max-width: 450px">
 	<Card.Media>
 		<Card.Image>
 			<img {src} alt="Hallgrímskirkja church standing over Reykjavik" />
@@ -35,7 +35,7 @@
 <style>
 	.actions {
 		display: flex;
-		gap: var(--space-2);
+		gap: var(--space-4);
 		width: 100%;
 	}
 	.actions :global(.button) {

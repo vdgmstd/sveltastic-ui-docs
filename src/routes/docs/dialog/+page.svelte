@@ -7,6 +7,7 @@
 	import NativeTriggerDialog from '../../_playground/examples/dialog/NativeTriggerDialog.svelte';
 	import PersistentDialog from '../../_playground/examples/dialog/PersistentDialog.svelte';
 	import SizesDialog from '../../_playground/examples/dialog/SizesDialog.svelte';
+	import DrawerDialog from '../../_playground/examples/dialog/DrawerDialog.svelte';
 	import FormDialog from '../../_playground/examples/dialog/FormDialog.svelte';
 	import ScrollDialog from '../../_playground/examples/dialog/ScrollDialog.svelte';
 
@@ -14,6 +15,7 @@
 	import nativeSrc from '../../_playground/examples/dialog/NativeTriggerDialog.svelte?raw';
 	import persistentSrc from '../../_playground/examples/dialog/PersistentDialog.svelte?raw';
 	import sizesSrc from '../../_playground/examples/dialog/SizesDialog.svelte?raw';
+	import drawerSrc from '../../_playground/examples/dialog/DrawerDialog.svelte?raw';
 	import formSrc from '../../_playground/examples/dialog/FormDialog.svelte?raw';
 	import scrollSrc from '../../_playground/examples/dialog/ScrollDialog.svelte?raw';
 
@@ -27,6 +29,7 @@
 		{ labelKey: 'playground.dialog.native.label', Component: NativeTriggerDialog, src: nativeSrc },
 		{ labelKey: 'playground.dialog.persistent.label', Component: PersistentDialog, src: persistentSrc },
 		{ labelKey: 'playground.dialog.sizes.label', Component: SizesDialog, src: sizesSrc },
+		{ labelKey: 'playground.dialog.drawer.label', Component: DrawerDialog, src: drawerSrc },
 		{ labelKey: 'playground.dialog.form.label', Component: FormDialog, src: formSrc },
 		{ labelKey: 'playground.dialog.scroll.label', Component: ScrollDialog, src: scrollSrc }
 	];
@@ -34,7 +37,7 @@
 	const rootApi: ApiProp[] = [
 		{ name: 'open', type: 'boolean', required: false, default: '$bindable(false)', description: 'Open state. Two-way bindable; also flows through onOpenChange (kit controlled-state idiom).' },
 		{ name: 'size', type: 'DialogSize', required: false, default: "'medium'", description: "Preset width: 'small' (400px) | 'medium' (520px) | 'large' (720px) | 'fullscreen' (stretches to the viewport)." },
-		{ name: 'align', type: 'DialogAlign', required: false, default: "'center'", description: "Vertical alignment: 'center' | 'top' (pins the dialog 6vh from the top)." },
+		{ name: 'align', type: 'DialogAlign', required: false, default: "'center'", description: "Anchor: 'center' | 'top' (6vh from the top) | 'start' / 'end' (full-height edge drawer, inline-axis, RTL-aware) | 'bottom' (full-width bottom sheet). Edge values slide in from that edge." },
 		{ name: 'color', type: 'Color', required: false, default: "'primary'", description: 'Accent palette — drives the focus outline and selection tint.' },
 		{ name: 'persistent', type: 'boolean', required: false, default: 'false', description: 'Block Esc + backdrop-click close paths; they play a bounce instead.' },
 		{ name: 'role', type: 'DialogRole', required: false, default: "'dialog'", description: "ARIA role for the surface: 'dialog' | 'alertdialog' (for destructive confirmations)." },

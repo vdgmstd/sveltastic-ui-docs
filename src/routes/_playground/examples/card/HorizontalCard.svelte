@@ -5,7 +5,7 @@
 	const src = '/card-demo/sourdough-bread.jpg';
 </script>
 
-<Card.Root variant="horizontal">
+<Card.Root variant="horizontal" cardStyle="max-width: 450px">
 	<Card.Media>
 		<Card.Image>
 			<img {src} alt="Crusty sourdough loaf on a dark counter" />
@@ -42,5 +42,6 @@
 		gap: 0.4rem;
 		align-items: center;
 		flex-wrap: wrap;
+		margin-top: var(--space-3);
 	}
 </style>

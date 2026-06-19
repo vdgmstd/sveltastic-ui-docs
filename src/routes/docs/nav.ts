@@ -14,12 +14,16 @@ export const componentLinks: readonly DocLink[] = [
 	{ slug: 'button', name: 'Button', source: 'Button', version: 'v1', category: 'Form controls', summary: 'Clickable trigger with variants, sizes, and loading state.' },
 	{ slug: 'input', name: 'Input', source: 'Input', version: 'v1', category: 'Form controls', summary: 'Single-line text field with label, prefix, and validation.' },
 	{ slug: 'input-number', name: 'Input Number', source: 'InputNumber', version: 'v1', category: 'Form controls', summary: 'Numeric input with steppers, clamping, and step control.' },
+	{ slug: 'pin-input', name: 'Pin Input', source: 'PinInput', version: 'v1', category: 'Form controls', summary: 'OTP / one-time-code field split into per-character cells.' },
 	{ slug: 'textarea', name: 'Textarea', source: 'Textarea', version: 'v1', category: 'Form controls', summary: 'Multi-line text field with autosize and char counter.' },
 	{ slug: 'checkbox', name: 'Checkbox', source: 'CheckBox', version: 'v1', category: 'Form controls', summary: 'Binary toggle with indeterminate state and groups.' },
 	{ slug: 'radio', name: 'Radio', source: 'Radio', version: 'v1', category: 'Form controls', summary: 'Mutually exclusive option inside a radio group.' },
 	{ slug: 'segmented', name: 'Segmented', source: 'Segmented', version: 'v1', category: 'Form controls', summary: 'Compact segmented control with a sliding indicator.' },
+	{ slug: 'rating-group', name: 'Rating', source: 'RatingGroup', version: 'v1', category: 'Form controls', summary: 'Star rating slider with half-steps, hover preview, and custom icons.' },
+	{ slug: 'toggle', name: 'Toggle', source: 'Toggle', version: 'v1', category: 'Form controls', summary: 'Pressed-state toggle button, standalone or grouped (single/multiple).' },
 	{ slug: 'switch', name: 'Switch', source: 'Switch', version: 'v1', category: 'Form controls', summary: 'On/off toggle with animated thumb and labels.' },
 	{ slug: 'select', name: 'Select', source: 'Select', version: 'v1', category: 'Form controls', summary: 'Dropdown picker with single, multi, and async options.' },
+	{ slug: 'combobox', name: 'Combobox', source: 'Combobox', version: 'v1', category: 'Form controls', summary: 'Editable typeahead picker — type to filter, single or multiple.' },
 	{ slug: 'slider', name: 'Slider', source: 'Slider', version: 'v1', category: 'Form controls', summary: 'Continuous or stepped value range with tooltips.' },
 	{ slug: 'datetime-picker', name: 'DateTime', source: 'DateTimePicker', version: 'v1', category: 'Form controls', summary: 'Combined date and time selector with calendar popover.' },
 	{ slug: 'calendar', name: 'Calendar', source: 'Calendar', version: 'v1', category: 'Form controls', summary: 'Inline month calendar with selection and disabled days.' },
@@ -38,8 +42,10 @@ export const componentLinks: readonly DocLink[] = [
 	{ slug: 'alert', name: 'Alert', source: 'Alert', version: 'v1', category: 'Overlays & feedback', summary: 'Banner for info, success, warning, and error states.' },
 	{ slug: 'dialog', name: 'Dialog', source: 'Dialog', version: 'v1', category: 'Overlays & feedback', summary: 'Modal overlay with focus trap and scroll lock.' },
 	{ slug: 'tooltip', name: 'Tooltip', source: 'Tooltip', version: 'v1', category: 'Overlays & feedback', summary: 'Contextual hint anchored and positioned to a target.' },
+	{ slug: 'popover', name: 'Popover', source: 'Popover', version: 'v1', category: 'Overlays & feedback', summary: 'Anchored floating panel — the escape hatch for custom overlays.' },
 	{ slug: 'menu', name: 'Menu', source: 'Menu', version: 'v1', category: 'Overlays & feedback', summary: 'Floating list of actions with keyboard navigation.' },
-	{ slug: 'notifications', name: 'Notifications', source: 'Notifications', version: 'v1', category: 'Overlays & feedback', summary: 'Imperative toast queue with positions and timeouts.' }
+	{ slug: 'notifications', name: 'Notifications', source: 'Notifications', version: 'v1', category: 'Overlays & feedback', summary: 'Imperative toast queue with positions and timeouts.' },
+	{ slug: 'toast', name: 'Toast', source: 'Toast', version: 'v1', category: 'Overlays & feedback', summary: 'Compound toast parts over the toast queue, with custom content.' }
 ];
 
 export interface HelperLink {

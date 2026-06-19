@@ -76,7 +76,11 @@
 	];
 
 	const contentApi: ApiProp[] = [
-		{ name: 'children', type: 'Snippet<[() => void]>', required: false, default: null, description: 'Menu rows — Menu.Item / Menu.CheckboxItem / Menu.RadioGroup / Menu.Group / Menu.Separator. Receives a close callback.' }
+		{ name: 'children', type: 'Snippet<[() => void]>', required: false, default: null, description: 'Menu rows — Menu.Item / Menu.CheckboxItem / Menu.RadioGroup / Menu.Group / Menu.Separator. Receives a close callback so custom content can dismiss the menu.' },
+		{ name: 'child', type: 'Snippet<[{ props, body }]>', required: false, default: null, description: 'Render-delegation: spread props on your own panel-body element and {@render body()} for the rows.' },
+		{ name: 'ref', type: 'HTMLDivElement | null', required: false, default: 'null', description: 'Bindable reference to the rendered panel-body element.' },
+		{ name: 'class', type: 'string', required: false, default: null, description: 'Class merged onto the panel-body element.' },
+		{ name: '…rest', type: 'HTMLAttributes', required: false, default: null, description: 'Every native HTML / data-* / aria-* attribute, forwarded to the panel-body element.' }
 	];
 
 	const headerApi: ApiProp[] = [
@@ -187,7 +191,7 @@
 <ApiTable
 	title="Menu.Content"
 	api={contentApi}
-	hint="The popup body. Place Menu.Item / Menu.CheckboxItem / Menu.RadioGroup / Menu.Group / Menu.Separator rows here; the children snippet receives a close callback."
+	hint="The popup body. Place Menu.Item / Menu.CheckboxItem / Menu.RadioGroup / Menu.Group / Menu.Separator rows here; the children snippet receives a close callback. Exposes ref, the child render-delegation snippet, class / data-* pass-through and a data-state hook."
 />
 <ApiTable
 	title="Menu.Header"
