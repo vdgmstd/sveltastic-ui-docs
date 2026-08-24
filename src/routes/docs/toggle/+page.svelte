@@ -8,14 +8,18 @@
 	import GroupSingleToggle from '../../_playground/examples/toggle/GroupSingleToggle.svelte';
 	import GroupMultipleToggle from '../../_playground/examples/toggle/GroupMultipleToggle.svelte';
 	import GroupVerticalToggle from '../../_playground/examples/toggle/GroupVerticalToggle.svelte';
+	import GroupDeselectToggle from '../../_playground/examples/toggle/GroupDeselectToggle.svelte';
+	import GroupWrapToggle from '../../_playground/examples/toggle/GroupWrapToggle.svelte';
 
 	import basicSrc from '../../_playground/examples/toggle/BasicToggle.svelte?raw';
 	import variantsSrc from '../../_playground/examples/toggle/VariantsToggle.svelte?raw';
 	import groupSingleSrc from '../../_playground/examples/toggle/GroupSingleToggle.svelte?raw';
 	import groupMultipleSrc from '../../_playground/examples/toggle/GroupMultipleToggle.svelte?raw';
 	import groupVerticalSrc from '../../_playground/examples/toggle/GroupVerticalToggle.svelte?raw';
+	import groupDeselectSrc from '../../_playground/examples/toggle/GroupDeselectToggle.svelte?raw';
+	import groupWrapSrc from '../../_playground/examples/toggle/GroupWrapToggle.svelte?raw';
 
-	import ApiTable, { type ApiProp } from '../_ApiTable.svelte';
+	import ApiTable, { COLOR_DEFAULT_NOTE, type ApiProp } from '../_ApiTable.svelte';
 
 	const t = (key: string) => i18n.t(key);
 
@@ -24,7 +28,9 @@
 		{ labelKey: 'playground.toggle.variants.label', hintKey: 'playground.toggle.variants.hint', Component: VariantsToggle, src: variantsSrc },
 		{ labelKey: 'playground.toggle.groupSingle.label', hintKey: 'playground.toggle.groupSingle.hint', Component: GroupSingleToggle, src: groupSingleSrc },
 		{ labelKey: 'playground.toggle.groupMultiple.label', hintKey: 'playground.toggle.groupMultiple.hint', Component: GroupMultipleToggle, src: groupMultipleSrc },
-		{ labelKey: 'playground.toggle.groupVertical.label', hintKey: 'playground.toggle.groupVertical.hint', Component: GroupVerticalToggle, src: groupVerticalSrc }
+		{ labelKey: 'playground.toggle.groupVertical.label', hintKey: 'playground.toggle.groupVertical.hint', Component: GroupVerticalToggle, src: groupVerticalSrc },
+		{ labelKey: 'playground.toggle.groupDeselect.label', hintKey: 'playground.toggle.groupDeselect.hint', Component: GroupDeselectToggle, src: groupDeselectSrc },
+		{ labelKey: 'playground.toggle.groupWrap.label', hintKey: 'playground.toggle.groupWrap.hint', Component: GroupWrapToggle, src: groupWrapSrc }
 	];
 
 	const toggleApi: ApiProp[] = [
@@ -32,7 +38,7 @@
 		{ name: 'onPressedChange', type: '(pressed: boolean) => void', required: false, default: null, description: 'Fired whenever the pressed state changes.' },
 		{ name: 'disabled', type: 'boolean', required: false, default: 'false', description: 'Inert + dimmed.' },
 		{ name: 'variant', type: 'Variant', required: false, default: "'transparent'", description: 'Button visual variant — subtle when off, accent-tinted when on. Any Button variant works.' },
-		{ name: 'color', type: 'Color', required: false, default: "'primary'", description: 'Palette accent.' },
+		{ name: 'color', type: 'Color', required: false, default: null, description: 'Palette accent.' + COLOR_DEFAULT_NOTE },
 		{ name: 'size', type: 'Size', required: false, default: "'medium'", description: 'Sizing scale shared with Button.' },
 		{ name: 'shape', type: 'Shape', required: false, default: "'default'", description: "'default' | 'circle' | 'square'." },
 		{ name: 'iconOnly', type: 'boolean', required: false, default: 'false', description: 'Square icon-only padding, larger glyph.' },
@@ -45,11 +51,13 @@
 
 	const groupRootApi: ApiProp[] = [
 		{ name: 'type', type: "'single' | 'multiple'", required: true, default: null, description: 'Selection mode. Drives the value type: string (single) or string[] (multiple).' },
-		{ name: 'value', type: 'string | string[]', required: false, default: '$bindable()', description: 'Selected value(s). Two-way bindable; single allows none (empty when the active item is toggled off).' },
-		{ name: 'onValueChange', type: '(value) => void', required: false, default: null, description: 'Fired on selection change (typed to the mode).' },
+		{ name: 'value', type: 'string | string[]', required: false, default: '$bindable()', description: 'Selected value(s). Two-way bindable. In single mode a re-tap on the active item is a no-op unless allowDeselect is set.' },
+		{ name: 'allowDeselect', type: 'boolean', required: false, default: 'false', description: 'Single mode only — a re-tap on the active item clears the selection, committing undefined (not an empty string).' },
+		{ name: 'onValueChange', type: '(value) => void', required: false, default: null, description: 'Fired on selection change (typed to the mode). Single mode widens to string | undefined once allowDeselect is passed.' },
 		{ name: 'disabled', type: 'boolean', required: false, default: 'false', description: 'Disable every item in the group.' },
 		{ name: 'orientation', type: "'horizontal' | 'vertical'", required: false, default: "'horizontal'", description: 'Layout + arrow-key navigation axis. Published as data-orientation.' },
 		{ name: 'loop', type: 'boolean', required: false, default: 'true', description: 'Wrap arrow navigation past the ends.' },
+		{ name: 'wrap', type: 'boolean', required: false, default: 'false', description: 'Let the row break onto more lines instead of overflowing at narrow widths.' },
 		{ name: 'rovingFocus', type: 'boolean', required: false, default: 'true', description: 'Roving tabindex (one tab-stop, arrows move within). Off → every item is tabbable.' },
 		{ name: 'variant', type: 'Variant', required: false, default: "'transparent'", description: 'Button variant applied to every item.' },
 		{ name: 'color / size / shape / ripple', type: '—', required: false, default: null, description: 'Shared visual config forwarded to every item.' },
@@ -61,6 +69,7 @@
 
 	const groupItemApi: ApiProp[] = [
 		{ name: 'value', type: 'string', required: true, default: null, description: 'Item identifier; unique within the group.' },
+		{ name: 'type', type: "HTMLButtonAttributes['type']", required: false, default: "'button'", description: 'Native button type — defaults to button so an item never submits an ancestor form.' },
 		{ name: 'disabled', type: 'boolean', required: false, default: 'false', description: 'Inert this item (the group disabled also cascades).' },
 		{ name: 'iconOnly', type: 'boolean', required: false, default: 'false', description: 'Square icon-only padding.' },
 		{ name: 'ariaLabel', type: 'string', required: false, default: null, description: 'Accessible name — required for icon-only items.' },

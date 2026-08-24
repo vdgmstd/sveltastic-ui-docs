@@ -55,6 +55,23 @@
 </div>
 
 <div class="block">
+	<h3>{t('playground.theme.ink.label')}</h3>
+	<p class="muted">{t('playground.theme.ink.hint')}</p>
+	<table class="vars">
+		<thead>
+			<tr><th>Token</th><th>Default</th><th>Purpose</th></tr>
+		</thead>
+		<tbody>
+			<tr><td><code>--on-c</code></td><td><code>var(--on-accent)</code></td><td>{t('playground.theme.ink.onC')}</td></tr>
+			<tr><td><code>--on-accent</code></td><td><code>255 255 255</code></td><td>{t('playground.theme.ink.onAccent')}</td></tr>
+			<tr><td><code>--on-accent-dark</code></td><td><code>44 62 80</code></td><td>{t('playground.theme.ink.onAccentDark')}</td></tr>
+			<tr><td><code>--on-light</code></td><td><code>var(--on-accent-dark)</code></td><td>{t('playground.theme.ink.onLight')}</td></tr>
+			<tr><td><code>--on-warn</code></td><td><code>var(--on-accent-dark)</code></td><td>{t('playground.theme.ink.onWarn')}</td></tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="block">
 	<h3>{t('playground.theme.usage.label')}</h3>
 	<p class="muted">{t('playground.theme.usage.hint')}</p>
 	<pre class="snippet">{`<` + `script lang="ts">

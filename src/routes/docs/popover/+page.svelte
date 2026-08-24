@@ -52,7 +52,7 @@
 	];
 
 	const portalApi: ApiProp[] = [
-		{ name: 'to', type: 'string | HTMLElement', required: false, default: 'document.body', description: 'Portal target for the panel.' },
+		{ name: 'to', type: 'string | HTMLElement', required: false, default: 'nearest <dialog>, else document.body', description: 'Portal target. CSS selector or element. Left unset, the panel lands in the nearest ancestor <dialog> (so an overlay opened from a Dialog stays in the top layer), else document.body — pass to="body" to force body from inside a dialog.' },
 		{ name: 'disabled', type: 'boolean', required: false, default: 'false', description: 'Render the panel in place instead of portalling it.' },
 		{ name: 'forceMount', type: 'boolean', required: false, default: 'false', description: 'Keep the panel mounted while closed (presence via data-state) — for custom transitions.' }
 	];
@@ -102,7 +102,7 @@
 <ApiTable
 	title="Popover.Portal"
 	api={portalApi}
-	hint="Optional — portals the panel to document.body (or a custom target) and toggles forceMount. The panel portals to body by default even without it."
+	hint="Optional — re-targets the portal and toggles forceMount. The panel portals on its own even without it: into the nearest ancestor <dialog> when the Popover is declared inside one, otherwise document.body."
 />
 <ApiTable
 	title="Popover.Content"

@@ -79,12 +79,12 @@
 	const rootApi: ApiProp[] = [
 		{ name: 'type', type: "'single' | 'range'", required: false, default: "'single'", description: 'Selection mode. Discriminates the value type (string vs DateRange).' },
 		{ name: 'value', type: 'string | DateRange', required: false, default: '$bindable()', description: 'Bound selection — a YYYY-MM-DD string in single mode, a { from, to } DateRange in range mode.' },
-		{ name: 'placeholder', type: 'DateLike', required: false, default: '$bindable()', description: 'Controlled view month (YYYY-MM-DD); two-way bindable. Drives which month / year the grid shows.' },
+		{ name: 'placeholder', type: 'DateLike', required: false, default: '$bindable()', description: 'Controlled view month (YYYY-MM-DD); two-way bindable. Drives which month / year the grid shows. A value outside min / max is clamped into range and the clamped date is written back through the binding.' },
 		{ name: 'locale', type: 'string', required: false, default: "'en-US'", description: 'Locale for weekday / month labels.' },
 		{ name: 'weekStart', type: 'WeekStart', required: false, default: null, description: "First day of the week (0=Sunday … 6=Saturday). Defaults to the locale's convention." },
 		{ name: 'weekdayFormat', type: "'short' | 'narrow' | 'long'", required: false, default: "'short'", description: 'Weekday header label width.' },
-		{ name: 'min', type: 'DateLike', required: false, default: null, description: 'Lower bound (inclusive).' },
-		{ name: 'max', type: 'DateLike', required: false, default: null, description: 'Upper bound (inclusive).' },
+		{ name: 'min', type: 'DateLike', required: false, default: null, description: 'Lower bound (inclusive). Also bounds navigation: out-of-range days, months and years are disabled and the prev / next buttons stop at the edge.' },
+		{ name: 'max', type: 'DateLike', required: false, default: null, description: 'Upper bound (inclusive). Bounds navigation the same way as min.' },
 		{ name: 'disabledDate', type: '(date: Temporal.PlainDate) => boolean', required: false, default: null, description: 'Predicate to disable individual days.' },
 		{ name: 'disabled', type: 'boolean', required: false, default: 'false', description: 'Disable the entire calendar.' },
 		{ name: 'readonly', type: 'boolean', required: false, default: 'false', description: 'Block selection while keeping the calendar interactive for navigation.' },
@@ -201,12 +201,12 @@
 <ApiTable
 	title="Calendar.PrevButton"
 	api={prevButtonApi}
-	hint="The icon-only button that steps the view back one month / page. Disabled with the calendar."
+	hint="The icon-only button that steps the view back one month / page. Disabled with the calendar, and whenever the previous month / year / year-page lies entirely outside min–max."
 />
 <ApiTable
 	title="Calendar.NextButton"
 	api={nextButtonApi}
-	hint="The icon-only button that steps the view forward one month / page. Disabled with the calendar."
+	hint="The icon-only button that steps the view forward one month / page. Disabled with the calendar, and whenever the next month / year / year-page lies entirely outside min–max."
 />
 <ApiTable
 	title="Calendar.Grid"

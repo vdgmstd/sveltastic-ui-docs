@@ -55,11 +55,11 @@
 		{ labelKey: 'playground.tabs.keyboard.label', descriptionKey: 'playground.tabs.keyboard.hint', Component: KeyboardTabs, src: keyboardSrc }
 	];
 
-	import ApiTable, { type ApiProp } from '../_ApiTable.svelte';
+	import ApiTable, { COLOR_DEFAULT_NOTE, type ApiProp } from '../_ApiTable.svelte';
 
 	const rootApi: ApiProp[] = [
 		{ name: 'value', type: 'string', required: false, default: '$bindable()', description: 'Active tab value. Two-way bindable.' },
-		{ name: 'color', type: 'Color', required: false, default: "'primary'", description: 'Palette accent. Drives the thumb fill and active-state color via --c.' },
+		{ name: 'color', type: 'Color', required: false, default: null, description: 'Palette accent. Drives the thumb fill and active-state color via --c.' + COLOR_DEFAULT_NOTE },
 		{ name: 'variant', type: 'TabsVariant', required: false, default: "'underline'", description: "Rail variant: 'underline' bottom bar (default), or filled 'default' / 'flat' / 'border' / 'relief' thumb." },
 		{ name: 'size', type: 'Size', required: false, default: "'medium'", description: "Sizing scale shared with Button / Segmented ('xl' | 'large' | 'medium' | 'small' | 'mini')." },
 		{ name: 'panelVariant', type: 'TabsPanelVariant', required: false, default: "'plain'", description: "Panel surface — 'plain' blends in, 'card' wraps the active panel in a Card-like surface." },

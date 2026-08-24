@@ -37,11 +37,11 @@
 		{ labelKey: 'playground.segmented.child.label', descriptionKey: 'playground.segmented.child.hint', Component: ChildSegmented, src: childSrc }
 	];
 
-	import ApiTable, { type ApiProp } from '../_ApiTable.svelte';
+	import ApiTable, { COLOR_DEFAULT_NOTE, type ApiProp } from '../_ApiTable.svelte';
 
 	const rootApi: ApiProp[] = [
 		{ name: 'value', type: 'V', required: false, default: '$bindable()', description: 'Selected token. Two-way bindable.' },
-		{ name: 'color', type: 'Color', required: false, default: "'primary'", description: 'Palette accent for the active thumb and (in flat) the track tint.' },
+		{ name: 'color', type: 'Color', required: false, default: null, description: 'Palette accent for the active thumb and (in flat) the track tint.' + COLOR_DEFAULT_NOTE },
 		{ name: 'variant', type: 'SegmentedVariant', required: false, default: "'default'", description: "Visual variant: 'default' | 'flat' | 'border' | 'relief'." },
 		{ name: 'size', type: 'Size', required: false, default: "'medium'", description: "Sizing scale shared with Button ('xl' | 'large' | 'medium' | 'small' | 'mini'). Outer height matches a Button at the same size." },
 		{ name: 'block', type: 'boolean', required: false, default: 'false', description: 'Stretch the group to fill the container width.' },

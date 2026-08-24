@@ -52,11 +52,11 @@
 		{ labelKey: 'playground.list.empty.label', Component: EmptyList, src: emptySrc }
 	];
 	import ApiTable from '../_ApiTable.svelte';
-	import type { ApiProp } from '../_ApiTable.svelte';
+	import { COLOR_DEFAULT_NOTE, type ApiProp } from '../_ApiTable.svelte';
 
 	const rootApi: ApiProp[] = [
 		{ name: 'variant', type: 'ListVariant', required: false, default: "'default'", description: "Surface variant: 'default' | 'flat' | 'border' | 'transparent' | 'shadow'." },
-		{ name: 'color', type: 'Color', required: false, default: "'primary'", description: 'Palette name or hex / rgb(...) / r,g,b. Exposes --c for descendants.' },
+		{ name: 'color', type: 'Color', required: false, default: null, description: 'Palette name or hex / rgb(...) / r,g,b. Exposes --c for descendants.' + COLOR_DEFAULT_NOTE },
 		{ name: 'size', type: 'Size', required: false, default: "'medium'", description: 'Density token shared across all items: xl | large | medium | small | mini.' },
 		{ name: 'divided', type: 'boolean', required: false, default: 'false', description: 'Hairline divider between items.' },
 		{ name: 'disabled', type: 'boolean', required: false, default: 'false', description: 'Disable every item at once.' },

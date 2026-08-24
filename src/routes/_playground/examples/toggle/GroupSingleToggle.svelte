@@ -10,7 +10,7 @@
 	<ToggleGroup.Item value="center" iconOnly ariaLabel="Align center"><TextAlignCenter size={18} /></ToggleGroup.Item>
 	<ToggleGroup.Item value="right" iconOnly ariaLabel="Align right"><TextAlignRight size={18} /></ToggleGroup.Item>
 </ToggleGroup.Root>
-<span class="muted">→ {align || 'none'}</span>
+<span class="muted">→ {align}</span>
 
 <style>
 	.muted {

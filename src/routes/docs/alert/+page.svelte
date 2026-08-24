@@ -3,7 +3,7 @@
 	import { i18n } from '$lib/i18n/index.svelte';
 	import DemoBlock from '../../_playground/DemoBlock.svelte';
 	import ApiTable from '../_ApiTable.svelte';
-	import type { ApiProp } from '../_ApiTable.svelte';
+	import { COLOR_DEFAULT_NOTE, type ApiProp } from '../_ApiTable.svelte';
 
 	import BasicAlert from '../../_playground/examples/alert/BasicAlert.svelte';
 	import VariantsAlert from '../../_playground/examples/alert/VariantsAlert.svelte';
@@ -38,7 +38,7 @@
 
 	const rootApi: ApiProp[] = [
 		{ name: 'variant', type: 'AlertVariant', required: false, default: "'relief'", description: "Visual variant: 'relief' (soft offset shadow) | 'gradient' (diagonal hue-shifted overlay)." },
-		{ name: 'color', type: 'Color', required: false, default: "'primary'", description: 'Palette name, hex, rgb(...) or "r,g,b" triplet — drives the background fill.' },
+		{ name: 'color', type: 'Color', required: false, default: null, description: 'Palette name, hex, rgb(...) or "r,g,b" triplet — drives the background fill.' + COLOR_DEFAULT_NOTE },
 		{ name: 'gradientEnd', type: 'Color', required: false, default: null, description: 'End-stop color for the gradient variant. Defaults to the --gradient-end token.' },
 		{ name: 'open', type: 'boolean', required: false, default: '$bindable(true)', description: 'Show / hide the alert. Two-way bindable; closing rides the slide transition.' },
 		{ name: 'collapsed', type: 'boolean | undefined', required: false, default: '$bindable(undefined)', description: 'Collapse state. undefined disables the affordance; true/false enables a click-to-collapse header via Alert.Toggle. Two-way bindable.' },

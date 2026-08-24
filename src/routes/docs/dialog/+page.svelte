@@ -29,15 +29,15 @@
 		{ labelKey: 'playground.dialog.native.label', Component: NativeTriggerDialog, src: nativeSrc },
 		{ labelKey: 'playground.dialog.persistent.label', Component: PersistentDialog, src: persistentSrc },
 		{ labelKey: 'playground.dialog.sizes.label', Component: SizesDialog, src: sizesSrc },
-		{ labelKey: 'playground.dialog.drawer.label', Component: DrawerDialog, src: drawerSrc },
+		{ labelKey: 'playground.dialog.drawer.label', hintKey: 'playground.dialog.drawer.hint', Component: DrawerDialog, src: drawerSrc },
 		{ labelKey: 'playground.dialog.form.label', Component: FormDialog, src: formSrc },
 		{ labelKey: 'playground.dialog.scroll.label', Component: ScrollDialog, src: scrollSrc }
 	];
 
 	const rootApi: ApiProp[] = [
 		{ name: 'open', type: 'boolean', required: false, default: '$bindable(false)', description: 'Open state. Two-way bindable; also flows through onOpenChange (kit controlled-state idiom).' },
-		{ name: 'size', type: 'DialogSize', required: false, default: "'medium'", description: "Preset width: 'small' (400px) | 'medium' (520px) | 'large' (720px) | 'fullscreen' (stretches to the viewport)." },
-		{ name: 'align', type: 'DialogAlign', required: false, default: "'center'", description: "Anchor: 'center' | 'top' (6vh from the top) | 'start' / 'end' (full-height edge drawer, inline-axis, RTL-aware) | 'bottom' (full-width bottom sheet). Edge values slide in from that edge." },
+		{ name: 'size', type: 'DialogSize', required: false, default: "'medium'", description: "Preset width: 'small' (400px) | 'medium' (520px) | 'large' (720px) | 'fullscreen' (stretches to the viewport). Bottom sheets honour it too from 481px up; below that they stay full-bleed." },
+		{ name: 'align', type: 'DialogAlign', required: false, default: "'center'", description: "Anchor: 'center' | 'top' (6vh from the top) | 'start' / 'end' (full-height edge drawer, inline-axis, RTL-aware) | 'bottom' (bottom sheet — full-bleed on phones, capped by size and centered from 481px up). Edge values slide in from that edge; there is no separate Drawer or Sheet component." },
 		{ name: 'color', type: 'Color', required: false, default: "'primary'", description: 'Accent palette — drives the focus outline and selection tint.' },
 		{ name: 'persistent', type: 'boolean', required: false, default: 'false', description: 'Block Esc + backdrop-click close paths; they play a bounce instead.' },
 		{ name: 'role', type: 'DialogRole', required: false, default: "'dialog'", description: "ARIA role for the surface: 'dialog' | 'alertdialog' (for destructive confirmations)." },
@@ -100,6 +100,7 @@
 {#each blocks as block (block.labelKey)}
 	<DemoBlock
 		label={t(block.labelKey)}
+		description={block.hintKey ? t(block.hintKey) : undefined}
 		codeLabel={t('playground.code.label')}
 		Component={block.Component}
 		src={block.src}
@@ -144,7 +145,7 @@
 <ApiTable
 	title="Dialog.Close"
 	api={closeApi}
-	hint="Closes the dialog; renders the icon-only X button by default. Plus every native HTML button attribute."
+	hint="Closes the dialog; renders the icon-only X button by default. Its hit target is 44px square while the painted plate stays 32px — retune with --dialog-close-hit / --dialog-close-plate / --dialog-close-inset on .dialog__close. Plus every native HTML button attribute."
 />
 
 <style>

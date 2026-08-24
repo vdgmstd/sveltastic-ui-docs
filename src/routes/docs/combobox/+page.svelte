@@ -114,7 +114,7 @@
 	];
 
 	const portalApi: ApiProp[] = [
-		{ name: 'to', type: 'string | HTMLElement', required: false, default: 'document.body', description: 'Portal target for the dropdown panel. CSS selector or element.' },
+		{ name: 'to', type: 'string | HTMLElement', required: false, default: 'nearest <dialog>, else document.body', description: 'Portal target. CSS selector or element. Left unset, the dropdown panel lands in the nearest ancestor <dialog> (so an overlay opened from a Dialog stays in the top layer), else document.body — pass to="body" to force body from inside a dialog.' },
 		{ name: 'disabled', type: 'boolean', required: false, default: 'false', description: 'Render the panel in place instead of portalling it.' },
 		{ name: 'forceMount', type: 'boolean', required: false, default: 'false', description: 'Keep the panel mounted while closed (presence via data-state).' }
 	];
@@ -190,7 +190,7 @@
 <ApiTable
 	title="Combobox.Portal"
 	api={portalApi}
-	hint="Portals the dropdown panel to document.body (or a custom target). Wrap Combobox.Content to re-target the stacking context, or set forceMount to attach your own transitions."
+	hint="Portals the dropdown panel out of the trigger's stacking context — into the nearest ancestor <dialog> when there is one, otherwise document.body. Pass to to re-target it, or forceMount to attach your own transitions."
 />
 
 <style>

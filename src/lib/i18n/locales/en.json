@@ -396,7 +396,7 @@
 			},
 			"groupSingle": {
 				"label": "Group — single select",
-				"hint": "`ToggleGroup.Root type=\"single\"` keeps at most one item on; clicking the active item toggles it off (value becomes empty). Arrows move focus, Space/Enter toggle."
+				"hint": "`ToggleGroup.Root type=\"single\"` keeps at most one item on; re-tapping the active item is a no-op unless you opt into `allowDeselect`. Arrows move focus, Space/Enter toggle."
 			},
 			"groupMultiple": {
 				"label": "Group — multiple select",
@@ -406,7 +406,15 @@
 				"label": "Group — vertical",
 				"hint": "`orientation=\"vertical\"` stacks the items and switches arrow navigation to Up/Down."
 			},
-			"vsSegmented": "Toggle vs Segmented: use Segmented for an exclusive single choice rendered as one sliding-thumb track (a radiogroup). Use ToggleGroup for independent press buttons (multiple), or a single-select that can be cleared — rendered as separate toggle buttons."
+			"groupDeselect": {
+				"label": "Group — clearable single",
+				"hint": "`allowDeselect` lets a re-tap on the active item clear the selection. The group then commits `undefined` — not an empty string — so type the bound state as `string | undefined`."
+			},
+			"groupWrap": {
+				"label": "Group — wrapping row",
+				"hint": "`wrap` lets the row break onto more lines instead of overflowing when the group is wider than its container."
+			},
+			"vsSegmented": "Toggle vs Segmented: use Segmented for an exclusive single choice rendered as one sliding-thumb track (a radiogroup). Use ToggleGroup for independent press buttons (multiple), or a single-select that can be cleared with `allowDeselect` — rendered as separate toggle buttons."
 		},
 		"segmented": {
 			"title": "Segmented",
@@ -615,11 +623,11 @@
 			},
 			"trigger": {
 				"label": "Triggers",
-				"hint": "hover opens on hover / focus; click toggles and dismisses on outside click."
+				"hint": "hover opens on hover / focus — on a touch device, on focus only; click toggles and dismisses on outside click."
 			},
 			"interactive": {
 				"label": "Interactive",
-				"hint": "Keeps the bubble open while the pointer is over it, so its content stays clickable."
+				"hint": "Keeps the bubble open while the pointer is over it, so its content stays clickable. Nothing to keep open on a device without hover, so it has no effect there."
 			},
 			"delay": {
 				"label": "Delay"
@@ -967,7 +975,8 @@
 				"label": "Sizes"
 			},
 			"drawer": {
-				"label": "Edge drawers (start / end / bottom)"
+				"label": "Edge drawers (start / end / bottom)",
+				"hint": "Drawers and sheets are this Dialog with align set — there is no separate component. align=\"start\" / \"end\" give an inline-axis side panel (RTL-aware), align=\"bottom\" a sheet: full-bleed on phones, capped by the size preset and centered from 481px up."
 			},
 			"form": {
 				"label": "Form dialog"
@@ -1127,7 +1136,7 @@
 		},
 		"ripple": {
 			"title": "Ripple",
-			"description": "GPU-composited click bloom packaged as a Svelte action. Drop on any host element with use:ripple — installs its own scoped stylesheet on first use, cleans up on destroy.",
+			"description": "GPU-composited click bloom packaged as a Svelte action. Drop on any host element with use:ripple — installs its own scoped stylesheet on first use, cleans up on destroy. It inks on pointerdown, so touch and pen activate it too, and a disc dissolves early if the gesture turns into a scroll.",
 			"basic": {
 				"label": "Basic",
 				"hint": "use:ripple with no options uses the kit primary color.",
@@ -1149,8 +1158,8 @@
 			},
 			"textColor": {
 				"label": "Text color shift",
-				"hint": "Host text animates to textColor during the bloom (default rgb(var(--on-accent)) — matches the kit's text-on-accent token, same as Button's default variant) and back on settle.",
-				"defaultLabel": "default (on-accent)",
+				"hint": "Host text animates to textColor during the bloom (default rgb(var(--on-c)) — the host's own ink, derived from its fill, falling back to the --on-accent token) and back on settle.",
+				"defaultLabel": "default (on-c)",
 				"offLabel": "currentColor (off)"
 			},
 			"surfaces": {
@@ -1165,7 +1174,14 @@
 				"color": "Accent color for this ripple. Palette name or CSS color string.",
 				"solidBg": "Lift the disc body so the wave doesn't blend into a host that's already the accent color.",
 				"disabled": "Skip ripple emission entirely.",
-				"textColor": "Colour the host text animates to during the bloom. Defaults to rgb(var(--on-accent)) — kit's text-on-accent token. Pass 'currentColor' to disable the shift."
+				"textColor": "Colour the host text animates to during the bloom. Defaults to the host's own rgb(var(--on-c)) ink, falling back to --on-accent. Pass 'currentColor' to disable the shift."
+			},
+			"handle": {
+				"label": "Handle (RippleHandle)",
+				"hint": "use:ripple returns a RippleHandle, exported from the package. Keep it when you need to ink from your own code — Pressable uses it to ink on Enter / Space.",
+				"spawnAt": "Ink without a pointer event. Origin is relative to the host top-left; omit it to fall back to options.origin, then to the host centre.",
+				"update": "Swap the options of the mounted action (Svelte calls it for you when the use: expression changes).",
+				"destroy": "Tear the action down — listeners, discs and the resize observer all go with it."
 			}
 		},
 		"list": {
@@ -1254,7 +1270,7 @@
 		},
 		"progress": {
 			"title": "Progress",
-			"description": "Linear or circular progress with indeterminate, stripes, custom thickness, and palette colors.",
+			"description": "Linear or circular progress with indeterminate, stripes, custom thickness, an opt-in ring glow, and palette colors.",
 			"linear": {
 				"label": "Linear"
 			},
@@ -1269,6 +1285,9 @@
 			},
 			"circular": {
 				"label": "Circular"
+			},
+			"glow": {
+				"label": "Circular glow"
 			},
 			"interactive": {
 				"label": "Interactive"
@@ -1440,7 +1459,7 @@
 			},
 			"restricted": {
 				"label": "Min / max bounds",
-				"hint": "min and max clamp the selectable range on date-bearing types (inclusive). Out-of-range days are disabled in the calendar."
+				"hint": "min and max clamp the selectable range on date-bearing types (inclusive). Out-of-range days, months and years are disabled in the calendar, and navigation stops at the bounds."
 			},
 			"iconPosition": {
 				"label": "Icon position",
@@ -1456,7 +1475,7 @@
 			},
 			"events": {
 				"label": "Events & open state",
-				"hint": "onValueChange fires on every committed value change; onOpenChange reports the dropdown state, which is also bindable via bind:open."
+				"hint": "onValueChange fires on every committed value change; onOpenChange reports the dropdown state, which is also bindable via bind:open. Typed text commits on blur or Enter — pass commitMode=\"input\" to also commit a complete entry mid-typing."
 			},
 			"colors": {
 				"label": "Colors",
@@ -1533,7 +1552,7 @@
 			},
 			"locale": {
 				"label": "Locale helpers",
-				"hint": "Resolve the host locale, decide week start (Sun vs Mon) and 12h/24h time without hard-coded lists."
+				"hint": "Resolve the host locale, decide the week's first day (0 Sunday … 6 Saturday — Friday and Saturday starts included) and 12h/24h time."
 			},
 			"types": {
 				"label": "Public types",
@@ -1561,6 +1580,15 @@
 				"setRtl": "Set direction flag, mirror to <html dir>.",
 				"toggleRtl": "Flip direction.",
 				"hydrate": "Read stored theme + prefers-color-scheme on mount. Call once from your root layout."
+			},
+			"ink": {
+				"label": "Accent ink",
+				"hint": "Filled variants derive their text colour from the fill instead of always painting white, so color=\"warning\" or a pale custom colour stays readable. Every token below is overridable from your own stylesheet — and because components no longer hard-code the accent, setting --c on any ancestor retints that whole subtree without !important.",
+				"onC": "The resolved ink for the current fill. Components stamp it per instance; the value here is only the fallback.",
+				"onAccent": "Ink over a normal, dark-enough accent fill.",
+				"onAccentDark": "Ink used whenever white would fail contrast against the fill (below ~2:1).",
+				"onLight": "Ink over color=\"light\" fills.",
+				"onWarn": "Ink over color=\"warning\" fills (the warning palette maps to the --warn token)."
 			},
 			"usage": {
 				"label": "Usage",

@@ -10,6 +10,7 @@
 	import StripesProgress from '../../_playground/examples/progress/StripesProgress.svelte';
 	import IndeterminateProgress from '../../_playground/examples/progress/IndeterminateProgress.svelte';
 	import CircularProgress from '../../_playground/examples/progress/CircularProgress.svelte';
+	import GlowProgress from '../../_playground/examples/progress/GlowProgress.svelte';
 	import InteractiveProgress from '../../_playground/examples/progress/InteractiveProgress.svelte';
 	import RangeProgress from '../../_playground/examples/progress/RangeProgress.svelte';
 	import ChildProgress from '../../_playground/examples/progress/ChildProgress.svelte';
@@ -19,6 +20,7 @@
 	import stripesSrc from '../../_playground/examples/progress/StripesProgress.svelte?raw';
 	import indeterminateSrc from '../../_playground/examples/progress/IndeterminateProgress.svelte?raw';
 	import circularSrc from '../../_playground/examples/progress/CircularProgress.svelte?raw';
+	import glowSrc from '../../_playground/examples/progress/GlowProgress.svelte?raw';
 	import interactiveSrc from '../../_playground/examples/progress/InteractiveProgress.svelte?raw';
 	import rangeSrc from '../../_playground/examples/progress/RangeProgress.svelte?raw';
 	import childSrc from '../../_playground/examples/progress/ChildProgress.svelte?raw';
@@ -31,6 +33,7 @@
 		{ labelKey: 'playground.progress.stripes.label', Component: StripesProgress, src: stripesSrc },
 		{ labelKey: 'playground.progress.indeterminate.label', Component: IndeterminateProgress, src: indeterminateSrc },
 		{ labelKey: 'playground.progress.circular.label', Component: CircularProgress, src: circularSrc },
+		{ labelKey: 'playground.progress.glow.label', Component: GlowProgress, src: glowSrc },
 		{ labelKey: 'playground.progress.interactive.label', Component: InteractiveProgress, src: interactiveSrc },
 		{ labelKey: 'playground.progress.range.label', Component: RangeProgress, src: rangeSrc },
 		{ labelKey: 'playground.progress.child.label', Component: ChildProgress, src: childSrc }
@@ -41,25 +44,26 @@
 		{ name: 'min', type: 'number', required: false, default: '0', description: 'Lower bound for value.' },
 		{ name: 'max', type: 'number', required: false, default: '100', description: 'Upper bound for value.' },
 		{ name: 'shape', type: 'ProgressShape', required: false, default: "'linear'", description: "'linear' (bar) or 'circular' (ring)." },
-		{ name: 'thickness', type: 'number', required: false, default: '8', description: 'Bar height (linear) or stroke width (circular), in px.' },
+		{ name: 'thickness', type: 'number', required: false, default: '8 / max(2, size / 9)', description: 'Bar height (linear, 8) or ring stroke (circular), in px. The ring default scales with the diameter — max(2, size / 9), so 7.1px at the default size.' },
 		{ name: 'size', type: 'number', required: false, default: '64', description: 'Diameter in px (circular only).' },
+		{ name: 'glow', type: 'boolean', required: false, default: 'false', description: 'Soft coloured drop-shadow around the circular ring. Opt-in — the ring paints flat by default.' },
 		{ name: 'color', type: 'Color', required: false, default: "'primary'", description: 'Palette accent driving fill and track.' },
 		{ name: 'ariaValueText', type: 'string', required: false, default: null, description: 'Spoken text overriding the computed percentage.' },
 		{ name: 'ariaLabel', type: 'string', required: false, default: null, description: 'ARIA label for assistive tech when no visible Progress.Label is supplied.' },
-		{ name: 'ref', type: 'HTMLDivElement | null', required: false, default: '$bindable(null)', description: 'Bindable ref to the root element.' },
+		{ name: 'ref', type: 'HTMLSpanElement | null', required: false, default: '$bindable(null)', description: 'Bindable ref to the root element (a <span> — Progress nests inside <button> / <label>).' },
 		{ name: 'child', type: 'Snippet<[{ props }]>', required: false, default: null, description: 'Render-delegation: receive the merged props and render your own root element.' },
 		{ name: 'children', type: 'Snippet', required: false, default: null, description: 'Place Progress.Track, Progress.Indicator, Progress.Label here.' }
 	];
 
 	const trackApi: ApiProp[] = [
-		{ name: 'ref', type: 'HTMLDivElement | null', required: false, default: '$bindable(null)', description: 'Bindable ref to the track element (<div> linear / <svg> circular).' },
+		{ name: 'ref', type: 'HTMLSpanElement | null', required: false, default: '$bindable(null)', description: 'Bindable ref to the track element (<span> linear / <svg> circular).' },
 		{ name: 'child', type: 'Snippet<[{ props }]>', required: false, default: null, description: 'Render-delegation: replaces the track element with your own.' },
 		{ name: 'children', type: 'Snippet', required: false, default: null, description: 'Default content rendered inside the linear track surface (e.g. an Indicator).' }
 	];
 
 	const indicatorApi: ApiProp[] = [
 		{ name: 'stripes', type: 'boolean', required: false, default: 'false', description: 'Animated diagonal stripes overlay (linear, determinate only).' },
-		{ name: 'ref', type: 'HTMLDivElement | null', required: false, default: '$bindable(null)', description: 'Bindable ref to the indicator element.' },
+		{ name: 'ref', type: 'HTMLSpanElement | null', required: false, default: '$bindable(null)', description: 'Bindable ref to the indicator element (a <span>).' },
 		{ name: 'child', type: 'Snippet<[{ props }]>', required: false, default: null, description: 'Render-delegation: replaces the indicator element with your own.' }
 	];
 
@@ -94,7 +98,7 @@
 <ApiTable
 	title="Progress.Track"
 	api={trackApi}
-	hint="The unfilled rail (linear <div>) or background ring (circular <svg>). Wrap Progress.Indicator inside it for the linear bar. Plus every native HTML attribute forwarded to the element."
+	hint="The unfilled rail (linear <span>) or background ring (circular <svg>). Wrap Progress.Indicator inside it for the linear bar. Plus every native HTML attribute forwarded to the element."
 />
 <ApiTable
 	title="Progress.Indicator"

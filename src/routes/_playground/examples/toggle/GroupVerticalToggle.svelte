@@ -9,7 +9,7 @@
 	<ToggleGroup.Item value="grid">Grid</ToggleGroup.Item>
 	<ToggleGroup.Item value="board">Board</ToggleGroup.Item>
 </ToggleGroup.Root>
-<span class="muted">→ {view || 'none'}</span>
+<span class="muted">→ {view}</span>
 
 <style>
 	.muted {

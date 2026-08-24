@@ -37,9 +37,9 @@
 	const rootApi: ApiProp[] = [
 		{ name: 'placement', type: 'TooltipPlacement', required: false, default: "'top'", description: "Side of the trigger: 'top' | 'right' | 'bottom' | 'left'." },
 		{ name: 'open', type: 'boolean', required: false, default: '$bindable(false)', description: 'Show / hide. Two-way bindable.' },
-		{ name: 'trigger', type: 'TooltipTrigger', required: false, default: "'hover'", description: "Activation strategy: 'hover' | 'click' | 'manual'." },
-		{ name: 'interactive', type: 'boolean', required: false, default: 'false', description: 'Keep the bubble open while the pointer is over it.' },
-		{ name: 'delay', type: 'number', required: false, default: '0', description: 'Show-delay in ms (hover / focus only).' },
+		{ name: 'trigger', type: 'TooltipTrigger', required: false, default: "'hover'", description: "Activation strategy: 'hover' | 'click' | 'manual'. 'hover' only reacts to a pointer that can actually hover — on touch it opens on focus alone, so reach for 'click' when a tap must open the bubble." },
+		{ name: 'interactive', type: 'boolean', required: false, default: 'false', description: 'Keep the bubble open while the pointer is over it. No effect on a device without hover.' },
+		{ name: 'delay', type: 'number', required: false, default: '0', description: 'Show-delay in ms (hover / focus only). The focus path applies everywhere; the hover path only where hovering exists.' },
 		{ name: 'color', type: 'Color', required: false, default: "'dark'", description: 'Palette color — drives the bubble accent.' },
 		{ name: 'onOpenChange', type: '(open: boolean) => void', required: false, default: null, description: 'Fires when open changes.' },
 		{ name: 'onOpenChangeComplete', type: '(open: boolean) => void', required: false, default: null, description: 'Fires after the exit fade finishes (bubble fully removed).' },

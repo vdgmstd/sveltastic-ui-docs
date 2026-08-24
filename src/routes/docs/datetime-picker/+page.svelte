@@ -57,6 +57,7 @@
 		{ name: 'placement', type: 'PopoverPlacement', required: false, default: "'bottom-start'", description: 'Dropdown placement relative to the trigger.' },
 		{ name: 'iconPosition', type: "'before' | 'after'", required: false, default: "'after'", description: 'Side of the field where the icon sits.' },
 		{ name: 'mask', type: 'MaskOptions', required: false, default: null, description: 'Override the input mask. Defaults are derived from type, showSeconds and hour12.' },
+		{ name: 'commitMode', type: "'input' | 'blur'", required: false, default: "'blur'", description: "When typed text commits to value. 'blur' waits for blur / Enter; 'input' also commits mid-typing, but only once the entry is complete. Either way a keystroke commit never closes the panel." },
 		{ name: 'icon', type: 'Snippet', required: false, default: null, description: 'Custom icon glyph (render-prop). Falls back to a clock (time) or calendar (date / datetime).' },
 		{ name: 'onValueChange', type: '(value: string) => void', required: false, default: null, description: 'Fires on every committed value change (kit controlled-state idiom).' },
 		{ name: 'onOpenChange', type: '(open: boolean) => void', required: false, default: null, description: 'Fires whenever the dropdown open state changes.' },

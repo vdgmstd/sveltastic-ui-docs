@@ -47,7 +47,7 @@
 	];
 
 	import ApiTable from '../_ApiTable.svelte';
-	import type { ApiProp } from '../_ApiTable.svelte';
+	import { COLOR_DEFAULT_NOTE, type ApiProp } from '../_ApiTable.svelte';
 
 	const rootApi: ApiProp[] = [
 		{ name: 'page', type: 'number', required: false, default: '$bindable(1)', description: 'Currently selected page (1-based). Two-way bindable.' },
@@ -67,7 +67,7 @@
 		{ name: 'disabled', type: 'boolean', required: false, default: 'false', description: 'Disable the entire control.' },
 		{ name: 'ripple', type: 'boolean', required: false, default: 'true', description: 'Emit a click ripple on selection.' },
 		{ name: 'block', type: 'boolean', required: false, default: 'false', description: "Stretch the control to the parent's width." },
-		{ name: 'color', type: 'Color', required: false, default: "'primary'", description: 'Palette color or hex / rgb(...).' },
+		{ name: 'color', type: 'Color', required: false, default: null, description: 'Palette color or hex / rgb(...).' + COLOR_DEFAULT_NOTE },
 		{ name: 'ariaLabel', type: 'string', required: false, default: "'Pagination'", description: 'Label for the wrapping <nav>.' },
 		{ name: 'ariaLabelPrev', type: 'string', required: false, default: "'Previous page'", description: 'Aria-label for the prev arrow.' },
 		{ name: 'ariaLabelNext', type: 'string', required: false, default: "'Next page'", description: 'Aria-label for the next arrow.' },

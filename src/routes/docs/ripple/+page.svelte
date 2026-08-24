@@ -62,6 +62,21 @@
 	</table>
 </div>
 
+<div class="block">
+	<h3>{t('playground.ripple.handle.label')}</h3>
+	<p class="muted">{t('playground.ripple.handle.hint')}</p>
+	<table class="vars">
+		<thead>
+			<tr><th>Member</th><th>Type</th><th>Purpose</th></tr>
+		</thead>
+		<tbody>
+			<tr><td><code>spawnAt</code></td><td><code>{'(origin?: { x, y }) => void'}</code></td><td>{t('playground.ripple.handle.spawnAt')}</td></tr>
+			<tr><td><code>update</code></td><td><code>{'(next?: RippleOptions) => void'}</code></td><td>{t('playground.ripple.handle.update')}</td></tr>
+			<tr><td><code>destroy</code></td><td><code>{'() => void'}</code></td><td>{t('playground.ripple.handle.destroy')}</td></tr>
+		</tbody>
+	</table>
+</div>
+
 <style>
 	.section__header { margin-bottom: 1.5rem; }
 	.section__header h2 { margin: 0 0 0.25rem; }

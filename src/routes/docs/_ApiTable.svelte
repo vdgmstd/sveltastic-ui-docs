@@ -7,6 +7,10 @@
 		description: string | null;
 	};
 
+	/** Appended to the `color` row of the components whose default is now unset (rendered default unchanged). */
+	export const COLOR_DEFAULT_NOTE =
+		' Unset by default — CSS supplies the primary token, so a --c override on an ancestor retints the subtree without !important.';
+
 	export type ApiTableProps = {
 		/** Component name shown as the table caption (e.g. `Button`). */
 		title: string;

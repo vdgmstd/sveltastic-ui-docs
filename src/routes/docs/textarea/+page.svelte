@@ -29,7 +29,7 @@
 	];
 
 	const fieldApi: ApiProp[] = [
-		{ name: 'placeholder', type: 'string', required: false, default: null, description: 'Native placeholder text (used as the animated fake placeholder in the default label style).' },
+		{ name: 'placeholder', type: 'string', required: false, default: null, description: 'Placeholder text (used as the animated fake placeholder in the default label style). A placeholder longer than the field is clipped at the field box instead of spilling below it.' },
 		{ name: 'rows', type: 'number', required: false, default: null, description: 'Native textarea rows.' },
 		{ name: 'maxlength', type: 'number', required: false, default: null, description: 'Native textarea maxlength.' },
 		{ name: 'ariaLabel', type: 'string', required: false, default: null, description: 'Accessible name when no visible Textarea.Label is rendered (→ aria-label).' },
@@ -56,7 +56,7 @@
 <ApiTable
 	title="Textarea.Root"
 	api={rootApi}
-	hint="The shell. Visual config and bind:value + onValueChange live here and flow to the parts via context. Compose it with Textarea.Control (wrapping Textarea.Field), Textarea.Label and Textarea.Message. Publishes data-state / data-disabled / data-readonly / data-field-state / data-variant / data-label-style hooks. Plus every native HTML attribute forwarded to the wrapper element."
+	hint="The shell. Visual config and bind:value + onValueChange live here and flow to the parts via context. Compose it with Textarea.Control (wrapping Textarea.Field), Textarea.Label and Textarea.Message. Publishes data-state / data-disabled / data-readonly / data-field-state / data-variant / data-label-style hooks. Resting placeholder / unfloated label opacity follows the kit-wide --placeholder-opacity token (0.62). Plus every native HTML attribute forwarded to the wrapper element."
 />
 <ApiTable
 	title="Textarea.Control"

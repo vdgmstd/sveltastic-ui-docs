@@ -4,7 +4,7 @@
 	import Section from '../../_playground/ButtonSection.svelte';
 	import DemoBlock from '../../_playground/DemoBlock.svelte';
 	import ApiTable from '../_ApiTable.svelte';
-	import type { ApiProp } from '../_ApiTable.svelte';
+	import { COLOR_DEFAULT_NOTE, type ApiProp } from '../_ApiTable.svelte';
 
 	import BasicButtonGroup from '../../_playground/examples/buttongroup/BasicButtonGroup.svelte';
 	import VariantsButtonGroup from '../../_playground/examples/buttongroup/VariantsButtonGroup.svelte';
@@ -29,7 +29,7 @@
 
 	const rootApi: ApiProp[] = [
 		{ name: 'variant', type: 'Variant', required: false, default: "'default'", description: "Visual variant: 'default' | 'flat' | 'border' | 'gradient' | 'relief' | 'transparent' | 'shadow' | 'floating'." },
-		{ name: 'color', type: 'Color', required: false, default: "'primary'", description: 'Palette name or hex / rgb(...) / r,g,b.' },
+		{ name: 'color', type: 'Color', required: false, default: null, description: 'Palette name or hex / rgb(...) / r,g,b.' + COLOR_DEFAULT_NOTE },
 		{ name: 'gradientEnd', type: 'Color', required: false, default: null, description: 'End-stop color for the gradient variant. Defaults to the --gradient-end token.' },
 		{ name: 'size', type: 'Size', required: false, default: "'medium'", description: 'Predefined size or any custom value.' },
 		{ name: 'shape', type: 'Shape', required: false, default: "'default'", description: "Border-radius shape: 'default' | 'circle' | 'square'." },
@@ -37,7 +37,7 @@
 		{ name: 'ariaLabel', type: 'string', required: false, default: null, description: 'Accessible name — required for iconOnly buttons with no visible text.' },
 		{ name: 'loading', type: 'boolean', required: false, default: 'false', description: 'Loading overlay. Blocks pointer events.' },
 		{ name: 'upload', type: 'boolean', required: false, default: 'false', description: 'Animated diagonal sweep evoking an upload progress feel.' },
-		{ name: 'block', type: 'boolean', required: false, default: 'false', description: 'Stretch to container width.' },
+		{ name: 'block', type: 'boolean', required: false, default: 'false', description: 'Stretch to container width. Also drops the button\'s intrinsic inline margin so the full-width surface stays inside its container.' },
 		{ name: 'active', type: 'boolean', required: false, default: '$bindable(false)', description: 'Force the pressed / selected state (toggle buttons). Exposes aria-pressed.' },
 		{ name: 'onActiveChange', type: '(active: boolean) => void', required: false, default: null, description: 'Fired when an active-toggle button is activated, with the next pressed value.' },
 		{ name: 'pressedDisabled', type: 'boolean', required: false, default: 'false', description: 'Active visuals + non-interactive (cursor + opacity).' },
@@ -47,7 +47,7 @@
 		{ name: 'ripple', type: 'boolean', required: false, default: 'true', description: 'Disable the click ripple by setting false.' },
 		{ name: 'disabled', type: 'boolean', required: false, default: 'false', description: 'Disabled (button) / inert (link).' },
 		{ name: 'href', type: 'string', required: false, default: null, description: 'When set, renders an <a> link instead of a <button>.' },
-		{ name: 'type', type: "HTMLButtonAttributes['type']", required: false, default: null, description: 'Native button type (button-mode).' },
+		{ name: 'type', type: "HTMLButtonAttributes['type']", required: false, default: "'button'", description: 'Native button type (button-mode). Defaults to button, so a Button inside a form never submits it by accident — pass type="submit" explicitly.' },
 		{ name: 'target', type: "HTMLAnchorAttributes['target']", required: false, default: null, description: 'Link target (href-mode).' },
 		{ name: 'rel', type: "HTMLAnchorAttributes['rel']", required: false, default: null, description: 'Link rel (href-mode).' },
 		{ name: 'download', type: "HTMLAnchorAttributes['download']", required: false, default: null, description: 'Link download (href-mode).' },

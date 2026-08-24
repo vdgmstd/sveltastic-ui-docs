@@ -46,11 +46,11 @@
 		{ labelKey: 'playground.chip.harmony.label', descriptionKey: 'playground.chip.harmony.hint', Component: HarmonyChip, src: harmonySrc }
 	];
 	import ApiTable from '../_ApiTable.svelte';
-	import type { ApiProp } from '../_ApiTable.svelte';
+	import { COLOR_DEFAULT_NOTE, type ApiProp } from '../_ApiTable.svelte';
 
 	const rootApi: ApiProp[] = [
 		{ name: 'variant', type: 'ChipVariant', required: false, default: "'default'", description: 'Visual variant. Mirrors the Button vocabulary so chips and buttons read as the same family.' },
-		{ name: 'color', type: 'Color', required: false, default: "'primary'", description: 'Palette name or hex / rgb(...) / r,g,b.' },
+		{ name: 'color', type: 'Color', required: false, default: null, description: 'Palette name or hex / rgb(...) / r,g,b.' + COLOR_DEFAULT_NOTE },
 		{ name: 'gradientEnd', type: 'Color', required: false, default: null, description: 'End-stop color for the gradient variant. Defaults to the --gradient-end token.' },
 		{ name: 'size', type: 'Size', required: false, default: "'medium'", description: "Predefined size matching Button's scale." },
 		{ name: 'shape', type: 'Shape', required: false, default: "'default'", description: 'Default = pill. square = --chip-radius corners. circle = round icon-only chip.' },

@@ -7,6 +7,7 @@
 	const rootApi: ApiProp[] = [
 		{ name: 'variant', type: 'CardVariant', required: false, default: "'default'", description: "Layout variant: 'default' | 'caption' | 'horizontal' | 'compact' | 'frosted' | 'peek'." },
 		{ name: 'color', type: 'Color', required: false, default: "'primary'", description: 'Palette name or hex / rgb(...) / r,g,b. Exposes --c for descendants (Buttons, Avatars).' },
+		{ name: 'pointer', type: 'boolean', required: false, default: 'false', description: 'Show cursor: pointer on the card surface. Opt-in — a plain card no longer promises a click; wrapping the card in an <a> inherits the pointer anyway.' },
 		{ name: 'imgInset', type: 'boolean', required: false, default: 'false', description: 'Render the image with insets / padding instead of edge-to-edge. Implied by variant="compact".' },
 		{ name: 'imgSize', type: 'number | string', required: false, default: null, description: "Override the image cell's main dimension. Number is treated as px; any CSS length is accepted as a string." },
 		{ name: 'cardClass', type: 'string', required: false, default: null, description: 'Class merged onto the inner .card surface (the visible, styled element — glass/flush/lift treatment or a max-width constraint).' },
@@ -68,7 +69,7 @@
 <ApiTable
 	title="Card.Root"
 	api={rootApi}
-	hint="The shell. Holds the layout variant + color / imgInset / imgSize config and renders the inner .card surface (reach it with cardClass / cardStyle — the card fills its container by default). Publishes data-variant / data-img-inset hooks. Compose with Card.Media, Card.Body and Card.Footer. Plus every native HTML attribute (id, aria-*, data-*, …) forwarded to the root <div> (or the element you render via the child snippet)."
+	hint="The shell. Holds the layout variant + color / pointer / imgInset / imgSize config and renders the inner .card surface (reach it with cardClass / cardStyle — the card fills its container by default). Publishes data-variant / data-img-inset hooks. Compose with Card.Media, Card.Body and Card.Footer. Plus every native HTML attribute (id, aria-*, data-*, …) forwarded to the root <div> (or the element you render via the child snippet)."
 />
 <ApiTable
 	title="Card.Media"
