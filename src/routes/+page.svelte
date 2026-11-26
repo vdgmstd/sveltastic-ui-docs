@@ -76,6 +76,8 @@
 		Tabs,
 		Textarea,
 	} from "sveltastic-ui";
+	import { flushSync } from "svelte";
+	import { beforeNavigate } from "$app/navigation";
 	import { version as pkgVersion } from "../../package.json";
 
 	const componentIcons: Record<string, typeof BellIcon> = {
@@ -155,6 +157,15 @@
 	let faqOpen = $state(true);
 	let surveyChoice = $state("weekly");
 	let pageStep = $state(2);
+
+	// The sign-in card is a demo, never a credential. Browsers offer "Save password?" when a password
+	// field still holds a value as the page goes away, so blank both fields — and flush the binding to
+	// the DOM — before the route unmounts on client-side navigation.
+	beforeNavigate(() => {
+		signInEmail = "";
+		signInPassword = "";
+		flushSync();
+	});
 
 	let sketchEl = $state<HTMLElement>();
 	let heroEl = $state<HTMLElement>();
@@ -470,7 +481,11 @@
 	<div class="tile">
 		<Card.Root>
 			<Card.Body>
-				<div class="auth">
+				<form
+					class="auth"
+					autocomplete="off"
+					onsubmit={(e) => e.preventDefault()}
+				>
 					<div class="auth__brand">
 						<span class="auth__mark"
 							><LightningIcon size={16} weight="fill" /></span
@@ -488,7 +503,7 @@
 					</Input.Root>
 					<Input.Root bind:value={signInPassword} labelStyle="placeholder" block>
 						<Input.Control>
-							<Input.Field type="password" passwordReveal autocomplete="off" name="demo-field-2" data-1p-ignore data-lpignore="true" />
+							<Input.Field type="password" passwordReveal autocomplete="new-password" name="demo-field-2" data-1p-ignore data-lpignore="true" />
 							<Input.Label>Password</Input.Label>
 						</Input.Control>
 					</Input.Root>
@@ -505,7 +520,7 @@
 						size="small"
 						block>Continue</Button.Root
 					>
-				</div>
+				</form>
 			</Card.Body>
 		</Card.Root>
 	</div>

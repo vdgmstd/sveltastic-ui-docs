@@ -1,7 +1,16 @@
 <script lang="ts">
+	import { flushSync } from 'svelte';
+	import { beforeNavigate } from '$app/navigation';
 	import { Input } from 'sveltastic-ui';
 
 	let password = $state('');
+
+	// Demo field: blank it (and flush the binding to the DOM) before the route unmounts,
+	// so the browser never offers to save what was typed here.
+	beforeNavigate(() => {
+		password = '';
+		flushSync();
+	});
 
 	// Strength 0..100 from length + character variety; the progress bar tints red -> amber -> green.
 	let strength = $derived.by(() => {
@@ -22,7 +31,12 @@
 
 <Input.Root bind:value={password} progress={strength}>
 	<Input.Control>
-		<Input.Field type="password" passwordReveal placeholder="Password strength" />
+		<Input.Field
+			type="password"
+			passwordReveal
+			autocomplete="new-password"
+			placeholder="Password strength"
+		/>
 	</Input.Control>
 </Input.Root>
 <span class="muted">{strengthLabel} — {strength}%</span>

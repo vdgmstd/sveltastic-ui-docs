@@ -1457,6 +1457,10 @@
 				"label": "Locale & week start",
 				"hint": "locale drives the calendar's month / weekday names; weekStart overrides the first column (0 = Sunday, 1 = Monday)."
 			},
+			"format": {
+				"label": "Date format & mask hint",
+				"hint": "format sets the entry / display order — a permutation of one YYYY, one MM and one DD joined by single '-', '.', '/' or space separators. It is presentation only: the bound value stays ISO in every format. maskHint replaces the typing ghost with a literal template of the same width, so the field can read ДД-ММ-ГГГГ while value is still YYYY-MM-DD."
+			},
 			"restricted": {
 				"label": "Min / max bounds",
 				"hint": "min and max clamp the selectable range on date-bearing types (inclusive). Out-of-range days, months and years are disabled in the calendar, and navigation stops at the bounds."
